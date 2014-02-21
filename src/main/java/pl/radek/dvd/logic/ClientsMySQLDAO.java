@@ -59,7 +59,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
     @Override
     public List<Client> getClientsByPage(int offset, int noOfRecords) {
         logger.debug("Perform method getClientsByPage");
-        //test przez intellij 2
+        //test przez intellij 3
 
         String hql = "from Client";
         List<Client> clients = hibernateTemplate.findByCriteria(DetachedCriteria.forClass(Client.class), offset, noOfRecords);
