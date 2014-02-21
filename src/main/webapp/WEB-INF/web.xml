@@ -1,0 +1,72 @@
+<?xml  version="1.0"  encoding="UTF-8"?>
+
+<web-app>
+    <display-name>Clients</display-name>
+    <description>
+        Clients
+    </description>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+
+    <welcome-file-list>
+        <welcome-file>jsp/index.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <servlet>
+        <servlet-name>GetClientsListServlet</servlet-name>
+        <servlet-class>pl.radek.dvd.servlets.GetClientsListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetClientsListServlet</servlet-name>
+        <url-pattern>/clients</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <servlet-class>pl.radek.dvd.servlets.DeleteClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteClientServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddClientServlet</servlet-name>
+        <servlet-class>pl.radek.dvd.servlets.AddClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddClientServlet</servlet-name>
+        <url-pattern>/addclient</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UpdateClientServlet</servlet-name>
+        <servlet-class>pl.radek.dvd.servlets.UpdateClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateClientServlet</servlet-name>
+        <url-pattern>/updateclient</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AddEditControlServlet</servlet-name>
+        <servlet-class>pl.radek.dvd.servlets.AddEditControlServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddEditControlServlet</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+
+
+
+</web-app>

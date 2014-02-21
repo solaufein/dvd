@@ -1,0 +1,85 @@
+inputs:-webkit-input-placeholder
+{
+    color:    #b5b5b5;
+}
+
+inputs-moz-placeholder
+{
+    color:    #b5b5b5;
+}
+
+.inputs
+{
+    border: 1px solid #c4c4c4;
+    height: 25px;
+    width: 275px;
+    font-size: 13px;
+    padding: 4px 4px 4px 4px;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    box-shadow: 0px 0px 8px #d9d9d9;
+    -moz-box-shadow: 0px 0px 8px #d9d9d9;
+    -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+}
+
+.inputs:focus {
+    background: #fff;
+    box-shadow: 0px 0px 0px 3px #7bc1f7, inset 0px 2px 3px rgba( 0,0,0,0.2 ), 0px 5px 5px rgba( 0,0,0,0.15 );
+    outline: none;
+}
+
+#formWrapper {
+width : 600px;
+padding : 15px;
+-webkit-box-sizing : border-box;
+}
+
+#formWrapper label {
+width: 7em;
+text-align: left;
+display: inline-block;
+margin-bottom : 15px;
+line-height: 25px;
+}
+
+span.error
+{
+color:red;
+}
+
+fieldset
+{
+background: #EEEEEE;
+border: 1px solid #444444;
+width: 20em;
+}
+
+legend
+{
+color: #fff;
+background: #333;
+border: 1px solid #444444;
+padding: 2px 6px;
+}
+
+#container
+{
+	margin: 0 auto;
+	width: 900px;
+	background:#FFFFFF ;
+}
+
+#content
+{
+	clear: left;
+	padding: 20px;
+	background: #FFFFFF ;
+}
+
+#content h2
+{
+	color:#000;
+	font-size: 160%;
+	margin: 0 0 .5em;
+}

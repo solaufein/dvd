@@ -1,0 +1,47 @@
+<project name="dvd" basedir="../" default="main">
+
+    <property file="scripts/build.properties"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+        <fileset dir="../src/main/resources" includes="**/*.*"/>
+    </path>
+
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" debug ="on">
+
+        </javac>
+    </target>
+
+
+    <target name="build-war" depends="compile">
+        <war destfile="${name}.war" webxml="../src/main/webapp/WEB-INF/web.xml">
+            <fileset dir="../src/main/webapp">
+                <exclude name="WEB-INF/web.xml"/>
+            </fileset>
+
+            <lib dir="${lib.dir}">
+                <exclude name="servlet-api.jar"/>
+            </lib>
+                <classes dir="${classes.dir}"/>
+                <classes dir="../src/main/resources" includes="config.properties"/>
+                <classes dir="../src/main/resources" includes="log4j.properties"/>
+        </war>
+    </target>
+
+    <target name="copy-war" depends="build-war">
+        <copy todir="${deploy.path}" preservelastmodified="true">
+            <fileset dir=".">
+                <include name="*.war"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="main" depends="clean,build-war,copy-war"/>
+
+</project>
