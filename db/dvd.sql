@@ -1,0 +1,110 @@
+CREATE DATABASE rentalmovie;
+USE rentalmovie;
+
+CREATE TABLE genre
+(id BIGINT NOT NULL AUTO_INCREMENT,
+genre VARCHAR(30) NOT NULL, 
+PRIMARY KEY(id),
+UNIQUE(genre)); 
+
+CREATE TABLE actors
+(id BIGINT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(30) NOT NULL, 
+last_name VARCHAR(30) NOT NULL, 
+PRIMARY KEY(id),
+UNIQUE(first_name, last_name)); 
+
+CREATE TABLE promotion
+(id BIGINT NOT NULL AUTO_INCREMENT,
+name VARCHAR(30) NOT NULL,
+value DECIMAL(10,2) NOT NULL, 
+promotion_days_number SMALLINT NOT NULL,
+PRIMARY KEY(id),
+UNIQUE(name)); 
+
+CREATE TABLE movie
+(id BIGINT NOT NULL AUTO_INCREMENT,
+genre_id BIGINT NOT NULL,
+promotion_id BIGINT NOT NULL,
+title VARCHAR(200) NOT NULL, 
+director VARCHAR(80) NOT NULL,
+production_year VARCHAR(4) NOT NULL,
+description VARCHAR(400),
+PRIMARY KEY(id),
+FOREIGN KEY(promotion_id) REFERENCES promotion(id) ON UPDATE CASCADE,
+FOREIGN KEY(genre_id) REFERENCES genre(id) ON UPDATE CASCADE);
+
+CREATE TABLE starring
+(id BIGINT NOT NULL AUTO_INCREMENT,
+actors_id BIGINT NOT NULL,
+movie_id BIGINT NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY(actors_id) REFERENCES actors(id) ON UPDATE CASCADE,
+FOREIGN KEY(movie_id) REFERENCES movie(id) ON UPDATE CASCADE);
+
+CREATE TABLE employee
+(id BIGINT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(30) NOT NULL, 
+last_name VARCHAR(30) NOT NULL, 
+phone_number VARCHAR(40),
+email VARCHAR(60) NOT NULL,
+login VARCHAR(20) NOT NULL,
+password VARCHAR(32) NOT NULL,
+PRIMARY KEY(id),
+UNIQUE(first_name, last_name)); 
+
+CREATE TABLE client
+(id BIGINT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(30) NOT NULL, 
+last_name VARCHAR(30) NOT NULL,
+pesel VARCHAR(11) NOT NULL,
+city VARCHAR(30),
+street VARCHAR(60), 
+phone_number VARCHAR(40),
+email VARCHAR(60),
+PRIMARY KEY(id),
+UNIQUE(first_name, last_name, pesel)); 
+
+CREATE TABLE receipt
+(id BIGINT NOT NULL AUTO_INCREMENT,
+price DECIMAL(10,2),
+pay_date DATETIME,
+bill_number BIGINT NOT NULL,
+PRIMARY KEY(id)); 
+
+CREATE TABLE movie_copy
+(id BIGINT NOT NULL AUTO_INCREMENT,
+movie_id BIGINT NOT NULL,
+serial_number VARCHAR(20) NOT NULL,
+condition_info VARCHAR(150) DEFAULT 'OK',
+availability BOOLEAN NOT NULL,
+PRIMARY KEY(id),
+FOREIGN KEY(movie_id) REFERENCES movie(id) ON UPDATE CASCADE,
+UNIQUE(serial_number));
+
+CREATE TABLE renting_registry
+(id BIGINT NOT NULL AUTO_INCREMENT,
+employee_id BIGINT NOT NULL, 
+client_id BIGINT NOT NULL, 
+receipt_id BIGINT NOT NULL,
+movie_copy_id BIGINT NOT NULL, 
+rent_date DATETIME NOT NULL, 
+return_date DATETIME NOT NULL,
+comment VARCHAR(255),
+PRIMARY KEY(id),
+FOREIGN KEY(employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(client_id) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(movie_copy_id) REFERENCES movie_copy(id) ON UPDATE CASCADE,
+FOREIGN KEY(receipt_id) REFERENCES receipt(id) ON UPDATE CASCADE); 
+
+
+
+
+
+
+
+
+
+
+
+
