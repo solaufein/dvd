@@ -37,8 +37,8 @@
     </bean>
 
     <bean id="clientDAO" class="pl.radek.dvd.logic.ClientsMySQLDAO">
-        <property name="sessionFactory" ref="sessionFactory"/>
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -46,6 +46,12 @@
         <property name="url" value="${url}/${dbName}"/>
         <property name="username" value="${userName}"/>
         <property name="password" value="${password}"/>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <constructor-arg>
+            <ref bean="sessionFactory"/>
+        </constructor-arg>
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

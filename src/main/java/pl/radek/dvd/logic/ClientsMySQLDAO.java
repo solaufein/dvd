@@ -41,9 +41,13 @@ public class ClientsMySQLDAO implements ClientsDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
     }
+
+   /* public void setSessionFactory(SessionFactory sessionFactory) {
+        this.hibernateTemplate = new HibernateTemplate(sessionFactory);
+    }*/
 
     @SuppressWarnings("unchecked")
     public List<Client> getClients() {
