@@ -1,4 +1,4 @@
-package pl.radek.dvd.servlets;
+package pl.radek.dvd.utils;
 
 import org.apache.log4j.PropertyConfigurator;
 

@@ -1,10 +1,10 @@
+<%@ include file="/jsp/include.jsp" %>
 <html>
-
-<head>
-<meta http-equiv="refresh" content="0;URL=http://localhost:8080/dvd/clients">
-</head>
-
-<body>
-</body>
-
+    <head>
+      <c:redirect url="/clients.htm"/>
+    </head>
+    <body>
+    </body>
 </html>
+
+

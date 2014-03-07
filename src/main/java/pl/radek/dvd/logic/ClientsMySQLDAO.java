@@ -8,6 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -41,13 +42,10 @@ public class ClientsMySQLDAO implements ClientsDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Autowired
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
     }
-
-   /* public void setSessionFactory(SessionFactory sessionFactory) {
-        this.hibernateTemplate = new HibernateTemplate(sessionFactory);
-    }*/
 
     @SuppressWarnings("unchecked")
     public List<Client> getClients() {
@@ -129,6 +127,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public int getNoOfRecords() {
         logger.debug("Getting total number of records");
         int records;

@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  */
 public class FormValidator {
 
-    Map<String, String> errors = new HashMap<String, String>();
+    private Map<String, String> errors = new HashMap<String, String>();
     private Pattern regexPattern;
     private Matcher regMatcher;
 

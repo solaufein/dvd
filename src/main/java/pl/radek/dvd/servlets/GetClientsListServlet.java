@@ -1,18 +1,15 @@
 package pl.radek.dvd.servlets;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -22,22 +19,24 @@ import java.util.List;
  * Time: 10:04
  * To change this template use File | Settings | File Templates.
  */
-public class GetClientsListServlet extends HttpServlet {
+
+@org.springframework.stereotype.Controller
+public class GetClientsListServlet implements Controller {
 
     private static Logger logger = Logger.getLogger(GetClientsListServlet.class);
-    ApplicationContext context;
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        context = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
+    @Autowired
+    private ClientsMySQLDAO clientsMySQLDAO;
+
+    public void setClientsMySQLDAO(ClientsMySQLDAO clientsMySQLDAO) {
+        this.clientsMySQLDAO = clientsMySQLDAO;
     }
 
+
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+    public ModelAndView handleRequest(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+  //      resp.setContentType("text/html");
         List<Client> clientList;
-        ClientsMySQLDAO mySQLDAO = (ClientsMySQLDAO) context.getBean("clientDAO");
 
         int page = 1;
         int recordsPerPage = 5;
@@ -47,10 +46,8 @@ public class GetClientsListServlet extends HttpServlet {
             page = Integer.parseInt(currPage);
         }
 
-        int noOfRecords = mySQLDAO.getNoOfRecords();
+        int noOfRecords = clientsMySQLDAO.getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        req.setAttribute(Constants.NO_OF_PAGES, noOfPages);
-        req.setAttribute(Constants.CURRENTPAGE, page);
 
         String field = req.getParameter(Constants.FIELD);
         String order = req.getParameter(Constants.ORDER);
@@ -62,13 +59,18 @@ public class GetClientsListServlet extends HttpServlet {
         }
 
         // sorting and paging logic method
-        clientList = getClients(mySQLDAO, page, recordsPerPage, field, order);
+        clientList = getClients(clientsMySQLDAO, page, recordsPerPage, field, order);
 
+  //      req.getRequestDispatcher("/jsp/clients/clients_list.jsp").forward(req, resp);
 
-        //       req.setAttribute("field", field);
-        //       req.setAttribute("order", order);
-        req.setAttribute(Constants.CLIENTLIST, clientList);
-        req.getRequestDispatcher("/jsp/clients/clients_list.jsp").forward(req, resp);
+        ModelAndView modelAndView = new ModelAndView("/jsp/clients/clients_list.jsp");    // forward:  ?
+        modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);
+        modelAndView.addObject(Constants.CURRENTPAGE, page);
+        modelAndView.addObject(Constants.FIELD, field);
+        modelAndView.addObject(Constants.ORDER, order);
+        modelAndView.addObject(Constants.CLIENTLIST, clientList);
+
+        return modelAndView;
     }
 
     private List<Client> getClients(ClientsMySQLDAO mySQLDAO, int page, int recordsPerPage, String field, String order) {

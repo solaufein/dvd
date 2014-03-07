@@ -1,3 +1,4 @@
+<%@ include file="/jsp/include.jsp" %>
 <%@page import="pl.radek.dvd.model.Client, pl.radek.dvd.model.Constants, pl.radek.dvd.utils.JspMethods, java.util.List"%>
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -20,7 +21,6 @@
                   return false;
               }
           </script>
-		  
 		  <style>
    
 			a.link {
@@ -28,12 +28,8 @@
 			}
    
 	      </style>
-
 </head>
-
 <body>
-
-
    <div id="container">
    	<div id="header">
    		<h1>
@@ -54,7 +50,6 @@
    			Clients list:
    		</h2>
 		     <%
-             List<Client> list = (List<Client>) request.getAttribute(Constants.CLIENTLIST);
 			 String order = request.getParameter(Constants.ORDER);
 			 String field = request.getParameter(Constants.FIELD);
 			 String contextPath = request.getContextPath();
@@ -64,56 +59,55 @@
                <table> 
                  <tr>
                   <td>	
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.FIRSTNAME,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.FIRSTNAME,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Firstname</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.LASTNAME,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.LASTNAME,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Lastname</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.PESEL,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.PESEL,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Pesel</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.CITY,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.CITY,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">City</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.STREET,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.STREET,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Street</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.PHONENUMBER,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.PHONENUMBER,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Phone Number</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients",order,Constants.EMAIL,field); %>
+					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.EMAIL,field); %>
 					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Email</a>
 				  </td>
 				  <td></td>
 				  <td></td>
                  </tr>
-            
-                 <% for(Client c : list) { %>
-                       <tr>
-                         <td>  <%   out.println(c.getFirstName());     %>  </td>
-                         <td>  <%   out.println(c.getLastName());      %>  </td>
-                         <td>  <%   out.println(c.getPesel());         %>  </td>
-                         <td>  <%   out.println(c.getCity());          %>  </td>
-                         <td>  <%   out.println(c.getStreet());        %>  </td>
-                         <td>  <%   out.println(c.getPhoneNumber());   %>  </td>
-                         <td>  <%   out.println(c.getEmail());         %>  </td>
-                         <td> <form action="<%=contextPath%>/delete" method="post" onsubmit="return ConfirmDelete();">
-                                  <input type="hidden" name="id" value="<%= c.getId() %>" />
+					<c:forEach items="${clientList}" var="client">
+						<tr>
+							<td>  <c:out value="${client.firstName}"/>  </td>
+							<td>  <c:out value="${client.lastName}"/>  </td>
+							<td>  <c:out value="${client.pesel}"/>  </td>
+							<td>  <c:out value="${client.city}"/>  </td>
+							<td>  <c:out value="${client.street}"/>  </td>
+							<td>  <c:out value="${client.phoneNumber}"/>  </td>
+							<td>  <c:out value="${client.email}"/>  </td>
+							<td> <form action="<%=contextPath%>/delete.htm" method="post" onsubmit="return ConfirmDelete();">
+                                  <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="Delete" class = "myButton"/>
                               </form></td>
-                         <td> <form name="editclient" action="<%=contextPath%>/controller" method="post">
-                                  <input type="hidden" name="id" value="<%= c.getId() %>" />
+                         <td> <form name="editclient" action="<%=contextPath%>/controller.htm" method="post">
+                                  <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="Edit" class = "myButton"/>
                               </form></td>
-                       </tr>
-                 <% } %>
+						</tr>
+					</c:forEach>   
                </table>
 	</div>
                </br>
@@ -121,88 +115,100 @@
 			 <table>  <tr>
 			   <td>
 			<%--Displaying First link except for the 1st page--%>   
-			   <% if (Integer.parseInt(request.getAttribute(Constants.CURRENTPAGE).toString()) != 1) { %>
-			   <% if (request.getParameter(Constants.ORDER) != null && request.getParameter(Constants.FIELD) != null){ %>
-			   <form name="firstlink" action="<%=contextPath%>/clients" method="get">
-                 <input type="hidden" name="order" value = "<%=order%>" />
-				 <input type="hidden" name="field" value = "<%=field%>" />
+			   <c:if test="${currentPage != 1}">
+				<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="firstlink" action="<%=contextPath%>/clients.htm" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
-			   <%} else {%>
-			   <form name="firstlink" action="<%=contextPath%>/clients" method="get">
+				</c:when>
+				<c:otherwise>
+			   <form name="firstlink" action="<%=contextPath%>/clients.htm" method="get">
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
-			   <% } %>
-			   <% } %>
+				</c:otherwise>
+				</c:choose>
+				</c:if>
 			   </td>
 			   
 			   <td>
 			<%--Displaying Previous link except for the 1st page--%>
-			<% if (Integer.parseInt(request.getAttribute(Constants.CURRENTPAGE).toString()) != 1) { %>
-			   <% if (request.getParameter(Constants.ORDER) != null && request.getParameter(Constants.FIELD) != null){ %>
-			   <form name="previouslink" action="<%=contextPath%>/clients" method="get">
-                 <input type="hidden" name="order" value = "<%=order%>" />
-				 <input type="hidden" name="field" value = "<%=field%>" />
+			   <c:if test="${currentPage != 1}">
+				<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="previouslink" action="<%=contextPath%>/clients.htm" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
-			   <%} else {%>
-			   <form name="previouslink" action="<%=contextPath%>/clients" method="get">
+				</c:when>
+				<c:otherwise>
+			   <form name="previouslink" action="<%=contextPath%>/clients.htm" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
-			   <% } %>
-			   <% } %>
+				</c:otherwise>
+				</c:choose>
+				</c:if>
 			   </td>
  
 			<%--Displaying Page numbers--%>
-            <td>  <%   out.println(request.getAttribute("currentPage"));   %>  </td>
+            <td> <c:out value="${currentPage}"/> </td>
 
 				<td>
 			<%--Displaying Next link--%>
-			<% if (Integer.parseInt(request.getAttribute(Constants.CURRENTPAGE).toString()) < Integer.parseInt(request.getAttribute(Constants.NO_OF_PAGES).toString())) { %>
-			   <% if (request.getParameter(Constants.ORDER) != null && request.getParameter(Constants.FIELD) != null){ %>
-			   <form name="nextlink" action="<%=contextPath%>/clients" method="get">
-                 <input type="hidden" name="order" value = "<%=order%>" />
-				 <input type="hidden" name="field" value = "<%=field%>" />
+			   <c:if test="${currentPage < noOfPages}">
+				<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="nextlink" action="<%=contextPath%>/clients.htm" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
-			   <%} else {%>
-			   <form name="nextlink" action="<%=contextPath%>/clients" method="get">
+				</c:when>
+				<c:otherwise>
+			   <form name="nextlink" action="<%=contextPath%>/clients.htm" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
-			   <% } %>
-			   <% } %>
+				</c:otherwise>
+				</c:choose>
+				</c:if>
 			   </td>
 
 			   <td>
 			<%--Displaying Last link--%>
-			<% if (Integer.parseInt(request.getAttribute(Constants.CURRENTPAGE).toString()) < Integer.parseInt(request.getAttribute(Constants.NO_OF_PAGES).toString())) { %>
-			   <% if (request.getParameter(Constants.ORDER) != null && request.getParameter(Constants.FIELD) != null){ %>
-			   <form name="lastlink" action="<%=contextPath%>/clients" method="get">
-                 <input type="hidden" name="order" value = "<%=order%>" />
-				 <input type="hidden" name="field" value = "<%=field%>" />
+			   <c:if test="${currentPage < noOfPages}">
+				<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="lastlink" action="<%=contextPath%>/clients.htm" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
-			   <%} else {%>
-			   <form name="lastlink" action="<%=contextPath%>/clients" method="get">
+				</c:when>
+				<c:otherwise>
+			   <form name="lastlink" action="<%=contextPath%>/clients.htm" method="get">
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
-			   <% } %>
-			   <% } %>
+				</c:otherwise>
+				</c:choose>
+				</c:if>
 			   </td>
 			   </tr>
 			   </table>
 			   
 			   </br>
 
-               <form name="newclient" action="<%=contextPath%>/controller" method="post">
+               <form name="newclient" action="<%=contextPath%>/controller.htm" method="post">
                  <input type="hidden" name="id" value = "new" />
                  <input type="submit" value="New Client" class = "myButton"/>
                </form>
