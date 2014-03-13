@@ -27,7 +27,6 @@
 
 
     <!-- Controllers, mapping -->
-    <bean name="/hello.htm" class="pl.radek.dvd.controller.HelloController"/>
     <!--bean name="/clients.htm" class="pl.radek.dvd.controller.GetClientsController"-->
         <!--property name="clientsMySQLDAO" ref="clientDAO"/-->
     <!--/bean-->
