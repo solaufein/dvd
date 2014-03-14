@@ -12,7 +12,7 @@ import pl.radek.dvd.model.Constants;
  */
 public class JspMethods {
 
-    public static String generateLink(String servlet, String order, String columnName, String field) {
+    /*public static String generateLink(String servlet, String order, String columnName, String field) {
         String link = null;
 
         if (Constants.ASC.equals(order) && columnName.equals(field)) {
@@ -22,11 +22,17 @@ public class JspMethods {
         }
 
         return link;
-    }
-
-   /* public static void main(String[] args) {
-       String link = JspMethods.generateLink("clients","ASC","FirstName","FirstName");
-        System.out.println("link: " + link);
     }*/
 
+    public static String generateLink(String order, String columnName, String field) {
+        String link = null;
+
+        if (Constants.ASC.equals(order) && columnName.equals(field)) {
+            link = "?order=" + Constants.DESC + "&field=" + columnName;
+        } else {
+            link = "?order=" + Constants.ASC + "&field=" + columnName;
+        }
+
+        return link;
+    }
 }

@@ -60,8 +60,18 @@ public class SimpleClientsService implements ClientsService {
     }
 
     @Override
+    public void addClient(Client client) {
+        clientsMySQLDAO.addClient(client);
+    }
+
+    @Override
     public void updateClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email, int id) {
         clientsMySQLDAO.updateClient(first_name, last_name, pesel, city, street, phone_number, email, id);
+    }
+
+    @Override
+    public void updateClient(Client client) {
+        clientsMySQLDAO.updateClient(client);
     }
 
     @Override

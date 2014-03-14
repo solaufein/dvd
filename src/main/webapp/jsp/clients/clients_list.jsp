@@ -52,39 +52,38 @@
 		     <%
 			 String order = request.getParameter(Constants.ORDER);
 			 String field = request.getParameter(Constants.FIELD);
-			 String contextPath = request.getContextPath();
 			 String generatedLink;
              %>
 	<div class="table">
                <table> 
                  <tr>
                   <td>	
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.FIRSTNAME,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Firstname</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.FIRSTNAME,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Firstname</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.LASTNAME,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Lastname</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.LASTNAME,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Lastname</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.PESEL,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Pesel</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.PESEL,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Pesel</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.CITY,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">City</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.CITY,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">City</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.STREET,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Street</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.STREET,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Street</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.PHONENUMBER,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Phone Number</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.PHONENUMBER,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Phone Number</a>
 				  </td>
                   <td>
-					<% generatedLink = JspMethods.generateLink("clients.htm",order,Constants.EMAIL,field); %>
-					<a href="<%=contextPath%>/<%=generatedLink%>" class="link">Email</a>
+					<% generatedLink = JspMethods.generateLink(order,Constants.EMAIL,field); %>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Email</a>
 				  </td>
 				  <td></td>
 				  <td></td>
@@ -98,11 +97,11 @@
 							<td>  <c:out value="${client.street}"/>  </td>
 							<td>  <c:out value="${client.phoneNumber}"/>  </td>
 							<td>  <c:out value="${client.email}"/>  </td>
-							<td> <form action="<%=contextPath%>/delete.htm" method="post" onsubmit="return ConfirmDelete();">
+							<td> <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="Delete" class = "myButton"/>
                               </form></td>
-                         <td> <form name="editclient" action="<%=contextPath%>/controller.htm" method="post">
+                         <td> <form name="editclient" action=" <c:url value="controller.htm"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="Edit" class = "myButton"/>
                               </form></td>
@@ -118,7 +117,7 @@
 			   <c:if test="${currentPage != 1}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="firstlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "1" />
@@ -126,7 +125,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="firstlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
@@ -140,7 +139,7 @@
 			   <c:if test="${currentPage != 1}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="previouslink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
@@ -148,7 +147,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="previouslink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
@@ -165,7 +164,7 @@
 			   <c:if test="${currentPage < noOfPages}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="nextlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
@@ -173,7 +172,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="nextlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
@@ -187,7 +186,7 @@
 			   <c:if test="${currentPage < noOfPages}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="lastlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
@@ -195,7 +194,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="lastlink" action="<%=contextPath%>/clients.htm" method="get">
+			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
@@ -208,7 +207,7 @@
 			   
 			   </br>
 
-               <form name="newclient" action="<%=contextPath%>/controller.htm" method="post">
+               <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
                  <input type="submit" value="New Client" class = "myButton"/>
                </form>

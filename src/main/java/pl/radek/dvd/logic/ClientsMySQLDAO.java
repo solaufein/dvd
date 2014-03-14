@@ -71,7 +71,10 @@ public class ClientsMySQLDAO implements ClientsDAO {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Client> getClientsSortedAndPaged(String field, String order, final int offset, final int noOfRecords) {
+    public List<Client> getClientsSortedAndPaged(String field,
+                                                 String order,
+                                                 final int offset,
+                                                 final int noOfRecords) {
         logger.debug("Perform method getClientsSortedAndPaged");
 
         final String hql = "FROM Client ORDER BY " + field + " " + order;
@@ -117,10 +120,45 @@ public class ClientsMySQLDAO implements ClientsDAO {
     }
 
     @Override
+    public void addClient(Client client) {
+        String first_name = client.getFirstName();
+        String last_name = client.getLastName();
+        String pesel = client.getPesel();
+        String city = client.getCity();
+        String street = client.getStreet();
+        String phone_number = client.getPhoneNumber();
+        String email = client.getEmail();
+
+        logger.debug("Adding client to db: firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
+
+        hibernateTemplate.save(client);
+
+        logger.debug("Added client to db: firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
+    }
+
+    @Override
     public void updateClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email, int id) {
         logger.debug("Updating client with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
 
         hibernateTemplate.update(new Client(id, first_name, last_name, pesel, city, street, phone_number, email));
+
+        logger.debug("Updated client with id =" + id + ", SET firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
+    }
+
+    @Override
+    public void updateClient(Client client) {
+        String first_name = client.getFirstName();
+        String last_name = client.getLastName();
+        String pesel = client.getPesel();
+        String city = client.getCity();
+        String street = client.getStreet();
+        String phone_number = client.getPhoneNumber();
+        String email = client.getEmail();
+        int id = client.getId();
+
+        logger.debug("Updating client with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
+
+        hibernateTemplate.update(client);
 
         logger.debug("Updated client with id =" + id + ", SET firstname=" + first_name + ", lastname=" + last_name + ", pesel=" + pesel + ", city=" + city + ", street=" + street + ", phonenumber=" + phone_number + ", email=" + email);
     }

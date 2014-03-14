@@ -51,7 +51,10 @@ public class AddEditController {
 
             // follow to add_client.jsp
             modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
-            modelAndView.addObject(Constants.ID, id);
+            Client client = new Client();
+            client.setId(-1);
+            modelAndView.addObject(Constants.CLIENT, client);
+       //     modelAndView.addObject(Constants.ID, id);
         } else {                         // edit client with given id
             logger.info("id equals: " + id + "(edit client)");
             Client client = simpleClientsService.getClient(Integer.parseInt(id));

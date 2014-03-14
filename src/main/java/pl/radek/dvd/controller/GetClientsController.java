@@ -38,11 +38,11 @@ public class GetClientsController {
         this.simpleClientsService = simpleClientsService;
     }
 
-    @RequestMapping(method= RequestMethod.GET)
-    public ModelAndView handleRequest(@RequestParam(value=Constants.ORDER, required=false) String order,
-                                      @RequestParam(value=Constants.FIELD, required=false) String field,
-                                      @RequestParam(value=Constants.CURRENTPAGE, required=false) String currentPage) throws Exception {
-        //      resp.setContentType("text/html");
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView handleRequest(@RequestParam(value = Constants.ORDER, required = false) String order,
+                                      @RequestParam(value = Constants.FIELD, required = false) String field,
+                                      @RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage) throws Exception {
+
         List<Client> clientList;
         int page = 1;
         int recordsPerPage = 5;
@@ -75,36 +75,11 @@ public class GetClientsController {
 
     private List<Client> getClients(ClientsService clientsService, int page, int recordsPerPage, String field, String order) {
         List<Client> clientList;
-        if (Constants.ASC.equals(order) && Constants.FIRSTNAME.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.FIRSTNAME, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.FIRSTNAME.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.FIRSTNAME, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.LASTNAME.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.LASTNAME, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.LASTNAME.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.LASTNAME, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.PESEL.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.PESEL, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.PESEL.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.PESEL, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.CITY.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.CITY, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.CITY.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.CITY, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.STREET.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.STREET, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.STREET.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.STREET, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.PHONENUMBER.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.PHONENUMBER, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.PHONENUMBER.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.PHONENUMBER, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.ASC.equals(order) && Constants.EMAIL.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.EMAIL, Constants.ASC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else if (Constants.DESC.equals(order) && Constants.EMAIL.equals(field)) {
-            clientList = clientsService.getClientsSortedAndPaged(Constants.EMAIL, Constants.DESC, (page - 1) * recordsPerPage, recordsPerPage);
-        } else {
+
+        if (field == null && order == null) {
             clientList = clientsService.getClientsByPage((page - 1) * recordsPerPage, recordsPerPage);
+        } else {
+            clientList = clientsService.getClientsSortedAndPaged(field, order, (page - 1) * recordsPerPage, recordsPerPage);
         }
         return clientList;
     }
