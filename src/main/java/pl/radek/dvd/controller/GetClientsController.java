@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.model.ListDataRequest;
+import pl.radek.dvd.service.ClientsListService;
 import pl.radek.dvd.service.ClientsService;
 import pl.radek.dvd.service.SimpleClientsService;
 
@@ -38,6 +40,13 @@ public class GetClientsController {
         this.simpleClientsService = simpleClientsService;
     }
 
+    /*@Autowired
+    private ClientsListService clientsListService;
+
+    public void setClientsListService(ClientsListService clientsListService) {
+        this.clientsListService = clientsListService;
+    }*/
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleRequest(@RequestParam(value = Constants.ORDER, required = false) String order,
                                       @RequestParam(value = Constants.FIELD, required = false) String field,
@@ -52,6 +61,7 @@ public class GetClientsController {
         }
 
         int noOfRecords = simpleClientsService.getNoOfRecords();
+     //   int noOfRecords = clientsListService.getClients(new ListDataRequest(null, null, null)).getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
         logger.info("Getting client list from db");
@@ -62,6 +72,7 @@ public class GetClientsController {
 
         // sorting and paging logic method
         clientList = getClients(simpleClientsService, page, recordsPerPage, field, order);
+    //    clientList = clientsListService.getClients(new ListDataRequest(null, null, null)).getDataList();
 
         ModelAndView modelAndView = new ModelAndView("/jsp/clients/clients_list.jsp");    // forward:  ?
         modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);

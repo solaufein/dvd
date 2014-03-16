@@ -17,6 +17,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import pl.radek.dvd.logic.daomapper.ClientRowMapper;
 import pl.radek.dvd.model.Client;
+import pl.radek.dvd.model.ListDataRequest;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -56,6 +57,11 @@ public class ClientsMySQLDAO implements ClientsDAO {
         List<Client> clients = hibernateTemplate.find(hql);
 
         return clients;
+    }
+
+    @Override
+    public List<Client> getClients(ListDataRequest listDataRequest) {
+        return null;  //todo: dorobic
     }
 
     @Override
@@ -175,5 +181,10 @@ public class ClientsMySQLDAO implements ClientsDAO {
         logger.debug("Got total number of records = " + records);
 
         return records;
+    }
+
+    @Override
+    public int getNoOfRecords(ListDataRequest listDataRequest) {
+        return 0;                          //todo: dorobic
     }
 }
