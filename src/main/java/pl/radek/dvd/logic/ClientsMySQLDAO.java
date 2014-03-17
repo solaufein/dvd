@@ -16,8 +16,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import pl.radek.dvd.logic.daomapper.ClientRowMapper;
-import pl.radek.dvd.model.Client;
-import pl.radek.dvd.model.ListDataRequest;
+import pl.radek.dvd.model.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -61,7 +60,41 @@ public class ClientsMySQLDAO implements ClientsDAO {
 
     @Override
     public List<Client> getClients(ListDataRequest listDataRequest) {
-        return null;  //todo: dorobic
+        logger.debug("Perform method getClients");
+
+        final String hql = "FROM Client";
+        List<Client> clients;
+        SortInfo sortInfo = listDataRequest.getSortInfo();
+        PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
+
+        final int page = paginationInfo.getPage();
+        final int recordsPerPage = paginationInfo.getRecordsPerPage();
+        final int offset = (page - 1) * recordsPerPage;
+
+
+        if (sortInfo == null) {
+            clients = hibernateTemplate.findByCriteria(DetachedCriteria.forClass(Client.class), offset, recordsPerPage);
+        } else {
+            String field = sortInfo.getOrderField();
+            boolean isAsc = sortInfo.isAsc();
+            String order;
+
+            if (isAsc == true) {
+                order = Constants.ASC;
+            } else {
+                order = Constants.DESC;
+            }
+            final String newHql = hql + " ORDER BY " + field + " " + order;
+            clients = hibernateTemplate.executeFind(new HibernateCallback<List<Client>>() {
+                @Override
+                public List<Client> doInHibernate(Session session) throws HibernateException, SQLException {
+                    return session.createQuery(newHql).setFirstResult(offset).setMaxResults(recordsPerPage).list();
+                }
+            });
+        }
+
+        logger.debug("Got sorted clients list from db");
+        return clients;
     }
 
     @Override
@@ -185,6 +218,8 @@ public class ClientsMySQLDAO implements ClientsDAO {
 
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
-        return 0;                          //todo: dorobic
+        int records = getNoOfRecords();
+
+        return records;
     }
 }
