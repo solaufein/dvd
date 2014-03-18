@@ -35,16 +35,6 @@ public class SimpleClientsService implements ClientsService {
     }
 
     @Override
-    public List getClientsByPage(int offset, int noOfRecords) {
-        return clientsMySQLDAO.getClientsByPage(offset, noOfRecords);
-    }
-
-    @Override
-    public List<Client> getClientsSortedAndPaged(String field, String order, int offset, int noOfRecords) {
-        return clientsMySQLDAO.getClientsSortedAndPaged(field, order, offset, noOfRecords);
-    }
-
-    @Override
     public Client getClient(int id) {
         return clientsMySQLDAO.getClient(id);
     }
@@ -72,10 +62,5 @@ public class SimpleClientsService implements ClientsService {
     @Override
     public void updateClient(Client client) {
         clientsMySQLDAO.updateClient(client);
-    }
-
-    @Override
-    public int getNoOfRecords() {
-        return clientsMySQLDAO.getNoOfRecords();
     }
 }

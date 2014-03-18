@@ -3,10 +3,10 @@
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Clients</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+<title><spring:message code="header.title" /></title>
 <link rel="stylesheet" type="text/css" href="jsp/css/main.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/button.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/table.css" />
@@ -33,21 +33,32 @@
    <div id="container">
    	<div id="header">
    		<h1>
-   			Dvd <b>R</b>entals
+   			<spring:message code="header" />
    		</h1>
    	</div>
    	<div id="navigation">
    		<ul>
-   			<li><a href="#">Home</a></li>
-   			<li><a href="#">Clients</a></li>
-   			<li><a href="#">Movies</a></li>
-   			<li><a href="#">Raports</a></li>
-   			<li><a href="#">Administration</a></li>
-   		</ul>
+   			<li><a href="#"><spring:message code="menu.home" /></a></li>
+   			<li><a href="#"><spring:message code="menu.clients" /></a></li>
+   			<li><a href="#"><spring:message code="menu.movies" /></a></li>
+   			<li><a href="#"><spring:message code="menu.raports" /></a></li>
+   			<li><a href="#"><spring:message code="menu.administration" /></a></li>
+   		</ul>	
    	</div>
+	<!-- Header right begin-->
+	<div style = "text-align:right; float:right">
+		<c:url var="englishLocaleUrl" value="/clients.htm">
+			<c:param name="lang" value="en" />
+		</c:url>
+		<c:url var="polishLocaleUrl" value="/clients.htm">
+			<c:param name="lang" value="pl" />
+		</c:url>	
+		<a href="${englishLocaleUrl}">EN</a> | <a href="${polishLocaleUrl}">PL</a>
+	</div>
+	<!-- Header right end-->
    	<div id="content">
    		<h2>
-   			Clients list:
+   			<spring:message code="clients.list"/>:
    		</h2>
 		     <%
 			 String order = request.getParameter(Constants.ORDER);
@@ -59,31 +70,31 @@
                  <tr>
                   <td>	
 					<% generatedLink = JspMethods.generateLink(order,Constants.FIRSTNAME,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Firstname</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="firstname"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.LASTNAME,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Lastname</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="lastname"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.PESEL,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Pesel</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="pesel"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.CITY,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">City</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="city"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.STREET,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Street</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="street"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.PHONENUMBER,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Phone Number</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="phonenumber"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.EMAIL,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link">Email</a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="email"/></a>
 				  </td>
 				  <td></td>
 				  <td></td>
@@ -99,11 +110,11 @@
 							<td>  <c:out value="${client.email}"/>  </td>
 							<td> <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${client.id}" />
-                                  <input type="submit" value="Delete" class = "myButton"/>
+                                  <input type="submit" value="<spring:message code="button.delete"/>" class = "myButton"/>
                               </form></td>
                          <td> <form name="editclient" action=" <c:url value="controller.htm"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
-                                  <input type="submit" value="Edit" class = "myButton"/>
+                                  <input type="submit" value="<spring:message code="button.edit"/>" class = "myButton"/>
                               </form></td>
 						</tr>
 					</c:forEach>   
@@ -209,12 +220,11 @@
 
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
-                 <input type="submit" value="New Client" class = "myButton"/>
-               </form>
-
+                 <input type="submit" value="<spring:message code="button.newclient"/>" class = "myButton"/>
+               </form>			   
    	</div>
    	<div id="footer">
-   		Copyright © Dvd Rentals, 2014
+   		<spring:message code="footer"/>
    	</div>
    </div>
 </body>
