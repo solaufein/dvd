@@ -1,7 +1,7 @@
 package pl.radek.dvd.logic;
 
 import pl.radek.dvd.model.Client;
-import pl.radek.dvd.model.ListDataRequest;
+import pl.radek.dvd.dto.ListDataRequest;
 
 import java.util.List;
 
@@ -16,13 +16,9 @@ public interface ClientsDAO {
 
     public List<Client> getClients();
     public List<Client> getClients(ListDataRequest listDataRequest);
-    public List<Client> getClientsByPage(int offset, int noOfRecords);
-    public List<Client> getClientsSortedAndPaged(String field, String order, int offset, int noOfRecords);
     public Client getClient(int id);
     public void deleteClient(int id);
-    public void addClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email);
     public void addClient(Client client);
-    public void updateClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email, int id);
     public void updateClient(Client client);
     public int getNoOfRecords();
     public int getNoOfRecords(ListDataRequest listDataRequest);

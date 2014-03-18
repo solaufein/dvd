@@ -1,4 +1,4 @@
-package pl.radek.dvd.model;
+package pl.radek.dvd.dto;
 
 /**
  * User: Sola

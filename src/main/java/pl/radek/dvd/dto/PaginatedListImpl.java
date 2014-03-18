@@ -1,5 +1,6 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.dto;
 
+import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.model.Client;
 
 import java.util.List;

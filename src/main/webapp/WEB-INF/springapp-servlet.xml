@@ -37,7 +37,6 @@
         <property name="defaultLocale" value="en" />
     </bean>
 
-
     <!-- View Resolver configuration-->
     <!--bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/jsp/clients/" />
@@ -45,14 +44,6 @@
     </bean-->
 
 
-    <!-- Controllers, mapping -->
-    <!--bean name="/clients.htm" class="pl.radek.dvd.controller.GetClientsController"-->
-        <!--property name="clientsMySQLDAO" ref="clientDAO"/-->
-    <!--/bean-->
-    <!--bean name="/delete.htm" class="pl.radek.dvd.controller.DeleteClientController"/-->
-    <!--bean name="/addclient.htm" class="pl.radek.dvd.controller.AddClientController"/-->
-    <!--bean name="/updateclient.htm" class="pl.radek.dvd.controller.UpdateClientController"/-->
-    <!--bean name="/controller.htm" class="pl.radek.dvd.controller.AddEditController"/-->
 
 
 </beans>

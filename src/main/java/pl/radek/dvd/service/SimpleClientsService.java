@@ -3,8 +3,11 @@ package pl.radek.dvd.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.PaginatedListImpl;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
+import pl.radek.dvd.dto.ListDataRequest;
 
 import java.util.List;
 
@@ -28,6 +31,17 @@ public class SimpleClientsService implements ClientsService {
         this.clientsMySQLDAO = clientsMySQLDAO;
     }
 
+    @Override
+    public PaginatedList<Client> getClients(final ListDataRequest request) {
+        List<Client> clients = clientsMySQLDAO.getClients(request);
+        int noOfRecords = clientsMySQLDAO.getNoOfRecords(request);
+
+        PaginatedListImpl paginatedList = new PaginatedListImpl();
+        paginatedList.setDataList(clients);
+        paginatedList.setNoOfRecords(noOfRecords);
+
+        return paginatedList;
+    }
 
     @Override
     public List<Client> getClients() {
@@ -45,18 +59,8 @@ public class SimpleClientsService implements ClientsService {
     }
 
     @Override
-    public void addClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email) {
-        clientsMySQLDAO.addClient(first_name, last_name, pesel, city, street, phone_number, email);
-    }
-
-    @Override
     public void addClient(Client client) {
         clientsMySQLDAO.addClient(client);
-    }
-
-    @Override
-    public void updateClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email, int id) {
-        clientsMySQLDAO.updateClient(first_name, last_name, pesel, city, street, phone_number, email, id);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.dto;
 
 import java.util.List;
 

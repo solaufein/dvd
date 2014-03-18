@@ -7,15 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.radek.dvd.logic.ClientsMySQLDAO;
+import pl.radek.dvd.dto.FilterInfo;
+import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.SortInfo;
 import pl.radek.dvd.model.*;
-import pl.radek.dvd.service.ClientsListService;
-import pl.radek.dvd.service.ClientsService;
-import pl.radek.dvd.service.PaginatedList;
+import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.service.SimpleClientsService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -33,10 +32,10 @@ public class GetClientsController {
     private static Logger logger = Logger.getLogger(GetClientsController.class);
 
     @Autowired
-    private ClientsListService clientsListService;
+    private SimpleClientsService simpleClientsService;
 
-    public void setClientsListService(ClientsListService clientsListService) {
-        this.clientsListService = clientsListService;
+    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
+        this.simpleClientsService = simpleClientsService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -70,7 +69,7 @@ public class GetClientsController {
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
         ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfo, paginationInfo);
 
-        PaginatedList<Client> clientPaginatedList = clientsListService.getClients(listDataRequest);
+        PaginatedList<Client> clientPaginatedList = simpleClientsService.getClients(listDataRequest);
         int noOfRecords = clientPaginatedList.getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 

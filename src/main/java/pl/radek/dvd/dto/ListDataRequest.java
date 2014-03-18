@@ -1,4 +1,8 @@
-package pl.radek.dvd.model;
+package pl.radek.dvd.dto;
+
+import pl.radek.dvd.dto.FilterInfo;
+import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.SortInfo;
 
 /**
  * User: Sola

@@ -7,9 +7,9 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" >
 
     <!-- Display -->
-    <display-name>Clients</display-name>
+    <display-name>Dvd</display-name>
     <description>
-        Clients
+        Dvd
     </description>
 
     <!-- Context Configuration -->

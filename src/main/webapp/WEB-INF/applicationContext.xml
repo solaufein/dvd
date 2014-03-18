@@ -14,9 +14,6 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!--context:component-scan base-package="pl.radek.dvd.servlets, pl.radek.dvd.logic"/-->
-    <!--context:annotation-config/-->
-
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
             <value>classpath:config.properties</value>
@@ -38,11 +35,6 @@
             </props>
         </property>
     </bean>
-
-    <!--bean id="clientDAO" class="pl.radek.dvd.logic.ClientsMySQLDAO">
-        <property name="jdbcTemplate" ref="jdbcTemplate"/>
-        <property name="hibernateTemplate" ref="hibernateTemplate"/>
-    </bean-->
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${driver}"/>

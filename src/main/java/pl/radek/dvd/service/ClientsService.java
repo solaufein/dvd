@@ -1,6 +1,8 @@
 package pl.radek.dvd.service;
 
+import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.model.Client;
+import pl.radek.dvd.dto.ListDataRequest;
 
 import java.util.List;
 
@@ -14,9 +16,8 @@ import java.util.List;
 public interface ClientsService {
     public List<Client> getClients();
     public Client getClient(int id);
+    public PaginatedList<Client> getClients(final ListDataRequest request);
     public void deleteClient(int id);
-    public void addClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email);
     public void addClient(Client client);
-    public void updateClient(String first_name, String last_name, String pesel, String city, String street, String phone_number, String email, int id);
     public void updateClient(Client client);
 }
