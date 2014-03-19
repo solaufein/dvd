@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-<title><spring:message code="header.title" /></title>
+<title><spring:message code="common.header.title" /></title>
 <link rel="stylesheet" type="text/css" href="jsp/css/main.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/button.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/form.css" />
@@ -22,51 +22,51 @@
 <c:choose>
 <c:when test="${client.id =='-1'}">
    
-	 <h1><spring:message code="clients.addnew"/> </h1>
+	 <h1><spring:message code="clients.add.header"/> </h1>
 	 <form:form method="POST" commandName="client" action="addclient.htm">
 <table>
     <tbody><tr>
         <td><form:hidden path="id"></form:hidden></td>
     </tr>
 	<tr>
-        <td><form:label path="firstName"><spring:message code="firstname"/>:</form:label></td>
+        <td><form:label path="firstName"><spring:message code="clients.clientsList.firstName"/>:</form:label></td>
         <td><form:input path="firstName" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="firstName" cssClass="error"></form:errors></td>
     </tr>
     <tr>
-        <td><form:label path="lastName"><spring:message code="lastname"/>:</form:label></td>
+        <td><form:label path="lastName"><spring:message code="clients.clientsList.lastName"/>:</form:label></td>
         <td><form:input path="lastName" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="lastName" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="pesel"><spring:message code="pesel"/>:</form:label></td>
+        <td><form:label path="pesel"><spring:message code="clients.clientsList.pesel"/>:</form:label></td>
         <td><form:input path="pesel" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="pesel" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="city"><spring:message code="city"/>:</form:label></td>
+        <td><form:label path="city"><spring:message code="clients.clientsList.city"/>:</form:label></td>
         <td><form:input path="city" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="city" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="street"><spring:message code="street"/>:</form:label></td>
+        <td><form:label path="street"><spring:message code="clients.clientsList.street"/>:</form:label></td>
         <td><form:input path="street" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="street" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="phoneNumber"><spring:message code="phonenumber"/>:</form:label></td>
+        <td><form:label path="phoneNumber"><spring:message code="clients.clientsList.phoneNumber"/>:</form:label></td>
         <td><form:input path="phoneNumber" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="phoneNumber" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="email"><spring:message code="email"/>:</form:label></td>
+        <td><form:label path="email"><spring:message code="clients.clientsList.email"/>:</form:label></td>
         <td><form:input path="email" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="email" cssClass="error"></form:errors></td>
     </tr>
 	<tr><td></td></tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="<spring:message code="button.submit"/>" class = "myButton">
+            <input type="submit" value="<spring:message code="common.button.submit"/>" class = "myButton">
         </td>
         <td></td>
         <td></td>
@@ -78,7 +78,7 @@
 	 <table>
 	   <tr>
 		<td colspan="2">
-           <input type="submit" value="<spring:message code="button.cancel"/>" class = "myButton"/>
+           <input type="submit" value="<spring:message code="common.button.cancel"/>" class = "myButton"/>
 		</td>
 		<td></td>
         <td></td>
@@ -89,51 +89,51 @@
 </c:when>
 <c:otherwise>
 
-	 <h1><spring:message code="clients.edit"/> </h1>
+	 <h1><spring:message code="clients.edit.header"/> </h1>
 	 <form:form method="POST" commandName="client" action="updateclient.htm">
 <table>
     <tbody><tr>
         <td><form:hidden path="id"></form:hidden></td>
     </tr>
 	<tr>
-        <td><form:label path="firstName"><spring:message code="firstname"/>:</form:label></td>
+        <td><form:label path="firstName"><spring:message code="clients.clientsList.firstName"/>:</form:label></td>
         <td><form:input path="firstName" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="firstName" cssClass="error"></form:errors></td>
     </tr>
     <tr>
-        <td><form:label path="lastName"><spring:message code="lastname"/>:</form:label></td>
+        <td><form:label path="lastName"><spring:message code="clients.clientsList.lastName"/>:</form:label></td>
         <td><form:input path="lastName" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="lastName" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="pesel"><spring:message code="pesel"/>:</form:label></td>
+        <td><form:label path="pesel"><spring:message code="clients.clientsList.pesel"/>:</form:label></td>
         <td><form:input path="pesel" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="pesel" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="city"><spring:message code="city"/>:</form:label></td>
+        <td><form:label path="city"><spring:message code="clients.clientsList.city"/>:</form:label></td>
         <td><form:input path="city" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="city" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="street"><spring:message code="street"/>:</form:label></td>
+        <td><form:label path="street"><spring:message code="clients.clientsList.street"/>:</form:label></td>
         <td><form:input path="street" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="street" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="phoneNumber"><spring:message code="phonenumber"/>:</form:label></td>
+        <td><form:label path="phoneNumber"><spring:message code="clients.clientsList.phoneNumber"/>:</form:label></td>
         <td><form:input path="phoneNumber" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="phoneNumber" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
-        <td><form:label path="email"><spring:message code="email"/>:</form:label></td>
+        <td><form:label path="email"><spring:message code="clients.clientsList.email"/>:</form:label></td>
         <td><form:input path="email" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="email" cssClass="error"></form:errors></td>
     </tr>
 	<tr><td></td></tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="<spring:message code="button.submit"/>" class = "myButton">
+            <input type="submit" value="<spring:message code="common.button.submit"/>" class = "myButton">
         </td>
         <td></td>
         <td></td>
@@ -145,7 +145,7 @@
 	 <table>
 	   <tr>
 		<td colspan="2">
-           <input type="submit" value="<spring:message code="button.cancel"/>" class = "myButton"/>
+           <input type="submit" value="<spring:message code="common.button.cancel"/>" class = "myButton"/>
 		</td>
 		<td></td>
         <td></td>

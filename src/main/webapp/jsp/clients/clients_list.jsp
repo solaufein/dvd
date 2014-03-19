@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pl" lang="pl">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-<title><spring:message code="header.title" /></title>
+<title><spring:message code="common.header.title" /></title>
 <link rel="stylesheet" type="text/css" href="jsp/css/main.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/button.css" />
 <link rel="stylesheet" type="text/css" href="jsp/css/table.css" />
@@ -14,7 +14,7 @@
           <script>
               function ConfirmDelete()
               {
-                var x = confirm("<spring:message code="deletion"/>");
+                var x = confirm("<spring:message code="common.question.deletion"/>");
                 if (x)
                     return true;
                 else
@@ -33,7 +33,7 @@
    <div id="container">
    	<div id="header">
    		<h1>
-   			<spring:message code="header" />
+   			<spring:message code="common.header" />
    		</h1>
    	</div>
    	<div id="navigation">
@@ -58,7 +58,7 @@
 	<!-- Header right end-->
    	<div id="content">
    		<h2>
-   			<spring:message code="clients.list"/>:
+   			<spring:message code="clients.clientsList.list"/>:
    		</h2>
 		     <%
 			 String order = request.getParameter(Constants.ORDER);
@@ -70,31 +70,31 @@
                  <tr>
                   <td>	
 					<% generatedLink = JspMethods.generateLink(order,Constants.FIRSTNAME,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="firstname"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.firstName"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.LASTNAME,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="lastname"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.lastName"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.PESEL,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="pesel"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.pesel"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.CITY,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="city"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.city"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.STREET,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="street"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.street"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.PHONENUMBER,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="phonenumber"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.phoneNumber"/></a>
 				  </td>
                   <td>
 					<% generatedLink = JspMethods.generateLink(order,Constants.EMAIL,field); %>
-					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="email"/></a>
+					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.email"/></a>
 				  </td>
 				  <td></td>
 				  <td></td>
@@ -110,11 +110,11 @@
 							<td>  <c:out value="${client.email}"/>  </td>
 							<td> <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${client.id}" />
-                                  <input type="submit" value="<spring:message code="button.delete"/>" class = "myButton"/>
+                                  <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
                               </form></td>
                          <td> <form name="editclient" action=" <c:url value="controller.htm"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
-                                  <input type="submit" value="<spring:message code="button.edit"/>" class = "myButton"/>
+                                  <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
                               </form></td>
 						</tr>
 					</c:forEach>   
@@ -220,11 +220,11 @@
 
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
-                 <input type="submit" value="<spring:message code="button.newclient"/>" class = "myButton"/>
+                 <input type="submit" value="<spring:message code="clients.button.newclient"/>" class = "myButton"/>
                </form>			   
    	</div>
    	<div id="footer">
-   		<spring:message code="footer"/>
+   		<spring:message code="common.footer"/>
    	</div>
    </div>
 </body>
