@@ -26,6 +26,14 @@ public class FormValidator {
         }
     }
 
+    public void validatePhoneNumber(String number) {
+        regexPattern = Pattern.compile("[0-9()-\\.]*");
+        regMatcher   = regexPattern.matcher(number);
+        if (!regMatcher.matches()) {
+            errors.put("phone_number"," - Invalid phone number");
+        }
+    }
+
     public void validatePesel(String pesel) {
         regexPattern = Pattern.compile("\\d{11}");
         regMatcher   = regexPattern.matcher(pesel);

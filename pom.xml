@@ -113,7 +113,14 @@
             <artifactId>hibernate-validator</artifactId>
             <version>5.0.2.Final</version>
         </dependency>
-        
+
+        <!-- Validation Api -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+
         <!--JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>

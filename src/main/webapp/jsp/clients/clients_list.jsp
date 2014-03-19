@@ -14,7 +14,7 @@
           <script>
               function ConfirmDelete()
               {
-                var x = confirm("Are you sure you want to delete?");
+                var x = confirm("<spring:message code="deletion"/>");
                 if (x)
                     return true;
                 else

@@ -2,7 +2,10 @@ package pl.radek.dvd.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +20,9 @@ import pl.radek.dvd.service.SimpleClientsService;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -42,31 +47,15 @@ public class AddClientController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView handleRequest(@ModelAttribute("client") Client client) throws Exception {
+    public ModelAndView handleRequest(@ModelAttribute("client") @Valid Client client, BindingResult result) throws Exception {
 
-        FormValidator formValidator = new FormValidator();
-        Map<String, String> errors;
         ModelAndView modelAndView;
-
         logger.info("AddClient - Get request parameters(fields)");
 
-        // validate form fields
-        logger.info("Validate form fields");
-        formValidator.validateAlfabeticField(client.getFirstName(), Constants.FIRSTNAME, " - Invalid Firstname");
-        formValidator.validateAlfabeticField(client.getLastName(), Constants.LASTNAME, " - Invalid Lastname");
-        formValidator.validatePesel(client.getPesel());
-        formValidator.validateAlfabeticField(client.getCity(), Constants.CITY, " - Invalid City");
-        formValidator.validateEmptyField(client.getStreet(), Constants.STREET, " - Invalid Street");
-        formValidator.validateEmptyField(client.getPhoneNumber(), Constants.PHONENUMBER, " - Empty field");
-        formValidator.validateEmailAddress(client.getEmail());
-
-        errors = formValidator.getErrors();
-
-        if (errors.isEmpty()) {
+        if (!result.hasErrors()) {
             // No errors, redirect to client list
             logger.info("No errors spotted");
             logger.info("Adding client to db");
-
             simpleClientsService.addClient(client);
 
             // redirect to GetClientsListServlet
@@ -79,7 +68,6 @@ public class AddClientController {
             modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
             modelAndView.addObject(Constants.ID, client.getId());
             modelAndView.addObject(Constants.CLIENT, client);
-            modelAndView.addObject(Constants.ERRORS, errors);
         }
         return modelAndView;
     }

@@ -31,37 +31,37 @@
 	<tr>
         <td><form:label path="firstName"><spring:message code="firstname"/>:</form:label></td>
         <td><form:input path="firstName" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.first_name}</span><td>
+		<td><form:errors path="firstName" cssClass="error"></form:errors></td>
     </tr>
     <tr>
         <td><form:label path="lastName"><spring:message code="lastname"/>:</form:label></td>
         <td><form:input path="lastName" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.last_name}</span><td>
+		<td><form:errors path="lastName" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="pesel"><spring:message code="pesel"/>:</form:label></td>
         <td><form:input path="pesel" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.pesel}</span><td>
+		<td><form:errors path="pesel" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="city"><spring:message code="city"/>:</form:label></td>
         <td><form:input path="city" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.city}</span><td>
+		<td><form:errors path="city" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="street"><spring:message code="street"/>:</form:label></td>
         <td><form:input path="street" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.street}</span><td>
+		<td><form:errors path="street" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="phoneNumber"><spring:message code="phonenumber"/>:</form:label></td>
         <td><form:input path="phoneNumber" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.phone_number}</span><td>
+		<td><form:errors path="phoneNumber" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="email"><spring:message code="email"/>:</form:label></td>
         <td><form:input path="email" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.email}</span><td>
+		<td><form:errors path="email" cssClass="error"></form:errors></td>
     </tr>
 	<tr><td></td></tr>
     <tr>
@@ -98,37 +98,37 @@
 	<tr>
         <td><form:label path="firstName"><spring:message code="firstname"/>:</form:label></td>
         <td><form:input path="firstName" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.first_name}</span><td>
+		<td><form:errors path="firstName" cssClass="error"></form:errors></td>
     </tr>
     <tr>
         <td><form:label path="lastName"><spring:message code="lastname"/>:</form:label></td>
         <td><form:input path="lastName" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.last_name}</span><td>
+		<td><form:errors path="lastName" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="pesel"><spring:message code="pesel"/>:</form:label></td>
         <td><form:input path="pesel" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.pesel}</span><td>
+		<td><form:errors path="pesel" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="city"><spring:message code="city"/>:</form:label></td>
         <td><form:input path="city" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.city}</span><td>
+		<td><form:errors path="city" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="street"><spring:message code="street"/>:</form:label></td>
         <td><form:input path="street" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.first_name}</span><td>
+		<td><form:errors path="street" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="phoneNumber"><spring:message code="phonenumber"/>:</form:label></td>
         <td><form:input path="phoneNumber" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.phone_number}</span><td>
+		<td><form:errors path="phoneNumber" cssClass="error"></form:errors></td>
     </tr>
 	<tr>
         <td><form:label path="email"><spring:message code="email"/>:</form:label></td>
         <td><form:input path="email" cssClass = "inputs"></form:input></td>
-		<td><span class="error">${errors.email}</span><td>
+		<td><form:errors path="email" cssClass="error"></form:errors></td>
     </tr>
 	<tr><td></td></tr>
     <tr>
