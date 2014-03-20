@@ -78,6 +78,21 @@
             <version>1.4.3.RELEASE</version>
         </dependency>
 
+        <!-- Test NG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+
         <!-- Log4J -->
         <dependency>
             <groupId>log4j</groupId>
@@ -133,7 +148,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-        
+
         <!--servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -171,6 +186,25 @@
         <finalName>
             dvd
         </finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
             <!-- Maven Tomcat Plugin -->
             <plugin>
@@ -193,6 +227,18 @@
                     <update>true</update>
                </configuration-->
             </plugin>
+
+            <!-- Maven Surefire Plugin (TestNG using Suite XML files) -->
+            <!--plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin-->
 
         </plugins>
     </build>
