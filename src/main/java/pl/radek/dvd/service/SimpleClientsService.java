@@ -3,12 +3,14 @@ package pl.radek.dvd.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.PaginatedListImpl;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.dto.ListDataRequest;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ import java.util.List;
  */
 
 @Service
-public class SimpleClientsService implements ClientsService {
+public class SimpleClientsService implements ClientsService<ClientData> {
 
     private static Logger logger = Logger.getLogger(SimpleClientsService.class);
 
@@ -32,25 +34,33 @@ public class SimpleClientsService implements ClientsService {
     }
 
     @Override
-    public PaginatedList<Client> getClients(final ListDataRequest request) {
+    public PaginatedList<ClientData> getClients(final ListDataRequest request) {
         List<Client> clients = clientsMySQLDAO.getClients(request);
         int noOfRecords = clientsMySQLDAO.getNoOfRecords(request);
+        //conversion
+        List<ClientData> clientDataList = convertClientListToClientDataList(clients);
 
         PaginatedListImpl paginatedList = new PaginatedListImpl();
-        paginatedList.setDataList(clients);
+        paginatedList.setDataList(clientDataList);
         paginatedList.setNoOfRecords(noOfRecords);
 
         return paginatedList;
     }
 
     @Override
-    public List<Client> getClients() {
-        return clientsMySQLDAO.getClients();
+    public List<ClientData> getClients() {
+        List<Client> clients = clientsMySQLDAO.getClients();
+        List<ClientData> clientDataList = convertClientListToClientDataList(clients);
+
+        return clientDataList;
     }
 
     @Override
-    public Client getClient(int id) {
-        return clientsMySQLDAO.getClient(id);
+    public ClientData getClient(int id) {
+        Client client = clientsMySQLDAO.getClient(id);
+        ClientData clientData = convertClientToClientData(client);
+
+        return clientData;
     }
 
     @Override
@@ -59,12 +69,62 @@ public class SimpleClientsService implements ClientsService {
     }
 
     @Override
-    public void addClient(Client client) {
-        clientsMySQLDAO.addClient(client);
+    public void addClient(ClientData client) {
+        Client c = convertClientDataToClient(client);
+        clientsMySQLDAO.addClient(c);
     }
 
     @Override
-    public void updateClient(Client client) {
-        clientsMySQLDAO.updateClient(client);
+    public void updateClient(ClientData client) {
+        Client c = convertClientDataToClient(client);
+        clientsMySQLDAO.updateClient(c);
+    }
+
+    private List<ClientData> convertClientListToClientDataList(List<Client> clientList) {
+        List<ClientData> clientDataList = new LinkedList<ClientData>();
+        for (Client c : clientList){
+            ClientData clientData = convertClientToClientData(c);
+            clientDataList.add(clientData);
+        }
+
+        return clientDataList;
+    }
+
+    private List<Client> convertClientDataListToClientList(List<ClientData> clientDataList) {
+        List<Client> clientList = new LinkedList<Client>();
+        for (ClientData cd : clientDataList){
+            Client client = convertClientDataToClient(cd);
+            clientList.add(client);
+        }
+
+        return clientList;
+    }
+
+    private ClientData convertClientToClientData(Client client) {
+        ClientData clientData = new ClientData();
+        clientData.setId(client.getId());
+        clientData.setFirstName(client.getFirstName());
+        clientData.setLastName(client.getLastName());
+        clientData.setPesel(client.getPesel());
+        clientData.setCity(client.getCity());
+        clientData.setStreet(client.getStreet());
+        clientData.setPhoneNumber(client.getPhoneNumber());
+        clientData.setEmail(client.getEmail());
+
+        return clientData;
+    }
+
+    private Client convertClientDataToClient(ClientData clientData) {
+        Client client = new Client();
+        client.setId(clientData.getId());
+        client.setFirstName(clientData.getFirstName());
+        client.setLastName(clientData.getLastName());
+        client.setPesel(clientData.getPesel());
+        client.setCity(clientData.getCity());
+        client.setStreet(clientData.getStreet());
+        client.setPhoneNumber(clientData.getPhoneNumber());
+        client.setEmail(clientData.getEmail());
+
+        return client;
     }
 }

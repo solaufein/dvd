@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
@@ -52,13 +53,14 @@ public class AddEditController {
 
             // follow to add_client.jsp
             modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
-            Client client = new Client();
+            ClientData client = new ClientData();
             client.setId(-1);
             modelAndView.addObject(Constants.CLIENT, client);
        //     modelAndView.addObject(Constants.ID, id);
+
         } else {                         // edit client with given id
             logger.info("id equals: " + id + "(edit client)");
-            Client client = clientFacade.getClient(Integer.parseInt(id));
+            ClientData client = clientFacade.getClient(Integer.parseInt(id));
 
             // follow to add_client.jsp
             modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");

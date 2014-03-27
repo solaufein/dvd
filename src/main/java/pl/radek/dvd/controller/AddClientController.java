@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.logic.FormValidator;
 import pl.radek.dvd.model.Client;
@@ -48,7 +49,7 @@ public class AddClientController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView handleRequest(@ModelAttribute("client") @Valid Client client, BindingResult result) throws Exception {
+    public ModelAndView handleRequest(@ModelAttribute("client") @Valid ClientData client, BindingResult result) throws Exception {
 
         ModelAndView modelAndView;
         logger.info("AddClient - Get request parameters(fields)");

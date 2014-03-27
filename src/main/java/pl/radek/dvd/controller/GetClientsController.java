@@ -7,12 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import pl.radek.dvd.dto.FilterInfo;
-import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginationInfo;
-import pl.radek.dvd.dto.SortInfo;
+import pl.radek.dvd.dto.*;
 import pl.radek.dvd.model.*;
-import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
@@ -44,7 +40,7 @@ public class GetClientsController {
                                       @RequestParam(value = Constants.FIELD, required = false) String field,
                                       @RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage) throws Exception {
 
-        List<Client> clientList;
+        List<ClientData> clientList;
         SortInfo sortInfo = null;
         FilterInfo filterInfo = null;
         int page = 1;
@@ -70,7 +66,7 @@ public class GetClientsController {
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
         ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfo, paginationInfo);
 
-        PaginatedList<Client> clientPaginatedList = clientFacade.getClients(listDataRequest);
+        PaginatedList<ClientData> clientPaginatedList = clientFacade.getClients(listDataRequest);
         int noOfRecords = clientPaginatedList.getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 

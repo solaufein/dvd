@@ -24,33 +24,24 @@ public class Client {
     @Column(name = "id")
     private int id;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.firstName")
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.lastName")
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Pattern(regexp = "\\d{11}", message = "Pattern.client.pesel")
     @Column(name = "pesel", nullable = false)
     private String pesel;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.city")
     @Column(name = "city", nullable = false)
     private String city;
 
-    @NotEmpty(message = "NotEmpty.client.street")
     @Column(name = "street", nullable = false)
     private String street;
 
-    @NotEmpty(message = "NotEmpty.client.phoneNumber")
-    @Pattern(regexp = "[0-9()-\\.]*", message = "Pattern.client.phoneNumber")
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @NotEmpty(message = "NotEmpty.client.email")
-    @Email(message = "Email.client.email")
     @Column(name = "email", nullable = false)
     private String email;
 

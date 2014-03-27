@@ -10,12 +10,12 @@ import java.util.List;
  * Date: 15.03.14
  * Time: 16:29
  */
-public class PaginatedListImpl implements PaginatedList<Client> {
-    private List<Client> dataList;
+public class PaginatedListImpl implements PaginatedList<ClientData> {
+    private List<ClientData> dataList;
     private int noOfRecords;
 
     @Override
-    public List<Client> getDataList() {
+    public List<ClientData> getDataList() {
         return dataList;
     }
 
@@ -24,7 +24,7 @@ public class PaginatedListImpl implements PaginatedList<Client> {
         return noOfRecords;
     }
 
-    public void setDataList(List<Client> dataList) {
+    public void setDataList(List<ClientData> dataList) {
         this.dataList = dataList;
     }
 
