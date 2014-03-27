@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +30,10 @@ public class DeleteClientController {
     private static Logger logger = Logger.getLogger(DeleteClientController.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientFacadeImpl clientFacade;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
+    public void setClientFacade(ClientFacadeImpl clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     @RequestMapping(method= RequestMethod.POST)
@@ -43,7 +44,7 @@ public class DeleteClientController {
         logger.info("get id from clients_list.jsp form, id=" + id);
 
         logger.info("Deleting client with id=" + id);
-        simpleClientsService.deleteClient(id);
+        clientFacade.deleteClient(id);
 
 
         // redirect to GetClientsController

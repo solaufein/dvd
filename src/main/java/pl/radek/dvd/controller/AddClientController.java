@@ -15,6 +15,7 @@ import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.logic.FormValidator;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
 import javax.servlet.ServletException;
@@ -40,10 +41,10 @@ public class AddClientController {
     private static Logger logger = Logger.getLogger(AddClientController.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientFacadeImpl clientFacade;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
+    public void setClientFacade(ClientFacadeImpl clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -56,7 +57,7 @@ public class AddClientController {
             // No errors, redirect to client list
             logger.info("No errors spotted");
             logger.info("Adding client to db");
-            simpleClientsService.addClient(client);
+            clientFacade.addClient(client);
 
             // redirect to GetClientsListServlet
             logger.info("Redirect to GetClientsController");

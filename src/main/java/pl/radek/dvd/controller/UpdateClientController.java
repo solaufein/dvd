@@ -13,6 +13,7 @@ import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.logic.FormValidator;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
 import javax.validation.Valid;
@@ -32,10 +33,10 @@ public class UpdateClientController {
     private static Logger logger = Logger.getLogger(AddClientController.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientFacadeImpl clientFacade;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
+    public void setClientFacade(ClientFacadeImpl clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -49,7 +50,7 @@ public class UpdateClientController {
             // No errors, redirect to client list
             logger.info("No errors spotted");
             logger.info("Editing Client with id= " + client.getId());
-            simpleClientsService.updateClient(client);
+            clientFacade.updateClient(client);
 
             // redirect to GetClientsListServlet
             logger.info("Redirect to GetClientsController");

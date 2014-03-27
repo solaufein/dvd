@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
 import javax.servlet.ServletConfig;
@@ -34,10 +35,10 @@ public class AddEditController {
     private static Logger logger = Logger.getLogger(AddEditController.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientFacadeImpl clientFacade;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
+    public void setClientFacade(ClientFacadeImpl clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -57,7 +58,7 @@ public class AddEditController {
        //     modelAndView.addObject(Constants.ID, id);
         } else {                         // edit client with given id
             logger.info("id equals: " + id + "(edit client)");
-            Client client = simpleClientsService.getClient(Integer.parseInt(id));
+            Client client = clientFacade.getClient(Integer.parseInt(id));
 
             // follow to add_client.jsp
             modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");

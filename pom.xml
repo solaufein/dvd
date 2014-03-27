@@ -77,6 +77,11 @@
             <artifactId>spring-data-jpa</artifactId>
             <version>1.4.3.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
 
         <!-- Test NG -->
         <dependency>
@@ -92,6 +97,14 @@
             <artifactId>mockito-all</artifactId>
             <version>1.9.5</version>
         </dependency>
+
+        <!-- JUnit -->
+        <!--dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency-->
 
         <!-- Log4J -->
         <dependency>
@@ -180,6 +193,7 @@
             <version>6.0</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -229,16 +243,16 @@
             </plugin>
 
             <!-- Maven Surefire Plugin (TestNG using Suite XML files) -->
-            <!--plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.17</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
-            </plugin-->
+            </plugin>
 
         </plugins>
     </build>

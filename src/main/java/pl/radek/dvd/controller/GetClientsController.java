@@ -13,6 +13,7 @@ import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.SortInfo;
 import pl.radek.dvd.model.*;
 import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.service.ClientFacadeImpl;
 import pl.radek.dvd.service.SimpleClientsService;
 
 import java.util.List;
@@ -32,10 +33,10 @@ public class GetClientsController {
     private static Logger logger = Logger.getLogger(GetClientsController.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientFacadeImpl clientFacade;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
+    public void setClientFacade(ClientFacadeImpl clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -69,7 +70,7 @@ public class GetClientsController {
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
         ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfo, paginationInfo);
 
-        PaginatedList<Client> clientPaginatedList = simpleClientsService.getClients(listDataRequest);
+        PaginatedList<Client> clientPaginatedList = clientFacade.getClients(listDataRequest);
         int noOfRecords = clientPaginatedList.getNoOfRecords();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
