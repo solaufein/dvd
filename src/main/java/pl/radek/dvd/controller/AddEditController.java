@@ -2,25 +2,15 @@ package pl.radek.dvd.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.logic.ClientsMySQLDAO;
-import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.service.ClientFacade;
 import pl.radek.dvd.service.ClientFacadeImpl;
-import pl.radek.dvd.service.SimpleClientsService;
-
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -36,9 +26,9 @@ public class AddEditController {
     private static Logger logger = Logger.getLogger(AddEditController.class);
 
     @Autowired
-    private ClientFacadeImpl clientFacade;
+    private ClientFacade clientFacade;
 
-    public void setClientFacade(ClientFacadeImpl clientFacade) {
+    public void setClientFacade(ClientFacade clientFacade) {
         this.clientFacade = clientFacade;
     }
 

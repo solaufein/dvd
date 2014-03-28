@@ -2,7 +2,6 @@ package pl.radek.dvd.controller;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -13,10 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.logic.ClientsMySQLDAO;
-import pl.radek.dvd.model.Client;
 import pl.radek.dvd.service.ClientFacadeImpl;
-import pl.radek.dvd.service.SimpleClientsService;
 
 /**
  * User: Sola
@@ -26,7 +22,7 @@ import pl.radek.dvd.service.SimpleClientsService;
 public class AddClientControllerTest {
 
     /*@Mock
-    private SimpleClientsService simpleClientsService;*/
+    private ClientsServiceImpl simpleClientsService;*/
 
     @Mock
     private ClientFacadeImpl clientFacade;

@@ -61,7 +61,7 @@
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean-->
 
-    <!--bean id="clientsServiceTest" class="pl.radek.dvd.service.SimpleClientsServiceTest">
+    <!--bean id="clientsServiceTest" class="pl.radek.dvd.service.ClientsServiceImplTest
         <property name="clientsMySQLDAO" ref="clientDAO"/>
     </bean-->
 </beans>

@@ -2,10 +2,6 @@ package pl.radek.dvd.service;
 
 
 import org.mockito.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,19 +15,19 @@ import pl.radek.dvd.model.Client;
  * Date: 2014-03-20
  * Time: 12:52
  */
-public class SimpleClientsServiceTest {
+public class ClientsServiceImplTest {
 
     @Mock
     private ClientsMySQLDAO clientsMySQLDAO;
 
     @InjectMocks
-    private SimpleClientsService simpleClientsService;
+    private ClientsServiceImpl clientsServiceImpl;
 
     @BeforeMethod
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-   //     simpleClientsService = new SimpleClientsService();
-   //     simpleClientsService.setClientsMySQLDAO(clientsMySQLDAO);           // ok ?
+   //     clientsServiceImpl = new ClientsServiceImpl();
+   //     clientsServiceImpl.setClientsMySQLDAO(clientsMySQLDAO);           // ok ?
     }
 
     @AfterMethod
@@ -49,17 +45,17 @@ public class SimpleClientsServiceTest {
         ClientData client = new ClientData(id, "rad", "wit", "22233344455", "Krak", "ul ladna", "555-222", "rad@rad.op.pl");
 
         final ArgumentCaptor<Client> clientCaptor = ArgumentCaptor.forClass(Client.class);
-        simpleClientsService.addClient(client);
+        clientsServiceImpl.addClient(client);
         Mockito.verify(clientsMySQLDAO).addClient(clientCaptor.capture());
         Assert.assertEquals(clientCaptor.getValue().getFirstName(), client.getFirstName());
         Assert.assertEquals(clientCaptor.getValue().getLastName(), client.getLastName());
 
        /* Mockito.when(clientsMySQLDAO.getClient(id)).thenReturn(client);
-        final Client c = simpleClientsService.getClient(id);*/
+        final Client c = clientsServiceImpl.getClient(id);*/
 
 
       /*
-        simpleClientsService.addClient(client);
+        clientsServiceImpl.addClient(client);
         Mockito.verify(clientsMySQLDAO, Mockito.times(2)).addClient(client);*/
 
 

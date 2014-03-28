@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
-import pl.radek.dvd.model.Client;
-
-import java.util.List;
 
 /**
  * User: Sola
@@ -17,44 +14,39 @@ import java.util.List;
  */
 
 @Component
-public class ClientFacadeImpl implements ClientFacade<ClientData> {
+public class ClientFacadeImpl implements ClientFacade {
 
     private static Logger logger = Logger.getLogger(ClientFacadeImpl.class);
 
     @Autowired
-    private SimpleClientsService simpleClientsService;
+    private ClientsService clientsService;
 
-    public void setSimpleClientsService(SimpleClientsService simpleClientsService) {
-        this.simpleClientsService = simpleClientsService;
-    }
-
-    @Override
-    public List<ClientData> getClients() {
-        return simpleClientsService.getClients();
+    public void setClientsService(ClientsService clientsService) {
+        this.clientsService = clientsService;
     }
 
     @Override
     public ClientData getClient(int id) {
-        return simpleClientsService.getClient(id);
+        return clientsService.getClient(id);
     }
 
     @Override
     public PaginatedList<ClientData> getClients(ListDataRequest request) {
-        return simpleClientsService.getClients(request);
+        return clientsService.getClients(request);
     }
 
     @Override
     public void deleteClient(int id) {
-        simpleClientsService.deleteClient(id);
+        clientsService.deleteClient(id);
     }
 
     @Override
     public void addClient(ClientData client) {
-        simpleClientsService.addClient(client);
+        clientsService.addClient(client);
     }
 
     @Override
     public void updateClient(ClientData client) {
-        simpleClientsService.updateClient(client);
+        clientsService.updateClient(client);
     }
 }

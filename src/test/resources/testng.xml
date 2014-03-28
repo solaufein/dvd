@@ -8,8 +8,7 @@
     </test>
     <test name="ClientsService test">
         <classes>
-            <class name="pl.radek.dvd.service.ClientsServiceTest"/>
-            <class name="pl.radek.dvd.service.SimpleClientsServiceTest"/>
+            <class name="pl.radek.dvd.service.ClientsServiceImplTest"/>
         </classes>
     </test>
 </suite>

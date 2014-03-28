@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.PaginatedListImpl;
+import pl.radek.dvd.logic.ClientsDAO;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.dto.ListDataRequest;
@@ -22,21 +23,21 @@ import java.util.List;
  */
 
 @Service
-public class SimpleClientsService implements ClientsService<ClientData> {
+public class ClientsServiceImpl implements ClientsService {
 
-    private static Logger logger = Logger.getLogger(SimpleClientsService.class);
+    private static Logger logger = Logger.getLogger(ClientsServiceImpl.class);
 
     @Autowired
-    private ClientsMySQLDAO clientsMySQLDAO;
+    private ClientsDAO clientsDAO;
 
-    public void setClientsMySQLDAO(ClientsMySQLDAO clientsMySQLDAO) {
-        this.clientsMySQLDAO = clientsMySQLDAO;
+    public void setClientsDAO(ClientsDAO clientsDAO) {
+        this.clientsDAO = clientsDAO;
     }
 
     @Override
     public PaginatedList<ClientData> getClients(final ListDataRequest request) {
-        List<Client> clients = clientsMySQLDAO.getClients(request);
-        int noOfRecords = clientsMySQLDAO.getNoOfRecords(request);
+        List<Client> clients = clientsDAO.getClients(request);
+        int noOfRecords = clientsDAO.getNoOfRecords(request);
         //conversion
         List<ClientData> clientDataList = convertClientListToClientDataList(clients);
 
@@ -49,7 +50,7 @@ public class SimpleClientsService implements ClientsService<ClientData> {
 
     @Override
     public List<ClientData> getClients() {
-        List<Client> clients = clientsMySQLDAO.getClients();
+        List<Client> clients = clientsDAO.getClients();
         List<ClientData> clientDataList = convertClientListToClientDataList(clients);
 
         return clientDataList;
@@ -57,7 +58,7 @@ public class SimpleClientsService implements ClientsService<ClientData> {
 
     @Override
     public ClientData getClient(int id) {
-        Client client = clientsMySQLDAO.getClient(id);
+        Client client = clientsDAO.getClient(id);
         ClientData clientData = convertClientToClientData(client);
 
         return clientData;
@@ -65,19 +66,19 @@ public class SimpleClientsService implements ClientsService<ClientData> {
 
     @Override
     public void deleteClient(int id) {
-        clientsMySQLDAO.deleteClient(id);
+        clientsDAO.deleteClient(id);
     }
 
     @Override
     public void addClient(ClientData client) {
         Client c = convertClientDataToClient(client);
-        clientsMySQLDAO.addClient(c);
+        clientsDAO.addClient(c);
     }
 
     @Override
     public void updateClient(ClientData client) {
         Client c = convertClientDataToClient(client);
-        clientsMySQLDAO.updateClient(c);
+        clientsDAO.updateClient(c);
     }
 
     private List<ClientData> convertClientListToClientDataList(List<Client> clientList) {
