@@ -4,20 +4,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.0.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!-- the application context definition for the springapp DispatcherServlet -->
+    <!--Tthe application context definition for the springapp DispatcherServlet -->
 
     <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller" />
     <mvc:annotation-driven />
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
-    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!-- Enable annotation @Secured for method security -->
+    <security:global-method-security secured-annotations="enabled" proxy-target-class="true"/>
 
     <!-- Internationalization configuration -->
     <mvc:interceptors>
@@ -39,11 +44,9 @@
 
     <!-- View Resolver configuration-->
     <!--bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/jsp/clients/" />
+        <property name="prefix" value="/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean-->
-
-
 
 
 </beans>

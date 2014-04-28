@@ -221,7 +221,12 @@
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
                  <input type="submit" value="<spring:message code="clients.button.newclient"/>" class = "myButton"/>
-               </form>			   
+               </form>
+
+               </br>
+
+               <a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+
    	</div>
    	<div id="footer">
    		<spring:message code="common.footer"/>

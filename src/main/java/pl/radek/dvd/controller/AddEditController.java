@@ -2,6 +2,7 @@ package pl.radek.dvd.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,7 @@ import pl.radek.dvd.service.ClientFacadeImpl;
 
 @Controller
 @RequestMapping("/controller.htm")
+@Secured("ROLE_ADMIN")
 public class AddEditController {
     private static Logger logger = Logger.getLogger(AddEditController.class);
 
