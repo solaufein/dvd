@@ -29,9 +29,6 @@ public class Employee {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "login", nullable = false)
-    private String login;
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -39,22 +36,20 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String phoneNumber, String email, String login, String password) {
+    public Employee(String firstName, String lastName, String phoneNumber, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.login = login;
         this.password = password;
     }
 
-    public Employee(int id, String firstName, String lastName, String phoneNumber, String email, String login, String password) {
+    public Employee(int id, String firstName, String lastName, String phoneNumber, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.login = login;
         this.password = password;
     }
 
@@ -76,10 +71,6 @@ public class Employee {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getLogin() {
-        return login;
     }
 
     public String getPassword() {
@@ -104,10 +95,6 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public void setPassword(String password) {

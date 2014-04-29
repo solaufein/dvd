@@ -4,18 +4,29 @@ INSERT INTO genre VALUES (default,'horror');
 INSERT INTO genre VALUES (default,'fantasy');
 INSERT INTO genre VALUES (default,'s-f');
 INSERT INTO genre VALUES (default,'thriller');
+INSERT INTO genre VALUES (default,'obyczajowy');
+INSERT INTO genre VALUES (default,'musical');
+INSERT INTO genre VALUES (default,'akcji');
 
 INSERT INTO actors VALUES (default,'brad','pitt');
 INSERT INTO actors VALUES (default,'will','smith');
 INSERT INTO actors VALUES (default,'mike','tyson');
 INSERT INTO actors VALUES (default,'tom','cruise');
+INSERT INTO actors VALUES (default,'anthony','hopkins');
 
 INSERT INTO promotion VALUES(default,'Hit',9.99,6);
 INSERT INTO promotion VALUES(default,'Mega Hit',7.99,5);
 INSERT INTO promotion VALUES(default,'Super Hit',5.99,3);
 
-INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','anowak@op.pl','adamnowak1',MD5('nowak1'));
-INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl','julia12',MD5('jula'));
+INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'));
+INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'));
+
+INSERT INTO roles VALUES(default,'ADMIN');
+INSERT INTO roles VALUES(default,'USER');
+
+INSERT INTO employee_roles VALUES(default,1,1);
+INSERT INTO employee_roles VALUES(default,1,2);
+INSERT INTO employee_roles VALUES(default,2,2);
 
 INSERT INTO client VALUES(default,'Stefan','Kora','88122233322','Krakow','Dobrego Pasterza 1','603603032','kora@op.pl');
 INSERT INTO client VALUES(default,'Zofia','Piec','84122236312','Krakow','Wielicka 2','503203032','piec@op.pl');
@@ -23,7 +34,7 @@ INSERT INTO client VALUES(default,'Ziuta','Ziemia','83122533622','Krakow','Szews
 INSERT INTO client VALUES(default,'Natalia','Zonk','85113533622','Krakow','Szewska 7','612783232','zonk@op.pl');
 INSERT INTO client VALUES(default,'Karolina','Gleba','87123533322','Krakow','Opolska 1','621722232','gleba@op.pl');
 INSERT INTO client VALUES(default,'Oliwia','Hola','82222533662','Krakow','Balicka 5','622783222','hola@op.pl');
-INSERT INTO client VALUES(default,'Micha≥','Wiadro','81124443622','Krakow','Krucza 2','611183232','wiadro@op.pl');
+INSERT INTO client VALUES(default,'Micha≈Ç','Wiadro','81124443622','Krakow','Krucza 2','611183232','wiadro@op.pl');
 INSERT INTO client VALUES(default,'Jan','Loko','83662536662','Krakow','Solarna 3','601888832','loko@op.pl');
 INSERT INTO client VALUES(default,'Jurek','Zito','83555556221','Krakow','Klasztorna 3','68883232','zito@op.pl');
 INSERT INTO client VALUES(default,'Olga','Przek','86162563622','Krakow','Sokola 8','633383232','przek@op.pl');
@@ -48,7 +59,7 @@ INSERT INTO movie VALUES(default,5,1,'Superman','Woody Allen','2011',default);
 INSERT INTO movie VALUES(default,5,1,'Sniper','Koxx','2010',default);
 INSERT INTO movie VALUES(default,5,2,'Hulk','Stanley Kubrick','2010',default);
 INSERT INTO movie VALUES(default,5,3,'Wolverine','Tim Burton','2012',default);
-INSERT INTO movie VALUES(default,3,1,'Pi≥a','Tim Burton','2013',default);
+INSERT INTO movie VALUES(default,3,1,'Pi≈Ça','Tim Burton','2013',default);
 INSERT INTO movie VALUES(default,1,2,'Gladiator','Ingmar Bergman','2009',default);
 INSERT INTO movie VALUES(default,2,3,'Rzym','Christopher Nolan','2012',default);
 
