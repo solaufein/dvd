@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.SortInfo;
@@ -31,6 +32,7 @@ import java.util.List;
  */
 
 @Repository
+@Transactional
 public class ClientsMySQLDAO implements ClientsDAO {
 
     private static Logger logger = Logger.getLogger(ClientsMySQLDAO.class);

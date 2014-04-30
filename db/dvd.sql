@@ -50,7 +50,7 @@ phone_number VARCHAR(40) NOT NULL,
 email VARCHAR(60) NOT NULL,
 password VARCHAR(32) NOT NULL,
 PRIMARY KEY(id),
-UNIQUE(first_name, last_name)); 
+UNIQUE(first_name, last_name, email));
 
 CREATE TABLE roles
 (id BIGINT NOT NULL AUTO_INCREMENT,
