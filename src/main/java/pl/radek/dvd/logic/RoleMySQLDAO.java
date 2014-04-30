@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.model.Roles;
 
 /**
@@ -14,6 +15,7 @@ import pl.radek.dvd.model.Roles;
  */
 
 @Repository
+@Transactional
 public class RoleMySQLDAO implements RoleDAO {
 
     private static Logger logger = Logger.getLogger(RoleMySQLDAO.class);

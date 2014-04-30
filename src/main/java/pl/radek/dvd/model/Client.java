@@ -24,13 +24,13 @@ public class Client {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", unique = true, nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", unique = true, nullable = false)
     private String lastName;
 
-    @Column(name = "pesel", nullable = false)
+    @Column(name = "pesel", unique = true, nullable = false)
     private String pesel;
 
     @Column(name = "city", nullable = false)

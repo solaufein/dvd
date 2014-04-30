@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.logic.EmployeeDAO;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.Roles;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Sola
@@ -24,7 +26,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class EmployeeDetailsService implements UserDetailsService {
 
     private static Logger logger = Logger.getLogger(EmployeeDetailsService.class);
@@ -45,6 +47,7 @@ public class EmployeeDetailsService implements UserDetailsService {
         boolean accountNonLocked = true;
 
         logger.debug("Got employee. login: " + employee.getEmail() + ", password: " + employee.getPassword());
+        logger.debug("Employee Roles: " + employee.getRolesSet());
 
         return new User(
                 employee.getEmail(),
@@ -53,25 +56,27 @@ public class EmployeeDetailsService implements UserDetailsService {
                 accountNonExpired,
                 credentialsNonExpired,
                 accountNonLocked,
-             //   getAuthorities(employee.getRole().getId(),
-                getAuthorities(1)                 // testing
+                getAuthorities(employee.getRolesSet())
         );
     }
 
-    public Collection<? extends GrantedAuthority> getAuthorities(Integer role) {
-        List<GrantedAuthority> authList = getGrantedAuthorities(getRoles(role));
+    public Collection<? extends GrantedAuthority> getAuthorities(Set<Roles> roles) {
+        List<GrantedAuthority> authList = getGrantedAuthorities(getRoles(roles));
         return authList;
     }
 
-    public List<String> getRoles(Integer role) {
+    public List<String> getRoles(Set<Roles> role) {
 
         List<String> roles = new ArrayList<String>();
 
-        if (role.intValue() == 1) {
-            roles.add("ROLE_USER");
-            roles.add("ROLE_ADMIN");
-        } else if (role.intValue() == 2) {
-            roles.add("ROLE_USER");
+        for (Roles r : role) {
+            if (r.getRole().equals("ADMIN")) {
+                roles.add("ROLE_ADMIN");
+            }
+
+            if (r.getRole().equals("USER")) {
+                roles.add("ROLE_USER");
+            }
         }
         return roles;
     }
@@ -84,5 +89,4 @@ public class EmployeeDetailsService implements UserDetailsService {
         }
         return authorities;
     }
-
 }

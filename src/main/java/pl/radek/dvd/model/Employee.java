@@ -1,6 +1,8 @@
 package pl.radek.dvd.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: Sola
@@ -17,21 +19,26 @@ public class Employee {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", unique = true, nullable = false)
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", unique = true, nullable = false)
     private String lastName;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ManyToMany(targetEntity=Roles.class, fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinTable(name = "employee_roles",
+            joinColumns = {@JoinColumn(name = "employee_id", referencedColumnName="id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName="id")})
+    private Set<Roles> rolesSet = new HashSet<Roles>(0);
 
     public Employee() {
     }
@@ -99,6 +106,14 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Roles> getRolesSet() {
+        return rolesSet;
+    }
+
+    public void setRolesSet(Set<Roles> rolesSet) {
+        this.rolesSet = rolesSet;
     }
 }
 
