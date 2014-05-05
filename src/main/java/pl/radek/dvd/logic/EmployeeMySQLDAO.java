@@ -68,7 +68,7 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     public Employee getEmployee(String login) {
         logger.debug("Getting employee by login(mail): " + login);
 
-        String hql = "FROM Employee E WHERE E.email = :login";
+        String hql = "FROM Employee e WHERE e.email = :login";
         Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(hql);
         q.setParameter("login", login);
         List results = q.list();

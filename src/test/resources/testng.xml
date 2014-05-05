@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Test all">
-    <test name="AddClientController test">
+    <!--test name="AddClientController test">
         <classes>
             <class name="pl.radek.dvd.controller.AddClientControllerTest"/>
         </classes>
-    </test>
-    <test name="ClientsService test">
+    </test-->
+    <!--test name="ClientsService test">
         <classes>
             <class name="pl.radek.dvd.service.ClientsServiceImplTest"/>
         </classes>
-    </test>
+    </test-->
 </suite>

@@ -24,9 +24,9 @@ INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD
 INSERT INTO roles VALUES(default,'ADMIN');
 INSERT INTO roles VALUES(default,'USER');
 
-INSERT INTO employee_roles VALUES(default,1,1);
-INSERT INTO employee_roles VALUES(default,1,2);
-INSERT INTO employee_roles VALUES(default,2,2);
+INSERT INTO employee_roles VALUES(1,1);
+INSERT INTO employee_roles VALUES(1,2);
+INSERT INTO employee_roles VALUES(2,2);
 
 INSERT INTO client VALUES(default,'Stefan','Kora','88122233322','Krakow','Dobrego Pasterza 1','603603032','kora@op.pl');
 INSERT INTO client VALUES(default,'Zofia','Piec','84122236312','Krakow','Wielicka 2','503203032','piec@op.pl');
@@ -108,6 +108,3 @@ INSERT INTO renting_registry VALUES(default,1,2,12,12,'2013-09-11 12:23:44','201
 INSERT INTO renting_registry VALUES(default,2,3,13,13,'2013-09-13 12:23:44','2013-09-18 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,2,4,14,14,'2013-10-11 12:23:44','2013-10-17 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,5,15,15,'2013-10-12 12:23:44','2013-10-19 12:23:44','everything ok');
-
-
-

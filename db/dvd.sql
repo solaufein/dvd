@@ -50,7 +50,7 @@ phone_number VARCHAR(40) NOT NULL,
 email VARCHAR(60) NOT NULL,
 password VARCHAR(32) NOT NULL,
 PRIMARY KEY(id),
-UNIQUE(first_name, last_name, email));
+UNIQUE(first_name, last_name, email)); 
 
 CREATE TABLE roles
 (id BIGINT NOT NULL AUTO_INCREMENT,
@@ -59,12 +59,11 @@ PRIMARY KEY(id),
 UNIQUE(role)); 
 
 CREATE TABLE employee_roles 
-(id BIGINT NOT NULL AUTO_INCREMENT,
-employee_id BIGINT NOT NULL,
+(employee_id BIGINT NOT NULL,
 role_id BIGINT NOT NULL,
-PRIMARY KEY(id),
-CONSTRAINT fk_employee_id FOREIGN KEY(employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT fk_role_id FOREIGN KEY(role_id) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE);
+PRIMARY KEY(employee_id, role_id),
+CONSTRAINT fk_employee FOREIGN KEY(employee_id) REFERENCES employee(id),
+CONSTRAINT fk_role FOREIGN KEY(role_id) REFERENCES roles(id));
 
 CREATE TABLE client
 (id BIGINT NOT NULL AUTO_INCREMENT,
@@ -108,16 +107,4 @@ PRIMARY KEY(id),
 FOREIGN KEY(employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(client_id) REFERENCES client(id) ON DELETE CASCADE ON UPDATE CASCADE,
 FOREIGN KEY(movie_copy_id) REFERENCES movie_copy(id) ON UPDATE CASCADE,
-FOREIGN KEY(receipt_id) REFERENCES receipt(id) ON UPDATE CASCADE); 
-
-
-
-
-
-
-
-
-
-
-
-
+FOREIGN KEY(receipt_id) REFERENCES receipt(id) ON UPDATE CASCADE);

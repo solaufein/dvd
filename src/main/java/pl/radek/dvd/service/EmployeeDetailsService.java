@@ -46,8 +46,15 @@ public class EmployeeDetailsService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
 
-        logger.debug("Got employee. login: " + employee.getEmail() + ", password: " + employee.getPassword());
-        logger.debug("Employee Roles: " + employee.getRolesSet());
+        // loggs
+        logger.debug("Got employee. login: " + employee.getEmail());
+        if (employee.getRolesSet().isEmpty()) {
+            logger.debug("Employee Roles: EMPTY");
+        } else {
+            for (Roles roles : employee.getRolesSet()) {
+                logger.debug("Employee Roles: " + roles.getRole());
+            }
+        }
 
         return new User(
                 employee.getEmail(),

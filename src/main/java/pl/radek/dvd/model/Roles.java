@@ -19,11 +19,11 @@ public class Roles {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "role", unique = true, nullable = false)
+    @Column(name = "role", nullable = false)
     private String role;
 
-    @ManyToMany(targetEntity=Employee.class, fetch = FetchType.LAZY, mappedBy = "rolesSet")
-    private Set<Employee> employees = new HashSet<Employee>(0);
+    @ManyToMany(mappedBy = "rolesSet",fetch=FetchType.EAGER)
+    private Set<Employee> employees = new HashSet<Employee>();
 
     public Roles() {
     }
