@@ -19,7 +19,7 @@ import pl.radek.dvd.service.ClientFacadeImpl;
  */
 
 @Controller
-@RequestMapping("/delete.htm")
+@RequestMapping("/emp/delete.htm")
 public class DeleteClientController {
     private static Logger logger = Logger.getLogger(DeleteClientController.class);
 

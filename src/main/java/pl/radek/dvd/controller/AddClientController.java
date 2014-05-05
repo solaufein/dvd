@@ -24,7 +24,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/addclient.htm")
+@RequestMapping("/emp/addclient.htm")
 public class AddClientController {
 
     private static Logger logger = Logger.getLogger(AddClientController.class);

@@ -30,12 +30,30 @@ public class HomeController {
         return modelAndView;
     }
 
-    @RequestMapping(value="/login.htm")
+    @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+    public ModelAndView login(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout) {
+
+        ModelAndView model = new ModelAndView("forward:/jsp/login.jsp");
+        if (error != null) {
+            model.addObject("error", "Invalid username and password!");
+        }
+
+        if (logout != null) {
+            model.addObject("msg", "You've been logged out successfully.");
+        }
+
+        return model;
+
+    }
+
+    /*@RequestMapping(value="/login.htm")
     public ModelAndView login(){
         ModelAndView modelAndView = new ModelAndView("forward:/jsp/login.jsp");
 
         return modelAndView;
-    }
+    }*/
 
     @RequestMapping(value="/logout.htm")
     public ModelAndView logout(){

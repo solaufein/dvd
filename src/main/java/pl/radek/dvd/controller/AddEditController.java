@@ -22,7 +22,7 @@ import pl.radek.dvd.service.ClientFacadeImpl;
  */
 
 @Controller
-@RequestMapping("/controller.htm")
+@RequestMapping("/emp/controller.htm")
 @Secured("ROLE_ADMIN")
 public class AddEditController {
     private static Logger logger = Logger.getLogger(AddEditController.class);
