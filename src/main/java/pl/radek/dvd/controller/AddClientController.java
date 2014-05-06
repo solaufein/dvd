@@ -55,7 +55,7 @@ public class AddClientController {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
 
-            modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
+            modelAndView = new ModelAndView("/clients/add_client");
             modelAndView.addObject(Constants.ID, client.getId());
             modelAndView.addObject(Constants.CLIENT, client);
         }

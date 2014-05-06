@@ -12,10 +12,10 @@
 
     <!--http pattern="/emp/jsp/css/**" security="none"/-->
     <http auto-config="true">
-        <intercept-url pattern="/jsp/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/login.htm*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/emp/**" access="ROLE_USER"/>
-        <form-login login-page="/jsp/login.jsp"
-                    default-target-url="/jsp/index.jsp"
+        <form-login login-page="/login.htm"
+                    default-target-url="/index.jsp"
                     authentication-failure-url="/login.htm?error"/>
         <logout logout-success-url="/login.htm?logout"/>
 

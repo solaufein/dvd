@@ -73,7 +73,7 @@ public class GetClientsController {
         // sorting and paging logic method
         clientList = clientPaginatedList.getDataList();
 
-        ModelAndView modelAndView = new ModelAndView("/jsp/clients/clients_list.jsp");    // forward:  ?
+        ModelAndView modelAndView = new ModelAndView("/clients/clients_list");
         modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);
         modelAndView.addObject(Constants.CURRENTPAGE, page);
         modelAndView.addObject(Constants.FIELD, field);

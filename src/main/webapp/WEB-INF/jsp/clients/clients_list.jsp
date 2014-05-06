@@ -1,4 +1,4 @@
-<%@ include file="/jsp/include.jsp" %>
+<%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@page import="pl.radek.dvd.model.Client, pl.radek.dvd.model.Constants, pl.radek.dvd.utils.JspMethods, java.util.List"%>
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 

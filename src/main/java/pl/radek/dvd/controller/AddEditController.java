@@ -44,7 +44,7 @@ public class AddEditController {
             logger.info("id equals: new (new client)");
 
             // follow to add_client.jsp
-            modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
+            modelAndView = new ModelAndView("/clients/add_client");
             ClientData client = new ClientData();
             client.setId(-1);
             modelAndView.addObject(Constants.CLIENT, client);
@@ -55,7 +55,7 @@ public class AddEditController {
             ClientData client = clientFacade.getClient(Integer.parseInt(id));
 
             // follow to add_client.jsp
-            modelAndView = new ModelAndView("forward:/jsp/clients/add_client.jsp");
+            modelAndView = new ModelAndView("/clients/add_client");
             modelAndView.addObject(Constants.CLIENT, client);
         }
         return modelAndView;

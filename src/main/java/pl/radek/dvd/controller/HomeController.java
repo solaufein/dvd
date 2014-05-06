@@ -35,7 +35,7 @@ public class HomeController {
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout) {
 
-        ModelAndView model = new ModelAndView("forward:/jsp/login.jsp");
+        ModelAndView model = new ModelAndView("/login");
         if (error != null) {
             model.addObject("error", "Invalid username and password!");
         }
@@ -48,26 +48,17 @@ public class HomeController {
 
     }
 
-    /*@RequestMapping(value="/login.htm")
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView("forward:/jsp/login.jsp");
-
-        return modelAndView;
-    }*/
-
     @RequestMapping(value="/logout.htm")
     public ModelAndView logout(){
-        ModelAndView modelAndView = new ModelAndView("redirect:/jsp/logout.jsp");
+        ModelAndView modelAndView = new ModelAndView("redirect:/logout");
 
         return modelAndView;
     }
 
     @RequestMapping(value="/denied.htm")
     public ModelAndView denied(){
-        ModelAndView modelAndView = new ModelAndView("forward:/jsp/denied.jsp");
+        ModelAndView modelAndView = new ModelAndView("/denied");
 
         return modelAndView;
     }
-
-    //todo: redirect / forward / String and nothing ?
 }

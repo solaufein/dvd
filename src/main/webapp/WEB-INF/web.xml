@@ -57,12 +57,11 @@
     <servlet-mapping>
         <servlet-name>springapp</servlet-name>
         <url-pattern>*.htm</url-pattern>
-        <!--url-pattern>*.htm</url-pattern-->
     </servlet-mapping>
 
     <!-- Welcome -->
     <welcome-file-list>
-        <welcome-file>jsp/index.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>
