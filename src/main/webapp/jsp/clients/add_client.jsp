@@ -7,9 +7,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
 <title><spring:message code="common.header.title" /></title>
-<link rel="stylesheet" type="text/css" href="jsp/css/main.css" />
-<link rel="stylesheet" type="text/css" href="jsp/css/button.css" />
-<link rel="stylesheet" type="text/css" href="jsp/css/form.css" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/button.css" />" />
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/form.css" />" />
 
    <script language="JavaScript" src="jsp/js/gen_validatorv4.js" type="text/javascript" xml:space="preserve">
    </script>

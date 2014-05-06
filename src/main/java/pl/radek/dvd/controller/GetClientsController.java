@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/clients.htm")
+@RequestMapping("/emp/clients.htm")
 public class GetClientsController {
 
     private static Logger logger = Logger.getLogger(GetClientsController.class);

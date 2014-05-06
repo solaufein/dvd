@@ -50,7 +50,7 @@ public class UpdateClientController {
 
             // redirect to GetClientsListServlet
             logger.info("Redirect to GetClientsController");
-            modelAndView = new ModelAndView("redirect:/clients.htm");
+            modelAndView = new ModelAndView("redirect:/emp/clients.htm");
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");

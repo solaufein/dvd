@@ -44,7 +44,7 @@ public class DeleteClientController {
         // redirect to GetClientsController
         logger.info("Redirect to GetClientsController");
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/clients.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients.htm");
 
         return modelAndView;
     }

@@ -21,6 +21,9 @@
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 
+    <!-- Static resources mapping - location -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
     <!-- Enable annotation @Secured for method security -->
     <security:global-method-security secured-annotations="enabled" proxy-target-class="true"/>
 

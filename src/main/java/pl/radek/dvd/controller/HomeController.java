@@ -22,10 +22,10 @@ public class HomeController {
 
     private static Logger logger = Logger.getLogger(HomeController.class);
 
-    @RequestMapping(value = "/home.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/emp/home.htm", method = RequestMethod.GET)
     public ModelAndView handleRequest() throws Exception {
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/clients.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients.htm");
 
         return modelAndView;
     }
