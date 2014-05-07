@@ -36,4 +36,14 @@ public class RoleMySQLDAO implements RoleDAO {
     public Roles getRole(int id) {
         return hibernateTemplate.get(Roles.class, id);
     }
+
+    @Override
+    public void deleteRole(int id) {
+        logger.debug("Deleting role by id: " + id);
+
+        hibernateTemplate.delete(hibernateTemplate.get(Roles.class, id));
+        //      hibernateTemplate.bulkUpdate("delete from Roles where id = " + id);
+
+        logger.debug("Deleted role.");
+    }
 }

@@ -1,75 +1,37 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
-<html>
+<!DOCTYPE html>
 <head>
-<title>Login Page</title>
-<style>
-.error {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
-}
-
-.msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
-}
-
-#login-box {
-	width: 300px;
-	padding: 20px;
-	margin: 100px auto;
-	background: #fff;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border: 1px solid #000;
-}
-</style>
+  <meta charset="utf-8">
+  <title>Dvd Rentals Login Page</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/login.css" />" />
 </head>
-<body onload='document.loginForm.username.focus();'>
+<body>
+  <div class="container">
 
-	<h1>Dvd Rentals</h1>
+        <c:if test="${not empty error}">
+  			<div class="error">${error}</div>
+  		</c:if>
+  		<c:if test="${not empty msg}">
+  			<div class="msg">${msg}</div>
+  		</c:if>
 
-	<div id="login-box">
-
-		<h3>Login with Username and Password</h3>
-
-		<c:if test="${not empty error}">
-			<div class="error">${error}</div>
-		</c:if>
-		<c:if test="${not empty msg}">
-			<div class="msg">${msg}</div>
-		</c:if>
-
-        <c:url var="loginUrl" value="/j_spring_security_check"></c:url>
-		<form name='loginForm'
-		    action="${loginUrl}" method='POST'>
-
-		    <table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='j_username' value=''></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='j_password' /></td>
-			</tr>
-			<tr>
-			    <td colspan='2'>
-                    <input name="submit" type="submit" value="Log in" />
-                </td>
-			</tr>
-		   </table>
-		</form>
-	</div>
-
+    <c:url var="loginUrl" value="/j_spring_security_check"></c:url>
+	<form id="login" name="loginForm" action="${loginUrl}" method="POST">
+		<div class="header">
+		<h3>@ Dvd Rentals </h3>
+		<p> Fill in fields below to login </p>
+		</div>
+		<div class="separator"></div>
+		<div class="inputs">
+			<input type="text" name="j_username" value="" placeholder="Username" autofocus/>
+			<input type="password" name="j_password" placeholder="Password"/>
+			<!--div class="remember">
+				<input name="checky" id="checky" value="1" type="checkbox"/>
+				<label class="terms"> Remember me for 1day </label>
+			</div-->
+			<input name="submit" type="submit" value="Log in" />
+		</div>
+	</form>
+  </div>
 </body>
 </html>

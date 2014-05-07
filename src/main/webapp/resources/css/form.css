@@ -30,37 +30,37 @@ inputs-moz-placeholder
 }
 
 #formWrapper {
-width : 600px;
-padding : 15px;
--webkit-box-sizing : border-box;
+    width : 600px;
+    padding : 15px;
+    -webkit-box-sizing : border-box;
 }
 
 #formWrapper label {
-width: 7em;
-text-align: left;
-display: inline-block;
-margin-bottom : 15px;
-line-height: 25px;
+    width: 7em;
+    text-align: left;
+    display: inline-block;
+    margin-bottom : 15px;
+    line-height: 25px;
 }
 
 span.error
 {
-color:red;
+    color:red;
 }
 
 fieldset
 {
-background: #EEEEEE;
-border: 1px solid #444444;
-width: 20em;
+    background: #EEEEEE;
+    border: 1px solid #444444;
+    width: 20em;
 }
 
 legend
 {
-color: #fff;
-background: #333;
-border: 1px solid #444444;
-padding: 2px 6px;
+    color: #fff;
+    background: #333;
+    border: 1px solid #444444;
+    padding: 2px 6px;
 }
 
 #container

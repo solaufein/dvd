@@ -9,4 +9,5 @@ import pl.radek.dvd.model.Roles;
  */
 public interface RoleDAO {
     public Roles getRole(int id);
+    public void deleteRole(int id);
 }

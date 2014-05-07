@@ -22,11 +22,15 @@
               }
           </script>
 		  <style>
-   
 			a.link {
-			color:white;
+			    color: #FFF;
+			    text-decoration: none;
 			}
-   
+
+            a.link:hover {
+                color: #FFF;
+                text-decoration: underline;
+            }
 	      </style>
 </head>
 <body>
@@ -36,6 +40,10 @@
    			<spring:message code="common.header" />
    		</h1>
    	</div>
+   	<div id="login_info">
+    		<div class="location">Location: Clients > List</div>
+    		<a href="<c:url value="/j_spring_security_logout"/>" class="logout">Logout ${pageContext.request.userPrincipal.name}</a>
+    	</div>
    	<div id="navigation">
    		<ul>
    			<li><a href="#"><spring:message code="menu.home" /></a></li>
@@ -46,14 +54,15 @@
    		</ul>	
    	</div>
 	<!-- Header right begin-->
-	<div style = "text-align:right; float:right">
+	<div id="langs">
 		<c:url var="englishLocaleUrl" value="/emp/clients.htm">
 			<c:param name="lang" value="en" />
 		</c:url>
 		<c:url var="polishLocaleUrl" value="/emp/clients.htm">
 			<c:param name="lang" value="pl" />
 		</c:url>	
-		<a href="${englishLocaleUrl}">EN</a> | <a href="${polishLocaleUrl}">PL</a>
+		<a href="${englishLocaleUrl}">EN</a>
+		<a href="${polishLocaleUrl}">PL</a>
 	</div>
 	<!-- Header right end-->
    	<div id="content">
@@ -121,34 +130,54 @@
                </table>
 	</div>
                </br>
-			   
+			 <div id="page_numbers">
 			 <table>  <tr>
 			   <td>
-			<%--Displaying First link except for the 1st page--%>   
-			   <c:if test="${currentPage != 1}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
+	<%--Displaying First link --%>
+	<c:choose>
+		<c:when test="${currentPage != 1}">
+		<c:choose>
+            <c:when test="${param.order != null && param.field != null}">
+               <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
+               <input type="hidden" name="order" value = "${param.order}" />
+               <input type="hidden" name="field" value = "${param.field}" />
+               <input type="hidden" name="currentPage" value = "1" />
+               <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
-				</c:when>
+            </c:when>
+            <c:otherwise>
+               <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
+               <input type="hidden" name="currentPage" value = "1" />
+               <input type="submit" value="|<<" class = "myButtonTwo"/>
+               </form>
+            </c:otherwise>
+        </c:choose>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+                <c:when test="${param.order != null && param.field != null}">
+                    <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
+                    <input type="hidden" name="order" value = "${param.order}" />
+                    <input type="hidden" name="field" value = "${param.field}" />
+                    <input type="hidden" name="currentPage" value = "1" />
+                    <input type="submit" value="|<<" class = "myButtonDisabled" disabled="disabled"/>
+                    </form>
+                </c:when>
 				<c:otherwise>
-			   <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
-				</c:if>
+                    <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
+                    <input type="hidden" name="currentPage" value = "1" />
+                    <input type="submit" value="|<<" class = "myButtonDisabled" disabled="disabled"/>
+                    </form>
+                </c:otherwise>
+             </c:choose>
+		</c:otherwise>
+	</c:choose>
 			   </td>
-			   
 			   <td>
-			<%--Displaying Previous link except for the 1st page--%>
-			   <c:if test="${currentPage != 1}">
-				<c:choose>
+			<%--Displaying Previous link --%>
+			<c:choose>
+		<c:when test="${currentPage != 1}">
+		<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
@@ -164,7 +193,26 @@
                </form>
 				</c:otherwise>
 				</c:choose>
-				</c:if>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
+				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
+                 <input type="submit" value="<" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:when>
+				<c:otherwise>
+			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
+                 <input type="submit" value="<" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:otherwise>
+				</c:choose>
+		</c:otherwise>
+	</c:choose>
 			   </td>
  
 			<%--Displaying Page numbers--%>
@@ -172,8 +220,9 @@
 
 				<td>
 			<%--Displaying Next link--%>
-			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
+	<c:choose>
+		<c:when test="${currentPage < noOfPages}">
+		<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
@@ -189,13 +238,33 @@
                </form>
 				</c:otherwise>
 				</c:choose>
-				</c:if>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
+				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
+                 <input type="submit" value=">" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:when>
+				<c:otherwise>
+			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
+                 <input type="submit" value=">" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:otherwise>
+				</c:choose>
+		</c:otherwise>
+	</c:choose>	
 			   </td>
 
 			   <td>
 			<%--Displaying Last link--%>
-			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
+			<c:choose>
+		<c:when test="${currentPage < noOfPages}">
+		<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
                  <input type="hidden" name="order" value = "${param.order}" />
@@ -211,11 +280,32 @@
                </form>
 				</c:otherwise>
 				</c:choose>
-				</c:if>
+		</c:when>
+		<c:otherwise>
+			<c:choose>
+				<c:when test="${param.order != null && param.field != null}">
+			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+                 <input type="hidden" name="order" value = "${param.order}" />
+				 <input type="hidden" name="field" value = "${param.field}" />
+				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
+                 <input type="submit" value=">>|" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:when>
+				<c:otherwise>
+			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
+                 <input type="submit" value=">>|" class = "myButtonDisabled" disabled="disabled"/>
+               </form>
+				</c:otherwise>
+				</c:choose>
+		</c:otherwise>
+	</c:choose>
+			
 			   </td>
 			   </tr>
 			   </table>
-			   
+			   </div>
+
 			   </br>
 
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
@@ -225,7 +315,7 @@
 
                </br>
 
-               <a href="<c:url value="/j_spring_security_logout"/>">Logout ${pageContext.request.userPrincipal.name}</a>
+
 
    	</div>
    	<div id="footer">
