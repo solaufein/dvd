@@ -7,23 +7,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
 <title><spring:message code="common.header.title" /></title>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css" />" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/button.css" />" />
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/form.css" />" />
-
-   <script language="JavaScript" src="jsp/js/gen_validatorv4.js" type="text/javascript" xml:space="preserve">
-   </script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/addedit.css" />" />
+ <script language="JavaScript" src="jsp/js/gen_validatorv4.js" type="text/javascript" xml:space="preserve">
+ </script>
 </head>
 <body>
-<div id="container">
-<div id = "content">
-
+<div class="container">
+<div id = "myform">
 
 <c:choose>
 <c:when test="${client.id =='-1'}">
-   
-	 <h1><spring:message code="clients.add.header"/> </h1>
+   <div class="header">
+  <h3> <spring:message code="clients.add.header"/> </h3>
+  <p> <spring:message code="common.fillin"/> </p>
+   </div>
+	<div class="separator"></div>
 	 <form:form method="POST" commandName="client" action="addclient.htm">
+	 <div class="inputs">
 <table>
     <tbody><tr>
         <td><form:hidden path="id"></form:hidden></td>
@@ -66,31 +66,37 @@
 	<tr><td></td></tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="<spring:message code="common.button.submit"/>" class = "myButton">
+            <input type="submit" value="<spring:message code="common.button.submit"/>" >
         </td>
         <td></td>
         <td></td>
     </tr>
-</tbody></table>  
+</tbody></table> 
+
 </form:form>
 	 
      <form name="cancel" action="<c:url value="clients.htm"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">
-           <input type="submit" value="<spring:message code="common.button.cancel"/>" class = "myButton"/>
+           <input type="submit" value="<spring:message code="common.button.cancel"/>" />
 		</td>
 		<td></td>
         <td></td>
 	   </tr>
 	  </table>
      </form>
-
+</div> 
 </c:when>
 <c:otherwise>
-
-	 <h1><spring:message code="clients.edit.header"/> </h1>
+	<div class="header">
+	<h3> <spring:message code="clients.edit.header"/> </h3>
+	<p> <spring:message code="common.fillin"/> </p>
+	</div>
+	<div class="separator"></div>
+	
 	 <form:form method="POST" commandName="client" action="updateclient.htm">
+	 <div class="inputs">
 <table>
     <tbody><tr>
         <td><form:hidden path="id"></form:hidden></td>
@@ -133,7 +139,7 @@
 	<tr><td></td></tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="<spring:message code="common.button.submit"/>" class = "myButton">
+            <input type="submit" value="<spring:message code="common.button.submit"/>" >
         </td>
         <td></td>
         <td></td>
@@ -145,14 +151,14 @@
 	 <table>
 	   <tr>
 		<td colspan="2">
-           <input type="submit" value="<spring:message code="common.button.cancel"/>" class = "myButton"/>
+           <input type="submit" value="<spring:message code="common.button.cancel"/>" />
 		</td>
 		<td></td>
         <td></td>
 	   </tr>
 	  </table>
      </form>
-
+</div>
 </c:otherwise>
 </c:choose>
 </div></div>

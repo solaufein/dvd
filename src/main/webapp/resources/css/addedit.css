@@ -1,0 +1,155 @@
+body {
+  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+  color: #404040;
+  background: #0ca3d2;
+}
+
+.container{
+	width: 706px;
+	max-width: 706px;
+	margin: 0 auto;
+
+}
+
+#myform{
+	padding: 0px 25px 25px;
+	background: #FFF;
+	box-shadow:
+		0px 0px 0px 5px rgba(255, 255, 255, 0.4),
+		0px 4px 20px rgba(0, 0, 0, 0.33);
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border radius: 4px;
+	display:table;
+	position: static;
+}
+
+#myform .header {
+	margin-bottom: 20px;
+}
+
+#myform .header h3 {
+	color: #333;
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+#myform .header p {
+	color: #8F8F8F;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+#myform .separator{
+	height: 1px;
+	background: #E8E8E8;
+	width: auto;
+	margin: 0px -25px;
+}
+
+#myform .inputs{
+	margin-top: 15px;
+
+}
+
+#myform .inputs label{
+	color: #8F8F8F;
+	font-size: 12px;
+	font-weight: 300;
+	letter-spacing: 1px;
+
+}
+
+input::-webkit-input-placeholder{
+	color: #B5B5B5;
+}
+
+input:-moz-placeholder{
+	color: #B5B5B5;
+}
+
+#myform .inputs input[type=text], input[type=password]{
+	background: #F5F5F5;
+	font-size: 0.8rem;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: none;
+	padding: 10px 10px;
+	width: 250px;
+	margin-bottom: 15px;
+	box-shadow: inset 0px 2px 3px rgba(0,0,0,0.1);
+	clear: both;
+}
+
+#myform .inputs input[type=text]:focus, input[type=password]:focus{
+	background: #FFF;
+	box-shadow: 0px 0px 0px 3px #FFFF66,
+	inset 0px 2px 3px rgba(0,0,0,0.2),
+	0px 5px 5px rgba(0,0,0,0.15);
+	outline: none;
+}
+
+#myform .inputs .remember{
+	display: block;
+	position: static;
+	height: 25px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	clear: both;
+}
+
+#myform .inputs input[type=checkbox]{
+	float: left;
+	margin-right: 14px;
+	margin-top: 3px;
+}
+
+#myform .inputs label.terms{
+	float: left;
+	font-size: 12px;
+}
+
+#myform .inputs input[type=submit]{
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 11px;
+	background: #333;
+	padding: 5px 13px 5px 13px;
+	text-decoration: none;
+	width: 9em;
+	height: 3em;
+	border: solid 1px black;
+	cursor: pointer;
+}
+
+#myform .inputs input[type=submit]:hover{
+	background: #383;
+	text-decoration: none;
+}
+
+.error {
+	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+	letter-spacing: 1px;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
