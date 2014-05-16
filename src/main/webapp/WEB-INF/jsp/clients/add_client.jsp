@@ -60,7 +60,7 @@
     </tr>
 	<tr>
         <td><form:label path="email"><spring:message code="clients.clientsList.email"/>:</form:label></td>
-        <td><form:input path="email" cssClass = "inputs"></form:input></td>
+        <td><form:input  path="email" cssClass = "inputs"></form:input></td>
 		<td><form:errors path="email" cssClass="error"></form:errors></td>
     </tr>
 	<tr><td></td></tr>

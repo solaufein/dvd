@@ -180,5 +180,11 @@ body {
 #page_numbers{
     margin-left:auto;
     margin-right:auto;
-    width:650px;
+}
+
+#page_numbers tr td{
+    min-width: 50px;
+    text-align: center;
+    font-size: 125%;
+    font-weight:bold;
 }
