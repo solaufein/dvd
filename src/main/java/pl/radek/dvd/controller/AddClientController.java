@@ -48,7 +48,7 @@ public class AddClientController {
             logger.info("Adding client to db");
             clientFacade.addClient(client);
 
-            // redirect to GetClientsListServlet
+            // redirect to GetClientsController
             logger.info("Redirect to GetClientsController");
             modelAndView = new ModelAndView("redirect:/emp/clients.htm");
         } else {

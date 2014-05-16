@@ -97,6 +97,7 @@
 					<% generatedLink = JspMethods.generateLink(order,Constants.EMAIL,field); %>
 					<a href="<c:url value="clients.htm"/><%=generatedLink%>" class="link"><spring:message code="clients.clientsList.email"/></a>
 				  </td>
+				  <td></td>
 				  <sec:authorize ifAnyGranted="ROLE_ADMIN">
 				  <td></td>
 				  <td></td>
@@ -111,17 +112,23 @@
 							<td>  <c:out value="${client.street}"/>  </td>
 							<td>  <c:out value="${client.phoneNumber}"/>  </td>
 							<td>  <c:out value="${client.email}"/>  </td>
-							<sec:authorize ifAnyGranted="ROLE_ADMIN">
 							<td> 
-							  <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+							  <form name="clientdetails" action=" <c:url value="clientdetails.htm"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
-                                  <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
+                                  <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
                               </form>
 							</td>
+							<sec:authorize ifAnyGranted="ROLE_ADMIN">
 							<td> 
 							  <form name="editclient" action=" <c:url value="controller.htm"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
+                              </form>
+							</td>
+							<td> 
+							  <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+                                  <input type="hidden" name="id" value="${client.id}" />
+                                  <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
                               </form>
 							</td>
 							</sec:authorize>
