@@ -12,6 +12,7 @@
     <properties>
         <spring.version>3.2.5.RELEASE</spring.version>
         <spring-security.version>3.2.0.RELEASE</spring-security.version>
+        <tiles.version>3.0.1</tiles.version>
     </properties>
 
     <dependencies>
@@ -86,6 +87,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Tiles -->
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-extras</artifactId>
+            <version>${tiles.version}</version>
         </dependency>
 
         <!-- Test NG -->

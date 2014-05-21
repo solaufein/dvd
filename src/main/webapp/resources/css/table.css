@@ -84,12 +84,12 @@
 	border-width:0px 0px 1px 1px;
 }
 
-a.link {
+.link {
     color: black;
     text-decoration: none;
 }
 
-a.link:hover {
+.link:hover {
     color: black;
     text-decoration: underline;
 }
