@@ -1,0 +1,134 @@
+#myform{
+	padding: auto;
+	background-color: #fff;
+	display:table;
+	position: static;
+
+}
+
+#myform .filtreheader {
+
+}
+
+#myform .filtreheader h3 {
+	color: #333;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#myform .filtreheader p {
+	color: #8F8F8F;
+	font-size: 12px;
+	font-weight: 300;
+}
+
+#myform .separator{
+	height: 1px;
+	background: #E8E8E8;
+	width: auto;
+
+
+}
+
+#myform .inputs{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#myform .inputs label{
+	color: black;
+	font-weight: 300;
+	letter-spacing: 1px;
+	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+}
+
+input::-webkit-input-placeholder{
+	color: #B5B5B5;
+}
+
+input:-moz-placeholder{
+	color: #B5B5B5;
+}
+
+#myform .inputs input[type=text], input[type=password]{
+	background: #F5F5F5;
+	font-size: 0.8rem;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: none;
+	padding: 5px 5px;
+	width: 170px;
+	margin-bottom: 10px;
+	box-shadow: inset 0px 2px 3px rgba(0,0,0,0.1);
+	clear: both;
+}
+
+#myform .inputs input[type=text]:focus, input[type=password]:focus{
+	background: #FFF;
+	box-shadow: 0px 0px 0px 3px #FFFF66,
+	inset 0px 2px 3px rgba(0,0,0,0.2),
+	0px 5px 5px rgba(0,0,0,0.15);
+	outline: none;
+}
+
+#myform .inputs .remember{
+	display: block;
+	position: static;
+	height: 25px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	clear: both;
+}
+
+#myform .inputs input[type=checkbox]{
+	float: left;
+	margin-right: 14px;
+	margin-top: 3px;
+}
+
+#myform .inputs label.terms{
+	float: left;
+	font-size: 12px;
+}
+
+#myform .inputs input[type=submit]{
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 11px;
+	background: #333;
+	padding: 5px 13px 5px 13px;
+	text-decoration: none;
+	border: solid 1px black;
+	cursor: pointer;
+}
+
+#myform .inputs input[type=submit]:hover{
+	background: #383;
+	text-decoration: none;
+}
+
+.error {
+	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+	letter-spacing: 1px;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}

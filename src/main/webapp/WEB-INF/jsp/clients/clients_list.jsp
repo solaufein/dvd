@@ -11,7 +11,47 @@
    		<h2>
    			<spring:message code="clients.clientsList.list"/>:
    		</h2>
-		     
+		
+		<div id = "myform">
+		<div class="filtreheader">
+			<p> <spring:message code="common.fillin.filtre"/> </p>
+		</div>
+		<div class="separator"></div>
+		<form:form method="GET" commandName="client" action="clients.htm" >	 
+			<div class="inputs">
+			<table>
+				<tbody>
+				<tr>
+					<td><form:hidden path="id"></form:hidden></td>
+				</tr>
+				<tr>
+					<td><form:label path="firstName"><spring:message code="clients.clientsList.firstName"/>:</form:label></td>
+					<td><form:input path="firstName" cssClass = "inputs"></form:input></td>
+					<td><form:errors path="firstName" cssClass="error"></form:errors></td>
+				</tr>
+				<tr>
+					<td><form:label path="lastName"><spring:message code="clients.clientsList.lastName"/>:</form:label></td>
+					<td><form:input path="lastName" cssClass = "inputs"></form:input></td>
+					<td><form:errors path="lastName" cssClass="error"></form:errors></td>
+				</tr>
+				<tr>
+					<td><form:label path="pesel"><spring:message code="clients.clientsList.pesel"/>:</form:label></td>
+					<td><form:input path="pesel" cssClass = "inputs"></form:input></td>
+					<td><form:errors path="pesel" cssClass="error"></form:errors></td>
+				</tr>
+				<tr><td></td></tr>
+				<tr>
+					<td colspan="2">
+						<input type="submit" value="<spring:message code="common.button.filtre"/>" >
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody></table> 
+		</form:form>
+			</div> 
+		</div>
+		 
 	<div class="table">
                <table> 
                  <tr>

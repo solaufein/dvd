@@ -43,13 +43,15 @@ public class GetClientsController {
         List<ClientData> clientList;
         SortInfo sortInfo = null;
         FilterInfo filterInfo = null;
+
+        // Pagination Info
         int page = 1;
         int recordsPerPage = 5;
-
         if (currentPage != null) {
             page = Integer.parseInt(currentPage);
         }
 
+        // Sort Info
         if ((field != null) && (order != null)) {
             logger.info("Field = " + field);
             logger.info("Order = " + order);
@@ -62,6 +64,9 @@ public class GetClientsController {
 
             sortInfo = new SortInfo(field, isAscOrder);
         }
+
+        // Filter Info
+    //    filterInfo = new FilterInfo("column", "data");
 
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
         ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfo, paginationInfo);
@@ -79,6 +84,8 @@ public class GetClientsController {
         modelAndView.addObject(Constants.FIELD, field);
         modelAndView.addObject(Constants.ORDER, order);
         modelAndView.addObject(Constants.CLIENTLIST, clientList);
+        ClientData client = new ClientData();
+        modelAndView.addObject(Constants.CLIENT, client);
 
         return modelAndView;
     }

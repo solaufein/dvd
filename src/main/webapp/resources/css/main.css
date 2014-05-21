@@ -145,6 +145,7 @@ body {
 {
 	clear: left;
 	padding: 20px;
+	min-height:700px;
 	background: #fff;
 }
 

@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/button.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/table.css" />" />
+	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/filtreform.css" />" />
 	<!--script type="text/javascript" src="<c:url value="/resources/js/hello.js" />" ></script-->
 
               <script>
