@@ -22,9 +22,6 @@
 			<table>
 				<tbody>
 				<tr>
-					<td><form:hidden path="id"></form:hidden></td>
-				</tr>
-				<tr>
 					<td><form:label path="firstName"><spring:message code="clients.clientsList.firstName"/>:</form:label></td>
 					<td><form:input path="firstName" cssClass = "inputs"></form:input></td>
 					<td><form:errors path="firstName" cssClass="error"></form:errors></td>
@@ -41,14 +38,21 @@
 				</tr>
 				<tr><td></td></tr>
 				<tr>
-					<td colspan="2">
+					<td>
 						<input type="submit" value="<spring:message code="common.button.filtre"/>" >
+					</td>
+		</form:form>
+					<td>
+					<form name="clearTable" action=" <c:url value="clients.htm"/>" method="get">
+						<input type="submit" value="<spring:message code="common.button.clear"/>"/>
+					</form>
 					</td>
 					<td></td>
 					<td></td>
 				</tr>
 			</tbody></table> 
-		</form:form>
+		
+			
 			</div> 
 		</div>
 		 
@@ -61,12 +65,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"  value="${cons.asc}" />
 								<c:param name="field"  value="${cons.firstname}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.firstname}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -79,12 +89,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.lastname}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.lastname}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -97,12 +113,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.pesel}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.pesel}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -115,12 +137,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.city}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.city}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -133,12 +161,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.street}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.street}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -151,12 +185,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.phonenumber}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.phonenumber}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -169,12 +209,18 @@
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.asc}" />
 								<c:param name="field"    value="${cons.email}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:when>
 						<c:otherwise>
 							<c:url value="clients.htm" var="paginationURL">
 								<c:param name="order"   value="${cons.desc}" />
 								<c:param name="field"    value="${cons.email}" />
+								<c:param name="firstName"  value="${param.firstName}" />
+								<c:param name="lastName"  value="${param.lastName}" />
+								<c:param name="pesel"  value="${param.pesel}" />
 							</c:url>
 						</c:otherwise>
 					  </c:choose>
@@ -229,6 +275,9 @@
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
+				 <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "1" />
@@ -237,6 +286,9 @@
 				</c:when>
 				<c:otherwise>
 			   <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
+				 <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
@@ -251,6 +303,9 @@
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
@@ -259,6 +314,9 @@
 				</c:when>
 				<c:otherwise>
 			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
@@ -276,6 +334,9 @@
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
@@ -284,6 +345,9 @@
 				</c:when>
 				<c:otherwise>
 			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
@@ -298,6 +362,9 @@
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
 			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
                  <input type="hidden" name="order" value = "${param.order}" />
 				 <input type="hidden" name="field" value = "${param.field}" />
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
@@ -306,6 +373,9 @@
 				</c:when>
 				<c:otherwise>
 			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+			   <input type="hidden" name="firstName" value = "${param.firstName}" />
+				 <input type="hidden" name="lastName" value = "${param.lastName}" />
+				 <input type="hidden" name="pesel" value = "${param.pesel}" />
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
@@ -316,7 +386,8 @@
 			   </tr>
 			   </table>
 			   </div>
-
+				noofpages: <c:out value="${noOfPages}"/>
+				current page: <c:out value="${currentPage}"/>
 			   </br>
 		 <sec:authorize ifAnyGranted="ROLE_ADMIN">
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">

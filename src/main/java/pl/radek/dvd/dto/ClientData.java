@@ -13,27 +13,27 @@ public class ClientData {
 
     private int id;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.firstName")
+    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "{Pattern.clientdata.firstName}")
     private String firstName;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.lastName")
+    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "{Pattern.clientdata.lastName}")
     private String lastName;
 
-    @Pattern(regexp = "\\d{11}", message = "Pattern.client.pesel")
+    @Pattern(regexp = "\\d{11}", message = "{Pattern.clientdata.pesel}")
     private String pesel;
 
-    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "Pattern.client.city")
+    @Pattern(regexp = "^[A-Z][a-ząęśćńółżź]+$", message = "{Pattern.clientdata.city}")
     private String city;
 
-    @NotEmpty(message = "NotEmpty.client.street")
+    @NotEmpty(message = "{NotEmpty.clientdata.street}")
     private String street;
 
-    @NotEmpty(message = "NotEmpty.client.phoneNumber")
-    @Pattern(regexp = "[0-9()-\\.]*", message = "Pattern.client.phoneNumber")
+    @NotEmpty(message = "{NotEmpty.clientdata.phoneNumber}")
+    @Pattern(regexp = "[0-9()-\\.]*", message = "{Pattern.clientdata.phoneNumber}")
     private String phoneNumber;
 
-    @NotEmpty(message = "NotEmpty.client.email")
-    @Email(message = "Email.client.email")
+    @NotEmpty(message = "{NotEmpty.clientdata.email}")
+    @Email(message = "{Email.clientdata.email}")
     private String email;
 
 

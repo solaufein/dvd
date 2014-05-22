@@ -3,9 +3,12 @@ package pl.radek.dvd.logic;
 
 import org.apache.log4j.Logger;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +17,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.SortInfo;
@@ -60,23 +64,169 @@ public class ClientsMySQLDAO implements ClientsDAO {
         return clients;
     }
 
-    @Override
+   /* @Override
     public List<Client> getClients(ListDataRequest listDataRequest) {
+        *//*
+        SELECT id, first_name, last_name, pesel FROM client
+        WHERE first_name LIKE 'Z%' AND last_name LIKE'P%' AND pesel LIKE'84%'
+        ORDER BY first_name ASC LIMIT 0,9;
+        *//*
+
         logger.debug("Perform method getClients");
 
         final String hql = "FROM Client";
-        List<Client> clients;
+        List<Client> clients = null;
         SortInfo sortInfo = listDataRequest.getSortInfo();
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
+        List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
         final int page = paginationInfo.getPage();
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
+        if (filterInfoList.isEmpty()) {
+            if (sortInfo == null) {
+                clients = hibernateTemplate.findByCriteria(DetachedCriteria.forClass(Client.class), offset, recordsPerPage);
+            } else {
+                String field = sortInfo.getOrderField();
+                boolean isAsc = sortInfo.isAsc();
+                String order;
 
-        if (sortInfo == null) {
-            clients = hibernateTemplate.findByCriteria(DetachedCriteria.forClass(Client.class), offset, recordsPerPage);
+                if (isAsc == true) {
+                    order = Constants.ASC;
+                } else {
+                    order = Constants.DESC;
+                }
+                final String newHql = hql + " ORDER BY " + field + " " + order;
+                clients = hibernateTemplate.executeFind(new HibernateCallback<List<Client>>() {
+                    @Override
+                    public List<Client> doInHibernate(Session session) throws HibernateException, SQLException {
+                        return session.createQuery(newHql).setFirstResult(offset).setMaxResults(recordsPerPage).list();
+                    }
+                });
+            }
+            logger.debug("Got sorted clients list from db");
+            return clients;
+
         } else {
+            //todo: dorobic filtrowanie...
+
+            if (sortInfo == null) {
+                // filtrowanie, bez sortowania, z paginacja
+                final String query = "FROM Client c WHERE c.firstName LIKE :fname " +
+                        "AND c.lastName LIKE :lname AND c.pesel LIKE :pes";
+
+                Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query);
+
+                for (FilterInfo filterInfo : filterInfoList) {
+                    if (filterInfo.getFilterColumn().equals(Constants.FIRSTNAME)) {
+                        q.setParameter("fname", filterInfo.getFilterData());
+                    }
+
+                    if (filterInfo.getFilterColumn().equals(Constants.LASTNAME)) {
+                        q.setParameter("lname", filterInfo.getFilterData());
+                    }
+
+                    if (filterInfo.getFilterColumn().equals(Constants.PESEL)) {
+                        q.setParameter("pes", filterInfo.getFilterData());
+                    }
+                }
+                clients = q.list();
+
+               *//* Criteria cr = hibernateTemplate.getSessionFactory().openSession().createCriteria(Client.class);
+                cr.add(Restrictions.like("firstName", "zara%"));
+                cr.add(Restrictions.like("lastName", "zara%"));
+                cr.add(Restrictions.like("peselName", "zara%"));
+                cr.setFirstResult(offset);
+                cr.setMaxResults(recordsPerPage);  *//*
+
+                *//*clients = hibernateTemplate.executeFind(new HibernateCallback<List<Client>>() {
+                    @Override
+                    public List<Client> doInHibernate(Session session) throws HibernateException, SQLException {
+                        return session.createQuery(query).setFirstResult(offset).setMaxResults(recordsPerPage).list();
+                    }
+                });*//*
+            } else {
+
+                //todo: filtrowanie
+
+                // filtrowanie, z sortowaniem, z paginacja
+                String field = sortInfo.getOrderField();
+                boolean isAsc = sortInfo.isAsc();
+                String order;
+
+                if (isAsc == true) {
+                    order = Constants.ASC;
+                } else {
+                    order = Constants.DESC;
+                }
+
+                final String query = "FROM Client c WHERE c.firstName LIKE :fname " +
+                        "AND c.lastName LIKE :lname AND c.pesel LIKE :pes";
+
+                final String newHql = query + " ORDER BY " + field + " " + order;
+                clients = hibernateTemplate.executeFind(new HibernateCallback<List<Client>>() {
+                    @Override
+                    public List<Client> doInHibernate(Session session) throws HibernateException, SQLException {
+                        return session.createQuery(newHql).setFirstResult(offset).setMaxResults(recordsPerPage).list();
+                    }
+                });
+            }
+
+            logger.debug("Got sorted and filtered clients list from db");
+            return clients;
+        }
+    }*/
+
+    @Override
+    public List<Client> getClients(ListDataRequest listDataRequest) {
+        logger.debug("Perform method getClients");
+
+        final String hql = "FROM Client";
+        List<Client> clients = null;
+        SortInfo sortInfo = listDataRequest.getSortInfo();
+        PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
+        List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
+
+        final int page = paginationInfo.getPage();
+        final int recordsPerPage = paginationInfo.getRecordsPerPage();
+        final int offset = (page - 1) * recordsPerPage;
+
+        StringBuilder query = new StringBuilder("from Client c ");
+        boolean isFirst = true;
+
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.FIRSTNAME)) {
+                    if (isFirst) {
+                        query.append(" WHERE c.firstName LIKE :fname");
+                    } else {
+                        query.append(" AND c.firstName LIKE :fname");
+                    }
+                    isFirst = false;
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.LASTNAME)) {
+                    if (isFirst) {
+                        query.append(" WHERE c.lastName LIKE :lname");
+                    } else {
+                        query.append(" AND c.lastName LIKE :lname");
+                    }
+                    isFirst = false;
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.PESEL)) {
+                    if (isFirst) {
+                        query.append(" WHERE c.pesel LIKE :pes");
+                    } else {
+                        query.append(" AND c.pesel LIKE :pes");
+                    }
+                    isFirst = false;
+                }
+            }
+        }
+
+        if (sortInfo != null) {
             String field = sortInfo.getOrderField();
             boolean isAsc = sortInfo.isAsc();
             String order;
@@ -86,17 +236,35 @@ public class ClientsMySQLDAO implements ClientsDAO {
             } else {
                 order = Constants.DESC;
             }
-            final String newHql = hql + " ORDER BY " + field + " " + order;
-            clients = hibernateTemplate.executeFind(new HibernateCallback<List<Client>>() {
-                @Override
-                public List<Client> doInHibernate(Session session) throws HibernateException, SQLException {
-                    return session.createQuery(newHql).setFirstResult(offset).setMaxResults(recordsPerPage).list();
-                }
-            });
+
+            query.append(" ORDER BY " + field + " " + order);
         }
 
-        logger.debug("Got sorted clients list from db");
-        return clients;
+        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.FIRSTNAME)) {
+                    q.setParameter("fname", filterInfo.getFilterData() + "%");
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.LASTNAME)) {
+                    q.setParameter("lname", filterInfo.getFilterData() + "%");
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.PESEL)) {
+                    q.setParameter("pes", filterInfo.getFilterData() + "%");
+                }
+            }
+        }
+
+        if (paginationInfo != null) {
+            q.setFirstResult(offset);
+            q.setMaxResults(recordsPerPage);
+        }
+
+        logger.debug("Got sorted and filtered clients list from db");
+        return q.list();
     }
 
     @Override
@@ -168,8 +336,17 @@ public class ClientsMySQLDAO implements ClientsDAO {
         return records;
     }
 
+    /*@Override
+    public int getNoOfRecords(ListDataRequest listDataRequest) {
+        int records = getNoOfRecords();
+
+        return records;
+    }*/
+
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
+        //todo:  SELECT COUNT(*) FROM Client WHERE first_name LIKE 'J%' AND pesel LIKE '83%';
+
         int records = getNoOfRecords();
 
         return records;

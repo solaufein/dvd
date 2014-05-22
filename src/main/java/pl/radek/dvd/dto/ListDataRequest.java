@@ -4,6 +4,8 @@ import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.SortInfo;
 
+import java.util.List;
+
 /**
  * User: Sola
  * Date: 14.03.14
@@ -12,9 +14,9 @@ import pl.radek.dvd.dto.SortInfo;
 public class ListDataRequest {
     private SortInfo sortInfo;
     private PaginationInfo paginationInfo;
-    private FilterInfo filterInfo;
+    private List<FilterInfo> filterInfo;
 
-    public ListDataRequest(SortInfo sortInfo, FilterInfo filterInfo, PaginationInfo paginationInfo) {
+    public ListDataRequest(SortInfo sortInfo, List<FilterInfo> filterInfo, PaginationInfo paginationInfo) {
         this.sortInfo = sortInfo;
         this.filterInfo = filterInfo;
         this.paginationInfo = paginationInfo;
@@ -24,7 +26,7 @@ public class ListDataRequest {
         return sortInfo;
     }
 
-    public FilterInfo getFilterInfo() {
+    public List<FilterInfo> getFilterInfo() {
         return filterInfo;
     }
 
