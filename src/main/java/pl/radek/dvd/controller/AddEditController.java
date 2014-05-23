@@ -36,7 +36,6 @@ public class AddEditController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView handleRequest(@RequestParam(Constants.ID) String id) throws Exception {
-        //     resp.setContentType("text/html");
         ModelAndView modelAndView;
         logger.info("get id from clients_list.jsp form, id=" + id);
 

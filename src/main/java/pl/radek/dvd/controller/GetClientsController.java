@@ -53,6 +53,7 @@ public class GetClientsController {
         // Pagination Info
         int page = 1;
         int recordsPerPage = 5;
+        int noOfPages;
         if (currentPage != null) {
             page = Integer.parseInt(currentPage);
         }
@@ -96,20 +97,13 @@ public class GetClientsController {
 
             PaginatedList<ClientData> clientPaginatedList = clientFacade.getClients(listDataRequest);
             int noOfRecords = clientPaginatedList.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
             logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
             logger.info(" !!!! NO OF PAGES : " + noOfPages);
             // sorting and paging logic method
             clientList = clientPaginatedList.getDataList();
 
-            modelAndView = new ModelAndView("/clients/clients_list");
-            modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);
-            modelAndView.addObject(Constants.CURRENTPAGE, page);
-            modelAndView.addObject(Constants.FIELD, field);
-            modelAndView.addObject(Constants.ORDER, order);
-            modelAndView.addObject(Constants.CLIENTLIST, clientList);
-            modelAndView.addObject(Constants.CLIENT, client);
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
@@ -118,19 +112,19 @@ public class GetClientsController {
 
             PaginatedList<ClientData> clientPaginatedList = clientFacade.getClients(listDataRequest);
             int noOfRecords = clientPaginatedList.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
             // sorting and paging logic method
             clientList = clientPaginatedList.getDataList();
-
-            modelAndView = new ModelAndView("/clients/clients_list");
-            modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);
-            modelAndView.addObject(Constants.CURRENTPAGE, page);
-            modelAndView.addObject(Constants.FIELD, field);
-            modelAndView.addObject(Constants.ORDER, order);
-            modelAndView.addObject(Constants.CLIENTLIST, clientList);
-            modelAndView.addObject(Constants.CLIENT, client);
         }
+
+        modelAndView = new ModelAndView("/clients/clients_list");
+        modelAndView.addObject(Constants.NO_OF_PAGES, noOfPages);
+        modelAndView.addObject(Constants.CURRENTPAGE, page);
+        modelAndView.addObject(Constants.FIELD, field);
+        modelAndView.addObject(Constants.ORDER, order);
+        modelAndView.addObject(Constants.CLIENTLIST, clientList);
+        modelAndView.addObject(Constants.CLIENT, client);
 
         return modelAndView;
     }

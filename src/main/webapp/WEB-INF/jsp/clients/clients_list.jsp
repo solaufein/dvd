@@ -6,7 +6,16 @@
 <jsp:useBean id="cons" class="pl.radek.dvd.model.Constants"/>
 
 <tiles:insertDefinition name="defaultTemplate">
-
+	<tiles:putAttribute name="langs">
+		<c:url var="englishLocaleUrl" value="/emp/clients.htm">
+		<c:param name="lang" value="en" />
+		</c:url>
+		<c:url var="polishLocaleUrl" value="/emp/clients.htm">
+		<c:param name="lang" value="pl" />
+		</c:url>
+		<a href="${englishLocaleUrl}">EN</a>
+		<a href="${polishLocaleUrl}">PL</a>
+	</tiles:putAttribute>
     <tiles:putAttribute name="content">
 
    		<h2>
@@ -111,7 +120,7 @@
 							<td>  <c:out value="${client.phoneNumber}"/>  </td>
 							<td>  <c:out value="${client.email}"/>  </td>
 							<td> 
-							  <form name="clientdetails" action=" <c:url value="clientdetails.htm"/>" method="post">
+							  <form name="clientdetails" action=" <c:url value="clientdetails.htm"/>" method="get">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
                               </form>

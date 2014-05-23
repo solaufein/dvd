@@ -3,10 +3,13 @@ package pl.radek.dvd.controller;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.dto.ClientData;
+import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.ClientFacade;
 
 /**
@@ -19,32 +22,40 @@ import pl.radek.dvd.service.ClientFacade;
 @RequestMapping("/emp/clientdetails.htm")
 public class ClientDetailsController {
 
-        private static Logger logger = Logger.getLogger(ClientDetailsController.class);
+    private static Logger logger = Logger.getLogger(ClientDetailsController.class);
 
-        @Autowired
-        private ClientFacade clientFacade;
+    @Autowired
+    private ClientFacade clientFacade;
 
-        public void setClientFacade(ClientFacade clientFacade) {
-            this.clientFacade = clientFacade;
-        }
+    public void setClientFacade(ClientFacade clientFacade) {
+        this.clientFacade = clientFacade;
+    }
 
-        @RequestMapping(method= RequestMethod.POST)
-        public ModelAndView handleRequest(@RequestParam("id") int id) throws Exception {
-            //     resp.setContentType("text/html");
+        @RequestMapping(method= RequestMethod.GET)
+        public ModelAndView handleRequest(@RequestParam("id") String id) throws Exception {
+            ModelAndView modelAndView;
 
             // get id from clients_list.jsp form
-            logger.info("get id from clients_list.jsp form, id=" + id);
-
             logger.info("Getting details for client with id=" + id);
-            //todo: details
+            //todo: details table
 
+            ClientData client = clientFacade.getClient(Integer.parseInt(id));
 
-            // Follow to client_details jsp
+            // follow to client_details.jsp
             logger.info("Follow to client_details jsp");
-
-            ModelAndView modelAndView = new ModelAndView("/clients/client_details");
+            modelAndView = new ModelAndView("/clients/client_details");
+            modelAndView.addObject(Constants.CLIENT, client);
 
             return modelAndView;
         }
-    }
+
+   /* @RequestMapping(method= RequestMethod.GET)
+    public ModelAndView changeLocale() throws Exception {
+        ModelAndView modelAndView;
+
+        modelAndView = new ModelAndView("/clients/client_details");
+
+        return modelAndView;
+    }*/
+}
 
