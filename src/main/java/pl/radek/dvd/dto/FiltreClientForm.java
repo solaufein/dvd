@@ -9,10 +9,10 @@ import javax.validation.constraints.Pattern;
  */
 public class FiltreClientForm {
 
-    @Pattern(regexp = "^\\s*$|^[A-Z][a-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.firstName}")
+    @Pattern(regexp = "^\\s*$|^[A-Za-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.firstName}")
     private String firstName;
 
-    @Pattern(regexp = "^\\s*$|^[A-Z][a-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.lastName}")
+    @Pattern(regexp = "^\\s*$|^[A-Za-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.lastName}")
     private String lastName;
 
     @Pattern(regexp = "^\\s*$|\\d*$", message = "{Pattern.filtreclientform.pesel}")

@@ -202,7 +202,7 @@
 			   </td>
  
 			<%--Displaying Page numbers--%>
-            <td> <c:out value="${currentPage}"/> </td>
+            <td> <c:out value="${currentPage}"/>/<c:out value="${noOfPages}"/> </td>
 
 				<td>
 			<%--Displaying Next link--%>
@@ -270,8 +270,6 @@
 			   </tr>
 			   </table>
 			   </div>
-				noofpages: <c:out value="${noOfPages}"/>
-				,current page: <c:out value="${currentPage}"/>
 			   </br>
 		 <sec:authorize ifAnyGranted="ROLE_ADMIN">
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
