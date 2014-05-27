@@ -40,6 +40,9 @@ public class Employee {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Roles> rolesSet = new HashSet<Roles>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
+
     public Employee() {
     }
 
@@ -58,6 +61,17 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+    }
+
+    public Employee(int id, String firstName, String lastName, String phoneNumber, String email, String password, Set<Roles> rolesSet, Set<RentingRegistry> rentingRegistries) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.rolesSet = rolesSet;
+        this.rentingRegistries = rentingRegistries;
     }
 
     public int getId() {
@@ -114,6 +128,14 @@ public class Employee {
 
     public void setRolesSet(Set<Roles> rolesSet) {
         this.rolesSet = rolesSet;
+    }
+
+    public Set<RentingRegistry> getRentingRegistries() {
+        return rentingRegistries;
+    }
+
+    public void setRentingRegistries(Set<RentingRegistry> rentingRegistries) {
+        this.rentingRegistries = rentingRegistries;
     }
 }
 

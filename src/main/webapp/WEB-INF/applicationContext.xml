@@ -27,7 +27,13 @@
                 <value>pl.radek.dvd.model.Client</value>
             </list>
         </property-->
-        <property name="packagesToScan" value="pl.radek.dvd.model"/>
+        <!--property name="packagesToScan" value="pl.radek.dvd.model"/-->
+        <property name="packagesToScan">
+            <list>
+                <value>pl.radek.dvd.model</value>
+                <value>pl.radek.dvd.dto</value>
+            </list>
+        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</prop>

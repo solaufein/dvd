@@ -39,9 +39,50 @@
 			</ul>
 		</div> 
 		</div>
-		<div class="table">
-		
-		</div>
+			<div class="table">
+               <table> 
+                 <tr>
+                  <td>
+
+					<a href="#" class="link"><spring:message code="clients.clientHistoryList.title"/></a>
+				  </td>
+                  <td>
+
+					<a href="#" class="link"><spring:message code="clients.clientHistoryList.serialNumber"/></a>
+				  </td>
+                  <td>
+
+					<a href="#" class="link"><spring:message code="clients.clientHistoryList.rentDate"/></a>
+				  </td>
+                  <td>
+
+					<a href="#" class="link"><spring:message code="clients.clientHistoryList.returnDate"/></a>
+				  </td>
+                  <td></td>
+                  <td></td>
+                 </tr>
+					<c:forEach items="${clientDetails}" var="details">
+						<tr>
+							<td>  <c:out value="${details.title}"/>  </td>
+							<td>  <c:out value="${details.serialNumber}"/>  </td>
+							<td>  <c:out value="${details.rentDate}"/>  </td>
+							<td>  <c:out value="${details.returnDate}"/>  </td>
+							<td> 
+							  <form name="printReceipt" action=" <c:url value="clientdetails.htm"/>" method="get">
+                                  <input type="hidden" name="id" value="${details.id}" />
+                                  <input type="submit" value="<spring:message code="common.button.print"/>" class = "myButton"/>
+                              </form>
+							</td>
+							<td> 
+							  <form name="returnMovie" action=" <c:url value="clientdetails.htm"/>" method="get">
+                                  <input type="hidden" name="id" value="${details.id}" />
+                                  <input type="submit" value="<spring:message code="common.button.return"/>" class = "myButton"/>
+                              </form>
+							</td>
+						</tr>
+					</c:forEach>   
+               </table>
+	</div>
 		</br>
 		
 		<form name="back" action="<c:url value="clients.htm"/>" method="get">

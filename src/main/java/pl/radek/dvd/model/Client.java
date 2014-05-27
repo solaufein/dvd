@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,6 +47,8 @@ public class Client {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
     public Client() {
     }
@@ -68,6 +72,18 @@ public class Client {
         this.street = street;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public Client(int id, String firstName, String lastName, String pesel, String city, String street, String phoneNumber, String email, Set<RentingRegistry> rentingRegistries) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pesel = pesel;
+        this.city = city;
+        this.street = street;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.rentingRegistries = rentingRegistries;
     }
 
     public int getId() {
@@ -102,6 +118,10 @@ public class Client {
         return email;
     }
 
+    public Set<RentingRegistry> getRentingRegistries() {
+        return rentingRegistries;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -132,5 +152,9 @@ public class Client {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setRentingRegistries(Set<RentingRegistry> rentingRegistries) {
+        this.rentingRegistries = rentingRegistries;
     }
 }

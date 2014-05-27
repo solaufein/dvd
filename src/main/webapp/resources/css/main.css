@@ -163,6 +163,10 @@ body {
     text-decoration: none;
 }
 
+#langs a:visited{
+    text-decoration: none;
+}
+
 #langs a:hover{
     text-decoration: underline;
 }

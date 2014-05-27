@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.ClientData;
+import pl.radek.dvd.dto.ClientDetails;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.ClientFacade;
+
+import java.util.List;
 
 /**
  * User: Sola
@@ -32,19 +35,22 @@ public class ClientDetailsController {
     }
 
         @RequestMapping(method= RequestMethod.GET)
-        public ModelAndView handleRequest(@RequestParam("id") String id) throws Exception {
+        public ModelAndView handleRequest(@RequestParam(value = Constants.ID, required = false) String id) throws Exception {
             ModelAndView modelAndView;
 
             // get id from clients_list.jsp form
             logger.info("Getting details for client with id=" + id);
-            //todo: details table
 
-            ClientData client = clientFacade.getClient(Integer.parseInt(id));
+            int ide = Integer.parseInt(id);
+
+            ClientData client = clientFacade.getClient(ide);
+            List<ClientDetails> clientDetailsList = clientFacade.getClientDetails(ide);
 
             // follow to client_details.jsp
             logger.info("Follow to client_details jsp");
             modelAndView = new ModelAndView("/clients/client_details");
             modelAndView.addObject(Constants.CLIENT, client);
+            modelAndView.addObject(Constants.CLIENTDETAILS, clientDetailsList);
 
             return modelAndView;
         }

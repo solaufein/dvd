@@ -11,6 +11,7 @@ public class Constants {
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";
 
+    public static final String CLIENTDETAILS = "clientDetails";
     public static final String CLIENT = "client";
     public static final String ID = "id";
     public static final String FIRSTNAME = "first_name";
@@ -33,6 +34,7 @@ public class Constants {
     public String asc = ASC;
     public String desc = DESC;
 
+    public String clientdetails = CLIENTDETAILS;
     public String client = CLIENT;
     public String id = ID;
     public String firstname = FIRSTNAME;
@@ -185,5 +187,13 @@ public class Constants {
 
     public void setNoofpages(String noofpages) {
         this.noofpages = noofpages;
+    }
+
+    public String getClientdetails() {
+        return clientdetails;
+    }
+
+    public void setClientdetails(String clientdetails) {
+        this.clientdetails = clientdetails;
     }
 }

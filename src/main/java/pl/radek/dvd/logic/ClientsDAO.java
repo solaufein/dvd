@@ -1,5 +1,6 @@
 package pl.radek.dvd.logic;
 
+import pl.radek.dvd.dto.ClientDetails;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.dto.ListDataRequest;
 
@@ -16,6 +17,7 @@ public interface ClientsDAO {
 
     public List<Client> getClients();
     public List<Client> getClients(ListDataRequest listDataRequest);
+    public List<ClientDetails> getClientDetails(int id);
     public Client getClient(int id);
     public void deleteClient(int id);
     public void addClient(Client client);

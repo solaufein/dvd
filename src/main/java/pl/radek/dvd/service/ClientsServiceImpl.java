@@ -3,13 +3,10 @@ package pl.radek.dvd.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.PaginatedList;
-import pl.radek.dvd.dto.PaginatedListImpl;
+import pl.radek.dvd.dto.*;
 import pl.radek.dvd.logic.ClientsDAO;
 import pl.radek.dvd.logic.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
-import pl.radek.dvd.dto.ListDataRequest;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -49,6 +46,11 @@ public class ClientsServiceImpl implements ClientsService {
     }
 
     @Override
+    public List<ClientDetails> getClientDetails(int id) {
+        return clientsDAO.getClientDetails(id);
+    }
+
+    @Override
     public List<ClientData> getClients() {
         List<Client> clients = clientsDAO.getClients();
         List<ClientData> clientDataList = convertClientListToClientDataList(clients);
@@ -63,6 +65,8 @@ public class ClientsServiceImpl implements ClientsService {
 
         return clientData;
     }
+
+
 
     @Override
     public void deleteClient(int id) {
