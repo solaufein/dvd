@@ -18,7 +18,6 @@ public interface ClientsService {
     public List<ClientData> getClients();
     public ClientData getClient(int id);
     public PaginatedList<ClientData> getClients(final ListDataRequest request);
-    public List<ClientDetails> getClientDetails(int id);
     public void deleteClient(int id);
     public void addClient(ClientData client);
     public void updateClient(ClientData client);

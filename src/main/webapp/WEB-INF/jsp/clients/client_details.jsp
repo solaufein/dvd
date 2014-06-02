@@ -43,24 +43,20 @@
                <table> 
                  <tr>
                   <td>
-
-					<a href="#" class="link"><spring:message code="clients.clientHistoryList.title"/></a>
+					<spring:message code="clients.clientHistoryList.title"/>
 				  </td>
                   <td>
-
-					<a href="#" class="link"><spring:message code="clients.clientHistoryList.serialNumber"/></a>
+					<spring:message code="clients.clientHistoryList.serialNumber"/>
 				  </td>
                   <td>
-
-					<a href="#" class="link"><spring:message code="clients.clientHistoryList.rentDate"/></a>
+					<spring:message code="clients.clientHistoryList.rentDate"/>
 				  </td>
                   <td>
-
-					<a href="#" class="link"><spring:message code="clients.clientHistoryList.returnDate"/></a>
+					<spring:message code="clients.clientHistoryList.returnDate"/>
 				  </td>
                   <td></td>
                   <td></td>
-                 </tr>
+				 </tr>
 					<c:forEach items="${clientDetails}" var="details">
 						<tr>
 							<td>  <c:out value="${details.title}"/>  </td>
@@ -84,6 +80,54 @@
                </table>
 	</div>
 		</br>
+		<div id="page_numbers">
+			  <table>  <tr>
+			   <td>
+			<%--Displaying First link except for the 1st page--%>   
+			   <c:if test="${currentPage != 1}">
+			   <form name="firstlink" action="<c:url value="clientdetails.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "1" />
+                 <input type="submit" value="|<<" class = "myButtonTwo"/>
+               </form>
+				</c:if>
+			   </td>
+
+			   <td>
+			<%--Displaying Previous link except for the 1st page--%>
+			   <c:if test="${currentPage != 1}">
+			   <form name="previouslink" action="<c:url value="clientdetails.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
+                 <input type="submit" value="<" class = "myButtonTwo"/>
+               </form>
+				</c:if>
+			   </td>
+ 
+			<%--Displaying Page numbers--%>
+            <td> <c:out value="${currentPage}"/>/<c:out value="${noOfPages}"/> </td>
+
+				<td>
+			<%--Displaying Next link--%>
+			   <c:if test="${currentPage < noOfPages}">
+			   <form name="nextlink" action="<c:url value="clientdetails.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
+                 <input type="submit" value=">" class = "myButtonTwo"/>
+               </form>
+				</c:if>
+			   </td>
+
+			   <td>
+			<%--Displaying Last link--%>
+			   <c:if test="${currentPage < noOfPages}">
+			   <form name="lastlink" action="<c:url value="clientdetails.htm"/>" method="get">
+				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
+                 <input type="submit" value=">>|" class = "myButtonTwo"/>
+               </form>
+				</c:if>
+			   </td>
+			   </tr>
+			   </table>
+			   </div>
+			   </br>
 		
 		<form name="back" action="<c:url value="clients.htm"/>" method="get">
 		<table>

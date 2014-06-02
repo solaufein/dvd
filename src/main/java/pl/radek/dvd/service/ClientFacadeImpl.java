@@ -24,8 +24,15 @@ public class ClientFacadeImpl implements ClientFacade {
     @Autowired
     private ClientsService clientsService;
 
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+
     public void setClientsService(ClientsService clientsService) {
         this.clientsService = clientsService;
+    }
+
+    public void setClientDetailsService(ClientDetailsService clientDetailsService) {
+        this.clientDetailsService = clientDetailsService;
     }
 
     @Override
@@ -39,8 +46,8 @@ public class ClientFacadeImpl implements ClientFacade {
     }
 
     @Override
-    public List<ClientDetails> getClientDetails(int id) {
-        return clientsService.getClientDetails(id);
+    public PaginatedList<ClientDetails> getClientDetails(ListDataRequest request, int clientId) {
+        return clientDetailsService.getClientDetails(request, clientId);
     }
 
     @Override

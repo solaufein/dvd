@@ -50,28 +50,6 @@ public class ClientsMySQLDAO implements ClientsDAO {
         this.hibernateTemplate = hibernateTemplate;
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<ClientDetails> getClientDetails(int id) {
-        logger.debug("Perform method getClientDetails for Client id: " + id);
-
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ClientDetails(mc.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
-        query.append("INNER JOIN rr.client as c ");
-        query.append("INNER JOIN rr.movieCopy as mc ");
-        query.append("INNER JOIN mc.movie as m ");
-        query.append("WHERE c.id = :ide ");
-        query.append("ORDER BY rr.rentDate DESC ");
-
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
-        q.setParameter("ide", id);
-
-        logger.debug("query: " + query.toString());
-        logger.debug("Got Client Details for Client id: " + id);
-        List <ClientDetails> list = (List <ClientDetails>) q.list();
-
-        return list;
-    }
-
     @SuppressWarnings("unchecked")
     public List<Client> getClients() {
         logger.debug("Perform method getClients");

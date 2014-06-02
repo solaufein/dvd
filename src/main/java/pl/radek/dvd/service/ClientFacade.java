@@ -16,7 +16,7 @@ import java.util.List;
 public interface ClientFacade {
     public ClientData getClient(int id);
     public PaginatedList<ClientData> getClients(final ListDataRequest request);
-    public List<ClientDetails> getClientDetails(int id);
+    public PaginatedList<ClientDetails> getClientDetails(final ListDataRequest request, int clientId);
     public void deleteClient(int id);
     public void addClient(ClientData client);
     public void updateClient(ClientData client);

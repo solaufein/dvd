@@ -46,11 +46,6 @@ public class ClientsServiceImpl implements ClientsService {
     }
 
     @Override
-    public List<ClientDetails> getClientDetails(int id) {
-        return clientsDAO.getClientDetails(id);
-    }
-
-    @Override
     public List<ClientData> getClients() {
         List<Client> clients = clientsDAO.getClients();
         List<ClientData> clientDataList = convertClientListToClientDataList(clients);
