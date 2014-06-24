@@ -37,4 +37,9 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
 
         return paginatedList;
     }
+
+    @Override
+    public ReceiptPdf getReceiptPdfInformations(int id) {
+        return clientDetailsDAO.getReceiptPdfInformations(id);
+    }
 }

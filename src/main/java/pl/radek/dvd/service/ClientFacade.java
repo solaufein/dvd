@@ -1,9 +1,6 @@
 package pl.radek.dvd.service;
 
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.ClientDetails;
-import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.*;
 import pl.radek.dvd.model.Client;
 
 import java.util.List;
@@ -17,6 +14,7 @@ public interface ClientFacade {
     public ClientData getClient(int id);
     public PaginatedList<ClientData> getClients(final ListDataRequest request);
     public PaginatedList<ClientDetails> getClientDetails(final ListDataRequest request, int clientId);
+    public ReceiptPdf getReceiptPdfInformations(int id);
     public void deleteClient(int id);
     public void addClient(ClientData client);
     public void updateClient(ClientData client);

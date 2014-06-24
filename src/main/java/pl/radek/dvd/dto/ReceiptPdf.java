@@ -1,43 +1,37 @@
 package pl.radek.dvd.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * User: Sola
- * Date: 2014-05-27
- * Time: 17:22
+ * Date: 2014-06-24
+ * Time: 17:07
  */
-public class ClientDetails {
-    private int id;               // renting registry id!
+
+/**
+ *  This class is DTO-class prepared for pdf generated view
+ */
+public class ReceiptPdf {
     private String title;         // movie title
     private String serialNumber;      // movie copy serial number
     private Date rentDate;
     private Date returnDate;
+    private BigDecimal price;
+    private Date payDate;
+    private int billNumber;
 
-    public ClientDetails() {
+    public ReceiptPdf() {
     }
 
-    public ClientDetails(String title, String serialNumber, Date rentDate, Date returnDate) {
+    public ReceiptPdf(String title, String serialNumber, Date rentDate, Date returnDate, BigDecimal price, Date payDate, int billNumber) {
         this.title = title;
         this.serialNumber = serialNumber;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
-    }
-
-    public ClientDetails(int id, String title, String serialNumber, Date rentDate, Date returnDate) {
-        this.id = id;
-        this.title = title;
-        this.serialNumber = serialNumber;
-        this.rentDate = rentDate;
-        this.returnDate = returnDate;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.price = price;
+        this.payDate = payDate;
+        this.billNumber = billNumber;
     }
 
     public String getTitle() {
@@ -70,5 +64,29 @@ public class ClientDetails {
 
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
+    }
+
+    public int getBillNumber() {
+        return billNumber;
+    }
+
+    public void setBillNumber(int billNumber) {
+        this.billNumber = billNumber;
     }
 }

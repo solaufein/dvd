@@ -39,6 +39,12 @@
 			</ul>
 		</div> 
 		</div>
+		<div class="rentMovieButton">
+			<form name="rentMovie" action=" <c:url value="clientdetails.htm"/>" method="get">
+				<input type="hidden" name="id" value="${param.id}" />
+				<input type="submit" value="<spring:message code="common.button.rentMovie"/>" class = "myButton"/>
+			</form>
+		</div>
 			<div class="table">
                <table> 
                  <tr>
@@ -54,8 +60,8 @@
                   <td>
 					<spring:message code="clients.clientHistoryList.returnDate"/>
 				  </td>
-                  <td></td>
-                  <td></td>
+                  <c:if test="${not empty details.returnDate}"><td></td></c:if>
+                  <c:if test="${empty details.returnDate}"><td></td></c:if>
 				 </tr>
 					<c:forEach items="${clientDetails}" var="details">
 						<tr>
@@ -63,18 +69,23 @@
 							<td>  <c:out value="${details.serialNumber}"/>  </td>
 							<td>  <c:out value="${details.rentDate}"/>  </td>
 							<td>  <c:out value="${details.returnDate}"/>  </td>
-							<td> 
-							  <form name="printReceipt" action=" <c:url value="clientdetails.htm"/>" method="get">
-                                  <input type="hidden" name="id" value="${details.id}" />
+							 <c:if test="${not empty details.returnDate}">
+							 <td>
+							  <form name="printReceipt" action=" <c:url value="printreceipt.htm"/>" method="post">
+                                  <input type="hidden" name="registryid" value="${details.id}" />
+								  <input type="hidden" name="clientid" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.print"/>" class = "myButton"/>
                               </form>
-							</td>
-							<td> 
+							  </td>
+							 </c:if>
+							 <c:if test="${empty details.returnDate}">
+							 <td>
 							  <form name="returnMovie" action=" <c:url value="clientdetails.htm"/>" method="get">
                                   <input type="hidden" name="id" value="${details.id}" />
                                   <input type="submit" value="<spring:message code="common.button.return"/>" class = "myButton"/>
                               </form>
-							</td>
+							  </td>
+							 </c:if>
 						</tr>
 					</c:forEach>   
                </table>

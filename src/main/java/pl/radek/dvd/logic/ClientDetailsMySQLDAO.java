@@ -48,7 +48,7 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ClientDetails(mc.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ClientDetails(rr.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
         query.append("INNER JOIN rr.client as c ");
         query.append("INNER JOIN rr.movieCopy as mc ");
         query.append("INNER JOIN mc.movie as m ");
@@ -65,6 +65,29 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         List<ClientDetails> list = (List<ClientDetails>) q.list();
 
         return list;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public ReceiptPdf getReceiptPdfInformations(int id) {
+        logger.debug("Perform method getReceiptPdfInformations for RR id: " + id);
+
+        //todo: ok ?  check this logic...
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ReceiptPdf(m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.price, r.payDate, r.billNumber) FROM RentingRegistry as rr ");
+        query.append("INNER JOIN rr.receipt as r ");
+        query.append("INNER JOIN rr.client as c ");
+        query.append("INNER JOIN rr.movieCopy as mc ");
+        query.append("INNER JOIN mc.movie as m ");
+        query.append("WHERE rr.id = :ide ");
+
+        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        q.setParameter("ide", id);
+
+        logger.debug("query: " + query.toString());
+        logger.debug("Got Receipt info for Client id: " + id);
+        List<ReceiptPdf> list = (List<ReceiptPdf>) q.list();
+
+        return list.get(0);
     }
 
     @SuppressWarnings("unchecked")

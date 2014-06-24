@@ -3,10 +3,7 @@ package pl.radek.dvd.service;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.ClientDetails;
-import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.*;
 
 import java.util.List;
 
@@ -48,6 +45,11 @@ public class ClientFacadeImpl implements ClientFacade {
     @Override
     public PaginatedList<ClientDetails> getClientDetails(ListDataRequest request, int clientId) {
         return clientDetailsService.getClientDetails(request, clientId);
+    }
+
+    @Override
+    public ReceiptPdf getReceiptPdfInformations(int id) {
+        return clientDetailsService.getReceiptPdfInformations(id);
     }
 
     @Override

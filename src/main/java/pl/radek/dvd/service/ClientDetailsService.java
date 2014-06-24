@@ -1,9 +1,6 @@
 package pl.radek.dvd.service;
 
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.ClientDetails;
-import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.*;
 
 /**
  * User: Sola
@@ -12,4 +9,5 @@ import pl.radek.dvd.dto.PaginatedList;
  */
 public interface ClientDetailsService {
     public PaginatedList<ClientDetails> getClientDetails(final ListDataRequest request, int clientId);
+    public ReceiptPdf getReceiptPdfInformations(int id);
 }
