@@ -72,7 +72,6 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
     public ReceiptPdf getReceiptPdfInformations(int id) {
         logger.debug("Perform method getReceiptPdfInformations for RR id: " + id);
 
-        //todo: ok ?  check this logic...
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ReceiptPdf(m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.price, r.payDate, r.billNumber) FROM RentingRegistry as rr ");
         query.append("INNER JOIN rr.receipt as r ");
         query.append("INNER JOIN rr.client as c ");

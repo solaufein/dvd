@@ -208,6 +208,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!--iText pdf -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.4.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>
