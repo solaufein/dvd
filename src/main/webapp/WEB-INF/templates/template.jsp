@@ -31,9 +31,11 @@
        		<tiles:insertAttribute name="header" />
        	</div>
        	<div id="login_info">
-        		<div class="location">Location: Clients > List</div>
+        		<div class="location">
+				<tiles:insertAttribute name="location_bar" />
+				</div>
         		<tiles:insertAttribute name="login_info" />
-        	</div>
+        </div>
        	<div id="navigation">
        		<tiles:insertAttribute name="navigation" />
        	</div>

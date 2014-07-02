@@ -32,6 +32,8 @@
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
             <property name="paramName" value="lang"/>
         </bean>
+        <!-- Location Status Bar Interceptor -->
+        <bean class="pl.radek.dvd.interceptor.LocationStatusBarInterceptor" />
     </mvc:interceptors>
 
     <!-- Access resource bundles with the specified basename -->
