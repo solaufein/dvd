@@ -7,10 +7,10 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/clients.htm">
+		<c:url var="englishLocaleUrl" value="/emp/clients/clientslist.htm">
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/clients.htm">
+		<c:url var="polishLocaleUrl" value="/emp/clients/clientslist.htm">
 		<c:param name="lang" value="pl" />
 		</c:url>
 		<a href="${englishLocaleUrl}">EN</a>
@@ -27,7 +27,7 @@
 			<p> <spring:message code="common.fillin.filtre"/> </p>
 		</div>
 		<div class="separator"></div>
-		<form:form method="GET" commandName="client" action="clients.htm" >	 
+		<form:form method="GET" commandName="client" action="clientslist.htm" >	 
 			<div class="inputs">
 			<table>
 				<tbody>
@@ -53,7 +53,7 @@
 					</td>
 		</form:form>
 					<td>
-					<form name="clearTable" action=" <c:url value="clients.htm"/>" method="get">
+					<form name="clearTable" action=" <c:url value="clientslist.htm"/>" method="get">
 						<input type="submit" value="<spring:message code="common.button.clear"/>"/>
 					</form>
 					</td>
@@ -71,37 +71,37 @@
                  <tr>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.firstname}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.firstName"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.lastname}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.lastName"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.pesel}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.pesel"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.city}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.city"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.street}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.street"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.phonenumber}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.phoneNumber"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.email}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clients.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.email"/></a>
 				  </td>
 				  <td></td>
@@ -151,7 +151,7 @@
 			   <c:if test="${currentPage != 1}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="firstlink" action=" <c:url value="clients.htm"/>" method="get">
+			   <form name="firstlink" action=" <c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 				 <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -164,7 +164,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="firstlink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="firstlink" action="<c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 				 <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -183,7 +183,7 @@
 			   <c:if test="${currentPage != 1}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="previouslink" action="<c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 			   <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -196,7 +196,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="previouslink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="previouslink" action="<c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 			   <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -218,7 +218,7 @@
 			   <c:if test="${currentPage < noOfPages}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="nextlink" action="<c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 			   <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -231,7 +231,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="nextlink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="nextlink" action="<c:url value="clientslist.htm"/>" method="get">
 			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 			   <input type="hidden" name="firstName" value = "${param.firstName}" />
 				 <input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -250,7 +250,7 @@
 			   <c:if test="${currentPage < noOfPages}">
 				<c:choose>
 				<c:when test="${param.order != null && param.field != null}">
-			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="lastlink" action="<c:url value="clientslist.htm"/>" method="get">
 				<c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 					<input type="hidden" name="firstName" value = "${param.firstName}" />
 					<input type="hidden" name="lastName" value = "${param.lastName}" />
@@ -263,7 +263,7 @@
                </form>
 				</c:when>
 				<c:otherwise>
-			   <form name="lastlink" action="<c:url value="clients.htm"/>" method="get">
+			   <form name="lastlink" action="<c:url value="clientslist.htm"/>" method="get">
 				<c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
 					<input type="hidden" name="firstName" value = "${param.firstName}" />
 					<input type="hidden" name="lastName" value = "${param.lastName}" />

@@ -25,7 +25,7 @@ public class HomeController {
     @RequestMapping(value = "/emp/home.htm", method = RequestMethod.GET)
     public ModelAndView handleRequest() throws Exception {
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients/clientslist.htm");
 
         return modelAndView;
     }

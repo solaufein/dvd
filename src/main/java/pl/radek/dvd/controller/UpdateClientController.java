@@ -24,7 +24,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/emp/updateclient.htm")
+@RequestMapping("/emp/clients/updateclient.htm")
 public class UpdateClientController {
     private static Logger logger = Logger.getLogger(AddClientController.class);
 
@@ -50,7 +50,7 @@ public class UpdateClientController {
 
             // redirect to GetClientsListServlet
             logger.info("Redirect to GetClientsController");
-            modelAndView = new ModelAndView("redirect:/emp/clients.htm");
+            modelAndView = new ModelAndView("redirect:/emp/clients/clientslist.htm");
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");

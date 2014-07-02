@@ -6,11 +6,11 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/clientdetails.htm">
+		<c:url var="englishLocaleUrl" value="/emp/clients/clientdetails.htm">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/clientdetails.htm">
+		<c:url var="polishLocaleUrl" value="/emp/clients/clientdetails.htm">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="pl" />
 		</c:url>
@@ -40,7 +40,7 @@
 		</div> 
 		</div>
 		<div class="rentMovieButton">
-			<form name="rentMovie" action=" <c:url value="clientdetails.htm"/>" method="get">
+			<form name="rentMovie" action=" <c:url value="clients/clientdetails.htm"/>" method="get">
 				<input type="hidden" name="id" value="${param.id}" />
 				<input type="submit" value="<spring:message code="common.button.rentMovie"/>" class = "myButton"/>
 			</form>
@@ -140,7 +140,7 @@
 			   </div>
 			   </br>
 		
-		<form name="back" action="<c:url value="clients.htm"/>" method="get">
+		<form name="back" action="<c:url value="clientslist.htm"/>" method="get">
 		<table>
 		<tr>
 			<td colspan="2">

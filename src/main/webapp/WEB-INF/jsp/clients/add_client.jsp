@@ -75,7 +75,7 @@
 
 </form:form>
 	 
-     <form name="cancel" action="<c:url value="clients.htm"/>" method="get">
+     <form name="cancel" action="<c:url value="clientslist.htm"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">
@@ -147,7 +147,7 @@
 </tbody></table>  
 </form:form>
 	 
-     <form name="cancel" action="<c:url value="clients.htm"/>" method="get">
+     <form name="cancel" action="<c:url value="clientslist.htm"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">

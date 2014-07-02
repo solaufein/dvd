@@ -20,7 +20,7 @@ import pl.radek.dvd.service.ClientFacadeImpl;
  */
 
 @Controller
-@RequestMapping("/emp/delete.htm")
+@RequestMapping("/emp/clients/delete.htm")
 @Secured("ROLE_ADMIN")
 public class DeleteClientController {
     private static Logger logger = Logger.getLogger(DeleteClientController.class);
@@ -46,7 +46,7 @@ public class DeleteClientController {
         // redirect to GetClientsController
         logger.info("Redirect to GetClientsController");
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients/clientslist.htm");
 
         return modelAndView;
     }
