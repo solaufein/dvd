@@ -1,4 +1,4 @@
-package pl.radek.dvd.controller;
+package pl.radek.dvd.controller.clients;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.controller.clients.AddClientController;
 import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.ClientFacade;
-import pl.radek.dvd.service.ClientFacadeImpl;
 
 import javax.validation.Valid;
 

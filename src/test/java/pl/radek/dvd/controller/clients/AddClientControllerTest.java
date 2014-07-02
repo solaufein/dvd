@@ -1,4 +1,4 @@
-package pl.radek.dvd.controller;
+package pl.radek.dvd.controller.clients;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.radek.dvd.controller.clients.AddClientController;
 import pl.radek.dvd.dto.ClientData;
 import pl.radek.dvd.service.ClientFacadeImpl;
 
@@ -49,7 +50,7 @@ public class AddClientControllerTest {
         BindingResult bindingResult = new BeanPropertyBindingResult(client, "client");
 
         ModelAndView modelAndView = addClientController.handleRequest(client, bindingResult);
-        Assert.assertEquals("redirect:/clients.htm", modelAndView.getViewName());
+        Assert.assertEquals("redirect:/clientslist.htm", modelAndView.getViewName());
     }
 
     @Test

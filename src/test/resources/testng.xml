@@ -3,7 +3,7 @@
 <suite name="Test all">
     <!--test name="AddClientController test">
         <classes>
-            <class name="pl.radek.dvd.controller.AddClientControllerTest"/>
+            <class name="pl.radek.dvd.controller.clients.AddClientControllerTest"/>
         </classes>
     </test-->
     <!--test name="ClientsService test">
