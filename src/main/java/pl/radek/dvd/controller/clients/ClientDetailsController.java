@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientDetails;
 import pl.radek.dvd.model.Constants;
-import pl.radek.dvd.service.ClientFacade;
+import pl.radek.dvd.service.clients.ClientFacade;
 
 import java.util.List;
 

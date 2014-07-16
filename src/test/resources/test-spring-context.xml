@@ -57,7 +57,7 @@
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
-    <!--bean id="clientDAO" class="pl.radek.dvd.logic.ClientsMySQLDAO">
+    <!--bean id="clientDAO" class="pl.radek.dvd.logic.clients.ClientsMySQLDAO">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean-->
 

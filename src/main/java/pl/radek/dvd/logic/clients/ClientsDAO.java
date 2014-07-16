@@ -1,6 +1,5 @@
-package pl.radek.dvd.logic;
+package pl.radek.dvd.logic.clients;
 
-import pl.radek.dvd.dto.ClientDetails;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.dto.ListDataRequest;
 

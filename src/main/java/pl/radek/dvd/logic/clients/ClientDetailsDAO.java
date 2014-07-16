@@ -1,9 +1,8 @@
-package pl.radek.dvd.logic;
+package pl.radek.dvd.logic.clients;
 
-import pl.radek.dvd.dto.ClientDetails;
+import pl.radek.dvd.dto.clients.ClientDetails;
 import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginatedList;
-import pl.radek.dvd.dto.ReceiptPdf;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 import java.util.List;
 

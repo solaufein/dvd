@@ -1,7 +1,6 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.service.clients;
 
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.ClientDetails;
+import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.ListDataRequest;
 

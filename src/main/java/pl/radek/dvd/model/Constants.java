@@ -11,6 +11,7 @@ public class Constants {
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";
 
+    // Client Details
     public static final String CLIENTDETAILS = "clientDetails";
     public static final String CLIENT = "client";
     public static final String ID = "id";
@@ -29,6 +30,15 @@ public class Constants {
 
     public static final String CURRENTPAGE = "currentPage";
     public static final String NO_OF_PAGES = "noOfPages";
+
+    //Movies
+    public static final String TITLE = "title";
+    public static final String GENRE = "genre";
+    public static final String PROMOTION = "promotion";
+    public static final String DIRECTOR = "director";
+    public static final String PRODUCTIONYEAR = "productionYear";
+    public static final String DESCRIPTION = "description";
+    public static final String ACTOR = "actor";
 
     //for jstl, el, jsp purposes
     public String asc = ASC;
@@ -52,6 +62,14 @@ public class Constants {
 
     public String currentpage = CURRENTPAGE;
     public String noofpages = NO_OF_PAGES;
+
+    public String title = TITLE;
+    public String genre = GENRE;
+    public String promotion = PROMOTION;
+    public String director = DIRECTOR;
+    public String productionyear = PRODUCTIONYEAR;
+    public String description = DESCRIPTION;
+    public String actor = ACTOR;
 
     public String getAsc() {
         return asc;
@@ -195,5 +213,61 @@ public class Constants {
 
     public void setClientdetails(String clientdetails) {
         this.clientdetails = clientdetails;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(String promotion) {
+        this.promotion = promotion;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getProductionyear() {
+        return productionyear;
+    }
+
+    public void setProductionyear(String productionyear) {
+        this.productionyear = productionyear;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
     }
 }

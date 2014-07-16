@@ -1,26 +1,19 @@
-package pl.radek.dvd.logic;
+package pl.radek.dvd.logic.clients;
 
 
 import org.apache.log4j.Logger;
 
-import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.model.*;
 
-import java.sql.SQLException;
 import java.util.List;
 
 

@@ -1,11 +1,12 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.service.clients;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.*;
-
-import java.util.List;
+import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientDetails;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 /**
  * User: Sola

@@ -1,9 +1,9 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.service.clients;
 
 import pl.radek.dvd.dto.*;
-import pl.radek.dvd.model.Client;
-
-import java.util.List;
+import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientDetails;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 /**
  * User: Sola

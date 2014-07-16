@@ -1,4 +1,4 @@
-package pl.radek.dvd.logic;
+package pl.radek.dvd.logic.clients;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -9,7 +9,8 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
-import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.dto.clients.ClientDetails;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ClientDetails(rr.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientDetails(rr.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
         query.append("INNER JOIN rr.client as c ");
         query.append("INNER JOIN rr.movieCopy as mc ");
         query.append("INNER JOIN mc.movie as m ");
@@ -72,7 +73,7 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
     public ReceiptPdf getReceiptPdfInformations(int id) {
         logger.debug("Perform method getReceiptPdfInformations for RR id: " + id);
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.ReceiptPdf(m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.price, r.payDate, r.billNumber) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ReceiptPdf(m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.price, r.payDate, r.billNumber) FROM RentingRegistry as rr ");
         query.append("INNER JOIN rr.receipt as r ");
         query.append("INNER JOIN rr.client as c ");
         query.append("INNER JOIN rr.movieCopy as mc ");

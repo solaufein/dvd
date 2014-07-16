@@ -1,6 +1,8 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.service.clients;
 
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.clients.ClientDetails;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 /**
  * User: Sola

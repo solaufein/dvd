@@ -4,8 +4,8 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import pl.radek.dvd.dto.ClientData;
-import pl.radek.dvd.dto.ReceiptPdf;
+import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

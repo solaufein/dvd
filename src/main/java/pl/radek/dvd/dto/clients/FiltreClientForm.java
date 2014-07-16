@@ -1,4 +1,4 @@
-package pl.radek.dvd.dto;
+package pl.radek.dvd.dto.clients;
 
 import javax.validation.constraints.Pattern;
 

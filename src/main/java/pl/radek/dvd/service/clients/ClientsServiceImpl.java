@@ -1,11 +1,12 @@
-package pl.radek.dvd.service;
+package pl.radek.dvd.service.clients;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.radek.dvd.dto.*;
-import pl.radek.dvd.logic.ClientsDAO;
-import pl.radek.dvd.logic.ClientsMySQLDAO;
+import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.PaginatedListImpl;
+import pl.radek.dvd.logic.clients.ClientsDAO;
 import pl.radek.dvd.model.Client;
 
 import java.util.LinkedList;
