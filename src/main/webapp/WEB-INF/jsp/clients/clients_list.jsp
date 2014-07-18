@@ -144,8 +144,8 @@
                </table>
 	</div>
                </br>
-			 <div id="page_numbers">
-			  <table>  <tr>
+			<div id="page_numbers">
+			  <table> <tr>
 			   <td>
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
@@ -278,7 +278,7 @@
 			   </td>
 			   </tr>
 			   </table>
-			   </div>
+			</div>
 			   </br>
 		 <sec:authorize ifAnyGranted="ROLE_ADMIN">
                <form name="newclient" action="<c:url value="controller.htm"/>" method="post">

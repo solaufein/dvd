@@ -82,11 +82,11 @@ public class MoviesMySQLDAO implements MoviesDAO {
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.movies.MoviesData(m.id , m.title, m.director, m.productionYear, g.genre, p.name) FROM Movie as m ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
-        query.append("LEFT JOIN m.actorSet as a ");
 
         boolean isFirst = true;
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            query.append("LEFT JOIN m.actorSet as a ");
             for (FilterInfo filterInfo : filterInfoList) {
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     if (isFirst) {
@@ -240,7 +240,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
-        query.append("LEFT JOIN m.actorSet as a ");
 
         Query q;
         int records;
@@ -248,6 +247,7 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             logger.debug("FilterInfoList is not null and not empty!");
+            query.append("LEFT JOIN m.actorSet as a ");
             for (FilterInfo filterInfo : filterInfoList) {
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     if (isFirst) {

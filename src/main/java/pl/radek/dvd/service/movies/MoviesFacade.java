@@ -17,6 +17,6 @@ public interface MoviesFacade {
     public Movie getMovie(int id);
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
     public void deleteMovie(int id);
-    public void addMovie(Movie client);
-    public void updateMovie(Movie client);
+    public void addMovie(Movie movie);
+    public void updateMovie(Movie movie);
 }

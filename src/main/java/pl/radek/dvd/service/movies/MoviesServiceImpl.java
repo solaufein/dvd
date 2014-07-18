@@ -60,13 +60,13 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public void addMovie(Movie client) {
-        moviesDAO.addMovie(client);
+    public void addMovie(Movie movie) {
+        moviesDAO.addMovie(movie);
 
     }
 
     @Override
-    public void updateMovie(Movie client) {
-        moviesDAO.updateMovie(client);
+    public void updateMovie(Movie movie) {
+        moviesDAO.updateMovie(movie);
     }
 }

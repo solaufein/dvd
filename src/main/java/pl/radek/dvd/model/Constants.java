@@ -32,6 +32,8 @@ public class Constants {
     public static final String NO_OF_PAGES = "noOfPages";
 
     //Movies
+    public static final String MOVIESLIST = "moviesList";
+    public static final String MOVIE = "movie";
     public static final String TITLE = "title";
     public static final String GENRE = "genre";
     public static final String PROMOTION = "promotion";
@@ -63,6 +65,8 @@ public class Constants {
     public String currentpage = CURRENTPAGE;
     public String noofpages = NO_OF_PAGES;
 
+    public String movieslist = MOVIESLIST;
+    public String movie = MOVIE;
     public String title = TITLE;
     public String genre = GENRE;
     public String promotion = PROMOTION;
