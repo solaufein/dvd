@@ -37,8 +37,9 @@ public class Constants {
     public static final String TITLE = "title";
     public static final String GENRE = "genre";
     public static final String PROMOTION = "promotion";
+    public static final String PROMOTIONNAME = "name";
     public static final String DIRECTOR = "director";
-    public static final String PRODUCTIONYEAR = "productionYear";
+    public static final String PRODUCTIONYEAR = "production_year";
     public static final String DESCRIPTION = "description";
     public static final String ACTOR = "actor";
 
@@ -70,6 +71,7 @@ public class Constants {
     public String title = TITLE;
     public String genre = GENRE;
     public String promotion = PROMOTION;
+    public String promotionname = PROMOTIONNAME;
     public String director = DIRECTOR;
     public String productionyear = PRODUCTIONYEAR;
     public String description = DESCRIPTION;
@@ -273,5 +275,13 @@ public class Constants {
 
     public void setActor(String actor) {
         this.actor = actor;
+    }
+
+    public String getPromotionname() {
+        return promotionname;
+    }
+
+    public void setPromotionname(String promotionname) {
+        this.promotionname = promotionname;
     }
 }
