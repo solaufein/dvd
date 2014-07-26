@@ -22,31 +22,78 @@
    			<spring:message code="movies.moviesList.list"/>:
    		</h2>
 	
+	<div id = "myform">
+		<div class="filtreheader">
+			<p> <spring:message code="common.fillin.filtre"/> </p>
+		</div>
+		<div class="separator"></div>
+		<form:form method="GET" commandName="movie" action="movieslist.htm" >	 
+		<div class="inputs">
+			<table>
+				<tbody>
+				<tr>
+					<td><form:label path="title"><spring:message code="movies.moviesList.title"/>:</form:label></td>
+					<td><form:input path="title" cssClass = "inputs"></form:input></td>
+					<td><form:errors path="title" cssClass="error"></form:errors></td>
+				</tr>
+				<tr>
+					<td><form:label path="genre"><spring:message code="movies.moviesList.genre"/>:</form:label></td>
+					<td><form:select path="genre"  items="${allGenres}" cssClass = "inputs"></form:select></td>
+					<td><form:errors path="genre" cssClass="error"></form:errors></td>
+				</tr>
+				<tr>
+					<td><form:label path="promotion"><spring:message code="movies.moviesList.promotion"/>:</form:label></td>
+					<td><form:select path="promotion"  items="${allPromotions}" cssClass = "inputs"></form:select></td>
+					<td><form:errors path="promotion" cssClass="error"></form:errors></td>
+				</tr>
+				<tr>
+					<td><form:label path="actor"><spring:message code="movies.moviesList.actor"/>:</form:label></td>
+					<td><form:input path="actor" cssClass = "inputs"></form:input></td>
+					<td><form:errors path="actor" cssClass="error"></form:errors></td>
+				</tr>
+				<tr><td></td></tr>
+				<tr>
+					<td>
+						<input type="submit" value="<spring:message code="common.button.filtre"/>" >
+					</td>
+		</form:form>
+					<td>
+					<form name="clearTable" action=" <c:url value="movieslist.htm"/>" method="get">
+						<input type="submit" value="<spring:message code="common.button.clear"/>"/>
+					</form>
+					</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody></table> 
+		</div> 
+	</div>
+	
 	<div class="table">
                <table> 
                  <tr>
                   <td>
-					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.title}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}"/>
+					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.title}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
 					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.title"/></a>
 				  </td>
                   <td>
-					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.director}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}"/>
+					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.director}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
 					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.director"/></a>
 				  </td>
                   <td>
-					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.productionyear}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}"/>
+					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.productionyear}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
 					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.productionYear"/></a>
 				  </td>
                   <td>
-					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.genre}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}"/>
+					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.genre}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
 					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.genre"/></a>
 				  </td>
                   <td>
-					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.promotionname}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}"/>
+					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.promotionname}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
 					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.promotion"/></a>
 				  </td>

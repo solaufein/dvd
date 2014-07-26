@@ -2,7 +2,9 @@ package pl.radek.dvd.service.movies;
 
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MoviesData;
+import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Movie;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public interface MoviesFacade {
     public List<Movie> getMovies();
+    public List<GenreData> getGenres();
+    public List<PromotionData> getPromotions();
     public Movie getMovie(int id);
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
     public void deleteMovie(int id);

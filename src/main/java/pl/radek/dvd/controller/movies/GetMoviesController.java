@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.genres.GenreData;
+import pl.radek.dvd.dto.movies.FiltreMovieForm;
 import pl.radek.dvd.dto.movies.MoviesData;
+import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,14 +39,26 @@ public class GetMoviesController {
         this.moviesFacade = moviesFacade;
     }
 
+    @ModelAttribute("allGenres")
+    public List<GenreData> getAllGenres() {
+        return moviesFacade.getGenres();
+    }
+
+    @ModelAttribute("allPromotions")
+    public List<PromotionData> getAllPromotions() {
+        return moviesFacade.getPromotions();
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView handleRequest(@RequestParam(value = Constants.ORDER, required = false) String order,
                                       @RequestParam(value = Constants.FIELD, required = false) String field,
-                                      @RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage) throws Exception {
+                                      @RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage,
+                                      @ModelAttribute("movie") @Valid FiltreMovieForm movie, BindingResult result) throws Exception {
         ModelAndView modelAndView;
         List<MoviesData> moviesDataList;
         SortInfo sortInfo = null;
         List<FilterInfo> filterInfoList = null;
+        ListDataRequest listDataRequest;
 
         // Pagination Info
         int page = 1;
@@ -67,7 +83,37 @@ public class GetMoviesController {
             sortInfo = new SortInfo(field, isAscOrder);
         }
 
-        ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfoList, paginationInfo);
+        if (!result.hasErrors()) {
+            // No errors, redirect to client list
+            logger.info("No errors spotted");
+
+            // Filter Info
+            String title = movie.getTitle();
+            String genre = movie.getGenre();
+            String promotion = movie.getPromotion();
+            String actor = movie.getActor();
+
+            filterInfoList = new ArrayList<FilterInfo>();
+            if (title != null && !title.equals("")) {
+                filterInfoList.add(new FilterInfo(Constants.TITLE, title));
+            }
+            if (genre != null && !genre.equals("")) {
+                filterInfoList.add(new FilterInfo(Constants.GENRE, genre));
+            }
+            if (promotion != null && !promotion.equals("")) {
+                filterInfoList.add(new FilterInfo(Constants.PROMOTION, promotion));
+            }
+            if (actor != null && !actor.equals("")) {
+                filterInfoList.add(new FilterInfo(Constants.ACTOR, actor));
+            }
+
+        } else {
+            // Put errors in request scope and forward back to JSP.
+            logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
+
+        }
+
+        listDataRequest = new ListDataRequest(sortInfo, filterInfoList, paginationInfo);
         PaginatedList<MoviesData> paginatedList = moviesFacade.getMovies(listDataRequest);
         int noOfRecords = paginatedList.getNoOfRecords();
         noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -82,7 +128,7 @@ public class GetMoviesController {
         modelAndView.addObject(Constants.FIELD, field);
         modelAndView.addObject(Constants.ORDER, order);
         modelAndView.addObject(Constants.MOVIESLIST, moviesDataList);
-   //     modelAndView.addObject(Constants.MOVIE, movie);
+        modelAndView.addObject(Constants.MOVIE, movie);
         return modelAndView;
     }
 
