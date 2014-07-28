@@ -56,17 +56,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
     @Override
     public List<MoviesData> getMovies(ListDataRequest listDataRequest) {
         //todo:  actor filtering
-     /*
-        SELECT m.id , m.title, m.director, m.production_year, g.genre, p.name
-        FROM movie as m
-        LEFT JOIN genre as g ON g.id = m.genre_id
-        LEFT JOIN promotion as p ON p.id = m.promotion_id
-        LEFT JOIN starring as s ON m.id = s.movie_id
-        LEFT JOIN actors as a ON s.actors_id = a.id
-        WHERE m.title LIKE '%S%' AND a.id = 1 AND g.id= 5 AND p.id = 1
-        ORDER BY m.title ASC LIMIT 0,9;
-    */
-
         logger.debug("Perform method getMovies - listDataRequest");
 
         final String hql = "FROM Movie";
@@ -82,11 +71,17 @@ public class MoviesMySQLDAO implements MoviesDAO {
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.movies.MoviesData(m.id , m.title, m.director, m.productionYear, g.genre, p.name) FROM Movie as m ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
+                    query.append("LEFT JOIN m.actorset as a ");
+                }
+            }
+        }
 
         boolean isFirst = true;
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
-            query.append("LEFT JOIN m.actorSet as a ");
             for (FilterInfo filterInfo : filterInfoList) {
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     if (isFirst) {
@@ -117,6 +112,14 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
                 if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
                     //todo: actor filtering
+                    if (isFirst) {
+                        query.append(" WHERE a.firstName LIKE :afirst");
+                        query.append(" OR a.lastName LIKE :alast");
+                    } else {
+                        query.append(" AND a.firstName LIKE :afirst");
+                        query.append(" OR a.lastName LIKE :alast");
+                    }
+                    isFirst = false;
                 }
             }
         }
@@ -136,9 +139,16 @@ public class MoviesMySQLDAO implements MoviesDAO {
         }
 
         Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        logger.info("QUERY = " + query.toString());
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
+                    //todo: actor filtering parameter
+                    q.setParameter("afirst", filterInfo.getFilterData() + "%");
+                    q.setParameter("alast", filterInfo.getFilterData() + "%");
+                }
+
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     q.setParameter("mtitle", filterInfo.getFilterData() + "%");
                 }
@@ -149,10 +159,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
                 if (filterInfo.getFilterColumn().equals(Constants.PROMOTION)) {
                     q.setParameter("pname", filterInfo.getFilterData());
-                }
-
-                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
-                    //todo: actor filtering parameter
                 }
             }
         }
@@ -240,6 +246,13 @@ public class MoviesMySQLDAO implements MoviesDAO {
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
+                    query.append("LEFT JOIN m.actorset as a ");
+                }
+            }
+        }
 
         Query q;
         int records;
@@ -247,7 +260,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             logger.debug("FilterInfoList is not null and not empty!");
-            query.append("LEFT JOIN m.actorSet as a ");
             for (FilterInfo filterInfo : filterInfoList) {
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     if (isFirst) {
@@ -277,13 +289,28 @@ public class MoviesMySQLDAO implements MoviesDAO {
                 }
 
                 if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
-                    //todo: actor filtering
+                    //todo: actor filtering: dopracować OR i AND lub zrobic w query CONCAT('',firstname,lastname) as fullname WHERE fullname = "%Brad Pitt%";
+                    if (isFirst) {
+                        query.append(" WHERE a.firstName LIKE :afirst");
+                        query.append(" OR a.lastName LIKE :alast");
+                    } else {
+                        query.append(" AND a.firstName LIKE :afirst");
+                        query.append(" OR a.lastName LIKE :alast");
+                    }
+                    isFirst = false;
                 }
             }
 
             q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+            logger.info("QUERY no of records = " + query.toString());
 
             for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
+                    //todo: actor filtering: jesli jest nazwa dwuczlonowa np Brad Pitt to zrobic parse na Brad i Pitt i pierwsze to imie, a drugie nazwisko
+                    q.setParameter("afirst", filterInfo.getFilterData() + "%");
+                    q.setParameter("alast", filterInfo.getFilterData() + "%");
+                }
+
                 if (filterInfo.getFilterColumn().equals(Constants.TITLE)) {
                     q.setParameter("mtitle", filterInfo.getFilterData() + "%");
                 }
@@ -294,10 +321,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
                 if (filterInfo.getFilterColumn().equals(Constants.PROMOTION)) {
                     q.setParameter("pname", filterInfo.getFilterData());
-                }
-
-                if (filterInfo.getFilterColumn().equals(Constants.ACTOR)) {
-                    //todo: actor filtering parameter
                 }
             }
             records = q.list().size();

@@ -6,7 +6,7 @@ INSERT INTO genre VALUES (default,'s-f');
 INSERT INTO genre VALUES (default,'thriller');
 INSERT INTO genre VALUES (default,'obyczajowy');
 INSERT INTO genre VALUES (default,'musical');
-INSERT INTO genre VALUES (default,'akcji');
+INSERT INTO genre VALUES (default,'akcja');
 
 INSERT INTO actors VALUES (default,'brad','pitt');
 INSERT INTO actors VALUES (default,'will','smith');
@@ -63,19 +63,19 @@ INSERT INTO movie VALUES(default,3,1,'Piła','Tim Burton','2013',default);
 INSERT INTO movie VALUES(default,1,2,'Gladiator','Ingmar Bergman','2009',default);
 INSERT INTO movie VALUES(default,2,3,'Rzym','Christopher Nolan','2012',default);
 
-INSERT INTO starring VALUES(default,1,1);
-INSERT INTO starring VALUES(default,1,7);
-INSERT INTO starring VALUES(default,4,1);
-INSERT INTO starring VALUES(default,4,2);
-INSERT INTO starring VALUES(default,3,2);
-INSERT INTO starring VALUES(default,3,3);
-INSERT INTO starring VALUES(default,2,1);
-INSERT INTO starring VALUES(default,2,3);
-INSERT INTO starring VALUES(default,4,4);
-INSERT INTO starring VALUES(default,1,5);
-INSERT INTO starring VALUES(default,1,6);
-INSERT INTO starring VALUES(default,4,6);
-INSERT INTO starring VALUES(default,1,2);
+INSERT INTO starring VALUES(1,1);
+INSERT INTO starring VALUES(1,7);
+INSERT INTO starring VALUES(4,1);
+INSERT INTO starring VALUES(4,2);
+INSERT INTO starring VALUES(3,2);
+INSERT INTO starring VALUES(3,3);
+INSERT INTO starring VALUES(2,1);
+INSERT INTO starring VALUES(2,3);
+INSERT INTO starring VALUES(4,4);
+INSERT INTO starring VALUES(1,5);
+INSERT INTO starring VALUES(1,6);
+INSERT INTO starring VALUES(4,6);
+INSERT INTO starring VALUES(1,2);
 
 INSERT INTO movie_copy VALUES(default,1,'A203','copy ok',1);
 INSERT INTO movie_copy VALUES(default,1,'A204','copy ok',1);
@@ -93,7 +93,6 @@ INSERT INTO movie_copy VALUES(default,7,'G104','copy ok',1);
 INSERT INTO movie_copy VALUES(default,7,'G106','copy ok',1);
 INSERT INTO movie_copy VALUES(default,7,'G107','copy ok',0);
 
-INSERT INTO renting_registry VALUES(default,1,1,1,1,'2013-05-10 12:23:44','2013-05-12 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,2,2,2,'2013-05-10 12:23:44','2013-05-13 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,3,3,3,'2013-05-12 12:23:44','2013-05-14 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,4,4,4,'2013-06-09 12:23:44','2013-06-12 12:23:44','everything ok');
@@ -108,3 +107,6 @@ INSERT INTO renting_registry VALUES(default,1,2,12,12,'2013-09-11 12:23:44','201
 INSERT INTO renting_registry VALUES(default,2,3,13,13,'2013-09-13 12:23:44','2013-09-18 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,2,4,14,14,'2013-10-11 12:23:44','2013-10-17 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,5,15,15,'2013-10-12 12:23:44','2013-10-19 12:23:44','everything ok');
+INSERT INTO renting_registry(employee_id, client_id, receipt_id, movie_copy_id, rent_date) 
+VALUES(1,1,1,1,'2013-06-10 12:23:44');
+

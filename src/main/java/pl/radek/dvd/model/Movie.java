@@ -41,11 +41,11 @@ public class Movie {
     @JoinColumn(name = "promotion_id", nullable = false)
     private Promotion promotion;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.LAZY)
     @JoinTable(name = "starring",
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "actors_id")})
-    private Set<Actor> actorSet = new HashSet<Actor>();
+    private Set<Actor> actorset = new HashSet<Actor>();
 
     public Movie() {
     }
@@ -58,7 +58,7 @@ public class Movie {
         this.description = description;
     }
 
-    public Movie(int id, String title, String director, String productionYear, String description, Set<MovieCopy> movieCopies, Genre genre, Promotion promotion, Set<Actor> actorSet) {
+    public Movie(int id, String title, String director, String productionYear, String description, Set<MovieCopy> movieCopies, Genre genre, Promotion promotion, Set<Actor> actorset) {
         this.id = id;
         this.title = title;
         this.director = director;
@@ -67,7 +67,7 @@ public class Movie {
         this.movieCopies = movieCopies;
         this.genre = genre;
         this.promotion = promotion;
-        this.actorSet = actorSet;
+        this.actorset = actorset;
     }
 
     public int getId() {
@@ -134,11 +134,11 @@ public class Movie {
         this.promotion = promotion;
     }
 
-    public Set<Actor> getActorSet() {
-        return actorSet;
+    public Set<Actor> getActorset() {
+        return actorset;
     }
 
-    public void setActorSet(Set<Actor> actorSet) {
-        this.actorSet = actorSet;
+    public void setActorset(Set<Actor> actorset) {
+        this.actorset = actorset;
     }
 }

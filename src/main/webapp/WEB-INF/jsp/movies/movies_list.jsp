@@ -38,12 +38,20 @@
 				</tr>
 				<tr>
 					<td><form:label path="genre"><spring:message code="movies.moviesList.genre"/>:</form:label></td>
-					<td><form:select path="genre"  items="${allGenres}" cssClass = "inputs"></form:select></td>
+					<td><form:select path="genre" cssClass = "inputs">
+							<form:option value="NONE" label="--- Select ---" />
+							<form:options items="${allGenres}" />
+						</form:select>
+					</td>
 					<td><form:errors path="genre" cssClass="error"></form:errors></td>
 				</tr>
 				<tr>
 					<td><form:label path="promotion"><spring:message code="movies.moviesList.promotion"/>:</form:label></td>
-					<td><form:select path="promotion"  items="${allPromotions}" cssClass = "inputs"></form:select></td>
+					<td><form:select path="promotion" cssClass = "inputs">
+							<form:option value="NONE" label="--- Select ---" />
+							<form:options items="${allPromotions}" />
+						</form:select>
+					</td>
 					<td><form:errors path="promotion" cssClass="error"></form:errors></td>
 				</tr>
 				<tr>
@@ -212,6 +220,12 @@
 			   </tr>
 			</table>
 	</div>
+			</br>
+               <form name="newmovie" action="<c:url value="controller.htm"/>" method="post">
+                 <input type="hidden" name="id" value = "new" />
+                 <input type="submit" value="<spring:message code="movies.button.newmovie"/>" class = "myButton"/>
+               </form>
+            </br>
 	
 	</tiles:putAttribute>
 </tiles:insertDefinition>

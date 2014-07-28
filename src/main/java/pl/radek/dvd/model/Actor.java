@@ -11,7 +11,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "actor")
+@Table(name = "actors")
 public class Actor {
     @Id
     @GeneratedValue
@@ -24,7 +24,7 @@ public class Actor {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @ManyToMany(mappedBy = "actorSet",fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy = "actorset",fetch=FetchType.LAZY)
     private Set<Movie> movies = new HashSet<Movie>();
 
     public Actor() {

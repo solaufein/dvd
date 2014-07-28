@@ -96,15 +96,19 @@ public class GetMoviesController {
             filterInfoList = new ArrayList<FilterInfo>();
             if (title != null && !title.equals("")) {
                 filterInfoList.add(new FilterInfo(Constants.TITLE, title));
+                logger.info("title = " + title);
             }
-            if (genre != null && !genre.equals("")) {
+            if (genre != null && !genre.equals("") && !genre.equals("NONE")) {
                 filterInfoList.add(new FilterInfo(Constants.GENRE, genre));
+                logger.info("genre = " + genre);
             }
-            if (promotion != null && !promotion.equals("")) {
+            if (promotion != null && !promotion.equals("") && !promotion.equals("NONE")) {
                 filterInfoList.add(new FilterInfo(Constants.PROMOTION, promotion));
+                logger.info("promotion = " + promotion);
             }
             if (actor != null && !actor.equals("")) {
                 filterInfoList.add(new FilterInfo(Constants.ACTOR, actor));
+                logger.info("actor = " + actor);
             }
 
         } else {

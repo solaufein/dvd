@@ -87,14 +87,14 @@ public class MoviesSortHeaderTag extends SimpleTagSupport {
 
         if (Constants.ASC.equals(order) && columnName.equals(field)) {
             link = "?order=" + Constants.DESC + "&field=" + columnName;
-            /*if (!firstName.isEmpty() || !lastName.isEmpty() || !pesel.isEmpty()) {
-                link = link + "&firstName=" + firstName + "&lastName=" + lastName + "&pesel=" + pesel;
-            }*/
+            if (!title.isEmpty() || !genre.isEmpty() || !promotion.isEmpty() || !actorName.isEmpty()) {
+                link = link + "&title=" + title + "&genre=" + genre + "&promotion=" + promotion + "&actor=" + actorName;
+            }
         } else {
             link = "?order=" + Constants.ASC + "&field=" + columnName;
-            /*if (!firstName.isEmpty() || !lastName.isEmpty() || !pesel.isEmpty()) {
-                link = link + "&firstName=" + firstName + "&lastName=" + lastName + "&pesel=" + pesel;
-            }*/
+            if (!title.isEmpty() || !genre.isEmpty() || !promotion.isEmpty() || !actorName.isEmpty()) {
+                link = link + "&title=" + title + "&genre=" + genre + "&promotion=" + promotion + "&actor=" + actorName;
+            }
         }
 
         getJspContext().setAttribute("hlink", link);
