@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="hero" uri="/WEB-INF/tags/headero.tld"%>
+<%@ taglib prefix="pagi" uri="/WEB-INF/tags/client_pagination.tld"%>
 <%@page import="pl.radek.dvd.model.Client, pl.radek.dvd.model.Constants, pl.radek.dvd.utils.JspMethods, java.util.List"%>
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="cons" class="pl.radek.dvd.model.Constants"/>
@@ -149,64 +150,18 @@
 			   <td>
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="firstlink" action=" <c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-				 <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if>
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="firstlink" action="<c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-				 <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if>
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "1" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
+				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> |<< </a>
 				</c:if>
 			   </td>
 
 			   <td>
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="previouslink" action="<c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-			   <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if>
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
-                 <input type="submit" value="<" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="previouslink" action="<c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-			   <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if>
-				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
-                 <input type="submit" value="<" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage - 1}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
+				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> < </a>
 				</c:if>
 			   </td>
  
@@ -216,64 +171,18 @@
 				<td>
 			<%--Displaying Next link--%>
 			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="nextlink" action="<c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-			   <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if> 
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
-                 <input type="submit" value=">" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="nextlink" action="<c:url value="clientslist.htm"/>" method="get">
-			   <c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-			   <input type="hidden" name="firstName" value = "${param.firstName}" />
-				 <input type="hidden" name="lastName" value = "${param.lastName}" />
-				 <input type="hidden" name="pesel" value = "${param.pesel}" />
-				 </c:if>
-				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
-                 <input type="submit" value=">" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage + 1}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
+				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> > </a>
 				</c:if>
 			   </td>
 
 			   <td>
 			<%--Displaying Last link--%>
 			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="lastlink" action="<c:url value="clientslist.htm"/>" method="get">
-				<c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-					<input type="hidden" name="firstName" value = "${param.firstName}" />
-					<input type="hidden" name="lastName" value = "${param.lastName}" />
-					<input type="hidden" name="pesel" value = "${param.pesel}" />
-				</c:if>
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
-                 <input type="submit" value=">>|" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="lastlink" action="<c:url value="clientslist.htm"/>" method="get">
-				<c:if test="${!empty param.firstName || !empty param.lastName || !empty param.pesel}">
-					<input type="hidden" name="firstName" value = "${param.firstName}" />
-					<input type="hidden" name="lastName" value = "${param.lastName}" />
-					<input type="hidden" name="pesel" value = "${param.pesel}" />
-				</c:if>
-				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
-                 <input type="submit" value=">>|" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${noOfPages}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
+				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> >>| </a>
 				</c:if>
 			   </td>
 			   </tr>

@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface GenresService {
     public List<GenreData> getGenres();
+    public List<Genre> getGenresEntity();
     public GenreData getGenre(int id);
     public void deleteGenre(int id);
     public void addGenre(GenreData genre);

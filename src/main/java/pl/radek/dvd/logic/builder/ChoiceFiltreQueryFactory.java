@@ -9,10 +9,12 @@ import pl.radek.dvd.dto.ListDataRequest;
  * Time: 12:45
  */
 
-public class ChoiceFiltreQueryFactory {
-    private MultiFiltreChoice multiFiltreChoice;
+public final class ChoiceFiltreQueryFactory {
 
-    public MultiFiltreChoice getMultiFiltreChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate) {
+    private ChoiceFiltreQueryFactory() {
+    }
+
+    public static MultiFiltreChoice getMultiFiltreChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate) {
         //logika dla wyboru Query Filtra, np jesli mamy dane wartosci to MovieFiltreChoice, a jesli inne to ClientFiltreChoice
         /*if (true) {
 
@@ -20,7 +22,7 @@ public class ChoiceFiltreQueryFactory {
 
         }*/
 
-        multiFiltreChoice = new MovieFiltreChoice(listDataRequest, hibernateTemplate);
-        return multiFiltreChoice;
+        return new MovieFiltreChoice(listDataRequest, hibernateTemplate);
+
     }
 }

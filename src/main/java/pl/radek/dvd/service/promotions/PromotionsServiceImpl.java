@@ -36,6 +36,11 @@ public class PromotionsServiceImpl implements PromotionsService {
     }
 
     @Override
+    public List<Promotion> getPromotionsEntity() {
+        return promotionDAO.getPromotions();
+    }
+
+    @Override
     public PromotionData getPromotion(int id) {
         Promotion promotion = promotionDAO.getPromotion(id);
         PromotionData promotionData = convertPromotionToPromotionData(promotion);

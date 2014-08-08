@@ -6,9 +6,12 @@ import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.genres.GenreData;
+import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
+import pl.radek.dvd.model.Promotion;
 import pl.radek.dvd.service.genres.GenresService;
 import pl.radek.dvd.service.promotions.PromotionsService;
 
@@ -47,7 +50,7 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
-    public List<Movie> getMovies() {
+    public List<MovieDataDTO> getMovies() {
         return moviesService.getMovies();
     }
 
@@ -57,12 +60,22 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
+    public List<Genre> getGenresEntity() {
+        return genresService.getGenresEntity();
+    }
+
+    @Override
+    public List<Promotion> getPromotionsEntity() {
+        return promotionsService.getPromotionsEntity();
+    }
+
+    @Override
     public List<PromotionData> getPromotions() {
         return promotionsService.getPromotions();
     }
 
     @Override
-    public Movie getMovie(int id) {
+    public MovieDataDTO getMovie(int id) {
         return moviesService.getMovie(id);
     }
 
@@ -77,12 +90,12 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
-    public void addMovie(Movie movie) {
-        moviesService.addMovie(movie);
+    public void addMovie(MovieDataDTO movieDataDTO) {
+        moviesService.addMovie(movieDataDTO);
     }
 
     @Override
-    public void updateMovie(Movie movie) {
-        moviesService.updateMovie(movie);
+    public void updateMovie(MovieDataDTO movieDataDTO) {
+        moviesService.updateMovie(movieDataDTO);
     }
 }

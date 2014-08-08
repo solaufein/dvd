@@ -1,27 +1,27 @@
 package pl.radek.dvd.utils.movies;
 
-import pl.radek.dvd.model.Constants;
-
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 /**
  * User: Sola
- * Date: 2014-07-21
- * Time: 12:32
+ * Date: 2014-07-29
+ * Time: 16:45
  */
-public class MoviesSortHeaderTag extends SimpleTagSupport {
+public class MoviePaginationTag extends SimpleTagSupport {
+    String order;
+    String field;
+
+    String currentPage;
+    String noOfPages;
+
     String title;
     String genre;
     String promotion;
     String actorName;
 
-    String order;
-    String field;
-    String columnName;
-
-    public MoviesSortHeaderTag() {
+    public MoviePaginationTag() {
     }
 
     public String getOrder() {
@@ -40,12 +40,20 @@ public class MoviesSortHeaderTag extends SimpleTagSupport {
         this.field = field;
     }
 
-    public String getColumnName() {
-        return columnName;
+    public String getCurrentPage() {
+        return currentPage;
     }
 
-    public void setColumnName(String columnName) {
-        this.columnName = columnName;
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public String getNoOfPages() {
+        return noOfPages;
+    }
+
+    public void setNoOfPages(String noOfPages) {
+        this.noOfPages = noOfPages;
     }
 
     public String getTitle() {
@@ -83,48 +91,48 @@ public class MoviesSortHeaderTag extends SimpleTagSupport {
     @Override
     public void doTag() throws JspException, IOException {
         super.doTag();
-        String link = "";
-        StringBuilder builder = new StringBuilder("?");
 
-        if (Constants.ASC.equals(order) && columnName.equals(field)) {
-            if (title != null && !title.equals("")) {
+        StringBuilder builder = new StringBuilder("?");
+        String link = "?";
+
+        if (order != null && field != null && !order.isEmpty() && !field.isEmpty()) {
+            if (title != null && !title.equals("")){
                 builder.append("title=").append(title).append("&");
             }
 
-            if (genre != null && !genre.equals("")) {
+            if(genre != null && !genre.equals("")){
                 builder.append("genre=").append(genre).append("&");
             }
 
-            if (promotion != null && !promotion.equals("")) {
+            if (promotion != null && !promotion.equals("")){
                 builder.append("promotion=").append(promotion).append("&");
             }
 
-            if (actorName != null && !actorName.equals("")) {
+            if (actorName != null && !actorName.equals("")){
                 builder.append("actor=").append(actorName).append("&");
             }
-            builder.append("order=").append(Constants.DESC).append("&").append("field=").append(columnName);
+            builder.append("order=").append(order).append("&").append("field=").append(field).append("&").append("currentPage=").append(currentPage);
 
         } else {
-            if (title != null && !title.equals("")) {
+            if (title != null && !title.equals("")){
                 builder.append("title=").append(title).append("&");
             }
 
-            if (genre != null && !genre.equals("")) {
+            if(genre != null && !genre.equals("")){
                 builder.append("genre=").append(genre).append("&");
             }
 
-            if (promotion != null && !promotion.equals("")) {
+            if (promotion != null && !promotion.equals("")){
                 builder.append("promotion=").append(promotion).append("&");
             }
 
-            if (actorName != null && !actorName.equals("")) {
+            if (actorName != null && !actorName.equals("")){
                 builder.append("actor=").append(actorName).append("&");
             }
-            builder.append("order=").append(Constants.ASC).append("&").append("field=").append(columnName);
-
+            builder.append("currentPage=").append(currentPage);
         }
-        link = builder.toString();
 
-        getJspContext().setAttribute("hlink", link);
+        link = builder.toString();
+        getJspContext().setAttribute("paginlink", link);
     }
 }

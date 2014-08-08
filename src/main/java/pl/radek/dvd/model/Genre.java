@@ -61,4 +61,9 @@ public class Genre {
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
     }
+
+    @Override
+    public String toString() {
+        return genre;
+    }
 }

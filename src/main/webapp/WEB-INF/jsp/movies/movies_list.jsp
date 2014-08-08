@@ -1,6 +1,7 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="hero" uri="/WEB-INF/tags/movies/movies_table_sort.tld"%>
+<%@ taglib prefix="pagi" uri="/WEB-INF/tags/movies/movies_pagination.tld"%>
 <%@page import="pl.radek.dvd.model.Client, pl.radek.dvd.model.Constants, pl.radek.dvd.utils.JspMethods, java.util.List"%>
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:useBean id="cons" class="pl.radek.dvd.model.Constants"/>
@@ -106,6 +107,8 @@
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.promotion"/></a>
 				  </td>
 				  <td></td>
+				  <td></td>
+				  <td></td>
                  </tr>
 					<c:forEach items="${moviesList}" var="movie">
 						<tr>
@@ -120,6 +123,18 @@
                                   <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
                               </form>
 							</td>
+							<td> 
+							  <form name="editmovie" action=" <c:url value="controller.htm"/>" method="post">
+                                  <input type="hidden" name="id" value="${movie.id}" />
+                                  <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
+                              </form>
+							</td>
+							<td> 
+							  <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+                                  <input type="hidden" name="id" value="${movie.id}" />
+                                  <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
+                              </form>
+							</td>
 						</tr>
 					</c:forEach>   
                </table>
@@ -130,44 +145,18 @@
 			   <td>
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="firstlink" action=" <c:url value="movieslist.htm"/>" method="get">
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="firstlink" action="<c:url value="movieslist.htm"/>" method="get">
-				 <input type="hidden" name="currentPage" value = "1" />
-                 <input type="submit" value="|<<" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "1" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
+				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> |<< </a>
 				</c:if>
 			   </td>
 
 			   <td>
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="previouslink" action="<c:url value="movieslist.htm"/>" method="get">
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
-                 <input type="submit" value="<" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="previouslink" action="<c:url value="movieslist.htm"/>" method="get">
-				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
-                 <input type="submit" value="<" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage - 1}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
+				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> < </a>
 				</c:if>
 			   </td>
  
@@ -176,45 +165,19 @@
 
 				<td>
 			<%--Displaying Next link--%>
-			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="nextlink" action="<c:url value="movieslist.htm"/>" method="get">
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
-                 <input type="submit" value=">" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="nextlink" action="<c:url value="movieslist.htm"/>" method="get">
-				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
-                 <input type="submit" value=">" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+			   <c:if test="${currentPage < noOfPages}">	
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage + 1}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
+				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> > </a>
 				</c:if>
 			   </td>
 
 			   <td>
 			<%--Displaying Last link--%>
-			   <c:if test="${currentPage < noOfPages}">
-				<c:choose>
-				<c:when test="${param.order != null && param.field != null}">
-			   <form name="lastlink" action="<c:url value="movieslist.htm"/>" method="get">
-                 <input type="hidden" name="order" value = "${param.order}" />
-				 <input type="hidden" name="field" value = "${param.field}" />
-				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
-                 <input type="submit" value=">>|" class = "myButtonTwo"/>
-               </form>
-				</c:when>
-				<c:otherwise>
-			   <form name="lastlink" action="<c:url value="movieslist.htm"/>" method="get">
-				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
-                 <input type="submit" value=">>|" class = "myButtonTwo"/>
-               </form>
-				</c:otherwise>
-				</c:choose>
+			   <c:if test="${currentPage < noOfPages}">				
+				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${noOfPages}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
+				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<a href="${paginURL}" class="myButtonTwo"> >>| </a>
 				</c:if>
 			   </td>
 			   </tr>

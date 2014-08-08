@@ -78,4 +78,6 @@ public class PromotionData {
     public String toString() {
         return name;
     }
+
+
 }

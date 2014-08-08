@@ -57,19 +57,39 @@ public class ClientSortHeaderTag extends SimpleTagSupport {
     @Override
     public void doTag() throws JspException, IOException {
         super.doTag();
+        StringBuilder builder = new StringBuilder("?");
         String link = "";
 
         if (Constants.ASC.equals(order) && columnName.equals(field)) {
-            link = "?order=" + Constants.DESC + "&field=" + columnName;
-            if (!firstName.isEmpty() || !lastName.isEmpty() || !pesel.isEmpty()) {
-                link = link + "&firstName=" + firstName + "&lastName=" + lastName + "&pesel=" + pesel;
+            if (firstName != null && !firstName.equals("")) {
+                builder.append("firstName=").append(firstName).append("&");
             }
+
+            if (lastName != null && !lastName.equals("")) {
+                builder.append("lastName=").append(lastName).append("&");
+            }
+
+            if (pesel != null && !pesel.equals("")) {
+                builder.append("pesel=").append(pesel).append("&");
+            }
+            builder.append("order=").append(Constants.DESC).append("&").append("field=").append(columnName);
+
         } else {
-            link = "?order=" + Constants.ASC + "&field=" + columnName;
-            if (!firstName.isEmpty() || !lastName.isEmpty() || !pesel.isEmpty()) {
-                link = link + "&firstName=" + firstName + "&lastName=" + lastName + "&pesel=" + pesel;
+            if (firstName != null && !firstName.equals("")) {
+                builder.append("firstName=").append(firstName).append("&");
             }
+
+            if (lastName != null && !lastName.equals("")) {
+                builder.append("lastName=").append(lastName).append("&");
+            }
+
+            if (pesel != null && !pesel.equals("")) {
+                builder.append("pesel=").append(pesel).append("&");
+            }
+            builder.append("order=").append(Constants.ASC).append("&").append("field=").append(columnName);
+
         }
+        link = builder.toString();
 
         getJspContext().setAttribute("hlink", link);
     }

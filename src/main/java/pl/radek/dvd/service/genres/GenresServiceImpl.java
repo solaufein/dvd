@@ -35,6 +35,11 @@ public class GenresServiceImpl implements GenresService {
     }
 
     @Override
+    public List<Genre> getGenresEntity() {
+        return genreDAO.getGenres();
+    }
+
+    @Override
     public GenreData getGenre(int id) {
         Genre genre = genreDAO.getGenre(id);
         GenreData genreData = convertGenreToGenreData(genre);

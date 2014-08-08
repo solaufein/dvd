@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface PromotionsService {
     public List<PromotionData> getPromotions();
+    public List<Promotion> getPromotionsEntity();
     public PromotionData getPromotion(int id);
     public void deletePromotion(int id);
     public void addPromotion(PromotionData promotion);
