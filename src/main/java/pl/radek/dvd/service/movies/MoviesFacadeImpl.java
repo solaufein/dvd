@@ -60,8 +60,18 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
+    public GenreData getGenre(int id) {
+        return genresService.getGenre(id);
+    }
+
+    @Override
     public List<Genre> getGenresEntity() {
         return genresService.getGenresEntity();
+    }
+
+    @Override
+    public PromotionData getPromotion(int id) {
+        return promotionsService.getPromotion(id);
     }
 
     @Override
@@ -92,6 +102,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
     @Override
     public void addMovie(MovieDataDTO movieDataDTO) {
         moviesService.addMovie(movieDataDTO);
+    }
+
+    @Override
+    public void addMovie(Movie movie) {
+        moviesService.addMovie(movie);
     }
 
     @Override

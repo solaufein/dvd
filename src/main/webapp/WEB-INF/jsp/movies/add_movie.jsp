@@ -46,8 +46,7 @@
 	<tr>
         <td><form:label path="genre"><spring:message code="movies.moviesList.genre"/>:</form:label></td>
         <td><form:select path="genre" cssClass = "inputs">
-				<form:option value="NONE" label="--- Select ---" />
-				<form:options items="${allGenres}" />
+				<form:options items="${allGenres}" itemValue="id" itemLabel="name"/>
 			</form:select>
 		</td>
 		<td><form:errors path="genre" cssClass="error"></form:errors></td>
@@ -55,8 +54,7 @@
 	<tr>
         <td><form:label path="promotion"><spring:message code="movies.moviesList.promotion"/>:</form:label></td>
         <td><form:select path="promotion" cssClass = "inputs">
-				<form:option value="NONE" label="--- Select ---" />
-				<form:options items="${allPromotions}" />
+				<form:options items="${allPromotions}" itemValue="id" itemLabel="name"/>
 			</form:select>
 		</td>
 		<td><form:errors path="promotion" cssClass="error"></form:errors></td>
@@ -93,7 +91,7 @@
 	</div>
 	<div class="separator"></div>
 
-	 <form:form method="POST" commandName="movie" action="updatemovie.htm">
+	 <form:form method="POST" commandName="movie" action="editmovie.htm">
 	 <div class="inputs">
 <table>
     <tbody><tr>
@@ -117,7 +115,7 @@
 	<tr>
         <td><form:label path="genre"><spring:message code="movies.moviesList.genre"/>:</form:label></td>
         <td><form:select path="genre" cssClass = "inputs">
-				<form:options items="${allGenres}" />
+				<form:options items="${allGenres}" itemValue="id" itemLabel="name"/>
 			</form:select>
 		</td>
 		<td><form:errors path="genre" cssClass="error"></form:errors></td>
@@ -125,7 +123,7 @@
 	<tr>
         <td><form:label path="promotion"><spring:message code="movies.moviesList.promotion"/>:</form:label></td>
         <td><form:select path="promotion" cssClass = "inputs">
-				<form:options items="${allPromotions}" />
+				<form:options items="${allPromotions}" itemValue="id" itemLabel="name"/>
 			</form:select>
 		</td>
 		<td><form:errors path="promotion" cssClass="error"></form:errors></td>

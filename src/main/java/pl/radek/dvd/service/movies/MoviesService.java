@@ -19,5 +19,6 @@ public interface MoviesService {
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
     public void deleteMovie(int id);
     public void addMovie(MovieDataDTO movieDataDTO);
+    public void addMovie(Movie movie);
     public void updateMovie(MovieDataDTO movieDataDTO);
 }

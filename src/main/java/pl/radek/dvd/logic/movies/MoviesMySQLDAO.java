@@ -83,20 +83,12 @@ public class MoviesMySQLDAO implements MoviesDAO {
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(movie.getGenre());
         Hibernate.initialize(movie.getPromotion());
-        //todo:  initialize actor Set also ?
+        Hibernate.initialize(movie.getActorset());
+        Hibernate.initialize(movie.getMovieCopies());
 
         transaction.commit();
         session.flush();
         session.close();
-
-       /* Movie movie = (Movie) hibernateTemplate.get(Movie.class, id);
-
-        Genre genre = movie.getGenre();
-        Promotion promotion = movie.getPromotion();
-
-        hibernateTemplate.initialize(genre.getGenre());
-        hibernateTemplate.initialize(promotion.getName());
-        // initialize actor Set also ?*/
 
         logger.debug("Got Movie by id: " + id);
         return movie;

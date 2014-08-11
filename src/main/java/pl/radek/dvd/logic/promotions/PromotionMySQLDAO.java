@@ -1,6 +1,9 @@
 package pl.radek.dvd.logic.promotions;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -49,7 +52,19 @@ public class PromotionMySQLDAO implements PromotionDAO {
     public Promotion getPromotion(int id) {
         logger.debug("Getting Promotion by id: " + id);
 
-        Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
+    //    Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
+
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        transaction.begin();
+        Promotion promotion = (Promotion) session.get(Promotion.class, id);
+
+        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
+        Hibernate.initialize(promotion.getMovies());
+
+        transaction.commit();
+        session.flush();
+        session.close();
 
         logger.debug("Got Promotion by id: " + id);
         return promotion;

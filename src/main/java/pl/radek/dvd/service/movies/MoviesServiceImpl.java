@@ -73,6 +73,11 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
+    public void addMovie(Movie movie) {
+        moviesDAO.addMovie(movie);
+    }
+
+    @Override
     public void updateMovie(MovieDataDTO movieDataDTO) {
         Movie movie = convertMovieDataDTOToMovie(movieDataDTO);
         moviesDAO.updateMovie(movie);
@@ -134,7 +139,10 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     private Genre convertGenreDataToGenre(GenreData genreData){
-        Genre genre = new Genre(genreData.getId(), genreData.getName(), genreData.getMovies());
+        Genre genre = new Genre();
+        genre.setId(genreData.getId());
+        genre.setGenre(genreData.getName());
+        genre.setMovies(genreData.getMovies());
         return genre;
     }
 

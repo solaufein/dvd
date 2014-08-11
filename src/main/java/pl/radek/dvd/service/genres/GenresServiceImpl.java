@@ -44,7 +44,7 @@ public class GenresServiceImpl implements GenresService {
         Genre genre = genreDAO.getGenre(id);
         GenreData genreData = convertGenreToGenreData(genre);
 
-        return null;
+        return genreData;
     }
 
     @Override

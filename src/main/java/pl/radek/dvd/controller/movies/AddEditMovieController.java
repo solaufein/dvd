@@ -52,12 +52,13 @@ public class AddEditMovieController {
         ModelAndView modelAndView;
         logger.info("get id from movies_list.jsp form, id=" + id);
 
-        if (id.equals("new")) {          // new movie
+        if (id.equals("new")) {          // add new movie
             logger.info("id equals: new (new movie)");
 
             // follow to add_movie.jsp
             modelAndView = new ModelAndView("/movies/add_movie");
             MovieDataDTO movie = new MovieDataDTO();
+       //     Movie movie = new Movie();
             movie.setId(-1);
             modelAndView.addObject(Constants.MOVIE, movie);
             //     modelAndView.addObject(Constants.ID, id);
@@ -65,12 +66,11 @@ public class AddEditMovieController {
         } else {                         // edit movie with given id
             logger.info("id equals: " + id + "(edit movie)");
             MovieDataDTO movie = moviesFacade.getMovie(Integer.parseInt(id));
+     //       Movie movie = new Movie();
 
             // follow to add_movie.jsp
             modelAndView = new ModelAndView("/movies/add_movie");
             modelAndView.addObject(Constants.MOVIE, movie);
-      //      logger.info("Genre name = " + movie.getGenre().getGenre());
-            logger.info("Promotion name = " + movie.getPromotion().getName());
         }
         return modelAndView;
     }
