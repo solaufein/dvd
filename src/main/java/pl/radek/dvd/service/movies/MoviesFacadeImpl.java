@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.genres.GenreData;
+import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.promotions.PromotionData;
@@ -13,6 +14,7 @@ import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.Promotion;
 import pl.radek.dvd.service.genres.GenresService;
+import pl.radek.dvd.service.movieCopy.MovieCopyService;
 import pl.radek.dvd.service.promotions.PromotionsService;
 
 import java.util.List;
@@ -27,6 +29,9 @@ import java.util.List;
 public class MoviesFacadeImpl implements MoviesFacade {
 
     private static Logger logger = Logger.getLogger(MoviesFacadeImpl.class);
+
+    @Autowired
+    private MovieCopyService movieCopyService;
 
     @Autowired
     private GenresService genresService;
@@ -47,6 +52,10 @@ public class MoviesFacadeImpl implements MoviesFacade {
 
     public void setPromotionsService(PromotionsService promotionsService) {
         this.promotionsService = promotionsService;
+    }
+
+    public void setMovieCopyService(MovieCopyService movieCopyService) {
+        this.movieCopyService = movieCopyService;
     }
 
     @Override
@@ -113,4 +122,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
     public void updateMovie(MovieDataDTO movieDataDTO) {
         moviesService.updateMovie(movieDataDTO);
     }
+
+    @Override
+    public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(ListDataRequest request, int id) {
+        return movieCopyService.getMovieCopyPaginatedList(request, id);
+    }
+
+
 }

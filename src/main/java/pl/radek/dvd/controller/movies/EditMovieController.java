@@ -71,6 +71,8 @@ public class EditMovieController {
             modelAndView = new ModelAndView("/movies/add_movie");
             modelAndView.addObject(Constants.ID, movie.getId());
             modelAndView.addObject(Constants.MOVIE, movie);
+            modelAndView.addObject("allGenres",moviesFacade.getGenres());
+            modelAndView.addObject("allPromotions",moviesFacade.getPromotions());
         }
         return modelAndView;
     }

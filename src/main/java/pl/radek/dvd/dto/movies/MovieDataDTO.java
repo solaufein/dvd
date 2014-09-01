@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.movies;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Actor;
@@ -7,6 +8,7 @@ import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.MovieCopy;
 import pl.radek.dvd.model.Promotion;
 
+import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,9 +19,16 @@ import java.util.Set;
  */
 public class MovieDataDTO {
     private int id;
+
+    @NotEmpty(message = "{NotEmpty.moviedatadto.title}")
     private String title;
+
+    @NotEmpty(message = "{NotEmpty.moviedatadto.director}")
     private String director;
+
+    @Pattern(regexp = "\\d{4}", message = "{Pattern.moviedatadto.productionyear}")
     private String productionYear;
+
     private String description;
     private Set<MovieCopy> movieCopies;
     private GenreData genre;
