@@ -15,7 +15,7 @@ import java.util.List;
 public interface MovieCopyService {
     public List<MovieCopyDTO> getMovieCopies();
 
-    public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int id);
+    public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int movieId);
 
     public MovieCopyDTO getMovieCopy(int id);
 

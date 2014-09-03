@@ -1,5 +1,6 @@
 package pl.radek.dvd.logic.movieCopy;
 
+import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
@@ -15,4 +16,7 @@ public interface MovieCopyDAO {
     public void deleteMovieCopy(int id);
     public void addMovieCopy(MovieCopy movieCopy);
     public void updateMovieCopy(MovieCopy movieCopy);
+
+    public int getNoOfRecords(ListDataRequest listDataRequest, int movieId);
+    public List<MovieCopy> getMovieCopies(ListDataRequest listDataRequest, int movieId);
 }

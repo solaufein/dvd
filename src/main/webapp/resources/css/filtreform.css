@@ -55,6 +55,11 @@ input:-moz-placeholder{
     padding-bottom: 15px;
 }
 
+.registerMovieCopyButton {
+    text-align: right;
+    padding-bottom: 15px;
+}
+
 #myform .inputs input[type=text], input[type=password]{
 	background: #F5F5F5;
 	font-size: 0.8rem;

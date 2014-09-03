@@ -39,11 +39,13 @@ public interface MoviesFacade {
 
     public void deleteMovie(int id);
 
+    public void deleteMovieCopy(int id);
+
     public void addMovie(Movie movie);
 
     public void addMovie(MovieDataDTO movieDataDTO);
 
     public void updateMovie(MovieDataDTO movieDataDTO);
 
-    public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int id);
+    public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int movieId);
 }

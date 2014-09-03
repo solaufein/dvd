@@ -109,6 +109,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
+    public void deleteMovieCopy(int id) {
+        movieCopyService.deleteMovieCopy(id);
+    }
+
+    @Override
     public void addMovie(MovieDataDTO movieDataDTO) {
         moviesService.addMovie(movieDataDTO);
     }

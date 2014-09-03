@@ -53,6 +53,7 @@ public class MovieDetailsController {
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
         ListDataRequest listDataRequest = new ListDataRequest(null, null, paginationInfo);
 
+        // movie id
         int ide = Integer.parseInt(id);
 
         MovieDataDTO movie = moviesFacade.getMovie(ide);

@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
+import pl.radek.dvd.dto.movies.PaginatedListMovieCopy;
 import pl.radek.dvd.logic.movieCopy.MovieCopyDAO;
+import pl.radek.dvd.model.MovieCopy;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,31 +33,80 @@ public class MovieCopyServiceImpl implements MovieCopyService {
 
     @Override
     public List<MovieCopyDTO> getMovieCopies() {
-        return null;
+        List<MovieCopy> movieCopies = movieCopyDAO.getMovieCopies();
+        List<MovieCopyDTO> movieCopyDTOs = convertMovieCopyListToMovieCopyDTOList(movieCopies);
+
+        return movieCopyDTOs;
     }
 
     @Override
     public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(ListDataRequest request, int id) {
-        return null;
+        List<MovieCopy> movies = movieCopyDAO.getMovieCopies(request, id);
+        int noOfRecords = movieCopyDAO.getNoOfRecords(request, id);
+
+        PaginatedListMovieCopy paginatedList = new PaginatedListMovieCopy();
+        paginatedList.setMovieCopyDTOs(convertMovieCopyListToMovieCopyDTOList(movies));
+        paginatedList.setNoOfRecords(noOfRecords);
+
+        return paginatedList;
     }
 
     @Override
     public MovieCopyDTO getMovieCopy(int id) {
-        return null;
+        MovieCopy movieCopy = movieCopyDAO.getMovieCopy(id);
+        MovieCopyDTO movieCopyDTO = convertMovieCopyToMovieCopyDTO(movieCopy);
+        return movieCopyDTO;
     }
 
     @Override
     public void deleteMovieCopy(int id) {
-
+        movieCopyDAO.deleteMovieCopy(id);
     }
 
     @Override
-    public void addMovieCopy(MovieCopyDTO movieCopy) {
-
+    public void addMovieCopy(MovieCopyDTO movieCopyDTO) {
+        MovieCopy movieCopy = convertMovieCopyDTOtoMovieCopy(movieCopyDTO);
+        movieCopyDAO.addMovieCopy(movieCopy);
     }
 
     @Override
-    public void updateMovieCopy(MovieCopyDTO movieCopy) {
+    public void updateMovieCopy(MovieCopyDTO movieCopyDTO) {
+        MovieCopy movieCopy = convertMovieCopyDTOtoMovieCopy(movieCopyDTO);
+        movieCopyDAO.updateMovieCopy(movieCopy);
 
+    }
+
+    private MovieCopy convertMovieCopyDTOtoMovieCopy(MovieCopyDTO movieCopyDTO) {
+        MovieCopy movieCopy = new MovieCopy();
+        movieCopy.setId(movieCopyDTO.getId());
+        movieCopy.setAvailability(movieCopyDTO.getAvailability());
+        movieCopy.setConditionInfo(movieCopyDTO.getConditionInfo());
+        movieCopy.setSerialNumber(movieCopyDTO.getSerialNumber());
+        movieCopy.setMovie(movieCopyDTO.getMovie());
+        movieCopy.setRentingRegistries(movieCopyDTO.getRentingRegistries());
+
+        return movieCopy;
+    }
+
+    private MovieCopyDTO convertMovieCopyToMovieCopyDTO(MovieCopy movieCopy) {
+        MovieCopyDTO movieCopyDTO = new MovieCopyDTO();
+        movieCopyDTO.setId(movieCopy.getId());
+        movieCopyDTO.setAvailability(movieCopy.getAvailability());
+        movieCopyDTO.setConditionInfo(movieCopy.getConditionInfo());
+        movieCopyDTO.setSerialNumber(movieCopy.getSerialNumber());
+        movieCopyDTO.setMovie(movieCopy.getMovie());
+        movieCopyDTO.setRentingRegistries(movieCopy.getRentingRegistries());
+
+        return movieCopyDTO;
+    }
+
+    private List<MovieCopyDTO> convertMovieCopyListToMovieCopyDTOList(List<MovieCopy> movieCopies) {
+        List<MovieCopyDTO> list = new LinkedList<MovieCopyDTO>();
+        for (MovieCopy movieCopy : movieCopies) {
+            MovieCopyDTO movieCopyDTO = convertMovieCopyToMovieCopyDTO(movieCopy);
+            list.add(movieCopyDTO);
+        }
+
+        return list;
     }
 }
