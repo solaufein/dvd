@@ -41,11 +41,14 @@
        	<div id="navigation">
        		<tiles:insertAttribute name="navigation" />
        	</div>
-    	<!-- Header right begin-->
+    <!-- Header right begin-->
     	<div id="langs">
     		<tiles:insertAttribute name="langs" />
     	</div>
-    	<!-- Header right end-->
+    <!-- Header right end-->
+    	<div class="clear"></div>
+        <tiles:insertAttribute name="navigation_left" />
+
        	<div id="content">
             <tiles:insertAttribute name="content" />
        	</div>
