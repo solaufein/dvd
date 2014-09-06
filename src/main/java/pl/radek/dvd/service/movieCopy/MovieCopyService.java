@@ -3,6 +3,8 @@ package pl.radek.dvd.service.movieCopy;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
+import pl.radek.dvd.dto.movies.MovieDataDTO;
+import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
@@ -21,7 +23,7 @@ public interface MovieCopyService {
 
     public void deleteMovieCopy(int id);
 
-    public void addMovieCopy(MovieCopyDTO movieCopy);
+    public void addMovieCopy(int movieId ,MovieCopyDTO movieCopy);
 
     public void updateMovieCopy(MovieCopyDTO movieCopy);
 }

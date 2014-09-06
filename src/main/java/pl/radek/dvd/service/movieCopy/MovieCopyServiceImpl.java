@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
+import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.PaginatedListMovieCopy;
 import pl.radek.dvd.logic.movieCopy.MovieCopyDAO;
+import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
+import pl.radek.dvd.service.movies.MoviesServiceImpl;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -64,9 +67,9 @@ public class MovieCopyServiceImpl implements MovieCopyService {
     }
 
     @Override
-    public void addMovieCopy(MovieCopyDTO movieCopyDTO) {
+    public void addMovieCopy(int movieId, MovieCopyDTO movieCopyDTO) {
         MovieCopy movieCopy = convertMovieCopyDTOtoMovieCopy(movieCopyDTO);
-        movieCopyDAO.addMovieCopy(movieCopy);
+        movieCopyDAO.addMovieCopy(movieId, movieCopy);
     }
 
     @Override

@@ -32,6 +32,8 @@ public class Constants {
     public static final String NO_OF_PAGES = "noOfPages";
 
     //Movies
+    public static final String MOVIEID = "movieid";
+    public static final String MOVIECOPY = "movieCopy";
     public static final String MOVIEDETAILS = "movieDetails";
     public static final String MOVIESLIST = "moviesList";
     public static final String MOVIE = "movie";
@@ -67,6 +69,8 @@ public class Constants {
     public String currentpage = CURRENTPAGE;
     public String noofpages = NO_OF_PAGES;
 
+    public String movieid = MOVIEID;
+    public String moviecopy = MOVIECOPY;
     public String moviedetails = MOVIEDETAILS;
     public String movieslist = MOVIESLIST;
     public String movie = MOVIE;
@@ -293,5 +297,21 @@ public class Constants {
 
     public void setMoviedetails(String moviedetails) {
         this.moviedetails = moviedetails;
+    }
+
+    public String getMoviecopy() {
+        return moviecopy;
+    }
+
+    public void setMoviecopy(String moviecopy) {
+        this.moviecopy = moviecopy;
+    }
+
+    public String getMovieid() {
+        return movieid;
+    }
+
+    public void setMovieid(String movieid) {
+        this.movieid = movieid;
     }
 }

@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.movies;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.RentingRegistry;
 
@@ -12,6 +13,8 @@ import java.util.Set;
  */
 public class MovieCopyDTO{
     private int id;
+
+    @NotEmpty(message = "{NotEmpty.moviecopydto.serialNumber}")
     private String serialNumber;
     private String conditionInfo;
     private short availability;

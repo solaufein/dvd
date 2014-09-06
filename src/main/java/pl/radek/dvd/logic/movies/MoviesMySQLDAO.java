@@ -75,9 +75,11 @@ public class MoviesMySQLDAO implements MoviesDAO {
     @Override
     public Movie getMovie(int id) {
         logger.debug("Getting Movie by id: " + id);
+
         Session session = hibernateTemplate.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         transaction.begin();
+
         Movie movie = (Movie) session.get(Movie.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
@@ -98,8 +100,18 @@ public class MoviesMySQLDAO implements MoviesDAO {
     public void deleteMovie(int id) {
         logger.debug("Deleting Movie by id: " + id);
 
-        hibernateTemplate.delete(hibernateTemplate.get(Movie.class, id));
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        transaction.begin();
+
+        //  hibernateTemplate.delete(hibernateTemplate.get(Movie.class, id));
         //      hibernateTemplate.bulkUpdate("delete from Movie where id = " + id);
+        Movie m = (Movie) session.get(Movie.class, id);
+        session.delete(m);
+
+        transaction.commit();
+        session.flush();
+        session.close();
 
         logger.debug("Deleted Movie");
     }

@@ -24,6 +24,11 @@
         </listener-class>
     </listener>
 
+    <!-- Creates Context Listener -->
+    <!--listener>
+        <listener-class>pl.radek.dvd.listener.Config</listener-class>
+    </listener-->
+
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>

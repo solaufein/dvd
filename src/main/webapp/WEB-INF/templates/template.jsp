@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/button.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/table.css" />" />
 	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/filtreform.css" />" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!--script type="text/javascript" src="<c:url value="/resources/js/hello.js" />" ></script-->
+
 
               <script>
                   function ConfirmDelete()
@@ -52,4 +54,9 @@
        	</div>
        </div>
     </body>
+    <script>
+    	$(document).ready(function(){
+    		$("#navigation ul li.${menuItem} a").addClass("active");
+    	});
+    </script>
 </html>

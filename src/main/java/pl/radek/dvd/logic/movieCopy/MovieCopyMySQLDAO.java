@@ -1,10 +1,8 @@
 package pl.radek.dvd.logic.movieCopy;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.RootEntityResultTransformer;
@@ -16,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
@@ -128,16 +127,46 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     @Override
     public void deleteMovieCopy(int id) {
         logger.debug("Deleting MovieCopy by id: " + id);
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        transaction.begin();
 
-        MovieCopy movieCopy = hibernateTemplate.get(MovieCopy.class, id);
-        hibernateTemplate.delete(movieCopy);
+        //     MovieCopy movieCopy = hibernateTemplate.get(MovieCopy.class, id);
+        //     hibernateTemplate.delete(movieCopy);
+
+        MovieCopy movieCopy = (MovieCopy) session.get(MovieCopy.class, id);
+        Hibernate.initialize(movieCopy.getMovie());
+        Hibernate.initialize(movieCopy.getRentingRegistries());
+
+        session.delete(movieCopy);
+
+        transaction.commit();
+        session.flush();
+        session.close();
 
         logger.debug("Deleted MovieCopy with id: " + id);
     }
 
     @Override
-    public void addMovieCopy(MovieCopy movieCopy) {
-        hibernateTemplate.save(movieCopy);
+    public void addMovieCopy(int movieId, MovieCopy movieCopy) {
+        logger.debug("Saving Movie Copy to Movie");
+
+        Session session = hibernateTemplate.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        transaction.begin();
+
+        Movie movie = (Movie) session.get(Movie.class, movieId);
+        movieCopy.setMovie(movie);
+        movieCopy.setAvailability((short) 1);
+
+        session.save(movieCopy);
+        movie.getMovieCopies().add(movieCopy);
+
+        transaction.commit();
+        session.flush();
+        session.close();
+
+        logger.debug("Saved Movie Copy to Movie sucesfully");
     }
 
     @Override

@@ -45,6 +45,8 @@ public interface MoviesFacade {
 
     public void addMovie(MovieDataDTO movieDataDTO);
 
+    public void addMovieCopy(int movieId, MovieCopyDTO movieCopyDTO);
+
     public void updateMovie(MovieDataDTO movieDataDTO);
 
     public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int movieId);

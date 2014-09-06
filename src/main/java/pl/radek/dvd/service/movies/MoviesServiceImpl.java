@@ -118,7 +118,7 @@ public class MoviesServiceImpl implements MoviesService {
         return movieDataDTO;
     }
 
-    private Movie convertMovieDataDTOToMovie(MovieDataDTO movieDataDTO) {
+    public static Movie convertMovieDataDTOToMovie(MovieDataDTO movieDataDTO) {
         Movie movie = new Movie();
         movie.setId(movieDataDTO.getId());
         movie.setTitle(movieDataDTO.getTitle());
@@ -138,7 +138,7 @@ public class MoviesServiceImpl implements MoviesService {
         return genreData;
     }
 
-    private Genre convertGenreDataToGenre(GenreData genreData){
+    private static Genre convertGenreDataToGenre(GenreData genreData){
         Genre genre = new Genre();
         genre.setId(genreData.getId());
         genre.setGenre(genreData.getName());
@@ -156,7 +156,7 @@ public class MoviesServiceImpl implements MoviesService {
         return promotionData;
     }
 
-    private Promotion convertPromotionDataToPromotion(PromotionData promotionData){
+    private static Promotion convertPromotionDataToPromotion(PromotionData promotionData){
         Promotion promotion = new Promotion();
         promotion.setId(promotionData.getId());
         promotion.setName(promotionData.getName());

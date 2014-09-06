@@ -3,10 +3,12 @@ package pl.radek.dvd.controller.movies;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
@@ -29,19 +31,20 @@ public class RegisterMovieCopyController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView handleRequest(@RequestParam(Constants.ID) String id) throws Exception {
+    public String handleRequest(@RequestParam(Constants.ID) String id,
+                                @RequestParam(Constants.MOVIEID) String movieid,
+                                ModelMap modelMap) throws Exception {
         ModelAndView modelAndView;
-        logger.info("get id from movies_list.jsp form, id=" + id);
+        logger.info("get id from movie_details.jsp id=" + id);
+        logger.info("movie id=" + movieid);
 
         // follow to add_moviecopy.jsp
-        modelAndView = new ModelAndView("/movies/add_moviecopy");
-        MovieDataDTO movie = new MovieDataDTO();
-        //     Movie movie = new Movie();
-        movie.setId(-1);
-        modelAndView.addObject(Constants.MOVIE, movie);
-        //     modelAndView.addObject(Constants.ID, id);
+        MovieCopyDTO movieCopyDTO = new MovieCopyDTO();
+     //   movieCopyDTO.setId(-1);
+        modelMap.addAttribute(Constants.MOVIECOPY, movieCopyDTO);
+        modelMap.addAttribute(Constants.MOVIEID, movieid);
 
 
-        return modelAndView;
+        return "/movies/add_moviecopy";
     }
 }

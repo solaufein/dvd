@@ -189,6 +189,6 @@
                  <input type="submit" value="<spring:message code="movies.button.newmovie"/>" class = "myButton"/>
                </form>
             </br>
-	
+
 	</tiles:putAttribute>
 </tiles:insertDefinition>

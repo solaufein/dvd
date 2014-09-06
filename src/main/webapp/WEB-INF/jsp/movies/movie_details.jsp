@@ -38,7 +38,7 @@
 		</div>
 		</div>
 		<div class="registerMovieCopyButton">
-			<form name="registerMovieCopy" action=" <c:url value="register.htm"/>" method="get">
+			<form name="registerMovieCopy" action=" <c:url value="register.htm"/>" method="post">
 				<input type="hidden" name="id" value = "new" />
 				<input type="hidden" name="movieid" value="${movie.id}" />
 				<input type="submit" value="<spring:message code="common.button.register"/>" class = "myButton"/>
@@ -59,8 +59,8 @@
 					<c:forEach items="${movieDetails}" var="details">
 						<tr>
 							<td>  <c:out value="${details.serialNumber}"/>  </td>
-							<td>  <c:out value="${details.availability}"/>  </td>
 							 <c:if test="${details.availability == '1'}">
+							 <td>  <spring:message code="movies.movieCopy.available"/>  </td>
 							 <td>
 							  <form name="rentMovieCopy" action=" <c:url value="moviedetails.htm"/>" method="post">
                                   <input type="hidden" name="moviecopyid" value="${details.id}" />
@@ -70,6 +70,7 @@
 							  </td>
 							 </c:if>
 							 <c:if test="${details.availability == '0'}">
+							 <td>  <spring:message code="movies.movieCopy.unavailable"/>  </td>
 							 <td>
 							  <form name="returnMovieCopy" action=" <c:url value="moviedetails.htm"/>" method="get">
                                   <input type="hidden" name="moviecopyid" value="${details.id}" />

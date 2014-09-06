@@ -89,7 +89,7 @@ CREATE TABLE movie_copy
 movie_id BIGINT NOT NULL,
 serial_number VARCHAR(20) NOT NULL,
 condition_info VARCHAR(150) DEFAULT 'OK',
-availability BOOLEAN NOT NULL,
+availability BOOLEAN NOT NULL DEFAULT 1,
 PRIMARY KEY(id),
 FOREIGN KEY(movie_id) REFERENCES movie(id) ON DELETE CASCADE ON UPDATE CASCADE,
 UNIQUE(serial_number));

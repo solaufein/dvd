@@ -1,6 +1,8 @@
 package pl.radek.dvd.logic.builder;
 
 import org.hibernate.Query;
+import org.hibernate.Transaction;
+import org.hibernate.classic.Session;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;

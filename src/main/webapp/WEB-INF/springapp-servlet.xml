@@ -16,7 +16,7 @@
 
     <!--Tthe application context definition for the springapp DispatcherServlet -->
 
-    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller"/>
+    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller, pl.radek.dvd.listener"/>
     <mvc:annotation-driven validator="validator"/>
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>

@@ -34,7 +34,7 @@ INSERT INTO client VALUES(default,'Ziuta','Ziemia','83122533622','Krakow','Szews
 INSERT INTO client VALUES(default,'Natalia','Zonk','85113533622','Krakow','Szewska 7','612783232','zonk@op.pl');
 INSERT INTO client VALUES(default,'Karolina','Gleba','87123533322','Krakow','Opolska 1','621722232','gleba@op.pl');
 INSERT INTO client VALUES(default,'Oliwia','Hola','82222533662','Krakow','Balicka 5','622783222','hola@op.pl');
-INSERT INTO client VALUES(default,'Michał','Wiadro','81124443622','Krakow','Krucza 2','611183232','wiadro@op.pl');
+INSERT INTO client VALUES(default,'Michal','Wiadro','81124443622','Krakow','Krucza 2','611183232','wiadro@op.pl');
 INSERT INTO client VALUES(default,'Jan','Loko','83662536662','Krakow','Solarna 3','601888832','loko@op.pl');
 INSERT INTO client VALUES(default,'Jurek','Zito','83555556221','Krakow','Klasztorna 3','68883232','zito@op.pl');
 INSERT INTO client VALUES(default,'Olga','Przek','86162563622','Krakow','Sokola 8','633383232','przek@op.pl');
@@ -59,7 +59,7 @@ INSERT INTO movie VALUES(default,5,1,'Superman','Woody Allen','2011',default);
 INSERT INTO movie VALUES(default,5,1,'Sniper','Koxx','2010',default);
 INSERT INTO movie VALUES(default,5,2,'Hulk','Stanley Kubrick','2010',default);
 INSERT INTO movie VALUES(default,5,3,'Wolverine','Tim Burton','2012',default);
-INSERT INTO movie VALUES(default,3,1,'Piła','Tim Burton','2013',default);
+INSERT INTO movie VALUES(default,3,1,'Pila','Tim Burton','2013',default);
 INSERT INTO movie VALUES(default,1,2,'Gladiator','Ingmar Bergman','2009',default);
 INSERT INTO movie VALUES(default,2,3,'Rzym','Christopher Nolan','2012',default);
 

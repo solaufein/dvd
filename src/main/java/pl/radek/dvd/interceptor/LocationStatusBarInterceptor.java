@@ -19,9 +19,24 @@ public class LocationStatusBarInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null) {
-            modelAndView.addObject("springViewName", modelAndView.getViewName());
-            logger.debug("Twoja bierzaca lokacja ViewName: " + modelAndView.getViewName());
-            logger.debug("Twoja bierzaca lokacja URI: " + request.getRequestURI());
+
+            String viewName = modelAndView.getViewName();
+            String requestURI = request.getRequestURI();
+            String[] menuItem = viewName.split("/");
+
+            modelAndView.addObject("springViewName", viewName);
+
+            if (menuItem.length > 1) {
+                modelAndView.addObject("menuItem", menuItem[1]);
+            } else {
+                modelAndView.addObject("menuItem", menuItem[0]);             // ok ?
+            }
+
+            /*for (String s : menuItem) {
+                logger.debug("Menu Item = " + s);
+            }*/
+            //    logger.debug("Twoja bierzaca lokacja ViewName: " + viewName);
+            //    logger.debug("Twoja bierzaca lokacja URI: " + requestURI);
         }
         super.postHandle(request, response, handler, modelAndView);
     }

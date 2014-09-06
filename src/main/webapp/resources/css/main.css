@@ -101,7 +101,12 @@ body {
 
 #navigation li a:hover
 {
-    background:#383;
+    background: #383;
+}
+
+.active
+{
+    background: #383;
 }
 
 .clear
