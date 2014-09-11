@@ -27,9 +27,13 @@ public class LocationStatusBarInterceptor extends HandlerInterceptorAdapter {
             modelAndView.addObject("springViewName", viewName);
 
             if (menuItem.length > 1) {
-                modelAndView.addObject("menuItem", menuItem[1]);
+                String menuIt = menuItem[1];
+                modelAndView.addObject("menuItem", menuIt);
+                logger.debug("Menu Item = " + menuIt);
             } else {
-                modelAndView.addObject("menuItem", menuItem[0]);             // ok ?
+                String menuIt = menuItem[0];
+                modelAndView.addObject("menuItem", menuIt);             // ok ?
+                logger.debug("Menu Item = " + menuIt);
             }
 
             /*for (String s : menuItem) {

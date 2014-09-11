@@ -5,27 +5,7 @@
 
 <html>
 	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
-    <title><spring:message code="common.header.title" /></title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css" />" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/button.css" />" />
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/table.css" />" />
-	<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/filtreform.css" />" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<!--script type="text/javascript" src="<c:url value="/resources/js/hello.js" />" ></script-->
-
-
-              <script>
-                  function ConfirmDelete()
-                  {
-                    var x = confirm("<spring:message code="common.question.deletion"/>");
-                    if (x)
-                        return true;
-                    else
-                      return false;
-                  }
-              </script>
-    		  <style></style>
+          <tiles:insertAttribute name="head" />
 	</head>
 	<body>
        <div id="container">
@@ -58,8 +38,18 @@
        </div>
     </body>
     <script>
-    	$(document).ready(function(){
-    		$("#navigation ul li.${menuItem} a").addClass("active");
-    	});
+    $(document).ready(function(){
+          navigation("${menuItem}");
+        });
+                function ConfirmDelete()
+                      {
+                        var x = confirm("<spring:message code="common.question.deletion"/>");
+                        if (x)
+                            return true;
+                        else
+                          return false;
+                      }
+
+
     </script>
 </html>
