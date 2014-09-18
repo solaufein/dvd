@@ -31,7 +31,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/emp/movies/editmovie.htm")
+@RequestMapping("/emp/movies/editmovie")
 public class EditMovieController {
     private static Logger logger = Logger.getLogger(EditMovieController.class);
 
@@ -63,7 +63,7 @@ public class EditMovieController {
 
             // redirect to GetMoviesController
             logger.info("Redirect to GetMoviesController");
-            modelAndView = new ModelAndView("redirect:/emp/movies/movieslist.htm");
+            modelAndView = new ModelAndView("redirect:/emp/movies/movieslist");
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");

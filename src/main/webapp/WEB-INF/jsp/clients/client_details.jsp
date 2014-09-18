@@ -6,11 +6,11 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/clients/clientdetails.htm">
+		<c:url var="englishLocaleUrl" value="/emp/clients/clientdetails">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/clients/clientdetails.htm">
+		<c:url var="polishLocaleUrl" value="/emp/clients/clientdetails">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="pl" />
 		</c:url>
@@ -40,7 +40,7 @@
 		</div> 
 		</div>
 		<div class="rentMovieButton">
-			<form name="rentMovie" action=" <c:url value="clients/clientdetails.htm"/>" method="get">
+			<form name="rentMovie" action=" <c:url value="clients/clientdetails"/>" method="get">
 				<input type="hidden" name="id" value="${param.id}" />
 				<input type="submit" value="<spring:message code="common.button.rentMovie"/>" class = "myButton"/>
 			</form>
@@ -71,7 +71,7 @@
 							<td>  <c:out value="${details.returnDate}"/>  </td>
 							 <c:if test="${not empty details.returnDate}">
 							 <td>
-							  <form name="printReceipt" action=" <c:url value="printreceipt.htm"/>" method="post">
+							  <form name="printReceipt" action=" <c:url value="printreceipt"/>" method="post">
                                   <input type="hidden" name="registryid" value="${details.id}" />
 								  <input type="hidden" name="clientid" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.print"/>" class = "myButton"/>
@@ -80,7 +80,7 @@
 							 </c:if>
 							 <c:if test="${empty details.returnDate}">
 							 <td>
-							  <form name="returnMovie" action=" <c:url value="clientdetails.htm"/>" method="get">
+							  <form name="returnMovie" action=" <c:url value="clientdetails"/>" method="get">
                                   <input type="hidden" name="id" value="${details.id}" />
                                   <input type="submit" value="<spring:message code="common.button.return"/>" class = "myButton"/>
                               </form>
@@ -96,7 +96,7 @@
 			   <td>
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
-			   <form name="firstlink" action="<c:url value="clientdetails.htm"/>" method="get">
+			   <form name="firstlink" action="<c:url value="clientdetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
@@ -106,7 +106,7 @@
 			   <td>
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
-			   <form name="previouslink" action="<c:url value="clientdetails.htm"/>" method="get">
+			   <form name="previouslink" action="<c:url value="clientdetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
@@ -119,7 +119,7 @@
 				<td>
 			<%--Displaying Next link--%>
 			   <c:if test="${currentPage < noOfPages}">
-			   <form name="nextlink" action="<c:url value="clientdetails.htm"/>" method="get">
+			   <form name="nextlink" action="<c:url value="clientdetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
@@ -129,7 +129,7 @@
 			   <td>
 			<%--Displaying Last link--%>
 			   <c:if test="${currentPage < noOfPages}">
-			   <form name="lastlink" action="<c:url value="clientdetails.htm"/>" method="get">
+			   <form name="lastlink" action="<c:url value="clientdetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
@@ -140,7 +140,7 @@
 			   </div>
 			   </br>
 		
-		<form name="back" action="<c:url value="clientslist.htm"/>" method="get">
+		<form name="back" action="<c:url value="clientslist"/>" method="get">
 		<table>
 		<tr>
 			<td colspan="2">

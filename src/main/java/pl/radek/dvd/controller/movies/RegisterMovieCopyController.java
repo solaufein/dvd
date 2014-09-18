@@ -19,7 +19,7 @@ import pl.radek.dvd.service.movies.MoviesFacade;
  */
 
 @Controller
-@RequestMapping("/emp/movies/register.htm")
+@RequestMapping("/emp/movies/register")
 public class RegisterMovieCopyController {
     private static Logger logger = Logger.getLogger(RegisterMovieCopyController.class);
 

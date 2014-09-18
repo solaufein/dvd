@@ -18,7 +18,7 @@ import pl.radek.dvd.service.clients.ClientFacade;
  */
 
 @Controller
-@RequestMapping("/emp/clients/printreceipt.htm")
+@RequestMapping("/emp/clients/printreceipt")
 public class PrintReceiptController {
     private static Logger logger = Logger.getLogger(PrintReceiptController.class);
 

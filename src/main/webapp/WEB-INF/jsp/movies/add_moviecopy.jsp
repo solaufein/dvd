@@ -20,7 +20,7 @@
   <p> <spring:message code="common.fillin"/> </p>
    </div>
 	<div class="separator"></div>
-	 <form:form method="POST" commandName="movieCopy" action="addmoviecopy.htm">
+	 <form:form method="POST" commandName="movieCopy" action="addmoviecopy">
 	 <div class="inputs">
 <table>
     <tbody>
@@ -52,7 +52,7 @@
 
 </form:form>
 
-     <form name="cancel" action="<c:url value="moviedetails.htm"/>" method="get">
+     <form name="cancel" action="<c:url value="moviedetails"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">

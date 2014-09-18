@@ -8,10 +8,10 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/clients/clientslist.htm">
+		<c:url var="englishLocaleUrl" value="/emp/clients/clientslist">
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/clients/clientslist.htm">
+		<c:url var="polishLocaleUrl" value="/emp/clients/clientslist">
 		<c:param name="lang" value="pl" />
 		</c:url>
 		<a href="${englishLocaleUrl}">EN</a>
@@ -28,7 +28,7 @@
 			<p> <spring:message code="common.fillin.filtre"/> </p>
 		</div>
 		<div class="separator"></div>
-		<form:form method="GET" commandName="client" action="clientslist.htm" >	 
+		<form:form method="GET" commandName="client" action="clientslist" >	 
 			<div class="inputs">
 			<table>
 				<tbody>
@@ -54,7 +54,7 @@
 					</td>
 		</form:form>
 					<td>
-					<form name="clearTable" action=" <c:url value="clientslist.htm"/>" method="get">
+					<form name="clearTable" action=" <c:url value="clientslist"/>" method="get">
 						<input type="submit" value="<spring:message code="common.button.clear"/>"/>
 					</form>
 					</td>
@@ -72,37 +72,37 @@
                  <tr>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.firstname}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.firstName"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.lastname}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.lastName"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.pesel}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.pesel"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.city}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.city"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.street}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.street"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.phonenumber}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.phoneNumber"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.email}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-					<c:url value="clientslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="clientslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="clients.clientsList.email"/></a>
 				  </td>
 				  <td></td>
@@ -121,20 +121,20 @@
 							<td>  <c:out value="${client.phoneNumber}"/>  </td>
 							<td>  <c:out value="${client.email}"/>  </td>
 							<td> 
-							  <form name="clientdetails" action=" <c:url value="clientdetails.htm"/>" method="get">
+							  <form name="clientdetails" action=" <c:url value="clientdetails"/>" method="get">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
                               </form>
 							</td>
 							<sec:authorize ifAnyGranted="ROLE_ADMIN">
 							<td> 
-							  <form name="editclient" action=" <c:url value="controller.htm"/>" method="post">
+							  <form name="editclient" action=" <c:url value="controller"/>" method="post">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
                               </form>
 							</td>
 							<td> 
-							  <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+							  <form action=" <c:url value="delete"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${client.id}" />
                                   <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
                               </form>
@@ -151,7 +151,7 @@
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "1" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="clientslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> |<< </a>
 				</c:if>
 			   </td>
@@ -160,7 +160,7 @@
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage - 1}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="clientslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> < </a>
 				</c:if>
 			   </td>
@@ -172,7 +172,7 @@
 			<%--Displaying Next link--%>
 			   <c:if test="${currentPage < noOfPages}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage + 1}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="clientslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> > </a>
 				</c:if>
 			   </td>
@@ -181,7 +181,7 @@
 			<%--Displaying Last link--%>
 			   <c:if test="${currentPage < noOfPages}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${noOfPages}" firstName = "${param.firstName}" lastName = "${param.lastName}" pesel = "${param.pesel}"/>
-				<c:url value="clientslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="clientslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> >>| </a>
 				</c:if>
 			   </td>
@@ -190,7 +190,7 @@
 			</div>
 			   </br>
 		 <sec:authorize ifAnyGranted="ROLE_ADMIN">
-               <form name="newclient" action="<c:url value="controller.htm"/>" method="post">
+               <form name="newclient" action="<c:url value="controller"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
                  <input type="submit" value="<spring:message code="clients.button.newclient"/>" class = "myButton"/>
                </form>

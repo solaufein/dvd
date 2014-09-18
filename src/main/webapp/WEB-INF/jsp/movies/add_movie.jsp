@@ -22,7 +22,7 @@
   <p> <spring:message code="common.fillin"/> </p>
    </div>
 	<div class="separator"></div>
-	 <form:form method="POST" commandName="movie" action="addmovie.htm">
+	 <form:form method="POST" commandName="movie" action="addmovie">
 	 <div class="inputs">
 <table>
     <tbody><tr>
@@ -71,7 +71,7 @@
 
 </form:form>
 
-     <form name="cancel" action="<c:url value="movieslist.htm"/>" method="get">
+     <form name="cancel" action="<c:url value="movieslist"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">
@@ -91,7 +91,7 @@
 	</div>
 	<div class="separator"></div>
 
-	 <form:form method="POST" commandName="movie" action="editmovie.htm">
+	 <form:form method="POST" commandName="movie" action="editmovie">
 	 <div class="inputs">
 <table>
     <tbody><tr>
@@ -139,7 +139,7 @@
 </tbody></table>
 </form:form>
 
-     <form name="cancel" action="<c:url value="movieslist.htm"/>" method="get">
+     <form name="cancel" action="<c:url value="movieslist"/>" method="get">
 	 <table>
 	   <tr>
 		<td colspan="2">

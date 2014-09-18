@@ -25,7 +25,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/emp/movies/addmoviecopy.htm")
+@RequestMapping("/emp/movies/addmoviecopy")
 public class AddMovieCopyController {
     private static Logger logger = Logger.getLogger(AddMovieCopyController.class);
 
@@ -69,7 +69,7 @@ public class AddMovieCopyController {
             // redirect to MovieDetailsController
             logger.info("Redirect to MovieDetailsController");
 
-            return "redirect:/emp/movies/moviedetails.htm";
+            return "redirect:/emp/movies/moviedetails";
 
         } else {
             modelMap.addAttribute(Constants.MOVIECOPY, moviecopy);

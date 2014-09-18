@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/emp/administration/employees.htm")
+@RequestMapping("/emp/administration/employees")
 public class GetEmployeesController {
     private static Logger logger = Logger.getLogger(GetEmployeesController.class);
 

@@ -16,7 +16,7 @@ import pl.radek.dvd.service.movies.MoviesFacade;
  */
 
 @Controller
-@RequestMapping("/emp/movies/delete.htm")
+@RequestMapping("/emp/movies/delete")
 public class DeleteMovieController {
     private static Logger logger = Logger.getLogger(DeleteMovieController.class);
 
@@ -41,7 +41,7 @@ public class DeleteMovieController {
         // redirect to GetMoviesController
         logger.info("Redirect to GetMoviesController");
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/emp/movies/movieslist.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/movies/movieslist");
 
         return modelAndView;
     }

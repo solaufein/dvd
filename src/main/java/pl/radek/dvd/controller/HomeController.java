@@ -22,15 +22,15 @@ public class HomeController {
 
     private static Logger logger = Logger.getLogger(HomeController.class);
 
-    @RequestMapping(value = "/emp/home.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/emp/home", method = RequestMethod.GET)
     public ModelAndView handleRequest() throws Exception {
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients/clientslist.htm");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients/clientslist");
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/login.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout) {
@@ -48,14 +48,14 @@ public class HomeController {
 
     }
 
-    @RequestMapping(value="/logout.htm")
+    @RequestMapping(value="/logout")
     public ModelAndView logout(){
         ModelAndView modelAndView = new ModelAndView("redirect:/logout");
 
         return modelAndView;
     }
 
-    @RequestMapping(value="/denied.htm")
+    @RequestMapping(value="/denied")
     public ModelAndView denied(){
         ModelAndView modelAndView = new ModelAndView("/denied");
 

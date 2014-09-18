@@ -6,10 +6,10 @@
 
 <tiles:insertDefinition name="administrationTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/administration/administration.htm">
+		<c:url var="englishLocaleUrl" value="/emp/administration/administration">
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/administration/administration.htm">
+		<c:url var="polishLocaleUrl" value="/emp/administration/administration">
 		<c:param name="lang" value="pl" />
 		</c:url>
 		<a href="${englishLocaleUrl}">EN</a>
@@ -35,7 +35,6 @@
 			});
 			
 			$(document).ready(function(){
-
 			$("#navigation_left ul li a").click(function() {
 
 					var loading = $('<div id="loading"/>');

@@ -8,10 +8,10 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/movies/movieslist.htm">
+		<c:url var="englishLocaleUrl" value="/emp/movies/movieslist">
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/movies/movieslist.htm">
+		<c:url var="polishLocaleUrl" value="/emp/movies/movieslist">
 		<c:param name="lang" value="pl" />
 		</c:url>
 		<a href="${englishLocaleUrl}">EN</a>
@@ -28,7 +28,7 @@
 			<p> <spring:message code="common.fillin.filtre"/> </p>
 		</div>
 		<div class="separator"></div>
-		<form:form method="GET" commandName="movie" action="movieslist.htm" >	 
+		<form:form method="GET" commandName="movie" action="movieslist" >	 
 		<div class="inputs">
 			<table>
 				<tbody>
@@ -67,7 +67,7 @@
 					</td>
 		</form:form>
 					<td>
-					<form name="clearTable" action=" <c:url value="movieslist.htm"/>" method="get">
+					<form name="clearTable" action=" <c:url value="movieslist"/>" method="get">
 						<input type="submit" value="<spring:message code="common.button.clear"/>"/>
 					</form>
 					</td>
@@ -83,27 +83,27 @@
                  <tr>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.title}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="movieslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.title"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.director}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="movieslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.director"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.productionyear}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="movieslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.productionYear"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.genre}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="movieslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.genre"/></a>
 				  </td>
                   <td>
 					<hero:Linkuj order = "${param.order}" field = "${param.field}" columnName = "${cons.promotionname}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-					<c:url value="movieslist.htm${hlink}" var = "paginationURL"/>
+					<c:url value="movieslist${hlink}" var = "paginationURL"/>
 					<a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.promotion"/></a>
 				  </td>
 				  <td></td>
@@ -118,19 +118,19 @@
 							<td>  <c:out value="${movie.genre}"/>  </td>
 							<td>  <c:out value="${movie.name}"/>  </td>
 							<td> 
-							  <form name="moviedetails" action=" <c:url value="moviedetails.htm"/>" method="get">
+							  <form name="moviedetails" action=" <c:url value="moviedetails"/>" method="get">
                                   <input type="hidden" name="id" value="${movie.id}" />
                                   <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
                               </form>
 							</td>
 							<td> 
-							  <form name="editmovie" action=" <c:url value="controller.htm"/>" method="post">
+							  <form name="editmovie" action=" <c:url value="controller"/>" method="post">
                                   <input type="hidden" name="id" value="${movie.id}" />
                                   <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
                               </form>
 							</td>
 							<td> 
-							  <form action=" <c:url value="delete.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+							  <form action=" <c:url value="delete"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${movie.id}" />
                                   <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
                               </form>
@@ -146,7 +146,7 @@
 			<%--Displaying First link except for the 1st page--%>   
 			   <c:if test="${currentPage != 1}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "1" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="movieslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> |<< </a>
 				</c:if>
 			   </td>
@@ -155,7 +155,7 @@
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage - 1}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="movieslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> < </a>
 				</c:if>
 			   </td>
@@ -167,7 +167,7 @@
 			<%--Displaying Next link--%>
 			   <c:if test="${currentPage < noOfPages}">	
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${currentPage + 1}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="movieslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> > </a>
 				</c:if>
 			   </td>
@@ -176,7 +176,7 @@
 			<%--Displaying Last link--%>
 			   <c:if test="${currentPage < noOfPages}">				
 				<pagi:Linkuj order = "${param.order}" field = "${param.field}" currentPage = "${noOfPages}" title = "${param.title}" genre = "${param.genre}" promotion = "${param.promotion}" actorName = "${param.actor}"/>
-				<c:url value="movieslist.htm${paginlink}" var = "paginURL"/>
+				<c:url value="movieslist${paginlink}" var = "paginURL"/>
 				<a href="${paginURL}" class="myButtonTwo"> >>| </a>
 				</c:if>
 			   </td>
@@ -184,7 +184,7 @@
 			</table>
 	</div>
 			</br>
-               <form name="newmovie" action="<c:url value="controller.htm"/>" method="post">
+               <form name="newmovie" action="<c:url value="controller"/>" method="post">
                  <input type="hidden" name="id" value = "new" />
                  <input type="submit" value="<spring:message code="movies.button.newmovie"/>" class = "myButton"/>
                </form>

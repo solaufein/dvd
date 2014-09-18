@@ -41,14 +41,15 @@
     $(document).ready(function(){
           navigation("${menuItem}");
         });
-                function ConfirmDelete()
-                      {
-                        var x = confirm("<spring:message code="common.question.deletion"/>");
-                        if (x)
-                            return true;
-                        else
-                          return false;
-                      }
+		
+	function ConfirmDelete()
+	  {
+		var x = confirm("<spring:message code="common.question.deletion"/>");
+		if (x)
+			return true;
+		else
+		  return false;
+	  }
 
 
     </script>

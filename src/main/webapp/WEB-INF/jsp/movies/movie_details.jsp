@@ -6,11 +6,11 @@
 
 <tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="langs">
-		<c:url var="englishLocaleUrl" value="/emp/movies/moviedetails.htm">
+		<c:url var="englishLocaleUrl" value="/emp/movies/moviedetails">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="en" />
 		</c:url>
-		<c:url var="polishLocaleUrl" value="/emp/movies/moviedetails.htm">
+		<c:url var="polishLocaleUrl" value="/emp/movies/moviedetails">
 		<c:param name="id" value="${param.id}" />
 		<c:param name="lang" value="pl" />
 		</c:url>
@@ -38,7 +38,7 @@
 		</div>
 		</div>
 		<div class="registerMovieCopyButton">
-			<form name="registerMovieCopy" action=" <c:url value="register.htm"/>" method="post">
+			<form name="registerMovieCopy" action=" <c:url value="register"/>" method="post">
 				<input type="hidden" name="id" value = "new" />
 				<input type="hidden" name="movieid" value="${movie.id}" />
 				<input type="submit" value="<spring:message code="common.button.register"/>" class = "myButton"/>
@@ -62,7 +62,7 @@
 							 <c:if test="${details.availability == '1'}">
 							 <td>  <spring:message code="movies.movieCopy.available"/>  </td>
 							 <td>
-							  <form name="rentMovieCopy" action=" <c:url value="moviedetails.htm"/>" method="post">
+							  <form name="rentMovieCopy" action=" <c:url value="moviedetails"/>" method="post">
                                   <input type="hidden" name="moviecopyid" value="${details.id}" />
 								  <input type="hidden" name="movieid" value="${movie.id}" />
                                   <input type="submit" value="<spring:message code="common.button.rent"/>" class = "myButton"/>
@@ -72,14 +72,14 @@
 							 <c:if test="${details.availability == '0'}">
 							 <td>  <spring:message code="movies.movieCopy.unavailable"/>  </td>
 							 <td>
-							  <form name="returnMovieCopy" action=" <c:url value="moviedetails.htm"/>" method="get">
+							  <form name="returnMovieCopy" action=" <c:url value="moviedetails"/>" method="get">
                                   <input type="hidden" name="moviecopyid" value="${details.id}" />
                                   <input type="submit" value="<spring:message code="common.button.return"/>" class = "myButton"/>
                               </form>
 							  </td>
 							 </c:if>
 							  <td> 
-							   <form action=" <c:url value="deletecopy.htm"/>" method="post" onsubmit="return ConfirmDelete();">
+							   <form action=" <c:url value="deletecopy"/>" method="post" onsubmit="return ConfirmDelete();">
                                   <input type="hidden" name="id" value="${details.id}" />
 								  <input type="hidden" name="movieid" value="${movie.id}" />
                                   <input type="submit" value="<spring:message code="common.button.delete"/>" class = "myButton"/>
@@ -96,7 +96,7 @@
 			   <td>
 			<%--Displaying First link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
-			   <form name="firstlink" action="<c:url value="moviedetails.htm"/>" method="get">
+			   <form name="firstlink" action="<c:url value="moviedetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "1" />
                  <input type="submit" value="|<<" class = "myButtonTwo"/>
                </form>
@@ -106,7 +106,7 @@
 			   <td>
 			<%--Displaying Previous link except for the 1st page--%>
 			   <c:if test="${currentPage != 1}">
-			   <form name="previouslink" action="<c:url value="moviedetails.htm"/>" method="get">
+			   <form name="previouslink" action="<c:url value="moviedetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage - 1}" />
                  <input type="submit" value="<" class = "myButtonTwo"/>
                </form>
@@ -119,7 +119,7 @@
 				<td>
 			<%--Displaying Next link--%>
 			   <c:if test="${currentPage < noOfPages}">
-			   <form name="nextlink" action="<c:url value="moviedetails.htm"/>" method="get">
+			   <form name="nextlink" action="<c:url value="moviedetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${currentPage + 1}" />
                  <input type="submit" value=">" class = "myButtonTwo"/>
                </form>
@@ -129,7 +129,7 @@
 			   <td>
 			<%--Displaying Last link--%>
 			   <c:if test="${currentPage < noOfPages}">
-			   <form name="lastlink" action="<c:url value="moviedetails.htm"/>" method="get">
+			   <form name="lastlink" action="<c:url value="moviedetails"/>" method="get">
 				 <input type="hidden" name="currentPage" value = "${noOfPages}" />
                  <input type="submit" value=">>|" class = "myButtonTwo"/>
                </form>
@@ -140,7 +140,7 @@
 			   </div>
 			   </br>
 
-		<form name="back" action="<c:url value="movieslist.htm"/>" method="get">
+		<form name="back" action="<c:url value="movieslist"/>" method="get">
 		<table>
 		<tr>
 			<td colspan="2">
