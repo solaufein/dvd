@@ -48,15 +48,43 @@ public class HomeController {
 
     }
 
-    @RequestMapping(value="/logout")
-    public ModelAndView logout(){
+    @RequestMapping(value = "/remind", method = RequestMethod.GET)
+    public ModelAndView pwReminderForm(
+            @RequestParam(value = "msg", required = false) String msg) {
+
+        ModelAndView model = new ModelAndView("/remind");
+        if (msg != null) {
+            model.addObject("msg", "Recovery link has been sent!");
+        }
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/remind", method = RequestMethod.POST)
+    public ModelAndView sendRecoveryLink() {
+
+        //todo: 1. logika, tworzenie kodu 20znakowego, sprawdzenie i zapis do bazy(kodu i daty), wyslanie maila z linkiem
+
+        //todo: 2. zrobic Controller ktory obsluzy tego linka (w zaleznosci: jesli przekroczony 5min czas- to msg i nic)
+        //todo:    a jesli mozna zmienic, to widok do zmiany. Zmiana -> controller, zapis do bazy nowego hasla, redirect Login.page
+
+        ModelAndView model = new ModelAndView("/remind");
+        model.addObject("msg", "Recovery link has been sent!");
+
+        return model;
+
+    }
+
+    @RequestMapping(value = "/logout")
+    public ModelAndView logout() {
         ModelAndView modelAndView = new ModelAndView("redirect:/logout");
 
         return modelAndView;
     }
 
-    @RequestMapping(value="/denied")
-    public ModelAndView denied(){
+    @RequestMapping(value = "/denied")
+    public ModelAndView denied() {
         ModelAndView modelAndView = new ModelAndView("/denied");
 
         return modelAndView;

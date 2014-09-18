@@ -16,6 +16,7 @@
   		</c:if>
 
     <c:url var="loginUrl" value="/j_spring_security_check"></c:url>
+    <c:url var="remindUrl" value="/remind" context="/dvd"/>
 	<form id="login" name="loginForm" action="${loginUrl}" method="POST">
 		<div class="header">
 		<h3>@ Dvd Rentals </h3>
@@ -30,8 +31,13 @@
 				<label class="terms"> Remember me for 1day </label>
 			</div-->
 			<input name="submit" type="submit" value="Log in" />
+
+
+            <div class="lostpw">
+                <a href="${remindUrl}">Lost Password?</a>
+            </div>
 		</div>
-	</form>
+		</form>
   </div>
 </body>
 </html>
