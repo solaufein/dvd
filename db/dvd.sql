@@ -46,8 +46,11 @@ CREATE TABLE employee
 first_name VARCHAR(30) NOT NULL, 
 last_name VARCHAR(30) NOT NULL, 
 phone_number VARCHAR(40) NOT NULL,
+phone_number VARCHAR(40) NOT NULL,
 email VARCHAR(60) NOT NULL,
 password VARCHAR(32) NOT NULL,
+pw_change_key VARCHAR(30)DEFAULT NULL,
+pw_change_date DATETIME DEFAULT NULL,
 PRIMARY KEY(id),
 UNIQUE(first_name, last_name, email)); 
 

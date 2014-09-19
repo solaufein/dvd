@@ -18,8 +18,8 @@ INSERT INTO promotion VALUES(default,'Hit',9.99,6);
 INSERT INTO promotion VALUES(default,'Mega Hit',7.99,5);
 INSERT INTO promotion VALUES(default,'Super Hit',5.99,3);
 
-INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'));
-INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'));
+INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'),default,default);
+INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'),default,default);
 
 INSERT INTO roles VALUES(default,'ADMIN');
 INSERT INTO roles VALUES(default,'USER');

@@ -7,7 +7,7 @@ body {
 .container{
 	width: 406px;
 	max-width: 406px;
-	margin: 0 auto;
+	margin: 0 600px;
 	margin-top: 200px;
 }
 
@@ -44,7 +44,8 @@ body {
 #login .separator{
 	height: 1px;
 	background: #E8E8E8;
-	width: 406px;
+	width: auto;
+	min-width: 406px;
 	margin: 0px -25px;
 }
 
@@ -96,6 +97,7 @@ input:-moz-placeholder{
 	margin-bottom: 15px;
 	box-shadow: inset 0px 2px 3px rgba(0,0,0,0.1);
 	clear: both;
+	display:block;
 }
 
 #login .inputs input[type=text]:focus, input[type=password]:focus{

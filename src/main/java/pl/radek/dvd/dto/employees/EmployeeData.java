@@ -1,60 +1,34 @@
-package pl.radek.dvd.model;
+package pl.radek.dvd.dto.employees;
 
-import javax.persistence.*;
+import pl.radek.dvd.model.RentingRegistry;
+import pl.radek.dvd.model.Roles;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * User: Sola
- * Date: 2014-04-26
- * Time: 14:10
+ * Date: 2014-09-19
+ * Time: 14:34
  */
+public class EmployeeData {
 
-@Entity
-@Table(name = "employee")
-public class Employee {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private int id;
-
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-
-    @Column(name = "last_name", nullable = false)
     private String lastName;
-
-    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(name = "pw_change_key")
     private String pwChangeKey;
-
-    @Column(name = "pw_change_date", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date pwChangeDate;
-
-    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
-    @JoinTable(name = "employee_roles",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Roles> rolesSet = new HashSet<Roles>();
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
-    public Employee() {
+    public EmployeeData() {
     }
 
-    public Employee(String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate) {
+    public EmployeeData(String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -64,7 +38,7 @@ public class Employee {
         this.pwChangeDate = pwChangeDate;
     }
 
-    public Employee(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate) {
+    public EmployeeData(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -75,7 +49,7 @@ public class Employee {
         this.pwChangeDate = pwChangeDate;
     }
 
-    public Employee(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate, Set<Roles> rolesSet, Set<RentingRegistry> rentingRegistries) {
+    public EmployeeData(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate, Set<Roles> rolesSet, Set<RentingRegistry> rentingRegistries) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -168,4 +142,3 @@ public class Employee {
         this.rentingRegistries = rentingRegistries;
     }
 }
-
