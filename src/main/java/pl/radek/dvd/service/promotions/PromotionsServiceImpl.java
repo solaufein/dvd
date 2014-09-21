@@ -3,6 +3,7 @@ package pl.radek.dvd.service.promotions;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.logic.promotions.PromotionDAO;
 import pl.radek.dvd.model.Promotion;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class PromotionsServiceImpl implements PromotionsService {
 
     private static Logger logger = Logger.getLogger(PromotionsServiceImpl.class);

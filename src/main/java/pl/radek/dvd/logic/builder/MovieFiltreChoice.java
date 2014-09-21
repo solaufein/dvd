@@ -60,7 +60,8 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
             query.append(" ORDER BY " + field + " " + order);
         }
 
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+      //  Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             setFiltreQueryParams(filterInfoList, q);
@@ -92,7 +93,8 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
 
         query.append(" GROUP BY m.title");
 
-        q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+     //   q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             setFiltreQueryParams(filterInfoList, q);

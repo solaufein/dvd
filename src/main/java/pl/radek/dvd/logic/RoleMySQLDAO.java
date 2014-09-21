@@ -15,7 +15,7 @@ import pl.radek.dvd.model.Roles;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class RoleMySQLDAO implements RoleDAO {
 
     private static Logger logger = Logger.getLogger(RoleMySQLDAO.class);

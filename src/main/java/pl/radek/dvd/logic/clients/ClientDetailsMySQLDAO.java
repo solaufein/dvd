@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
 
     private static Logger logger = Logger.getLogger(ClientDetailsMySQLDAO.class);
@@ -56,7 +56,8 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         query.append("WHERE c.id = :ide ");
         query.append("ORDER BY rr.rentDate DESC ");
 
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+     //   Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
         q.setParameter("ide", id);
         q.setFirstResult(offset);
         q.setMaxResults(recordsPerPage);
@@ -80,7 +81,8 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         query.append("INNER JOIN mc.movie as m ");
         query.append("WHERE rr.id = :ide ");
 
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+     //   Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
         q.setParameter("ide", id);
 
         logger.debug("query: " + query.toString());

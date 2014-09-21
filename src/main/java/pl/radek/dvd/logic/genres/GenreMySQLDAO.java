@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class GenreMySQLDAO implements GenreDAO {
 
     private static Logger logger = Logger.getLogger(GenreMySQLDAO.class);

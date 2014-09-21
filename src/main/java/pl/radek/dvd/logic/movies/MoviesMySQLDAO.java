@@ -33,7 +33,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class MoviesMySQLDAO implements MoviesDAO {
 
     private static Logger logger = Logger.getLogger(MoviesMySQLDAO.class);
@@ -76,9 +76,10 @@ public class MoviesMySQLDAO implements MoviesDAO {
     public Movie getMovie(int id) {
         logger.debug("Getting Movie by id: " + id);
 
-        Session session = hibernateTemplate.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        transaction.begin();
+    //    Session session = hibernateTemplate.getSessionFactory().openSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+    //    Transaction transaction = session.beginTransaction();
+    //    transaction.begin();
 
         Movie movie = (Movie) session.get(Movie.class, id);
 
@@ -88,9 +89,9 @@ public class MoviesMySQLDAO implements MoviesDAO {
         Hibernate.initialize(movie.getActorset());
         Hibernate.initialize(movie.getMovieCopies());
 
-        transaction.commit();
-        session.flush();
-        session.close();
+    //    transaction.commit();
+   //     session.flush();
+   //     session.close();
 
         logger.debug("Got Movie by id: " + id);
         return movie;
@@ -100,18 +101,19 @@ public class MoviesMySQLDAO implements MoviesDAO {
     public void deleteMovie(int id) {
         logger.debug("Deleting Movie by id: " + id);
 
-        Session session = hibernateTemplate.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        transaction.begin();
+     //   Session session = hibernateTemplate.getSessionFactory().openSession();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+     //   Transaction transaction = session.beginTransaction();
+     //   transaction.begin();
 
         //  hibernateTemplate.delete(hibernateTemplate.get(Movie.class, id));
         //      hibernateTemplate.bulkUpdate("delete from Movie where id = " + id);
         Movie m = (Movie) session.get(Movie.class, id);
         session.delete(m);
 
-        transaction.commit();
-        session.flush();
-        session.close();
+     //   transaction.commit();
+    //    session.flush();
+    //    session.close();
 
         logger.debug("Deleted Movie");
     }

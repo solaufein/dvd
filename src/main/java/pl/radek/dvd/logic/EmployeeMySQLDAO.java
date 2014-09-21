@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class EmployeeMySQLDAO implements EmployeeDAO {
 
     private static Logger logger = Logger.getLogger(EmployeeMySQLDAO.class);
@@ -122,6 +122,11 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         hibernateTemplate.update(employee);
 
         logger.debug("Updated employee with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
+
+    }
+
+    @Override
+    public void passwordChangeKey(String email, String code) {
 
     }
 

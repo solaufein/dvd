@@ -58,7 +58,7 @@ public class RemindController {
         String kod = new BigInteger(130, secureRandom).toString(32);
 
         // save generated code to db (by given email)
-        // employeeFacade.passwordChangeKey(email, kod);
+        employeeFacade.passwordChangeKey(email, kod);        //todo: zrobic DAO
 
         // send email with link " http://localhost:8080/dvd/remind/{kod} " to given email
 

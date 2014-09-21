@@ -2,6 +2,7 @@ package pl.radek.dvd.service.employees;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.logic.EmployeeDAO;
 import pl.radek.dvd.model.Employee;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -57,6 +59,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void updateEmployee(Employee employee) {
         employeeDAO.updateEmployee(employee);
+    }
+
+    @Override
+    public void passwordChangeKey(String email, String code) {
+
     }
 
     @Override

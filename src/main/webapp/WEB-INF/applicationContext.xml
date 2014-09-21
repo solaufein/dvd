@@ -14,6 +14,8 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic" />
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
             <value>classpath:config.properties</value>
@@ -36,6 +38,7 @@
         </property>
         <property name="hibernateProperties">
             <props>
+                <prop key="current_session_context_class">thread</prop>
                 <prop key="hibernate.dialect"> org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -85,5 +88,6 @@
         </property>
     </bean>
 
-    <!--tx:annotation-driven/-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
 </beans>

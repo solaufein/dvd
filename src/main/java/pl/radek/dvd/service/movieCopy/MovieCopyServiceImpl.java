@@ -3,6 +3,7 @@ package pl.radek.dvd.service.movieCopy;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class MovieCopyServiceImpl implements MovieCopyService {
 
     private static Logger logger = Logger.getLogger(MovieCopyServiceImpl.class);

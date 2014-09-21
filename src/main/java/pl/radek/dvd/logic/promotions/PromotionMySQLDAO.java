@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class PromotionMySQLDAO implements PromotionDAO {
 
     private static Logger logger = Logger.getLogger(PromotionMySQLDAO.class);

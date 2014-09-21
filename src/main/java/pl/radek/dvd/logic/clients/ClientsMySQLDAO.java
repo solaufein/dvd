@@ -26,7 +26,7 @@ import java.util.List;
  */
 
 @Repository
-@Transactional
+//@Transactional
 public class ClientsMySQLDAO implements ClientsDAO {
 
     private static Logger logger = Logger.getLogger(ClientsMySQLDAO.class);
@@ -116,7 +116,8 @@ public class ClientsMySQLDAO implements ClientsDAO {
             query.append(" ORDER BY " + field + " " + order);
         }
 
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+     //   Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             for (FilterInfo filterInfo : filterInfoList) {
@@ -254,7 +255,8 @@ public class ClientsMySQLDAO implements ClientsDAO {
                 }
             }
 
-            q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+        //    q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
+            q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
             for (FilterInfo filterInfo : filterInfoList) {
                 if (filterInfo.getFilterColumn().equals(Constants.FIRSTNAME)) {

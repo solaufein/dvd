@@ -3,6 +3,7 @@ package pl.radek.dvd.service.genres;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.logic.genres.GenreDAO;
 import pl.radek.dvd.model.Genre;
@@ -16,6 +17,7 @@ import java.util.List;
  * Time: 16:28
  */
 @Service
+@Transactional
 public class GenresServiceImpl implements GenresService {
 
     private static Logger logger = Logger.getLogger(GenresServiceImpl.class);

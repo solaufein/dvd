@@ -3,6 +3,7 @@ package pl.radek.dvd.service.clients;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.clients.ClientDetails;
 import pl.radek.dvd.dto.clients.PaginatedListClientDetails;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class ClientDetailsServiceImpl implements ClientDetailsService {
 
     private static Logger logger = Logger.getLogger(ClientDetailsServiceImpl.class);
