@@ -14,6 +14,9 @@
            http://www.springframework.org/schema/tx
            http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!-- Root Context: defines shared resources visible to all other web components -->
+
+    <!-- here must be component scan for service and logic(dao) becouse we have HERE tx: annotation driven for transactional -->
     <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic" />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!--Tthe application context definition for the springapp DispatcherServlet -->
+    <!-- The application context definition for the springapp DispatcherServlet -->
 
     <!--context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller, pl.radek.dvd.listener"/-->
     <context:component-scan base-package="pl.radek.dvd.controller, pl.radek.dvd.listener"/>

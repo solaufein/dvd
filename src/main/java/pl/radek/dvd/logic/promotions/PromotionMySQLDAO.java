@@ -20,7 +20,6 @@ import java.util.List;
  */
 
 @Repository
-//@Transactional
 public class PromotionMySQLDAO implements PromotionDAO {
 
     private static Logger logger = Logger.getLogger(PromotionMySQLDAO.class);
@@ -54,17 +53,12 @@ public class PromotionMySQLDAO implements PromotionDAO {
 
     //    Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
 
-        Session session = hibernateTemplate.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        transaction.begin();
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         Promotion promotion = (Promotion) session.get(Promotion.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(promotion.getMovies());
-
-        transaction.commit();
-        session.flush();
-        session.close();
 
         logger.debug("Got Promotion by id: " + id);
         return promotion;

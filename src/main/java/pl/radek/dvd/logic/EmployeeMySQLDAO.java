@@ -20,7 +20,6 @@ import java.util.List;
  */
 
 @Repository
-//@Transactional
 public class EmployeeMySQLDAO implements EmployeeDAO {
 
     private static Logger logger = Logger.getLogger(EmployeeMySQLDAO.class);
@@ -69,7 +68,7 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         logger.debug("Getting employee by login(mail): " + login);
 
         String hql = "FROM Employee e WHERE e.email = :login";
-        Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(hql);
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql);
         q.setParameter("login", login);
         List results = q.list();
 

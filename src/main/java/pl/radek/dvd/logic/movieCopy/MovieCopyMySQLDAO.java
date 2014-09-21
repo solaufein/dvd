@@ -26,7 +26,6 @@ import java.util.List;
  */
 
 @Repository
-//@Transactional
 public class MovieCopyMySQLDAO implements MovieCopyDAO {
     private static Logger logger = Logger.getLogger(MovieCopyMySQLDAO.class);
 
@@ -63,10 +62,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
-    //    Session session = hibernateTemplate.getSessionFactory().openSession();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-   //     Transaction transaction = session.beginTransaction();
-    //    transaction.begin();
 
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.model.MovieCopy(mc.id, mc.serialNumber, mc.conditionInfo, mc.availability) FROM MovieCopy as mc ");
         //   StringBuilder query = new StringBuilder("FROM MovieCopy as mc ");
@@ -76,7 +72,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
 
         Query q = session.createQuery(query.toString());
-        //    Query q = hibernateTemplate.getSessionFactory().openSession().createQuery(query.toString());
 
         q.setParameter("ide", movieId);
 
@@ -94,10 +89,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
             Hibernate.initialize(movieCopy.getRentingRegistries());
         }*/
 
-   //     transaction.commit();
-   //     session.flush();
-   //     session.close();
-
         logger.debug("Got MovieCopies by id: " + movieId);
         return movieCopies;
     }
@@ -108,19 +99,12 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         //  MovieCopy movieCopy= (MovieCopy) hibernateTemplate.get(MovieCopy.class, id);
 
-    //    Session session = hibernateTemplate.getSessionFactory().openSession();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-   //     Transaction transaction = session.beginTransaction();
-  //      transaction.begin();
         MovieCopy movieCopy = (MovieCopy) session.get(MovieCopy.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(movieCopy.getMovie());
         Hibernate.initialize(movieCopy.getRentingRegistries());
-
-    //    transaction.commit();
-    //    session.flush();
-    //    session.close();
 
         logger.debug("Got MovieCopy by id: " + id);
         return movieCopy;
@@ -129,10 +113,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     @Override
     public void deleteMovieCopy(int id) {
         logger.debug("Deleting MovieCopy by id: " + id);
-    //    Session session = hibernateTemplate.getSessionFactory().openSession();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-   //     Transaction transaction = session.beginTransaction();
-   //     transaction.begin();
 
         //     MovieCopy movieCopy = hibernateTemplate.get(MovieCopy.class, id);
         //     hibernateTemplate.delete(movieCopy);
@@ -143,10 +124,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         session.delete(movieCopy);
 
-   //     transaction.commit();
-   //     session.flush();
-   //     session.close();
-
         logger.debug("Deleted MovieCopy with id: " + id);
     }
 
@@ -154,10 +131,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     public void addMovieCopy(int movieId, MovieCopy movieCopy) {
         logger.debug("Saving Movie Copy to Movie");
 
-   //     Session session = hibernateTemplate.getSessionFactory().openSession();
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-     //   Transaction transaction = session.beginTransaction();
-     //   transaction.begin();
 
         Movie movie = (Movie) session.get(Movie.class, movieId);
         movieCopy.setMovie(movie);
@@ -165,10 +139,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         session.save(movieCopy);
         movie.getMovieCopies().add(movieCopy);
-
-    //    transaction.commit();
-    //    session.flush();
-    //    session.close();
 
         logger.debug("Saved Movie Copy to Movie sucesfully");
     }

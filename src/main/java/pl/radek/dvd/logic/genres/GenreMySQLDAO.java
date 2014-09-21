@@ -20,7 +20,6 @@ import java.util.List;
  */
 
 @Repository
-//@Transactional
 public class GenreMySQLDAO implements GenreDAO {
 
     private static Logger logger = Logger.getLogger(GenreMySQLDAO.class);
@@ -54,17 +53,11 @@ public class GenreMySQLDAO implements GenreDAO {
 
       //  Genre genre = (Genre) hibernateTemplate.get(Genre.class, id);
 
-        Session session = hibernateTemplate.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        transaction.begin();
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         Genre genre = (Genre) session.get(Genre.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(genre.getMovies());
-
-        transaction.commit();
-        session.flush();
-        session.close();
 
         logger.debug("Got Genre by id: " + id);
         return genre;
