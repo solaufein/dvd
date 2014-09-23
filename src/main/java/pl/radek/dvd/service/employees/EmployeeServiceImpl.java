@@ -62,8 +62,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void passwordChangeKey(String email, String code) {
-
+    public void setPasswordChangeKey(String email, String code) {
+        employeeDAO.setPasswordChangeKey(email, code);
     }
 
     @Override

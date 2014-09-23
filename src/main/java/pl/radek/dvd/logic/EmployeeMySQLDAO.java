@@ -2,6 +2,7 @@ package pl.radek.dvd.logic;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.model.Employee;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -125,8 +128,23 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     }
 
     @Override
-    public void passwordChangeKey(String email, String code) {
+    public void setPasswordChangeKey(String email, String code) {
+        logger.debug("Updating Employee - setting generated code for email: " + email);
 
+        String hql = "update Employee e set e.pwChangeKey =:code, e.pwChangeDate =:data where e.email =:mail";
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String actualDate = sdf.format(date);
+        logger.debug("Actual formatted date: " + actualDate);
+
+        Session currentSession = hibernateTemplate.getSessionFactory().getCurrentSession();
+        Query query = currentSession.createQuery(hql);
+        query.setParameter("mail", email);
+        query.setParameter("code", code);
+        query.setParameter("data", date);
+        query.executeUpdate();
+
+        logger.debug("Updated Employee - setted generated code");
     }
 
     @Override

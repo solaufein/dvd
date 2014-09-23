@@ -20,6 +20,7 @@ INSERT INTO promotion VALUES(default,'Super Hit',5.99,3);
 
 INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'),default,default);
 INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'),default,default);
+INSERT INTO employee VALUES(default,'Radek','Wit','505226107','radoslawwitek@gmail.com',MD5('rad'),default,default);
 
 INSERT INTO roles VALUES(default,'ADMIN');
 INSERT INTO roles VALUES(default,'USER');
@@ -27,6 +28,8 @@ INSERT INTO roles VALUES(default,'USER');
 INSERT INTO employee_roles VALUES(1,1);
 INSERT INTO employee_roles VALUES(1,2);
 INSERT INTO employee_roles VALUES(2,2);
+INSERT INTO employee_roles VALUES(3,1);
+INSERT INTO employee_roles VALUES(3,2);
 
 INSERT INTO client VALUES(default,'Stefan','Kora','88122233322','Krakow','Dobrego Pasterza 1','603603032','kora@op.pl');
 INSERT INTO client VALUES(default,'Zofia','Piec','84122236312','Krakow','Wielicka 2','503203032','piec@op.pl');

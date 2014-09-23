@@ -77,6 +77,38 @@
     <bean name="secureRandom" class="java.security.SecureRandom">
     </bean>
 
+    <!-- Mail Authenticator implementation -->
+    <bean id="smtpAuthenticator"
+          class="pl.radek.dvd.mail.SmtpAuthenticator">
+        <constructor-arg value="{mail.smtp.user}" />
+        <constructor-arg value="{mail.smtp.password}" />
+    </bean>
+
+    <!-- Setup an authenticated session -->
+    <!--bean id="mailSession" class="javax.mail.Session"
+          factory-method="getInstance">
+        <constructor-arg>
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.socketFactory.port">465</prop>
+                <prop key="mail.smtp.socketFactory.class">
+                    javax.net.ssl.SSLSocketFactory
+                </prop>
+                <prop key="mail.smtp.socketFactory.fallback">
+                    false
+                </prop>
+            </props>
+        </constructor-arg>
+        <constructor-arg ref="smtpAuthenticator" />
+    </bean-->
+
+    <!-- Configure the MailSender with the authenticated session -->
+    <!--bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.smtp.host}" />
+        <property name="session" ref="mailSession" />
+    </bean-->
+
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="${mail.smtp.host}" />
         <property name="port" value="${mail.smtp.port}" />
@@ -87,6 +119,7 @@
                 <prop key="mail.transport.protocol">${mail.transport.protocol}</prop>
                 <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
                 <prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+                <prop key="mail.debug">true</prop>
             </props>
         </property>
     </bean>

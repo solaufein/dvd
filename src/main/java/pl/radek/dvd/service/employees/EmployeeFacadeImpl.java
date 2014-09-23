@@ -59,8 +59,8 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public void passwordChangeKey(String email, String code) {
-        employeeService.passwordChangeKey(email, code);
+    public void setPasswordChangeKey(String email, String code) {
+        employeeService.setPasswordChangeKey(email, code);
     }
 
     @Override

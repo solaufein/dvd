@@ -18,7 +18,7 @@ public interface EmployeeFacade {
     public void deleteEmployee(int id);
     public void addEmployee(Employee employee);
     public void updateEmployee(Employee employee);
-    public void passwordChangeKey(String email, String code);
+    public void setPasswordChangeKey(String email, String code);
     public int getNoOfRecords();
     public int getNoOfRecords(ListDataRequest listDataRequest);
 }
