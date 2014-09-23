@@ -148,6 +148,13 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     }
 
     @Override
+    public boolean checkLinkExp(String empId) {
+        logger.debug("Checking Link expiration time");
+
+        return true;
+    }
+
+    @Override
     public int getNoOfRecords() {
         logger.debug("Getting total number of records");
         int records;

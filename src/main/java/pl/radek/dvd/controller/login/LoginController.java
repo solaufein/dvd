@@ -20,7 +20,8 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(
             @RequestParam(value = "error", required = false) String error,
-            @RequestParam(value = "logout", required = false) String logout) {
+            @RequestParam(value = "logout", required = false) String logout,
+            @RequestParam(value = "changed", required = false) String changed) {
 
         ModelAndView model = new ModelAndView("/login");
         if (error != null) {
@@ -29,6 +30,10 @@ public class LoginController {
 
         if (logout != null) {
             model.addObject("msg", "You've been logged out successfully.");
+        }
+
+        if (changed != null) {
+            model.addObject("changed", "Your password has been changed successfully.");
         }
 
         return model;

@@ -68,7 +68,7 @@ public class RemindController {
         String kod = new BigInteger(130, secureRandom).toString(32);
 
         // save generated code to db (by given email)
-        employeeFacade.setPasswordChangeKey(email, kod);  // ! obsluga gdy jest exception bo nie ma takiego pracownika z takim emailem
+        employeeFacade.setPasswordChangeKey(email, kod);
 
         // send email with link " http://localhost:8080/dvd/remind/{kod} " to given email
         String subject = "Dvd Rentals - Request Changing Password";
@@ -94,15 +94,20 @@ public class RemindController {
     }
 
     @RequestMapping(value = " /remind/{empId}", method = RequestMethod.GET)
-    public String changePw(@PathVariable String empId,
-                           ModelMap modelMap) {
-        //todo: 2. zrobic drugi Controller ktory obsluzy tego linka (w zaleznosci: jesli przekroczony 5min czas- to msg i nic)
+    public String checkLinkExp(@PathVariable String empId,
+                               ModelMap modelMap) {
+        //todo:    obsluga linka (w zaleznosci: jesli przekroczony 5min czas- to msg i nic)
         //todo:    a jesli mozna zmienic, to widok do zmiany. Zmiana -> Controller, zapis do bazy nowego hasla, redirect: Login.page
 
+        boolean isActiveLink = employeeFacade.checkLinkExp(empId);
 
-
-        modelMap.addAttribute("msg", "Your link has expired! " + empId);
-
-        return "/remind";
+        if (isActiveLink) {
+            // link active (exists AND time is up to 5min), forward to change password view form
+            return "/change";
+        } else {
+            // link expired, forward to /remind with aproprietate message
+            modelMap.addAttribute("msg", "Your link has expired! " + empId);
+            return "/remind";
+        }
     }
 }

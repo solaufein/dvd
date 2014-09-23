@@ -14,6 +14,9 @@
   		<c:if test="${not empty msg}">
   			<div class="msg">${msg}</div>
   		</c:if>
+		<c:if test="${not empty changed}">
+  			<div class="msg">${changed}</div>
+  		</c:if>
 
     <c:url var="loginUrl" value="/j_spring_security_check"></c:url>
     <c:url var="remindUrl" value="/remind" context="/dvd"/>

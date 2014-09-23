@@ -19,6 +19,7 @@ public interface EmployeeService {
     public void addEmployee(Employee employee);
     public void updateEmployee(Employee employee);
     public void setPasswordChangeKey(String email, String code);
+    public boolean checkLinkExp(String empId);
     public int getNoOfRecords();
     public int getNoOfRecords(ListDataRequest listDataRequest);
 }

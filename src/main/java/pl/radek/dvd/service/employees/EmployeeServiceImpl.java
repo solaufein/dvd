@@ -67,6 +67,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public boolean checkLinkExp(String empId) {
+       return employeeDAO.checkLinkExp(empId);
+    }
+
+    @Override
     public int getNoOfRecords() {
         return employeeDAO.getNoOfRecords();
     }

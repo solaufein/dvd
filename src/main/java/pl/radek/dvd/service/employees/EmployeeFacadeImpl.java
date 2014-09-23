@@ -64,6 +64,11 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
+    public boolean checkLinkExp(String empId) {
+        return employeeService.checkLinkExp(empId);
+    }
+
+    @Override
     public int getNoOfRecords() {
         return employeeService.getNoOfRecords();
     }
