@@ -24,9 +24,10 @@
 		</div>
 		<div class="separator"></div>
 		<div class="inputs">
-			<input type="password" name="pw" value="" placeholder="New Password" autofocus/>
-			<input type="password" name="repw" value="" placeholder="Repeat New Password"/>
-			
+			<input type="password" id ="pw" name="pw" value="" placeholder="New Password" autofocus/>
+			<input type="password" id ="repw" name="repw" value="" placeholder="Repeat New Password"/>
+			<input type="hidden" name="empId" value="${empId}" />
+
 			<input type="submit" name="submit" value="Change" />
 
 			<div class="loginpage">
@@ -35,6 +36,33 @@
 		</div>
 	</form>
   </div>
-
+	<script>
+	$(document).ready(function(){
+		$( "#change" ).validate({
+			rules: {
+				pw: {
+					required: true,
+					minlength: 5
+				},
+				repw: {
+					required: true,
+					minlength: 5,
+					equalTo: "#pw"
+				}
+			},
+			messages: {
+				pw: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long"
+				},
+				repw: {
+					required: "Please provide a password",
+					minlength: "Your password must be at least 5 characters long",
+					equalTo: "Please enter the same password as above"
+				}
+			}
+		});
+	});
+	</script>
 </body>
 </html>

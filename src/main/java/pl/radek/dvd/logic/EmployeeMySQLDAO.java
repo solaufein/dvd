@@ -86,6 +86,25 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     }
 
     @Override
+    public Employee getEmployeeByEmpId(String empId) {
+        logger.debug("Getting employee by empId: " + empId);
+
+        String hql = "FROM Employee e WHERE e.pwChangeKey = :empId";
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(hql);
+        q.setParameter("empId", empId);
+        List results = q.list();
+
+        if (results.size() > 0) {
+            Employee employee = (Employee) results.get(0);
+            logger.debug("Got employee by empId: " + empId);
+            return employee;
+        } else {
+            logger.debug("Result list is null ");
+            return null;
+        }
+    }
+
+    @Override
     public void deleteEmployee(int id) {
         logger.debug("Deleting employee by id: " + id);
 
@@ -145,13 +164,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         query.executeUpdate();
 
         logger.debug("Updated Employee - setted generated code");
-    }
-
-    @Override
-    public boolean checkLinkExp(String empId) {
-        logger.debug("Checking Link expiration time");
-
-        return true;
     }
 
     @Override

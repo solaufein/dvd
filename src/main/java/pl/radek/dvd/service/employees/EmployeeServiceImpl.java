@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.logic.EmployeeDAO;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.utils.Encryption;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,13 +65,56 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void setPasswordChangeKey(String email, String code) {
-        employeeDAO.setPasswordChangeKey(email, code);
+    public void setPasswordChangeKey(String email, String code) throws EmployeeNotFoundException {
+        Employee employee = employeeDAO.getEmployee(email);
+
+        if (employee != null) {
+            Date date = new Date();
+            employee.setPwChangeKey(code);
+            employee.setPwChangeDate(date);
+
+            employeeDAO.updateEmployee(employee);
+        } else {
+            throw new EmployeeNotFoundException("Employee with given email: " + email + " not found!");
+        }
+
+        //   employeeDAO.setPasswordChangeKey(email, code);
+    }
+
+    @Override
+    public void changePassword(String empId, String pw) throws EmployeeNotFoundException {
+        Employee employeeByEmpId = employeeDAO.getEmployeeByEmpId(empId);
+
+        if (employeeByEmpId != null) {        // this empId exists
+            employeeByEmpId.setPassword(Encryption.encrypt(pw));       // encrypt password with md5
+            employeeDAO.updateEmployee(employeeByEmpId);
+        } else {
+            throw new EmployeeNotFoundException("Employee with given changePwKey: " + empId + " not found!");
+        }
     }
 
     @Override
     public boolean checkLinkExp(String empId) {
-       return employeeDAO.checkLinkExp(empId);
+        Employee employeeByEmpId = employeeDAO.getEmployeeByEmpId(empId);
+
+
+        if (employeeByEmpId != null) {        // this empId exists
+            //check if previous date - current date < 5min
+            Date pwChangeDate = employeeByEmpId.getPwChangeDate();
+            Date currentDate = new Date();
+
+            long diff = currentDate.getTime() - pwChangeDate.getTime();
+            long diffMinutes = diff / (60 * 1000) % 60;
+
+            if (diffMinutes < 3) {      //  if diffrence in minutes was less than 3min its ok
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
     }
 
     @Override

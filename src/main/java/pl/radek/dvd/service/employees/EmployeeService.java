@@ -1,6 +1,7 @@
 package pl.radek.dvd.service.employees;
 
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
 
 import java.util.List;
@@ -18,7 +19,8 @@ public interface EmployeeService {
     public void deleteEmployee(int id);
     public void addEmployee(Employee employee);
     public void updateEmployee(Employee employee);
-    public void setPasswordChangeKey(String email, String code);
+    public void setPasswordChangeKey(String email, String code) throws EmployeeNotFoundException;
+    public void changePassword(String empId, String pw) throws EmployeeNotFoundException;
     public boolean checkLinkExp(String empId);
     public int getNoOfRecords();
     public int getNoOfRecords(ListDataRequest listDataRequest);

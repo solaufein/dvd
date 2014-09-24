@@ -3,6 +3,7 @@ package pl.radek.dvd.service.employees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
 
 import java.util.List;
@@ -59,8 +60,13 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public void setPasswordChangeKey(String email, String code) {
+    public void setPasswordChangeKey(String email, String code) throws EmployeeNotFoundException {
         employeeService.setPasswordChangeKey(email, code);
+    }
+
+    @Override
+    public void changePassword(String empId, String pw) throws EmployeeNotFoundException {
+        employeeService.changePassword(empId, pw);
     }
 
     @Override

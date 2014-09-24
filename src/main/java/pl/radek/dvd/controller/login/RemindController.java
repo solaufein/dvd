@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
@@ -64,11 +65,19 @@ public class RemindController {
     @RequestMapping(value = "/remind", method = RequestMethod.POST)
     public ModelAndView sendRecoveryLink(@RequestParam(value = Constants.EMAIL) String email) {
 
+        ModelAndView model;
+
         // generate 25-26 alphanumerical code
         String kod = new BigInteger(130, secureRandom).toString(32);
 
         // save generated code to db (by given email)
-        employeeFacade.setPasswordChangeKey(email, kod);
+        try {
+            employeeFacade.setPasswordChangeKey(email, kod);
+        } catch (EmployeeNotFoundException e) {
+            model = new ModelAndView("/remind");    // forward to remind.jsp with msg: employee not found
+            model.addObject("msg", e.getMessage());
+            return model;
+        }
 
         // send email with link " http://localhost:8080/dvd/remind/{kod} " to given email
         String subject = "Dvd Rentals - Request Changing Password";
@@ -86,7 +95,7 @@ public class RemindController {
         // sends the e-mail
         mailSender.send(simpleMailMessage);
 
-        ModelAndView model = new ModelAndView("/remind");
+        model = new ModelAndView("/remind");    // forward to remind.jsp
         model.addObject("msg", "Recovery link has been sent!");
 
         return model;
@@ -96,17 +105,18 @@ public class RemindController {
     @RequestMapping(value = " /remind/{empId}", method = RequestMethod.GET)
     public String checkLinkExp(@PathVariable String empId,
                                ModelMap modelMap) {
-        //todo:    obsluga linka (w zaleznosci: jesli przekroczony 5min czas- to msg i nic)
-        //todo:    a jesli mozna zmienic, to widok do zmiany. Zmiana -> Controller, zapis do bazy nowego hasla, redirect: Login.page
+        // obsluga linka w zaleznosci: jesli przekroczony 3min czasu LUB key nie istnieje - to msg i nic
+        // a jesli mozna zmienic, to widok do zmiany.
 
         boolean isActiveLink = employeeFacade.checkLinkExp(empId);
 
         if (isActiveLink) {
             // link active (exists AND time is up to 5min), forward to change password view form
+            modelMap.addAttribute("empId", empId);
             return "/change";
         } else {
-            // link expired, forward to /remind with aproprietate message
-            modelMap.addAttribute("msg", "Your link has expired! " + empId);
+            // link expired or not exists, forward to /remind with aproprietate message
+            modelMap.addAttribute("msg", "Your link has expired or don't exists!");
             return "/remind";
         }
     }

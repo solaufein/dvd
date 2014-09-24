@@ -97,6 +97,7 @@ input:-moz-placeholder{
 	padding: 10px 10px;
 	width: 250px;
 	margin-bottom: 15px;
+	margin-top: 15px;
 	box-shadow: inset 0px 2px 3px rgba(0,0,0,0.1);
 	display: block;
 	clear: both;
@@ -144,6 +145,7 @@ input:-moz-placeholder{
 	height: 3em;
 	border: solid 1px black;
 	cursor: pointer;
+	margin-top: 10px;
 	display: block;
 }
 
