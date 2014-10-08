@@ -3,6 +3,8 @@ package pl.radek.dvd.service.employees;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
 
@@ -30,7 +32,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public List<Employee> getEmployees(ListDataRequest listDataRequest) {
+    public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest){
         return employeeService.getEmployees(listDataRequest);
     }
 

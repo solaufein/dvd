@@ -1,6 +1,8 @@
 package pl.radek.dvd.service.employees;
 
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
 
@@ -13,7 +15,7 @@ import java.util.List;
  */
 public interface EmployeeFacade {
     public List<Employee> getEmployees();
-    public List<Employee> getEmployees(ListDataRequest listDataRequest);
+    public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest);
     public Employee getEmployee(int id);
     public Employee getEmployee(String name);
     public void deleteEmployee(int id);

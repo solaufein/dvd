@@ -23,18 +23,10 @@
 			This is default text, which will be replaced
 		</div>
 		
-		<form id="formularz" action="#" method="get" onsubmit="popup()">
-            <input type="submit" value="popupik" class = "myButton"/>
-        </form>
 		
 		<script>
 			$(document).ready(function(){
-				$("#formularz").click(function() {
-					alert( "Handler for .click() called." );
-				});
-			});
 			
-			$(document).ready(function(){
 			$("#navigation_left ul li a").click(function() {
 
 					var loading = $('<div id="loading"/>');
@@ -53,6 +45,8 @@
 						return false;
 				});
 			});
+			
+			
 		</script>
 		
 	</tiles:putAttribute>

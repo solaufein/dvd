@@ -21,6 +21,9 @@ INSERT INTO promotion VALUES(default,'Super Hit',5.99,3);
 INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'),default,default);
 INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'),default,default);
 INSERT INTO employee VALUES(default,'Radek','Wit','505226107','radoslawwitek@gmail.com',MD5('rad'),default,default);
+INSERT INTO employee VALUES(default,'Stefan','Oso','515226107','raslawwitek@gmail.com',MD5('zzz'),default,default);
+INSERT INTO employee VALUES(default,'Ziut','Ksow','525226107','ratitek@gmail.com',MD5('sss'),default,default);
+INSERT INTO employee VALUES(default,'Ferdek','Etet','535226107','razitek@gmail.com',MD5('eee'),default,default);
 
 INSERT INTO roles VALUES(default,'ADMIN');
 INSERT INTO roles VALUES(default,'USER');

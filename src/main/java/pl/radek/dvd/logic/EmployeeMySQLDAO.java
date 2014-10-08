@@ -1,6 +1,7 @@
 package pl.radek.dvd.logic;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.model.Employee;
 
 import java.text.SimpleDateFormat;
@@ -53,7 +56,36 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
     @Override
     public List<Employee> getEmployees(ListDataRequest listDataRequest) {
-        return null;
+        logger.debug("Perform method getEmployees with listDataRequest");
+        PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
+
+        final int page = paginationInfo.getPage();
+        final int recordsPerPage = paginationInfo.getRecordsPerPage();
+        final int offset = (page - 1) * recordsPerPage;
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        StringBuilder query = new StringBuilder("FROM Employee as e ");
+
+        Query q = session.createQuery(query.toString());
+
+        if (paginationInfo != null) {
+            q.setFirstResult(offset);
+            q.setMaxResults(recordsPerPage);
+        }
+
+        List<Employee> employees = (List<Employee>) q.list();
+
+        //todo: ok ?
+        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
+        /*for (Employee employee : employees) {
+            Hibernate.initialize(employee.getRentingRegistries());
+            Hibernate.initialize(employee.getRolesSet());
+        }*/
+
+        logger.debug("Got Paginated EmployeeList ");
+
+        return employees;
     }
 
     @Override
@@ -181,6 +213,7 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
+
         int records = getNoOfRecords();
 
         return records;

@@ -53,7 +53,7 @@ public class RemindController {
     public ModelAndView pwReminderForm(
             @RequestParam(value = "msg", required = false) String msg) {
 
-        ModelAndView model = new ModelAndView("/remind");
+        ModelAndView model = new ModelAndView("/remind");        // remnind.jsp
         if (msg != null) {
             model.addObject("msg", "Recovery link has been sent!");
         }

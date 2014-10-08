@@ -3,19 +3,14 @@ package pl.radek.dvd.service.promotions;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.promotions.PromotionData;
-import pl.radek.dvd.model.Promotion;
-
-import java.util.List;
 
 /**
  * User: Sola
- * Date: 2014-07-26
- * Time: 16:27
+ * Date: 2014-10-08
+ * Time: 12:43
  */
-public interface PromotionsService {
-    public List<PromotionData> getPromotions();
+public interface PromotionsFacade {
     public PaginatedList<PromotionData> getPromotions(ListDataRequest listDataRequest);
-    public List<Promotion> getPromotionsEntity();
     public PromotionData getPromotion(int id);
     public void deletePromotion(int id);
     public void addPromotion(PromotionData promotion);

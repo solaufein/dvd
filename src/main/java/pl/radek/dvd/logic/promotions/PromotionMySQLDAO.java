@@ -2,13 +2,18 @@ package pl.radek.dvd.logic.promotions;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
@@ -48,10 +53,43 @@ public class PromotionMySQLDAO implements PromotionDAO {
     }
 
     @Override
+    public List<Promotion> getPromotions(ListDataRequest listDataRequest) {
+        logger.debug("Perform method getPromotions with listDataRequest");
+        PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
+
+        final int page = paginationInfo.getPage();
+        final int recordsPerPage = paginationInfo.getRecordsPerPage();
+        final int offset = (page - 1) * recordsPerPage;
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        StringBuilder query = new StringBuilder("FROM Promotion as p ");
+
+        Query q = session.createQuery(query.toString());
+
+        if (paginationInfo != null) {
+            q.setFirstResult(offset);
+            q.setMaxResults(recordsPerPage);
+        }
+
+        List<Promotion> promotions = (List<Promotion>) q.list();
+
+        //todo: ok ?
+        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
+        /*for (Promotion promotion : promotions) {
+            Hibernate.initialize(promotion.getMovies());
+        }*/
+
+        logger.debug("Got Paginated Promotions List ");
+
+        return promotions;
+    }
+
+    @Override
     public Promotion getPromotion(int id) {
         logger.debug("Getting Promotion by id: " + id);
 
-    //    Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
+        //    Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
 
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
@@ -82,5 +120,25 @@ public class PromotionMySQLDAO implements PromotionDAO {
     @Override
     public void updatePromotion(Promotion promotion) {
         hibernateTemplate.update(promotion);
+    }
+
+    public int getNoOfRecords() {
+        logger.debug("Getting total number of records");
+        int records;
+        String hql = "SELECT COUNT(*) FROM Promotion";
+
+        records = DataAccessUtils.intResult(hibernateTemplate.find(hql));
+        //      records = jdbcTemplate.queryForInt(hql);
+        logger.debug("Got total number of records = " + records);
+
+        return records;
+    }
+
+    @Override
+    public int getNoOfRecords(ListDataRequest listDataRequest) {
+
+        int records = getNoOfRecords();
+
+        return records;
     }
 }

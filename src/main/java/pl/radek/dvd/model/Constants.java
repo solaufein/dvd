@@ -46,6 +46,14 @@ public class Constants {
     public static final String DESCRIPTION = "description";
     public static final String ACTOR = "actor";
 
+    //Movies
+    public static final String EMPLOYEELIST = "employeeList";
+    public static final String EMPLOYEE = "employee";
+
+    //Promotions
+    public static final String PROMOTIONLIST = "promotionList";
+
+
     //for jstl, el, jsp purposes
     public String asc = ASC;
     public String desc = DESC;
@@ -82,6 +90,12 @@ public class Constants {
     public String productionyear = PRODUCTIONYEAR;
     public String description = DESCRIPTION;
     public String actor = ACTOR;
+
+    public String employeelist = EMPLOYEELIST;
+    public String employee = EMPLOYEE;
+
+    public String promotionlist = PROMOTIONLIST;
+
 
     public String getAsc() {
         return asc;
@@ -313,5 +327,49 @@ public class Constants {
 
     public void setMovieid(String movieid) {
         this.movieid = movieid;
+    }
+
+    public static String getNoOfPages() {
+        return NO_OF_PAGES;
+    }
+
+    public String getEmployeelist() {
+        return employeelist;
+    }
+
+    public void setEmployeelist(String employeelist) {
+        this.employeelist = employeelist;
+    }
+
+    public String getPromotionlist() {
+        return promotionlist;
+    }
+
+    public void setPromotionlist(String promotionlist) {
+        this.promotionlist = promotionlist;
+    }
+
+    public String getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(String employee) {
+        this.employee = employee;
+    }
+
+    public String getMovieslist() {
+        return movieslist;
+    }
+
+    public void setMovieslist(String movieslist) {
+        this.movieslist = movieslist;
+    }
+
+    public String getMovie() {
+        return movie;
+    }
+
+    public void setMovie(String movie) {
+        this.movie = movie;
     }
 }

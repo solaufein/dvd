@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.promotions.PaginatedListPromotion;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.logic.promotions.PromotionDAO;
 import pl.radek.dvd.model.Promotion;
@@ -35,6 +38,18 @@ public class PromotionsServiceImpl implements PromotionsService {
         List<Promotion> promotions = promotionDAO.getPromotions();
         List<PromotionData> promotionDatas = convertPromotionListToPromotionDataList(promotions);
         return promotionDatas;
+    }
+
+    @Override
+    public PaginatedList<PromotionData> getPromotions(ListDataRequest listDataRequest) {
+        List<Promotion> promotions = promotionDAO.getPromotions(listDataRequest);
+        int noOfRecords = promotionDAO.getNoOfRecords(listDataRequest);
+
+        PaginatedListPromotion paginatedListPromotion = new PaginatedListPromotion();
+        paginatedListPromotion.setPromotionDataList(convertPromotionListToPromotionDataList(promotions));
+        paginatedListPromotion.setNoOfRecords(noOfRecords);
+
+        return paginatedListPromotion;
     }
 
     @Override

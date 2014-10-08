@@ -37,7 +37,7 @@ public class GetAdministrationController {
 
         // follow to movie_details.jsp
         logger.info("Follow to administration jsp");
-        modelMap.addAttribute(Constants.CURRENTPAGE, page);
+        //    modelMap.addAttribute(Constants.CURRENTPAGE, page);
 
         return "/administration/administration";
     }

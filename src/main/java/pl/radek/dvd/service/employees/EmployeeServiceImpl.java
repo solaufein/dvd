@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.employees.EmployeeData;
+import pl.radek.dvd.dto.employees.PaginatedListEmployee;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.logic.EmployeeDAO;
 import pl.radek.dvd.model.Employee;
 import pl.radek.dvd.utils.Encryption;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -35,8 +39,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployees(ListDataRequest listDataRequest) {
-        return employeeDAO.getEmployees(listDataRequest);
+    public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest) {
+        List<Employee> employeeList = employeeDAO.getEmployees(listDataRequest);
+        int noOfRecords = employeeDAO.getNoOfRecords();
+
+        PaginatedListEmployee paginatedList = new PaginatedListEmployee();
+        paginatedList.setEmployeeDataList(convertEmployeeListToEmployeeDataList(employeeList));
+        paginatedList.setNoOfRecords(noOfRecords);
+
+        return paginatedList;
     }
 
     @Override
@@ -125,5 +136,50 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
         return employeeDAO.getNoOfRecords(listDataRequest);
+    }
+
+    private List<EmployeeData> convertEmployeeListToEmployeeDataList(List<Employee> employees) {
+        List<EmployeeData> list = new LinkedList<EmployeeData>();
+        for (Employee employee : employees) {
+            EmployeeData employeeData = convertEmployeeToEmployeeData(employee);
+            list.add(employeeData);
+        }
+
+        return list;
+    }
+
+    private EmployeeData convertEmployeeToEmployeeData(Employee employee) {
+        EmployeeData employeeData = new EmployeeData();
+
+        employeeData.setId(employee.getId());
+        employeeData.setFirstName(employee.getFirstName());
+        employeeData.setLastName(employee.getLastName());
+        employeeData.setEmail(employee.getEmail());
+        employeeData.setPassword(employee.getPassword());
+        employeeData.setPhoneNumber(employee.getPhoneNumber());
+        employeeData.setPwChangeDate(employee.getPwChangeDate());
+        employeeData.setPwChangeKey(employee.getPwChangeKey());
+        employeeData.setRentingRegistries(employee.getRentingRegistries());
+        employeeData.setRolesSet(employee.getRolesSet());
+
+
+        return employeeData;
+    }
+
+    private Employee convertEmployeeDataToEmployee(EmployeeData employeeData) {
+        Employee employee = new Employee();
+
+        employee.setId(employeeData.getId());
+        employee.setFirstName(employeeData.getFirstName());
+        employee.setLastName(employeeData.getLastName());
+        employee.setEmail(employeeData.getEmail());
+        employee.setPassword(employeeData.getPassword());
+        employee.setPhoneNumber(employeeData.getPhoneNumber());
+        employee.setPwChangeDate(employeeData.getPwChangeDate());
+        employee.setPwChangeKey(employeeData.getPwChangeKey());
+        employee.setRentingRegistries(employeeData.getRentingRegistries());
+        employee.setRolesSet(employeeData.getRolesSet());
+
+        return employee;
     }
 }

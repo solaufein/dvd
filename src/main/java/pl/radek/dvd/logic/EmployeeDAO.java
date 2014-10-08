@@ -1,6 +1,7 @@
 package pl.radek.dvd.logic;
 
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.model.Employee;
 
 import java.util.List;
