@@ -1,5 +1,6 @@
 package pl.radek.dvd.service.employees;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
@@ -18,6 +19,8 @@ import java.util.List;
 
 @Component
 public class EmployeeFacadeImpl implements EmployeeFacade {
+
+    private static Logger logger = Logger.getLogger(EmployeeFacadeImpl.class);
 
     @Autowired
     EmployeeService employeeService;

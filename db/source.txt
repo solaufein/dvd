@@ -1,0 +1,11 @@
+drop database rentalmovie;
+
+source C:\Users\Sola\IdeaProjects\dvd\db\dvd.sql
+source C:\Users\Sola\IdeaProjects\dvd\db\data.sql
+
+show create table employee;
+
+SHOW ENGINE INNODB STATUS;
+
+
+$(event.target).attr("href")

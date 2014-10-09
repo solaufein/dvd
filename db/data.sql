@@ -33,6 +33,9 @@ INSERT INTO employee_roles VALUES(1,2);
 INSERT INTO employee_roles VALUES(2,2);
 INSERT INTO employee_roles VALUES(3,1);
 INSERT INTO employee_roles VALUES(3,2);
+INSERT INTO employee_roles VALUES(4,1);
+INSERT INTO employee_roles VALUES(5,1);
+INSERT INTO employee_roles VALUES(6,1);
 
 INSERT INTO client VALUES(default,'Stefan','Kora','88122233322','Krakow','Dobrego Pasterza 1','603603032','kora@op.pl');
 INSERT INTO client VALUES(default,'Zofia','Piec','84122236312','Krakow','Wielicka 2','503203032','piec@op.pl');

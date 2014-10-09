@@ -49,3 +49,22 @@
   text-decoration: none;
   border: solid 1px black;
 }
+
+.delempbtn{
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 11px;
+    background: #333;
+    padding: 5px 13px 5px 13px;
+    text-decoration: none;
+    border: solid 1px black;
+    cursor: pointer;
+}
+
+.delempbtn:hover {
+  background: #383;
+  text-decoration: none;
+}

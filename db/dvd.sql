@@ -46,7 +46,6 @@ CREATE TABLE employee
 first_name VARCHAR(30) NOT NULL, 
 last_name VARCHAR(30) NOT NULL, 
 phone_number VARCHAR(40) NOT NULL,
-phone_number VARCHAR(40) NOT NULL,
 email VARCHAR(60) NOT NULL,
 password VARCHAR(32) NOT NULL,
 pw_change_key VARCHAR(30)DEFAULT NULL,
@@ -64,8 +63,8 @@ CREATE TABLE employee_roles
 (employee_id BIGINT NOT NULL,
 role_id BIGINT NOT NULL,
 PRIMARY KEY(employee_id, role_id),
-CONSTRAINT fk_employee FOREIGN KEY(employee_id) REFERENCES employee(id),
-CONSTRAINT fk_role FOREIGN KEY(role_id) REFERENCES roles(id));
+CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE);
 
 CREATE TABLE client
 (id BIGINT NOT NULL AUTO_INCREMENT,

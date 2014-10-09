@@ -35,7 +35,7 @@ public class GetPromotionsController {
         this.promotionsFacade = promotionsFacade;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String handleRequest(@RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage,
                                 ModelMap modelMap) throws Exception {
 

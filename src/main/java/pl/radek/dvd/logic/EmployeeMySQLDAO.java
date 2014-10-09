@@ -140,8 +140,15 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     public void deleteEmployee(int id) {
         logger.debug("Deleting employee by id: " + id);
 
-        hibernateTemplate.delete(hibernateTemplate.get(Employee.class, id));
-        //      hibernateTemplate.bulkUpdate("delete from Employee where id = " + id);
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        Employee employee = (Employee) session.get(Employee.class, id);
+        //   Hibernate.initialize(employee.getRolesSet());
+        //   Hibernate.initialize(employee.getRentingRegistries());
+
+        session.delete(employee);
+
+        // hibernateTemplate.delete(hibernateTemplate.get(Employee.class, id));
+        // hibernateTemplate.bulkUpdate("delete from Employee where id = " + id);
 
         logger.debug("Deleted employee");
     }

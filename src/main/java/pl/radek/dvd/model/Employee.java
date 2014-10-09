@@ -42,7 +42,7 @@ public class Employee {
     @Temporal(TemporalType.TIMESTAMP)
     private Date pwChangeDate;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.LAZY)    // cascade = {CascadeType.ALL},fetch=FetchType.EAGER ?
     @JoinTable(name = "employee_roles",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
