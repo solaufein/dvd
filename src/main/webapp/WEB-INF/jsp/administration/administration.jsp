@@ -20,32 +20,15 @@
 		<c:url value="/resources/images/loading.gif" var="loadgif" />
 
 		<div id="ajax-content">
-			This is default text, which will be replaced
+			Choose tab that you are interested in...
 		</div>
 		
 		
 		<script>
+			
 			$(document).ready(function(){
-			
-			$("#navigation_left ul li a").click(function() {
-
-					var loading = $('<div id="loading"/>');
-					loading.prepend('<img src="${loadgif}" />');
-					
-					$("#ajax-content").empty().append(loading);
-					$("#navigation_left ul li a").removeClass("current");
-					$(this).addClass("current");
-
-					$.ajax
-					({ url: this.href,
-					   success: function(html) {
-						$("#ajax-content").empty().append(html);
-						}
-					});
-						return false;
-				});
+				tabsAction("${loadgif}");
 			});
-			
 			
 		</script>
 		

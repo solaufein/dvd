@@ -63,6 +63,9 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
+        logger.debug("getEmployees - page:  " + page);
+        logger.debug("getEmployees - recordsPerPage:  " + recordsPerPage);
+
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
         StringBuilder query = new StringBuilder("FROM Employee as e ");

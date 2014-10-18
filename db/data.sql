@@ -21,9 +21,15 @@ INSERT INTO promotion VALUES(default,'Super Hit',5.99,3);
 INSERT INTO employee VALUES(default,'Adam','Nowak','505505505','nowak@op.pl',MD5('nowak1'),default,default);
 INSERT INTO employee VALUES(default,'Julia','Szpak','601602603','szpak@op.pl',MD5('szpak1'),default,default);
 INSERT INTO employee VALUES(default,'Radek','Wit','505226107','radoslawwitek@gmail.com',MD5('rad'),default,default);
-INSERT INTO employee VALUES(default,'Stefan','Oso','515226107','raslawwitek@gmail.com',MD5('zzz'),default,default);
-INSERT INTO employee VALUES(default,'Ziut','Ksow','525226107','ratitek@gmail.com',MD5('sss'),default,default);
-INSERT INTO employee VALUES(default,'Ferdek','Etet','535226107','razitek@gmail.com',MD5('eee'),default,default);
+INSERT INTO employee VALUES(default,'Stefan','Oso','595226127','raslawwitek@gmail.com',MD5('zzz'),default,default);
+INSERT INTO employee VALUES(default,'Ziut','Ksow','525126107','ratitek@gmail.com',MD5('ssrs'),default,default);
+INSERT INTO employee VALUES(default,'Ferdek','Etet','535226117','ferdo@gmail.com',MD5('e2ee'),default,default);
+INSERT INTO employee VALUES(default,'Guto','Kajet','565727107','kajeto@gmail.com',MD5('oowso'),default,default);
+INSERT INTO employee VALUES(default,'Riko','Zipes','585286187','rikozip@gmail.com',MD5('ttft'),default,default);
+INSERT INTO employee VALUES(default,'Yerbo','Kreco','511226117','yerbaa@gmail.com',MD5('zzswe'),default,default);
+INSERT INTO employee VALUES(default,'Nolas','Yusi','522215167','nosa@gmail.com',MD5('z265we'),default,default);
+INSERT INTO employee VALUES(default,'Jhok','Rok','721125117','jhos@gmail.com',MD5('sgr3'),default,default);
+INSERT INTO employee VALUES(default,'Susi','Jonns','616263167','jokkos@gmail.com',MD5('gfde2'),default,default);
 
 INSERT INTO roles VALUES(default,'ADMIN');
 INSERT INTO roles VALUES(default,'USER');
@@ -36,6 +42,9 @@ INSERT INTO employee_roles VALUES(3,2);
 INSERT INTO employee_roles VALUES(4,1);
 INSERT INTO employee_roles VALUES(5,1);
 INSERT INTO employee_roles VALUES(6,1);
+INSERT INTO employee_roles VALUES(7,1);
+INSERT INTO employee_roles VALUES(8,1);
+INSERT INTO employee_roles VALUES(9,1);
 
 INSERT INTO client VALUES(default,'Stefan','Kora','88122233322','Krakow','Dobrego Pasterza 1','603603032','kora@op.pl');
 INSERT INTO client VALUES(default,'Zofia','Piec','84122236312','Krakow','Wielicka 2','503203032','piec@op.pl');

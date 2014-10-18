@@ -36,6 +36,8 @@
         <put-list-attribute name="jsList" cascade="true" inherit="true">
             <add-attribute value="/resources/js/tabs.js" />
             <add-attribute value="/resources/js/hello.js" />
+            <add-attribute value="/resources/js/employee_pagination.js" />
+            <add-attribute value="/resources/js/employee_actions.js" />
         </put-list-attribute>
     </definition>
 

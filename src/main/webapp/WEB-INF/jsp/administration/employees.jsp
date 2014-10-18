@@ -5,7 +5,7 @@
 		
 		
 	<div class="table">
-               <table id = "tabb"> 
+               <table id = "tabb">   
                  <tr>
                   <td>
 					<spring:message code="employee.employeeList.firstName"/>
@@ -38,7 +38,7 @@
 							  <!--a href="<c:url value="employees/delete/${employee.id}"/>.json" id = "delemp" class = "myButton">Delete</a-->
 							  <form name="deleteemployee" class="delemp" action="<c:url value="employees/delete"/>" method="POST">
                                   <input type="hidden" name="id" value="${employee.id}" />
-                                  <input type="submit" value="<spring:message code="common.button.delete"/> ${employee.id}" class = "delempbtn"/>
+                                  <input type="submit" value="<spring:message code="common.button.delete"/>" class = "delempbtn"/>
                               </form>
 							</td>
 						</tr>
@@ -88,7 +88,7 @@
 			   </td>
 			   </tr>
 			   </table>
-			   </div>
+	</div>
 	</br>
 	   <form name="newemployee" id="newemp" action="<c:url value="employees/new"/>" method="post">
 		 <input type="hidden" name="id" value = "new" />
@@ -96,165 +96,13 @@
 	   </form>
 	</br>
 	
+	<c:url value="employees/list" var="adres"/>
+	
 	<script>
 		$(document).ready(function(){
-		var currentPage = 1;
-		var noOfPages = ${noOfPages};
 		
-		var loading = $('<div id="loading"/>');
-		loading.prepend('<img src="${loadgif}" />');
-		
-		if (currentPage == 1){
-			$("#firstlink").hide();
-			$("#previouslink").hide();
-		}
-		if (currentPage == noOfPages){
-			$("#nextlink").hide();
-			$("#lastlink").hide();
-		}
-			
-			$("#nextlink").click(function() {
-				currentPage += 1;
-				$(".table").empty().append(loading);
-
-				$.ajax
-				({ type: $("#nextlink").attr("method"),
-				   url: $("#nextlink").attr("action"),
-				   data: $("#nextlink").serialize(),
-				   success: function(html) {
-					$(".table").empty().append(html);
-						if (currentPage == noOfPages){
-							$("#nextlink").hide();
-							$("#lastlink").hide();
-							$("#firstlink").show();
-							$("#previouslink").show();
-						}
-					}
-				});
-				
-				$("#page").text(currentPage + " / " + noOfPages);
-				return false;
-			});
-			
-			$("#firstlink").click(function() {
-				currentPage = 1;
-				$(".table").empty().append(loading);
-
-				$.ajax
-				({ type: $("#firstlink").attr("method"),
-				   url: $("#firstlink").attr("action"),
-				   data: $("#firstlink").serialize(),
-				   success: function(html) {
-					$(".table").empty().append(html);
-						if (currentPage == 1){
-							$("#nextlink").show();
-							$("#lastlink").show();
-							$("#firstlink").hide();
-							$("#previouslink").hide();
-						}
-					}
-				});
-				
-				$("#page").text(currentPage + " / " + noOfPages);
-				return false;
-			});
-			
-			$("#previouslink").click(function() {
-				currentPage -= 1;
-				$(".table").empty().append(loading);
-
-				$.ajax
-				({ type: $("#previouslink").attr("method"),
-				   url: $("#previouslink").attr("action"),
-				   data: $("#previouslink").serialize(),
-				   success: function(html) {
-					$(".table").empty().append(html);
-						if (currentPage == 1){
-							$("#nextlink").show();
-							$("#lastlink").show();
-							$("#firstlink").hide();
-							$("#previouslink").hide();
-						}
-					}
-				});
-				
-				$("#page").text(currentPage + " / " + noOfPages);
-				return false;
-			});
-			
-			$("#lastlink").click(function() {
-				currentPage = ${noOfPages};
-				$(".table").empty().append(loading);
-
-				$.ajax
-				({ type: $("#lastlink").attr("method"),
-				   url: $("#lastlink").attr("action"),
-				   data: $("#lastlink").serialize(),
-				   success: function(html) {
-					$(".table").empty().append(html);
-						if (currentPage == noOfPages){
-							$("#nextlink").hide();
-							$("#lastlink").hide();
-							$("#firstlink").show();
-							$("#previouslink").show();
-						}
-					}
-				});
-				
-				$("#page").text(currentPage + " / " + noOfPages);
-				return false;
-			});
-			
-			$(".delempbtn").on("click",function(e) {
-				e.preventDefault();
-				var conBox = confirm("Are you sure ?");
-				if(conBox){
-					$.ajax
-					({ 
-					   type: $(".delemp").attr("method"),
-					   url: $(".delemp").attr("action"),
-					   data: $(this).parent().serialize(),
-					   success: function(response) {
-						alert("done deleted." + response);
-						$(".table").load("<c:url value="employees/list"/> #tabb");
-				//		$(e.target).closest("tr").remove;
-						
-						}
-					});
-					return false;
-				} else {
-				//	$(this).dialog("close");
-					return false;
-				}
-			});
-			
-			
-			
-			$("#newemp").click(function() {
-				$.ajax
-				({ type: $("#newemp").attr("method"),
-				   url: $("#newemp").attr("action"),
-				   data: $("#newemp").serialize(),
-				   success: function(html) {
-
-						
-					}
-				});
-				return false;
-			});
-			
-			$("#editemp").click(function() {
-				$.ajax
-				({ type: $("#editemp").attr("method"),
-				   url: $("#editemp").attr("action"),
-				   data: $("#editemp").serialize(),
-				   success: function(html) {
-
-						
-					}
-				});
-				return false;
-			});
+		initPaginationButtons("${noOfPages}");
+		initActionButtons("${adres}");	
 		
 		});
 	</script>

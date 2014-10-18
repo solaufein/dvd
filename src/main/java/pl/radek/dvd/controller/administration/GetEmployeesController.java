@@ -55,10 +55,11 @@ public class GetEmployeesController {
         List<EmployeeData> employeeDataList = employeeDataPaginatedList.getDataList();
 
         noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        logger.info(" !!!! EMPLOYEES !!!! ");
+        logger.info(" !!!! EMPLOYEES LIST !!!! ");
         logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
         logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
         logger.info(" !!!! NO OF PAGES : " + noOfPages);
+        logger.info(" !!!! CURRENT PAGE : " + page);
 
         // follow to employees.jsp
         logger.info("Follow to employees jsp");
@@ -81,7 +82,11 @@ public class GetEmployeesController {
         int recordsPerPage = 5;
         if (currentPage != null) {
             page = Integer.parseInt(currentPage);
+        } else {
+            logger.info(" !!!! CurrentPage is NULL (0) ");
         }
+
+
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
 
         listDataRequest = new ListDataRequest(null, null, paginationInfo);
@@ -89,10 +94,17 @@ public class GetEmployeesController {
         PaginatedList<EmployeeData> employeeDataPaginatedList = employeeFacade.getEmployees(listDataRequest);
         List<EmployeeData> employeeDataList = employeeDataPaginatedList.getDataList();
 
+        int noOfRecords = employeeDataPaginatedList.getNoOfRecords();                      // ??
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);              // ??
+
         // follow to employees_page.jsp
         logger.info("Follow to employees_page jsp");
         modelMap.addAttribute(Constants.EMPLOYEELIST, employeeDataList);
+   //     modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);                         // ??
 
+        logger.info(" !!!! EMPLOYEES CURRENT PAGE !!!! ");
+        logger.info(" !!!! NO OF PAGES : " + noOfPages);                                 // ??
+        logger.info(" !!!! PAGE : " + page);
 
         return "/administration/employees_page";
     }
@@ -108,21 +120,21 @@ public class GetEmployeesController {
         logger.info("Employee with id = " + id + " successfully deleted");
 
         //  return "/administration/employees_page";
-        return "deleted";
+        return "Employee successfully deleted";
     }
 
     /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public void deleteEmp(@PathVariable("id") int id, ModelMap modelMap) throws Exception {
+    public String deleteEmp(@PathVariable("id") int id) throws Exception {
 
         logger.info("Deleting employee with id=" + id);
 
         employeeFacade.deleteEmployee(id);
 
-        logger.info("Employee successfully deleted");
+        logger.info("Employee with id = " + id + " successfully deleted");
 
         //  return "/administration/employees_page";
-        //  return "deleted";
+          return "deleted";
     }*/
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
