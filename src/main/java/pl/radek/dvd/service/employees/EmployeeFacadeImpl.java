@@ -6,8 +6,10 @@ import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.employees.EmployeeData;
+import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.service.roles.RoleService;
 
 import java.util.List;
 
@@ -25,8 +27,20 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     @Autowired
     EmployeeService employeeService;
 
+    @Autowired
+    RoleService roleService;
+
     public void setEmployeeService(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
+    @Override
+    public List<RoleData> getRoles() {
+        return roleService.getRoles();
     }
 
     @Override
@@ -55,12 +69,12 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public void addEmployee(EmployeeData employee) {
         employeeService.addEmployee(employee);
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(EmployeeData employee) {
         employeeService.updateEmployee(employee);
     }
 

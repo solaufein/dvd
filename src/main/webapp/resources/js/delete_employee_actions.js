@@ -31,47 +31,11 @@ function deleteEmp(obj , address){
 		return false;
 	}
 }
-
-function newEmp(obj, address){
-	$.ajax
-	({ type: $("#newemp").attr("method"),
-	   url: $("#newemp").attr("action"),
-	   data: $("#newemp").serialize(),
-	   success: function(html) {
-
-
-		}
-	});
-}
-
-function editEmp(obj, address){
-	$.ajax
-	({ type: $("#editemp").attr("method"),
-	   url: $("#editemp").attr("action"),
-	   data: $("#editemp").serialize(),
-	   success: function(html) {
-
-
-		}
-	});
-}		
-		
-function initActionButtons(address){
-
+	
+function initDeleteButton(address){
+  // DELETE ACTION
   $(".table").on("click",".delempbtn",function(e) {
 	e.preventDefault();
 	deleteEmp(this, address);
   });
-
-  $("#newemp").on("click", function(e) {
-	e.preventDefault();
-	newEmp(this, address);	
-  });
-
-	$("#editemp").on("click", function(e) {
-	e.preventDefault();
-	editEmp(this, address);	
-  });
-  
-
 }

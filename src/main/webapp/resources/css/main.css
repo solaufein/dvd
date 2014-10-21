@@ -1,7 +1,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+	font: 11px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
 	color: #404040;
 	background:#0ca3d2;
 }
@@ -165,6 +165,19 @@ body {
 	margin: 0 0 .5em;
 }
 
+#ajax-content
+{
+	clear: left;
+	padding: 20px;
+	min-height:700px;
+	background: #fff;
+}
+
+#ajax-content #loading {
+  width: 50%;
+  margin: 0 auto;
+}
+
 #langs a{
     padding: 5px 10px;
     text-align:right;
@@ -204,10 +217,10 @@ body {
 }
 
 .content-loading  {
-    content:url('../images/loading.gif');
-  /*background-color: white;
+  content:url('../images/loading.gif');
+ /* background-color: white;
   background-image: url('../images/loading.gif');
   background-repeat:no-repeat;
   background-attachment:fixed;
-  background-position:center;*/
+  background-position:center;   */
 }

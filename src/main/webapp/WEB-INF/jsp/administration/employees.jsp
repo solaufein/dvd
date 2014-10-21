@@ -3,7 +3,45 @@
    			<spring:message code="employee.employeeList.list"/>:
    		</h2>
 		
+<div id="dialog-form" title="Create new user">
+	  <p class="validateTips">All form fields are required.</p>	
+	
+<form:form method="POST" commandName="emp" action="new">
+        <form:hidden path="id"></form:hidden>
+   
+        <form:label path="firstName"><spring:message code="employee.employeeList.firstName"/>:</form:label>
+        <form:input path="firstName" cssClass = "text ui-widget-content ui-corner-all"></form:input>
+		<form:errors path="firstName" cssClass="error"></form:errors>
+    
+    
+        <form:label path="lastName"><spring:message code="employee.employeeList.lastName"/>:</form:label>
+        <form:input path="lastName" cssClass = "text ui-widget-content ui-corner-all"></form:input>
+		<form:errors path="lastName" cssClass="error"></form:errors>
+    
+	
+        <form:label path="phoneNumber"><spring:message code="employee.employeeList.phoneNumber"/>:</form:label>
+        <form:input path="phoneNumber" cssClass = "text ui-widget-content ui-corner-all"></form:input>
+		<form:errors path="phoneNumber" cssClass="error"></form:errors>
 		
+		<form:label path="email"><spring:message code="employee.employeeList.email"/>:</form:label>
+        <form:input path="email" cssClass = "text ui-widget-content ui-corner-all"></form:input>
+		<form:errors path="email" cssClass="error"></form:errors>
+		
+		<form:label path="password"><spring:message code="employee.employeeList.password"/>:</form:label>
+        <form:password path="password" cssClass = "text ui-widget-content ui-corner-all"></form:password>
+		<form:errors path="password" cssClass="error"></form:errors>
+		
+		<label for="repassword"><spring:message code="employee.employeeList.repassword"/></label>
+		<input type="password" name="repassword" id="repassword" value="" class="text ui-widget-content ui-corner-all">
+		
+		<form:checkboxes items="${allRoles}" path="rolesSet" />
+		<form:errors path="rolesSet" cssClass="error" />
+		
+		<!-- Allow form submission with keyboard without duplicating the dialog button -->
+		<input type="submit" value="<spring:message code="common.button.submit"/>" tabindex="-1" style="position:absolute; top:-1000px">	
+</form:form>
+</div>
+	
 	<div class="table">
                <table id = "tabb">   
                  <tr>
@@ -90,10 +128,12 @@
 			   </table>
 	</div>
 	</br>
-	   <form name="newemployee" id="newemp" action="<c:url value="employees/new"/>" method="post">
+	   <!--form name="newemployee" id="newemp" action="<c:url value="employees/new"/>" method="post">
 		 <input type="hidden" name="id" value = "new" />
 		 <input type="submit" value="<spring:message code="employee.button.newemployee"/>" class = "myButton"/>
-	   </form>
+	   </form-->
+	   
+	   <button id="create-user" class="myButton"><spring:message code="employee.button.newemployee"/></button>
 	</br>
 	
 	<c:url value="employees/list" var="adres"/>
@@ -102,7 +142,8 @@
 		$(document).ready(function(){
 		
 		initPaginationButtons("${noOfPages}");
-		initActionButtons("${adres}");	
+		initAddButton("${adres}");	
+		initDeleteButton("${adres}");
 		
 		});
 	</script>

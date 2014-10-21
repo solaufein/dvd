@@ -69,13 +69,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
-        employeeDAO.addEmployee(employee);
+    public void addEmployee(EmployeeData employee) {
+        Employee employeeObj = convertEmployeeDataToEmployee(employee);
+        employeeDAO.addEmployee(employeeObj);
     }
 
     @Override
-    public void updateEmployee(Employee employee) {
-        employeeDAO.updateEmployee(employee);
+    public void updateEmployee(EmployeeData employee) {
+        Employee employeeObj = convertEmployeeDataToEmployee(employee);
+        employeeDAO.updateEmployee(employeeObj);
     }
 
     @Override

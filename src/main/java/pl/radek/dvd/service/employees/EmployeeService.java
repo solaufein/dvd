@@ -19,8 +19,8 @@ public interface EmployeeService {
     public Employee getEmployee(int id);
     public Employee getEmployee(String name);
     public void deleteEmployee(int id);
-    public void addEmployee(Employee employee);
-    public void updateEmployee(Employee employee);
+    public void addEmployee(EmployeeData employee);
+    public void updateEmployee(EmployeeData employee);
     public void setPasswordChangeKey(String email, String code) throws EmployeeNotFoundException;
     public void changePassword(String empId, String pw) throws EmployeeNotFoundException;
     public boolean checkLinkExp(String empId);

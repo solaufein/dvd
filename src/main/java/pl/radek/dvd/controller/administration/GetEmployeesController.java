@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.employees.EmployeeData;
+import pl.radek.dvd.dto.roles.RoleData;
+import pl.radek.dvd.editor.employees.RoleEditor;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.model.Employee;
 import pl.radek.dvd.service.employees.EmployeeFacade;
@@ -28,6 +31,16 @@ public class GetEmployeesController {
 
     @Autowired
     private EmployeeFacade employeeFacade;
+
+    @ModelAttribute("allRoles")
+    public List<RoleData> getAllRoles() {
+        return employeeFacade.getRoles();
+    }
+
+    /*@InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(RoleData.class, "rolesSet", new RoleEditor(this.employeeFacade));
+    }*/
 
     public void setEmployeeFacade(EmployeeFacade employeeFacade) {
         this.employeeFacade = employeeFacade;
@@ -61,8 +74,11 @@ public class GetEmployeesController {
         logger.info(" !!!! NO OF PAGES : " + noOfPages);
         logger.info(" !!!! CURRENT PAGE : " + page);
 
+        EmployeeData employeeData = new EmployeeData();           // add model for data binding in add/edit
+
         // follow to employees.jsp
         logger.info("Follow to employees jsp");
+        modelMap.addAttribute("emp", employeeData);
         modelMap.addAttribute(Constants.CURRENTPAGE, page);
         modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
         modelMap.addAttribute(Constants.EMPLOYEELIST, employeeDataList);
@@ -100,7 +116,7 @@ public class GetEmployeesController {
         // follow to employees_page.jsp
         logger.info("Follow to employees_page jsp");
         modelMap.addAttribute(Constants.EMPLOYEELIST, employeeDataList);
-   //     modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);                         // ??
+        //     modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);                         // ??
 
         logger.info(" !!!! EMPLOYEES CURRENT PAGE !!!! ");
         logger.info(" !!!! NO OF PAGES : " + noOfPages);                                 // ??
@@ -123,6 +139,7 @@ public class GetEmployeesController {
         return "Employee successfully deleted";
     }
 
+    // REST STYLE
     /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteEmp(@PathVariable("id") int id) throws Exception {
@@ -139,14 +156,22 @@ public class GetEmployeesController {
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
     public String newEmp() throws Exception {
+        logger.info("new Emp controller method start - adding new employee ");
 
+        //   employeeFacade.addEmployee(employee);
+
+        logger.info("new Emp controller method end - added employee ");
 
         return "/administration/employees_page";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editEmp() throws Exception {
+        logger.info("edit Emp controller method start - editing employee ");
 
+        //     employeeFacade.updateEmployee(employee);
+
+        logger.info("edit Emp controller method end - edmployee edited ok ");
 
         return "/administration/employees_page";
     }
