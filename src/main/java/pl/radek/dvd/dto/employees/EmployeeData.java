@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.employees;
 
+import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.model.RentingRegistry;
 import pl.radek.dvd.model.Roles;
 
@@ -22,7 +23,7 @@ public class EmployeeData {
     private String password;
     private String pwChangeKey;
     private Date pwChangeDate;
-    private Set<Roles> rolesSet = new HashSet<Roles>();
+    private Set<RoleData> rolesSet = new HashSet<RoleData>();
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
     public EmployeeData() {
@@ -49,7 +50,7 @@ public class EmployeeData {
         this.pwChangeDate = pwChangeDate;
     }
 
-    public EmployeeData(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate, Set<Roles> rolesSet, Set<RentingRegistry> rentingRegistries) {
+    public EmployeeData(int id, String firstName, String lastName, String phoneNumber, String email, String password, String pwChangeKey, Date pwChangeDate, Set<RoleData> rolesSet, Set<RentingRegistry> rentingRegistries) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -126,11 +127,11 @@ public class EmployeeData {
         this.pwChangeDate = pwChangeDate;
     }
 
-    public Set<Roles> getRolesSet() {
+    public Set<RoleData> getRolesSet() {
         return rolesSet;
     }
 
-    public void setRolesSet(Set<Roles> rolesSet) {
+    public void setRolesSet(Set<RoleData> rolesSet) {
         this.rolesSet = rolesSet;
     }
 

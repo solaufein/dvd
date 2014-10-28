@@ -6,6 +6,7 @@ import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.Roles;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ import java.util.List;
  */
 public interface EmployeeFacade {
     public List<RoleData> getRoles();
+    public RoleData getRole(int id);
+    public Roles getRoleEntity(int id);
 
     public List<Employee> getEmployees();
     public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest);

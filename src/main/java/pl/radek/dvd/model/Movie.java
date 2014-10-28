@@ -30,18 +30,18 @@ public class Movie {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movie")               // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     private Set<MovieCopy> movieCopies = new HashSet<MovieCopy>(0);
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)                                  // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)                                  // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     @JoinColumn(name = "promotion_id", nullable = false)
     private Promotion promotion;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.LAZY)
+    @ManyToMany(fetch=FetchType.LAZY)   // cascade = {CascadeType.ALL},       ???
     @JoinTable(name = "starring",
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "actors_id")})

@@ -8,14 +8,14 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.dto.employees.PaginatedListEmployee;
+import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.logic.EmployeeDAO;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.Roles;
 import pl.radek.dvd.utils.Encryption;
 
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: Sola
@@ -71,6 +71,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void addEmployee(EmployeeData employee) {
         Employee employeeObj = convertEmployeeDataToEmployee(employee);
+        String password = employeeObj.getPassword();
+        employeeObj.setPassword(Encryption.encrypt(password));             // set MD5 password
         employeeDAO.addEmployee(employeeObj);
     }
 
@@ -165,7 +167,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeData.setPwChangeDate(employee.getPwChangeDate());
         employeeData.setPwChangeKey(employee.getPwChangeKey());
         employeeData.setRentingRegistries(employee.getRentingRegistries());
-        employeeData.setRolesSet(employee.getRolesSet());
+        employeeData.setRolesSet(convertRolesSetToRoleDataSet(employee.getRolesSet()));
 
 
         return employeeData;
@@ -183,8 +185,44 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPwChangeDate(employeeData.getPwChangeDate());
         employee.setPwChangeKey(employeeData.getPwChangeKey());
         employee.setRentingRegistries(employeeData.getRentingRegistries());
-        employee.setRolesSet(employeeData.getRolesSet());
+        employee.setRolesSet(convertRoleDataSetToRolesSet(employeeData.getRolesSet()));
 
         return employee;
+    }
+
+    private Set<RoleData> convertRolesSetToRoleDataSet(Set<Roles> rolesSet) {
+        Set<RoleData> roleDataSet = new HashSet<RoleData>();
+        for (Roles roles : rolesSet) {
+            RoleData roleData = convertRolesToRoleData(roles);
+            roleDataSet.add(roleData);
+        }
+        return roleDataSet;
+    }
+
+    private Set<Roles> convertRoleDataSetToRolesSet(Set<RoleData> roleDataSet) {
+        Set<Roles> rolesSet = new HashSet<Roles>();
+        for (RoleData roleData : roleDataSet) {
+            Roles roles = convertRoleDataToRoles(roleData);
+            rolesSet.add(roles);
+        }
+        return rolesSet;
+    }
+
+    private RoleData convertRolesToRoleData(Roles role) {
+        RoleData roleData = new RoleData();
+        roleData.setId(role.getId());
+        roleData.setRole(role.getRole());
+        roleData.setEmployees(role.getEmployees());
+
+        return roleData;
+    }
+
+    private Roles convertRoleDataToRoles(RoleData roleData) {
+        Roles roles = new Roles();
+        roles.setId(roleData.getId());
+        roles.setRole(roleData.getRole());
+        roles.setEmployees(roleData.getEmployees());
+
+        return roles;
     }
 }

@@ -34,7 +34,7 @@ function deleteEmp(obj , address){
 	
 function initDeleteButton(address){
   // DELETE ACTION
-  $(".table").on("click",".delempbtn",function(e) {
+  $(".table").on("click",".delempbtn",function(e) {		// oddelegowanie .delempbtn - za kazdym razem szuka w .table przycisku o tej klasie
 	e.preventDefault();
 	deleteEmp(this, address);
   });

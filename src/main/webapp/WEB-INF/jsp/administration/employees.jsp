@@ -34,7 +34,7 @@
 		<label for="repassword"><spring:message code="employee.employeeList.repassword"/></label>
 		<input type="password" name="repassword" id="repassword" value="" class="text ui-widget-content ui-corner-all">
 		
-		<form:checkboxes items="${allRoles}" path="rolesSet" />
+		<form:checkboxes items="${allRoles}" path="rolesSet" itemLabel="role" itemValue="id"/>
 		<form:errors path="rolesSet" cssClass="error" />
 		
 		<!-- Allow form submission with keyboard without duplicating the dialog button -->
@@ -133,7 +133,7 @@
 		 <input type="submit" value="<spring:message code="employee.button.newemployee"/>" class = "myButton"/>
 	   </form-->
 	   
-	   <button id="create-user" class="myButton"><spring:message code="employee.button.newemployee"/></button>
+	   <button id="create-user" value="<c:url value="employees/new"/>" class="myButton"><spring:message code="employee.button.newemployee"/></button>
 	</br>
 	
 	<c:url value="employees/list" var="adres"/>

@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.dto.roles.RoleData;
+import pl.radek.dvd.editor.employees.RoleCollectionsEditor;
 import pl.radek.dvd.editor.employees.RoleEditor;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.Roles;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: Sola
@@ -37,10 +40,11 @@ public class GetEmployeesController {
         return employeeFacade.getRoles();
     }
 
-    /*@InitBinder
+    @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(RoleData.class, "rolesSet", new RoleEditor(this.employeeFacade));
-    }*/
+    //    binder.registerCustomEditor(RoleData.class, "rolesSet", new RoleEditor(this.employeeFacade));
+        binder.registerCustomEditor(Set.class, "rolesSet", new RoleCollectionsEditor(Set.class, true, employeeFacade));
+    }
 
     public void setEmployeeFacade(EmployeeFacade employeeFacade) {
         this.employeeFacade = employeeFacade;
@@ -139,7 +143,7 @@ public class GetEmployeesController {
         return "Employee successfully deleted";
     }
 
-    // REST STYLE
+    // REST STYLE DELETE OPERATION - request method: DELETE
     /*@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String deleteEmp(@PathVariable("id") int id) throws Exception {
@@ -155,17 +159,33 @@ public class GetEmployeesController {
     }*/
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public String newEmp() throws Exception {
+    @ResponseBody
+    public String newEmp(@ModelAttribute("emp") EmployeeData emp) throws Exception {
         logger.info("new Emp controller method start - adding new employee ");
 
-        //   employeeFacade.addEmployee(employee);
+        /*if (emp != null) {
+            logger.info("firstname: " + emp.getFirstName());
+            Set<RoleData> rolesSet = emp.getRolesSet();
+            if (rolesSet != null) {
+                for (RoleData roles : rolesSet) {
+                    logger.info("Role: " + roles.getRole() + ", Id = " + roles.getId());
+                }
+            } else {
+                logger.info("Roles Set NULL ! ");
+            }
+        } else {
+            logger.info("Employee NULL ! ");
+        }*/
+
+        employeeFacade.addEmployee(emp);
 
         logger.info("new Emp controller method end - added employee ");
 
-        return "/administration/employees_page";
+        return "Employee successfully added";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
     public String editEmp() throws Exception {
         logger.info("edit Emp controller method start - editing employee ");
 

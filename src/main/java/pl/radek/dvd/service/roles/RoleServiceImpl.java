@@ -40,8 +40,16 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Roles getRole(int id) {
-        return roleDAO.getRole(id);
+    public RoleData getRole(int id) {
+        Roles role = roleDAO.getRole(id);
+        RoleData roleData = convertRolesToRoleData(role);
+        return roleData;
+    }
+
+    @Override
+    public Roles getRoleEntity(int id) {
+        Roles role = roleDAO.getRole(id);
+        return role;
     }
 
     @Override

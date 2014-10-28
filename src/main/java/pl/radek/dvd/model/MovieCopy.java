@@ -27,10 +27,10 @@ public class MovieCopy {
     @Column(name = "availability", nullable = false)
     private short availability;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movieCopy")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "movieCopy")           // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)                               // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 

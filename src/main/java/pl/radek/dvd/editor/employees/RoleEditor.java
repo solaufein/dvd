@@ -1,6 +1,8 @@
 package pl.radek.dvd.editor.employees;
 
+import org.apache.log4j.Logger;
 import pl.radek.dvd.dto.roles.RoleData;
+import pl.radek.dvd.model.Roles;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
 import java.beans.PropertyEditorSupport;
@@ -12,6 +14,8 @@ import java.util.List;
  * Time: 14:16
  */
 public class RoleEditor extends PropertyEditorSupport {
+    private static Logger logger = Logger.getLogger(RoleEditor.class);
+
     private EmployeeFacade employeeFacade;
 
     /**
@@ -33,6 +37,10 @@ public class RoleEditor extends PropertyEditorSupport {
      */
     @Override
     public void setAsText(String text) throws IllegalArgumentException {
+        logger.info("Role Editor inside method: setAsText...");
 
+        RoleData role = employeeFacade.getRole(Integer.parseInt(text));
+    //    Roles role = employeeFacade.getRoleEntity(Integer.parseInt(text));
+        setValue(role);
     }
 }

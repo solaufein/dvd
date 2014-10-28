@@ -166,7 +166,10 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         logger.debug("Adding employee to db: firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
 
-        hibernateTemplate.save(employee);
+      //  hibernateTemplate.save(employee);
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        session.save(employee);
 
         logger.debug("Added employee to db: firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
     }

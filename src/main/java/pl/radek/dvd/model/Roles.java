@@ -60,4 +60,26 @@ public class Roles {
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Roles)) return false;
+
+        Roles roles = (Roles) o;
+
+        if (id != roles.id) return false;
+        if (employees != null ? !employees.equals(roles.employees) : roles.employees != null) return false;
+        if (role != null ? !role.equals(roles.role) : roles.role != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (employees != null ? employees.hashCode() : 0);
+        return result;
+    }
 }

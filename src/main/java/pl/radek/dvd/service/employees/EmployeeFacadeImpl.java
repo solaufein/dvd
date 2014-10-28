@@ -9,6 +9,7 @@ import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.Roles;
 import pl.radek.dvd.service.roles.RoleService;
 
 import java.util.List;
@@ -41,6 +42,16 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     @Override
     public List<RoleData> getRoles() {
         return roleService.getRoles();
+    }
+
+    @Override
+    public RoleData getRole(int id) {
+        return roleService.getRole(id);
+    }
+
+    @Override
+    public Roles getRoleEntity(int id) {
+        return roleService.getRoleEntity(id);
     }
 
     @Override

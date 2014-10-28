@@ -42,13 +42,14 @@ public class Employee {
     @Temporal(TemporalType.TIMESTAMP)
     private Date pwChangeDate;
 
-    @ManyToMany(fetch=FetchType.LAZY)    // cascade = {CascadeType.ALL},fetch=FetchType.EAGER ?
+
+    @ManyToMany(fetch=FetchType.LAZY)    // cascade = {CascadeType.ALL},fetch=FetchType.EAGER ?       // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     @JoinTable(name = "employee_roles",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Roles> rolesSet = new HashSet<Roles>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")                          // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
     public Employee() {

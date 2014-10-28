@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface RoleService {
     public List<RoleData> getRoles();
-    public Roles getRole(int id);
+    public RoleData getRole(int id);
+    public Roles getRoleEntity(int id);
     public void deleteRole(int id);
 }
