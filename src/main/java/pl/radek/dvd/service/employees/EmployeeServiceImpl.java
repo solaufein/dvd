@@ -54,6 +54,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public EmployeeData getEmployeeData(int id) {
+        Employee employee = employeeDAO.getEmployee(id);
+        EmployeeData employeeData = convertEmployeeToEmployeeData(employee);
+
+        return employeeData;
+    }
+
+    @Override
     public Employee getEmployee(int id) {
         return employeeDAO.getEmployee(id);
     }
@@ -168,7 +176,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeData.setPwChangeKey(employee.getPwChangeKey());
         employeeData.setRentingRegistries(employee.getRentingRegistries());
         employeeData.setRolesSet(convertRolesSetToRoleDataSet(employee.getRolesSet()));
-
 
         return employeeData;
     }

@@ -1,6 +1,7 @@
 package pl.radek.dvd.controller.administration;
 
 import org.apache.log4j.Logger;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,9 +13,7 @@ import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.editor.employees.RoleCollectionsEditor;
 import pl.radek.dvd.editor.employees.RoleEditor;
-import pl.radek.dvd.model.Constants;
-import pl.radek.dvd.model.Employee;
-import pl.radek.dvd.model.Roles;
+import pl.radek.dvd.model.*;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
 import java.util.LinkedList;
@@ -186,13 +185,62 @@ public class GetEmployeesController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public String editEmp() throws Exception {
+    public String editEmp(@ModelAttribute("emp") EmployeeData emp) throws Exception {
         logger.info("edit Emp controller method start - editing employee ");
 
-        //     employeeFacade.updateEmployee(employee);
+        if (emp != null) {
+            logger.info("firstname: " + emp.getFirstName());
+            Set<RoleData> rolesSet = emp.getRolesSet();
+            if (rolesSet != null) {
+                for (RoleData roles : rolesSet) {
+                    logger.info("Role: " + roles.getRole() + ", Id = " + roles.getId());
+                }
+            } else {
+                logger.info("Roles Set NULL ! ");
+            }
+        } else {
+            logger.info("Employee NULL ! ");
+        }
+
+        //     employeeFacade.updateEmployee(emp);
 
         logger.info("edit Emp controller method end - edmployee edited ok ");
 
         return "/administration/employees_page";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public Employee getEmpById(@RequestParam("id") int id) throws Exception {
+        logger.info("get Emp controller method start");
+
+       /* Foo foo = new Foo();
+        foo.setAge("5");
+        foo.setColor("blue");
+        foo.setName("foo");*/
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Employee employee = employeeFacade.getEmployee(id);
+
+        String s = objectMapper.writeValueAsString(employee);
+        logger.info("s = " + s);
+
+        logger.info("first name = " + employee.getFirstName());
+        logger.info("last name = " + employee.getLastName());
+        logger.info("emaile = " + employee.getEmail());
+        logger.info("passw = " + employee.getPassword());
+        logger.info("phonenumber = " + employee.getPhoneNumber());
+        for (Roles roles : employee.getRolesSet()) {
+            logger.info("roleset = " + roles.getRole());
+        }
+
+        for (RentingRegistry rentingRegistry : employee.getRentingRegistries()) {
+            logger.info("renting registry id = " + rentingRegistry.getId());
+        }
+
+
+        logger.info("get Emp controller method end");
+
+        return employee;
     }
 }

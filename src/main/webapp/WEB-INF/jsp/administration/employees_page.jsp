@@ -24,9 +24,9 @@
 					<td>  <c:out value="${employee.phoneNumber}"/>  </td>
 					<td>  <c:out value="${employee.email}"/>  </td>
 					<td> 
-					  <form name="editemployee" id="editemp" action="<c:url value="employees/edit"/>" method="post">
+					  <form name="editemployee" class="editemp" action="<c:url value="employees/edit"/>" method="post">
 						  <input type="hidden" name="id" value="${employee.id}" />
-						  <input type="submit" value="<spring:message code="common.button.edit"/>" class = "myButton"/>
+						  <input type="submit" value="<spring:message code="common.button.edit"/>" class = "editempbtn"/>
 					  </form>
 					</td>
 					<td> 

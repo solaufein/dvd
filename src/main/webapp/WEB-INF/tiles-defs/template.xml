@@ -48,10 +48,11 @@
         <put-list-attribute name="jsList" cascade="true" inherit="true">
             <add-attribute value="/resources/js/tabs.js" />
             <add-attribute value="/resources/js/hello.js" />
+            <add-attribute value="/resources/js/utils.js" />
             <add-attribute value="/resources/js/employee_pagination.js" />
             <add-attribute value="/resources/js/delete_employee_actions.js" />
-            <add-attribute value="/resources/js/add_employee_action.js" />
-            <!--add-attribute value="/resources/js/edit_employee_actions.js" /-->
+            <!--add-attribute value="/resources/js/add_employee_action.js" /-->
+            <add-attribute value="/resources/js/edit_employee_actions.js" />
         </put-list-attribute>
     </definition>
 

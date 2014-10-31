@@ -50,7 +50,7 @@
   border: solid 1px black;
 }
 
-.delempbtn{
+.delempbtn, .editempbtn{
     -webkit-border-radius: 4;
     -moz-border-radius: 4;
     border-radius: 4px;
@@ -64,7 +64,7 @@
     cursor: pointer;
 }
 
-.delempbtn:hover {
+.delempbtn:hover, .editempbtn:hover {
   background: #383;
   text-decoration: none;
 }

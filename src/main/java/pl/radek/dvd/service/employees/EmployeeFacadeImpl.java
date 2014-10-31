@@ -65,6 +65,11 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
+    public EmployeeData getEmployeeData(int id) {
+        return employeeService.getEmployeeData(id);
+    }
+
+    @Override
     public Employee getEmployee(int id) {
         return employeeService.getEmployee(id);
     }

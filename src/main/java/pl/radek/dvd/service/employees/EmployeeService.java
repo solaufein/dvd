@@ -16,6 +16,7 @@ import java.util.List;
 public interface EmployeeService {
     public List<Employee> getEmployees();
     public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest);
+    public EmployeeData getEmployeeData(int id);
     public Employee getEmployee(int id);
     public Employee getEmployee(String name);
     public void deleteEmployee(int id);

@@ -14,6 +14,8 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.model.Employee;
+import pl.radek.dvd.model.RentingRegistry;
+import pl.radek.dvd.model.Roles;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -95,7 +97,20 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     public Employee getEmployee(int id) {
         logger.debug("Getting employee by id: " + id);
 
-        Employee employee = (Employee) hibernateTemplate.get(Employee.class, id);
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        Employee employee = (Employee) session.get(Employee.class, id);
+
+        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
+        /*for (Roles roles : employee.getRolesSet()){
+            Hibernate.initialize(roles.getEmployees());
+        }*/
+        Hibernate.initialize(employee.getRolesSet());
+
+        /*for (RentingRegistry rentingRegistry : employee.getRentingRegistries()){
+            Hibernate.initialize(rentingRegistry.getEmployee());
+        }*/
+        Hibernate.initialize(employee.getRentingRegistries());
 
         logger.debug("Got employee by id: " + id);
         return employee;
@@ -185,7 +200,10 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         logger.debug("Updating employee with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
 
-        hibernateTemplate.update(employee);
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        session.update(employee);
+
+     //   hibernateTemplate.update(employee);
 
         logger.debug("Updated employee with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
 
