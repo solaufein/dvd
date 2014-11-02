@@ -23,6 +23,7 @@ public interface EmployeeFacade {
     public List<Employee> getEmployees();
     public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest);
     public EmployeeData getEmployeeData(int id);
+    public EmployeeData getEmployeeJsonData(int id);
     public Employee getEmployee(int id);
     public Employee getEmployee(String name);
     public void deleteEmployee(int id);

@@ -102,15 +102,15 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         Employee employee = (Employee) session.get(Employee.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
+        Hibernate.initialize(employee.getRolesSet());
         /*for (Roles roles : employee.getRolesSet()){
             Hibernate.initialize(roles.getEmployees());
         }*/
-        Hibernate.initialize(employee.getRolesSet());
 
+        Hibernate.initialize(employee.getRentingRegistries());
         /*for (RentingRegistry rentingRegistry : employee.getRentingRegistries()){
             Hibernate.initialize(rentingRegistry.getEmployee());
         }*/
-        Hibernate.initialize(employee.getRentingRegistries());
 
         logger.debug("Got employee by id: " + id);
         return employee;

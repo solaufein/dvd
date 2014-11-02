@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.employees;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.radek.dvd.dto.roles.RoleData;
 import pl.radek.dvd.model.RentingRegistry;
 import pl.radek.dvd.model.Roles;
@@ -24,7 +25,7 @@ public class EmployeeData {
     private String pwChangeKey;
     private Date pwChangeDate;
     private Set<RoleData> rolesSet = new HashSet<RoleData>();
-    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
+    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);       //todo: in future change this to RentingRegistryData if needed
 
     public EmployeeData() {
     }

@@ -16,6 +16,7 @@ import pl.radek.dvd.editor.employees.RoleEditor;
 import pl.radek.dvd.model.*;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,6 @@ public class GetEmployeesController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-    //    binder.registerCustomEditor(RoleData.class, "rolesSet", new RoleEditor(this.employeeFacade));
         binder.registerCustomEditor(Set.class, "rolesSet", new RoleCollectionsEditor(Set.class, true, employeeFacade));
     }
 
@@ -105,7 +105,6 @@ public class GetEmployeesController {
             logger.info(" !!!! CurrentPage is NULL (0) ");
         }
 
-
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
 
         listDataRequest = new ListDataRequest(null, null, paginationInfo);
@@ -113,16 +112,11 @@ public class GetEmployeesController {
         PaginatedList<EmployeeData> employeeDataPaginatedList = employeeFacade.getEmployees(listDataRequest);
         List<EmployeeData> employeeDataList = employeeDataPaginatedList.getDataList();
 
-        int noOfRecords = employeeDataPaginatedList.getNoOfRecords();                      // ??
-        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);              // ??
-
         // follow to employees_page.jsp
         logger.info("Follow to employees_page jsp");
         modelMap.addAttribute(Constants.EMPLOYEELIST, employeeDataList);
-        //     modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);                         // ??
 
         logger.info(" !!!! EMPLOYEES CURRENT PAGE !!!! ");
-        logger.info(" !!!! NO OF PAGES : " + noOfPages);                                 // ??
         logger.info(" !!!! PAGE : " + page);
 
         return "/administration/employees_page";
@@ -206,38 +200,26 @@ public class GetEmployeesController {
 
         logger.info("edit Emp controller method end - edmployee edited ok ");
 
-        return "/administration/employees_page";
+        return "Employee successfully edited and saved";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public Employee getEmpById(@RequestParam("id") int id) throws Exception {
+    public EmployeeData getEmpById(@RequestParam("id") int id) throws Exception {
         logger.info("get Emp controller method start");
 
-       /* Foo foo = new Foo();
-        foo.setAge("5");
-        foo.setColor("blue");
-        foo.setName("foo");*/
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Employee employee = employeeFacade.getEmployee(id);
-
-        String s = objectMapper.writeValueAsString(employee);
-        logger.info("s = " + s);
+        EmployeeData employee = employeeFacade.getEmployeeJsonData(id);
+        employee.setPwChangeDate(null);
+        employee.setPwChangeKey(null);
+        employee.setRentingRegistries(null);
 
         logger.info("first name = " + employee.getFirstName());
         logger.info("last name = " + employee.getLastName());
         logger.info("emaile = " + employee.getEmail());
-        logger.info("passw = " + employee.getPassword());
         logger.info("phonenumber = " + employee.getPhoneNumber());
-        for (Roles roles : employee.getRolesSet()) {
+       /* for (Roles roles : employee.getRolesSet()) {
             logger.info("roleset = " + roles.getRole());
-        }
-
-        for (RentingRegistry rentingRegistry : employee.getRentingRegistries()) {
-            logger.info("renting registry id = " + rentingRegistry.getId());
-        }
-
+        }*/
 
         logger.info("get Emp controller method end");
 

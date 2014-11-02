@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.roles;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import pl.radek.dvd.model.Employee;
 
 import java.util.HashSet;
@@ -14,6 +15,8 @@ public class RoleData {
 
     private int id;
     private String role;
+
+    @JsonIgnore // this is becouse lazyInitializationError was thrown - no session or session was closed, during ResponseBody json object
     private Set<Employee> employees = new HashSet<Employee>();
 
     public RoleData() {

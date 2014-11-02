@@ -62,6 +62,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public EmployeeData getEmployeeJsonData(int id) {
+        Employee employee = employeeDAO.getEmployee(id);
+        EmployeeData employeeData = new EmployeeData();
+        employeeData.setId(employee.getId());
+        employeeData.setFirstName(employee.getFirstName());
+        employeeData.setLastName(employee.getLastName());
+        employeeData.setEmail(employee.getEmail());
+        employeeData.setPhoneNumber(employee.getPhoneNumber());
+        Set<Roles> rolesSet = employee.getRolesSet();
+        employeeData.setRolesSet(convertRolesSetToRoleDataSet(rolesSet));
+
+        return employeeData;
+    }
+
+    @Override
     public Employee getEmployee(int id) {
         return employeeDAO.getEmployee(id);
     }

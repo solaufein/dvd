@@ -1,5 +1,7 @@
 package pl.radek.dvd.model;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,7 +26,7 @@ public class Roles {
     @Column(name = "role", nullable = false)
     private String role;
 
-    @ManyToMany(mappedBy = "rolesSet",fetch=FetchType.LAZY)       // EAGER ?  // @JsonManagedReference
+    @ManyToMany(mappedBy = "rolesSet",fetch=FetchType.LAZY)       // EAGER ?  // @JsonManagedReference // @JsonIgnore
     private Set<Employee> employees = new HashSet<Employee>();
 
     public Roles() {

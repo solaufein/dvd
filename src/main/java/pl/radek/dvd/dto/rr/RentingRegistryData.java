@@ -21,4 +21,7 @@ public class RentingRegistryData {
     private Employee employee;
     private Receipt receipt;
     private MovieCopy movieCopy;
+
+    public RentingRegistryData() {
+    }
 }

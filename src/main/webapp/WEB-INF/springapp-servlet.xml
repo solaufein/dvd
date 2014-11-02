@@ -19,6 +19,7 @@
     <!--context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller, pl.radek.dvd.listener"/-->
     <context:component-scan base-package="pl.radek.dvd.controller, pl.radek.dvd.listener"/>
     <mvc:annotation-driven validator="validator"/>
+
     <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
     <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 
