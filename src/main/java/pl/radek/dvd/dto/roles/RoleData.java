@@ -1,6 +1,7 @@
 package pl.radek.dvd.dto.roles;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import pl.radek.dvd.dto.employees.EmployeeData;
 import pl.radek.dvd.model.Employee;
 
 import java.util.HashSet;

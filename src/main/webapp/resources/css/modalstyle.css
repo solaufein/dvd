@@ -1,3 +1,6 @@
+#dialog-form {
+    display: none;
+}
 
 label, input {
  display:block;

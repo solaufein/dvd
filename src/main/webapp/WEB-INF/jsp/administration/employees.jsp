@@ -145,10 +145,6 @@
     $(document).ready(function () {
 
         initPaginationButtons("${noOfPages}");
-        //initAddButton();
-        //	initAddButton.initAdd();
-        initDeleteButton("${adres}");
-        editBtnAction.initBtn();
-
+        InitEmpActionButtons.init();
     });
 </script>

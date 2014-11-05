@@ -168,6 +168,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDAO.getNoOfRecords(listDataRequest);
     }
 
+    private Set<EmployeeData> convertEmployeeSetToEmployeeDataSet(Set<Employee> employees) {
+        Set<EmployeeData> employeeDataSet = new HashSet<EmployeeData>();
+        for (Employee employee : employees) {
+            EmployeeData employeeData = convertEmployeeToEmployeeData(employee);
+            employeeDataSet.add(employeeData);
+        }
+
+        return employeeDataSet;
+    }
+
+    private Set<Employee> convertEmployeeDataSetToEmployeeSet(Set<EmployeeData> employeeDataSet) {
+        Set<Employee> employeeSet = new HashSet<Employee>();
+        for (EmployeeData employeeData : employeeDataSet) {
+            Employee e = convertEmployeeDataToEmployee(employeeData);
+            employeeSet.add(e);
+        }
+        return employeeSet;
+    }
+
     private List<EmployeeData> convertEmployeeListToEmployeeDataList(List<Employee> employees) {
         List<EmployeeData> list = new LinkedList<EmployeeData>();
         for (Employee employee : employees) {
