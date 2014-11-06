@@ -48,6 +48,7 @@ public class RoleMySQLDAO implements RoleDAO {
 
     @Override
     public Roles getRole(int id) {
+        logger.info("Getting role by id: " + id);
     //    return hibernateTemplate.get(Roles.class, id);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
@@ -57,6 +58,7 @@ public class RoleMySQLDAO implements RoleDAO {
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(roles.getEmployees());
 
+        logger.info("Got role by id: " + id);
         return roles;
     }
 

@@ -182,7 +182,7 @@ public class GetEmployeesController {
     public String editEmp(@ModelAttribute("emp") EmployeeData emp) throws Exception {
         logger.info("edit Emp controller method start - editing employee ");
 
-        if (emp != null) {
+        /*if (emp != null) {
             logger.info("firstname: " + emp.getFirstName());
             Set<RoleData> rolesSet = emp.getRolesSet();
             if (rolesSet != null) {
@@ -194,9 +194,9 @@ public class GetEmployeesController {
             }
         } else {
             logger.info("Employee NULL ! ");
-        }
+        }*/
 
-        //     employeeFacade.updateEmployee(emp);
+        employeeFacade.updateEmployee(emp);
 
         logger.info("edit Emp controller method end - edmployee edited ok ");
 
@@ -213,10 +213,10 @@ public class GetEmployeesController {
         employee.setPwChangeKey(null);
         employee.setRentingRegistries(null);
 
-        logger.info("first name = " + employee.getFirstName());
+        /*logger.info("first name = " + employee.getFirstName());
         logger.info("last name = " + employee.getLastName());
         logger.info("emaile = " + employee.getEmail());
-        logger.info("phonenumber = " + employee.getPhoneNumber());
+        logger.info("phonenumber = " + employee.getPhoneNumber());*/
        /* for (Roles roles : employee.getRolesSet()) {
             logger.info("roleset = " + roles.getRole());
         }*/

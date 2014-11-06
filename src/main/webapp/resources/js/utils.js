@@ -41,6 +41,19 @@ DvdFormUtil = {
         }
     },
 
+    checkCheckboxIsChecked: function (jsonSet, inputSet) {
+        $.each(jsonSet, function (key, value) {
+            //   console.log("id = " + value.id + ", role = " + value.role);
+            inputSet.each(function () {
+                //   console.log($(this).val());
+                if (value.id == $(this).val()) {
+                    //   console.log("id = " + value.id + ", is CHECKED");
+                    $(this).prop('checked', true);
+                }
+            });
+        });
+    },
+
     submitFormViaAjax: function () {
         $.ajax({
             type: "POST",

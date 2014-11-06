@@ -65,6 +65,7 @@ InitEmpActionButtons = {
             editEmp: $(".editemp"),
             delEmp: $(".delemp"),
             redirectLocation: $("#navigation_left").find("ul li.employees a").attr('href'),
+            id: $("#id"),
             firstName: $("#firstName"),
             lastName: $("#lastName"),
             phoneNumber: $("#phoneNumber"),
@@ -328,11 +329,19 @@ InitEmpActionButtons = {
                 url: editEmpAction,
                 data: dataForm,
                 dataType: "json",
-                success: function (response) {
-                    console.log(response);
-                    console.log("wrzucamy dane... i otwieramy formularz");
-                    //teraz wrzucamy otrzymane dane do formularza... i go otwieramy...
+                success: function (data) {
+                    console.log(data);
 
+                    //obiekt zawierający inputy z Rolami
+                    var set = InitEmpActionButtons.config.form.find('input[name="rolesSet"]');
+
+                    //teraz wrzucamy otrzymane dane do formularza... i go otwieramy...
+                    DvdFormUtil.checkCheckboxIsChecked(data.rolesSet, set);
+                    InitEmpActionButtons.config.id.val(data.id);
+                    InitEmpActionButtons.config.firstName.val(data.firstName);
+                    InitEmpActionButtons.config.lastName.val(data.lastName);
+                    InitEmpActionButtons.config.phoneNumber.val(data.phoneNumber);
+                    InitEmpActionButtons.config.email.val(data.email);
 
                     InitEmpActionButtons.config.dialog.dialog("open");
                 }

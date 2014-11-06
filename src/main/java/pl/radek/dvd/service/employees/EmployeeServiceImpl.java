@@ -62,6 +62,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    /**
+     * This method returns EmployeeData without: RentingRegistry, PwChangeDate, PwChangeKey
+     */
     public EmployeeData getEmployeeJsonData(int id) {
         Employee employee = employeeDAO.getEmployee(id);
         EmployeeData employeeData = new EmployeeData();
@@ -100,9 +103,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void updateEmployee(EmployeeData employee) {
-        Employee employeeObj = convertEmployeeDataToEmployee(employee);
-        employeeDAO.updateEmployee(employeeObj);
+    public void updateEmployee(EmployeeData employeeData) {
+        Employee employee = getEmployee(employeeData.getId());
+        //   Employee employeeObj = convertEmployeeDataToEmployee(employeeData);
+
+        changeEmployee(employee, employeeData);
+
+        employeeDAO.updateEmployee(employee);
     }
 
     @Override
@@ -168,6 +175,21 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeDAO.getNoOfRecords(listDataRequest);
     }
 
+    private void changeEmployee(Employee employee, EmployeeData employeeData) {
+        employee.setId(employeeData.getId());
+        employee.setFirstName(employeeData.getFirstName());
+        employee.setLastName(employeeData.getLastName());
+        employee.setEmail(employeeData.getEmail());
+        employee.setPhoneNumber(employeeData.getPhoneNumber());
+
+        //These fields are not edited by user, maybe in future this will be implemented
+        //  employee.setPassword(employeeData.getPassword());
+        //  employee.setPwChangeDate(employeeData.getPwChangeDate());
+        //  employee.setPwChangeKey(employeeData.getPwChangeKey());
+        //  employee.setRentingRegistries(employeeData.getRentingRegistries());
+        employee.setRolesSet(convertRoleDataSetToRolesSet(employeeData.getRolesSet()));
+    }
+
     private Set<EmployeeData> convertEmployeeSetToEmployeeDataSet(Set<Employee> employees) {
         Set<EmployeeData> employeeDataSet = new HashSet<EmployeeData>();
         for (Employee employee : employees) {
@@ -221,8 +243,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFirstName(employeeData.getFirstName());
         employee.setLastName(employeeData.getLastName());
         employee.setEmail(employeeData.getEmail());
-        employee.setPassword(employeeData.getPassword());
         employee.setPhoneNumber(employeeData.getPhoneNumber());
+        employee.setPassword(employeeData.getPassword());
         employee.setPwChangeDate(employeeData.getPwChangeDate());
         employee.setPwChangeKey(employeeData.getPwChangeKey());
         employee.setRentingRegistries(employeeData.getRentingRegistries());
