@@ -2,6 +2,7 @@ package pl.radek.dvd.service.movies;
 
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.actor.ActorDataTag;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
@@ -19,6 +20,8 @@ import java.util.List;
  * Time: 15:27
  */
 public interface MoviesFacade {
+    public List<ActorDataTag> getActorTags(String tagName);
+
     public List<MovieDataDTO> getMovies();
 
     public List<GenreData> getGenres();

@@ -114,12 +114,26 @@ public class PromotionMySQLDAO implements PromotionDAO {
 
     @Override
     public void addPromotion(Promotion promotion) {
-        hibernateTemplate.save(promotion);
+        logger.info("add Promotion method begin");
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        session.save(promotion);
+
+        //  hibernateTemplate.save(promotion);
+
+        logger.info("add Promotion method END");
     }
 
     @Override
     public void updatePromotion(Promotion promotion) {
-        hibernateTemplate.update(promotion);
+        logger.info("update Promotion method begin");
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        session.update(promotion);
+
+        //  hibernateTemplate.update(promotion);
+
+        logger.info("update Promotion method END");
     }
 
     public int getNoOfRecords() {

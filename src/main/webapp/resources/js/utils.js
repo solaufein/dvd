@@ -34,7 +34,7 @@ DvdFormUtil = {
     checkRegexp: function (tip, o, regexp, n) {
         if (!( regexp.test(o.val()) )) {
             o.addClass("ui-state-error");
-            updateTips(tip, n);
+            this.updateTips(tip, n);
             return false;
         } else {
             return true;
@@ -54,17 +54,54 @@ DvdFormUtil = {
         });
     },
 
-    submitFormViaAjax: function () {
+    submitFormViaAjax1: function (type, url, data, dataType, contentType, callback) {
+
         $.ajax({
-            type: "POST",
-            //    contentType: "application/json; charset=utf-8",	// default is 'application/x-www-form-urlencoded; charset=UTF-8', if you want send data as JSON change it - i think
-            dataType: "json",     // expected data type in return
-            url: "your controller url",
+            type: type,
+            contentType: contentType, //"application/json; charset=utf-8",	// default is 'application/x-www-form-urlencoded; charset=UTF-8', if you want send data as JSON change it - i think
+            dataType: dataType,     // expected data type in return. for example: "json"
+            url: url,
             //	data: "{'data1':'" + value1+ "', 'data2':'" + value2+ "', 'data3':'" + value3+ "'}",	// json data
-            data: $("#form").serialize(),	// normal data
-            success: function (data) {
+            data: data,	// normal data: $("#form").serialize()
+            success: function (datas) {
                 // logic, on success
+                callback(datas);
+            }
+        });
+    },
+    submitFormViaAjax2: function (type, url, data, dataType, callback) {
+
+        $.ajax({
+            type: type,
+            dataType: dataType,
+            url: url,
+            data: data,
+            success: function (datas) {
+                callback(datas);
+            }
+        });
+    },
+    submitFormViaAjax3: function (type, url, data, contentType, callback) {
+
+        $.ajax({
+            type: type,
+            contentType: contentType,
+            url: url,
+            data: data,
+            success: function (datas) {
+                callback(datas);
+            }
+        });
+    },
+    submitFormViaAjax4: function (type, url, data, callback) {
+
+        $.ajax({
+            type: type,
+            url: url,
+            data: data,
+            success: function (datas) {
+                callback(datas);
             }
         });
     }
-}
+};

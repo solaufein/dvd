@@ -9,6 +9,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.actor.ActorDataTag;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.FiltreMovieForm;
 import pl.radek.dvd.dto.movies.MoviesData;
@@ -139,5 +140,34 @@ public class GetMoviesController {
         modelAndView.addObject(Constants.MOVIE, movie);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/getTags", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<ActorDataTag> getTags(@RequestParam("term") String term) {
+
+        List<ActorDataTag> data = moviesFacade.getActorTags(term);
+
+        for (int i = 0; i < data.size(); i++) {
+            logger.info("data id = " + data.get(i).getId());
+            logger.info("data tag = " + data.get(i).getTag());
+        }
+
+        return data;
+
+    }
+
+    /*private List<ActorDataTag> simulateSearchResult(String tagName) {
+
+        List<ActorDataTag> result = new ArrayList<ActorDataTag>();
+        // iterate a list and filter by tagName
+        for (ActorDataTag tag : data) {
+            if (tag.getTag().contains(tagName)) {
+                result.add(tag);
+            }
+        }
+
+        return result;
+    }*/
 
 }
