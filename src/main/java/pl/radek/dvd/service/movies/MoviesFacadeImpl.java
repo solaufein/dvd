@@ -11,6 +11,7 @@ import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.Promotion;
@@ -65,6 +66,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
 
     public void setActorsService(ActorsService actorsService) {
         this.actorsService = actorsService;
+    }
+
+    @Override
+    public Actor getActor(int id) {
+        return actorsService.getActor(id);
     }
 
     @Override

@@ -7,14 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import pl.radek.dvd.dto.actor.ActorDataTag;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.editor.movies.ActorCollectionsEditor;
 import pl.radek.dvd.editor.movies.GenreEditor;
 import pl.radek.dvd.editor.movies.PromotionEditor;
 import pl.radek.dvd.model.Constants;
@@ -23,6 +22,8 @@ import pl.radek.dvd.service.movies.MoviesFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Set;
 
 /**
  * User: Sola
@@ -46,6 +47,7 @@ public class AddMovieController {
     protected void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(GenreData.class,"genre", new GenreEditor(this.moviesFacade));
         binder.registerCustomEditor(PromotionData.class,"promotion", new PromotionEditor(this.moviesFacade));
+        binder.registerCustomEditor(Set.class, "actorset", new ActorCollectionsEditor(Set.class, true, moviesFacade));
     }
 
 
@@ -89,6 +91,22 @@ public class AddMovieController {
             modelAndView.addObject("allPromotions",moviesFacade.getPromotions());
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/getTags", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    List<ActorDataTag> getTags(@RequestParam("term") String term) {
+
+        List<ActorDataTag> data = moviesFacade.getActorTags(term);
+
+        for (int i = 0; i < data.size(); i++) {
+            logger.info("data id = " + data.get(i).getId());
+            logger.info("data tag = " + data.get(i).getTag());
+        }
+
+        return data;
+
     }
 
 }

@@ -8,6 +8,7 @@ import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.Promotion;
@@ -20,6 +21,8 @@ import java.util.List;
  * Time: 15:27
  */
 public interface MoviesFacade {
+    public Actor getActor(int id);
+
     public List<ActorDataTag> getActorTags(String tagName);
 
     public List<MovieDataDTO> getMovies();

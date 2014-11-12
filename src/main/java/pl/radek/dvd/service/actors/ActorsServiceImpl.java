@@ -28,6 +28,11 @@ public class ActorsServiceImpl implements ActorsService {
     }
 
     @Override
+    public Actor getActor(int id) {
+        return actorsDAO.getActor(id);
+    }
+
+    @Override
     public List<ActorDataTag> getActorTags(String tagName) {
 
         List<Actor> actorsByName = actorsDAO.getActorsByName(tagName);
