@@ -24,7 +24,7 @@ public class Actor {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @ManyToMany(mappedBy = "actorset",fetch=FetchType.LAZY)
+    @ManyToMany(mappedBy = "actorset", fetch = FetchType.LAZY)
     private Set<Movie> movies = new HashSet<Movie>();
 
     public Actor() {
@@ -73,5 +73,14 @@ public class Actor {
 
     public void setMovies(Set<Movie> movies) {
         this.movies = movies;
+    }
+
+    @Override
+    /**
+     * return JSON formatted String like: {"id" : "5", "name" : "john white"}
+     */
+    public String toString() {
+        String fullName = "\" " + firstName + " " + lastName + "\"}";
+        return "{\"id\" : " + "\"" + id + "\"" + ", \"name\" :" + fullName;
     }
 }

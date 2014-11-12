@@ -16,6 +16,7 @@ import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.editor.movies.ActorCollectionsEditor;
 import pl.radek.dvd.editor.movies.GenreEditor;
 import pl.radek.dvd.editor.movies.PromotionEditor;
+import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.service.movies.MoviesFacade;
@@ -45,8 +46,8 @@ public class AddMovieController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(GenreData.class,"genre", new GenreEditor(this.moviesFacade));
-        binder.registerCustomEditor(PromotionData.class,"promotion", new PromotionEditor(this.moviesFacade));
+        binder.registerCustomEditor(GenreData.class, "genre", new GenreEditor(this.moviesFacade));
+        binder.registerCustomEditor(PromotionData.class, "promotion", new PromotionEditor(this.moviesFacade));
         binder.registerCustomEditor(Set.class, "actorset", new ActorCollectionsEditor(Set.class, true, moviesFacade));
     }
 
@@ -63,7 +64,7 @@ public class AddMovieController {
             logger.info("Adding movie to db");
 
             logger.info("Title = " + movie.getTitle());
-            if (movie.getGenre() != null) {
+            /*if (movie.getGenre() != null) {
                 logger.info("Genre = " + movie.getGenre().getName());
             }else {
                 logger.info("Genre is NULL !!");
@@ -73,9 +74,18 @@ public class AddMovieController {
                 logger.info("Promotion = " + movie.getPromotion().getName());
             } else {
                 logger.info("Promotion is NULL !!");
-            }
+            }*/
 
-            moviesFacade.addMovie(movie);
+            /*if (movie.getActorset() != null) {
+                for (Actor actor : movie.getActorset()) {
+                    logger.info("Actor id = " + actor.getId());
+                    logger.info("Actor name = " + actor.getFirstName() + " " + actor.getLastName());
+                }
+            } else {
+                logger.info("Actor Set is NULL !!");
+            }*/
+
+        //    moviesFacade.addMovie(movie);
 
             // redirect to GetMoviesController
             logger.info("Redirect to GetMoviesController");
@@ -84,11 +94,13 @@ public class AddMovieController {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
 
+          //  movie.setActorset(null);
+
             modelAndView = new ModelAndView("/movies/add_movie");
             modelAndView.addObject(Constants.ID, movie.getId());
             modelAndView.addObject(Constants.MOVIE, movie);
-            modelAndView.addObject("allGenres",moviesFacade.getGenres());
-            modelAndView.addObject("allPromotions",moviesFacade.getPromotions());
+            modelAndView.addObject("allGenres", moviesFacade.getGenres());
+            modelAndView.addObject("allPromotions", moviesFacade.getPromotions());
         }
         return modelAndView;
     }

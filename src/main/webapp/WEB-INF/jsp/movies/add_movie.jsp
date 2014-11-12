@@ -159,6 +159,11 @@
                             <td><form:errors path="promotion" cssClass="error"></form:errors></td>
                         </tr>
                         <tr>
+                            <td>
+                                <form:hidden path="actorset"></form:hidden>
+                            </td>
+                        </tr>
+                        <tr>
                             <td></td>
                         </tr>
                         <tr>

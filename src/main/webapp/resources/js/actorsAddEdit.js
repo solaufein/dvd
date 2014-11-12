@@ -21,6 +21,7 @@ InitAutocompleteInput = {
 
         this.setAutocompleteAction();
         this.setRemoveAddedField();
+        this.getActorSetData();
         this.appendDataBeforeSubmit();
     },
 
@@ -101,8 +102,8 @@ InitAutocompleteInput = {
 
     appendDataBeforeSubmit: function () {
         InitAutocompleteInput.config.form.submit(function (e) {
-            e.preventDefault();
-            console.log("submit");
+            //    e.preventDefault();
+            console.log("appendDataBeforeSubmit entered");
 
             //iterate over hidden fields, add ID's to actorSet hidden imput, and submit form
 
@@ -114,8 +115,24 @@ InitAutocompleteInput = {
                     name: 'actorset',
                     type: 'hidden',
                     value: this.value
-                }).appendTo(InitAutocompleteInput.config.form);
+                }).appendTo(InitAutocompleteInput.config.actorSet.parent());
             });
+
+            InitAutocompleteInput.config.actorSet.remove();
         })
+    },
+    getActorSetData: function () {
+        var obj = InitAutocompleteInput.config.actorSet.val();
+
+        console.log("actor set val = " + obj);
+
+        if (obj) {
+            $.each($.parseJSON(obj), function (idx, obj) {
+                console.log("this id val = " + obj.id);
+                console.log("this id name = " + obj.name);
+
+                // create input fields and hidden fields with id
+            });
+        }
     }
 };
