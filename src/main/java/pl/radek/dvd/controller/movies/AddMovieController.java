@@ -64,28 +64,8 @@ public class AddMovieController {
             logger.info("Adding movie to db");
 
             logger.info("Title = " + movie.getTitle());
-            /*if (movie.getGenre() != null) {
-                logger.info("Genre = " + movie.getGenre().getName());
-            }else {
-                logger.info("Genre is NULL !!");
-            }
 
-            if (movie.getPromotion() != null) {
-                logger.info("Promotion = " + movie.getPromotion().getName());
-            } else {
-                logger.info("Promotion is NULL !!");
-            }*/
-
-            /*if (movie.getActorset() != null) {
-                for (Actor actor : movie.getActorset()) {
-                    logger.info("Actor id = " + actor.getId());
-                    logger.info("Actor name = " + actor.getFirstName() + " " + actor.getLastName());
-                }
-            } else {
-                logger.info("Actor Set is NULL !!");
-            }*/
-
-        //    moviesFacade.addMovie(movie);
+            moviesFacade.addMovie(movie);
 
             // redirect to GetMoviesController
             logger.info("Redirect to GetMoviesController");
@@ -94,7 +74,7 @@ public class AddMovieController {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
 
-          //  movie.setActorset(null);
+            //  movie.setActorset(null);
 
             modelAndView = new ModelAndView("/movies/add_movie");
             modelAndView.addObject(Constants.ID, movie.getId());
@@ -118,7 +98,5 @@ public class AddMovieController {
         }
 
         return data;
-
     }
-
 }

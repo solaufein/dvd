@@ -7,8 +7,6 @@ InitAutocompleteInput = {
      },
      */
 
-    x: 1,
-
     init: function () {
         InitAutocompleteInput.config = {
             autocompleteField: $("#myform").find(".findActorArea .searchActor input"), // search actor input
@@ -16,13 +14,43 @@ InitAutocompleteInput = {
             max_fields: 10, //maximum input boxes allowed
             wrapper: $("#myform").find(".findActorArea"), //find actor box wrapper
             searchActor: $("#myform").find(".findActorArea .searchActor"), //search actor wrapper
-            actorSet: $("#actorset")
+            actorSet: $("#actorset"),
+            x: 1
         };
 
         this.setAutocompleteAction();
         this.setRemoveAddedField();
         this.getActorSetData();
         this.appendDataBeforeSubmit();
+    },
+
+    createActorListDiv: function (val, id) {
+        var div = $('<div class="actorList"/>');
+        var remove = $('<a href="#" class="remove_field">Remove</a></div>');
+
+        var input = $('<input type="text" name="mytext[]"/>');
+        input.prop('disabled', true);
+        input.val(val);
+
+        var hidden = $('<input type="hidden" name="mytext[]"/>');
+        hidden.val(id);
+        console.log("this hidden val = " + hidden.val());
+
+        div.append(hidden).append(input).append(remove);
+        return div;
+    },
+
+    checkIfActorIsAlreadyPresent: function (ui) {
+        console.log("checkIfActorIsAlreadyPresent");
+        var flag = false;
+        var actorList = InitAutocompleteInput.config.wrapper.find(".actorList");
+        actorList.children('input[type=hidden]').each(function () {
+            if (this.value == ui.item.id) {
+                console.log("found the same item!");
+                flag = true;
+            }
+        });
+        return flag;
     },
 
     setAutocompleteAction: function () {
@@ -64,25 +92,22 @@ InitAutocompleteInput = {
             },
             minLength: 2,
             select: function (event, ui) {
-                if (InitAutocompleteInput.x < InitAutocompleteInput.config.max_fields) { //max input box allowed
-                    InitAutocompleteInput.x++; //text box increment
-                    console.log("add x = " + InitAutocompleteInput.x);
+                var isActorPresent = InitAutocompleteInput.checkIfActorIsAlreadyPresent(ui);
+                console.log("is actor present? = " + isActorPresent);
 
-                    var div = $('<div class="actorList"/>');
-                    var remove = $('<a href="#" class="remove_field">Remove</a></div>');
+                if (!isActorPresent) {
+                    if (InitAutocompleteInput.config.x < InitAutocompleteInput.config.max_fields) { //max input box allowed
+                        InitAutocompleteInput.config.x++; //text box increment
+                        console.log("add x = " + InitAutocompleteInput.config.x);
 
-                    var input = $('<input type="text" name="mytext[]"/>');
-                    input.prop('disabled', true);
-                    input.val(ui.item.value);
+                        var div = InitAutocompleteInput.createActorListDiv(ui.item.value, ui.item.id);
+                        $(InitAutocompleteInput.config.wrapper).append(div);
 
-                    var hidden = $('<input type="hidden" name="mytext[]"/>');
-                    hidden.val(ui.item.id);
-                    console.log("this hidden val = " + hidden.val());
-
-                    div.append(hidden).append(input).append(remove);
-
-                    $(InitAutocompleteInput.config.wrapper).append(div);
-
+                        // after select, clear input field
+                        $(this).val('');
+                        return false;
+                    }
+                } else {
                     // after select, clear input field
                     $(this).val('');
                     return false;
@@ -95,8 +120,8 @@ InitAutocompleteInput = {
         $(InitAutocompleteInput.config.wrapper).on("click", ".remove_field", function (e) { //user click on remove text
             e.preventDefault();
             $(this).parent('div').remove();
-            InitAutocompleteInput.x--;
-            console.log("odd x = " + InitAutocompleteInput.x);
+            InitAutocompleteInput.config.x--;
+            console.log("odd x = " + InitAutocompleteInput.config.x);
         })
     },
 
@@ -132,6 +157,10 @@ InitAutocompleteInput = {
                 console.log("this id name = " + obj.name);
 
                 // create input fields and hidden fields with id
+                var div = InitAutocompleteInput.createActorListDiv(obj.name, obj.id);
+                $(InitAutocompleteInput.config.wrapper).append(div);
+
+                InitAutocompleteInput.config.x++; //text box increment
             });
         }
     }
