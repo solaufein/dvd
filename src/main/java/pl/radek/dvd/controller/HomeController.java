@@ -20,7 +20,7 @@ public class HomeController {
     @RequestMapping(value = "/emp/home", method = RequestMethod.GET)
     public ModelAndView handleRequest() throws Exception {
 
-        ModelAndView modelAndView = new ModelAndView("redirect:/emp/movies/movieslist");
+        ModelAndView modelAndView = new ModelAndView("redirect:/emp/clients/clientslist");
       //  ModelAndView modelAndView = new ModelAndView("redirect:/emp/administration/administration");
 
         return modelAndView;

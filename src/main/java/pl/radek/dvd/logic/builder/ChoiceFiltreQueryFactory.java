@@ -23,6 +23,17 @@ public final class ChoiceFiltreQueryFactory {
         }*/
 
         return new MovieFiltreChoice(listDataRequest, hibernateTemplate);
+    }
 
+    public static MultiFiltreChoice getMultiFiltreChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate, String dtoName) {
+        MultiFiltreChoice multiFiltreChoice = null;
+
+        //logika dla wyboru Query Filtra, np jesli mamy dane wartosci to MovieFiltreChoice, a jesli inne to ClientFiltreChoice
+        if (dtoName.equals("moviesData")) {
+            multiFiltreChoice = new MovieFiltreChoice(listDataRequest, hibernateTemplate);
+        } else if (dtoName.equals("moviesRentData")) {
+            multiFiltreChoice = new MovieRentFilterChoice(listDataRequest, hibernateTemplate);
+        }
+        return multiFiltreChoice;
     }
 }

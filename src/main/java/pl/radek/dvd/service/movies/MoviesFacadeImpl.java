@@ -6,16 +6,19 @@ import org.springframework.stereotype.Component;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.actor.ActorDataTag;
+import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
+import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.Promotion;
 import pl.radek.dvd.service.actors.ActorsService;
+import pl.radek.dvd.service.clients.ClientsService;
 import pl.radek.dvd.service.genres.GenresService;
 import pl.radek.dvd.service.movieCopy.MovieCopyService;
 import pl.radek.dvd.service.promotions.PromotionsService;
@@ -48,6 +51,13 @@ public class MoviesFacadeImpl implements MoviesFacade {
     @Autowired
     private ActorsService actorsService;
 
+    @Autowired
+    private ClientsService clientsService;
+
+    public void setClientsService(ClientsService clientsService) {
+        this.clientsService = clientsService;
+    }
+
     public void setMoviesService(MoviesService moviesService) {
         this.moviesService = moviesService;
     }
@@ -66,6 +76,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
 
     public void setActorsService(ActorsService actorsService) {
         this.actorsService = actorsService;
+    }
+
+    @Override
+    public ClientData getClient(int id) {
+        return clientsService.getClient(id);
     }
 
     @Override
@@ -121,6 +136,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
     @Override
     public PaginatedList<MoviesData> getMovies(ListDataRequest request) {
         return moviesService.getMovies(request);
+    }
+
+    @Override
+    public PaginatedList<MoviesRentData> getMoviesRentData(ListDataRequest request) {
+        return moviesService.getMoviesRentData(request);
     }
 
     @Override

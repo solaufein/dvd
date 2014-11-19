@@ -3,10 +3,12 @@ package pl.radek.dvd.service.movies;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.actor.ActorDataTag;
+import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
+import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
@@ -21,6 +23,8 @@ import java.util.List;
  * Time: 15:27
  */
 public interface MoviesFacade {
+    public ClientData getClient(int id);
+
     public Actor getActor(int id);
 
     public List<ActorDataTag> getActorTags(String tagName);
@@ -42,6 +46,7 @@ public interface MoviesFacade {
     public MovieDataDTO getMovie(int id);
 
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
+    public PaginatedList<MoviesRentData> getMoviesRentData(ListDataRequest request);
 
     public void deleteMovie(int id);
 

@@ -11,11 +11,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pl.radek.dvd.dto.FilterInfo;
-import pl.radek.dvd.dto.ListDataRequest;
-import pl.radek.dvd.dto.PaginationInfo;
-import pl.radek.dvd.dto.SortInfo;
+import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.movies.MoviesData;
+import pl.radek.dvd.dto.movies.MoviesRentData;
+import pl.radek.dvd.dto.movies.PaginatedListMoviesRent;
+import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.logic.builder.MovieFiltreChoice;
 import pl.radek.dvd.logic.builder.MultiFiltreChoice;
 import pl.radek.dvd.model.Constants;
@@ -64,11 +64,27 @@ public class MoviesMySQLDAO implements MoviesDAO {
     @Override
     public List<MoviesData> getMovies(ListDataRequest listDataRequest) {
         logger.debug("Perform method getMovies - listDataRequest");
-        multiFiltreChoice = ChoiceFiltreQueryFactory.getMultiFiltreChoice(listDataRequest, hibernateTemplate);
+        multiFiltreChoice = ChoiceFiltreQueryFactory.getMultiFiltreChoice(listDataRequest, hibernateTemplate, "moviesData");
         Query q = multiFiltreChoice.filtreQuery();
 
-        logger.debug("Got sorted and filtered Movies list from db");
+        logger.debug("Got sorted and filtered Movies data list from db");
         return q.list();
+    }
+
+    @Override
+    public PaginatedList<MoviesRentData> getMoviesRentDataPaginated(ListDataRequest listDataRequest) {
+        logger.debug("Perform method getMoviesRentData - listDataRequest");
+        multiFiltreChoice = ChoiceFiltreQueryFactory.getMultiFiltreChoice(listDataRequest, hibernateTemplate, "moviesRentData");
+        Query q = multiFiltreChoice.filtreQuery();
+        int noOfRecords = multiFiltreChoice.getNoOfRecords();
+        List<MoviesRentData> moviesRentDatas = q.list();
+
+        PaginatedListMoviesRent paginatedList = new PaginatedListMoviesRent();
+        paginatedList.setMoviesDatas(moviesRentDatas);
+        paginatedList.setNoOfRecords(noOfRecords);
+
+        logger.debug("Got sorted and filtered paginated Movies rent data list from db");
+        return paginatedList;
     }
 
     @Override
@@ -87,6 +103,36 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         logger.debug("Got Movie by id: " + id);
         return movie;
+    }
+
+    @Override
+    public RentData getMovieRentData(int movieCopyId) {
+        logger.debug("Getting MovieRentData by id: " + movieCopyId);
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.RentData(m.title, mc.serialNumber, p.name) FROM Movie as m ");
+        query.append("INNER JOIN m.movieCopies as mc ");
+        query.append("INNER JOIN m.promotion as p ");
+        query.append("WHERE mc.id = :ide ");
+        query.append("AND mc.availability = :avail ");
+
+        Query q = session.createQuery(query.toString());
+
+        short avail = 1;
+        q.setParameter("avail", avail);
+        q.setParameter("ide", movieCopyId);
+
+        List results = q.list();
+
+        if (results.size() > 0) {
+            RentData rentData = (RentData) results.get(0);
+            logger.debug("Got MovieRentData by id: " + movieCopyId);
+            return rentData;
+        } else {
+            logger.debug("Result list is null ");
+            return null;
+        }
     }
 
     @Override

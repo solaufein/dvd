@@ -1,4 +1,49 @@
+#clientDetails{
+    float: left;
+    background-color: #fff;
+    display:table;
+    position: static;
+    padding: 0px 0px 0px 80px;
+}
+
+#clientDetails .filtreheader {
+
+}
+
+#clientDetails .filtreheader h3 {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#clientDetails .filtreheader p {
+    color: #8F8F8F;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+#clientDetails .separator{
+    height: 1px;
+    background: #E8E8E8;
+    width: auto;
+
+
+}
+
+#clientDetails .inputs{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#clientDetails .inputs label{
+    color: black;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+}
+
 #myform{
+    float: left;
 	padding: auto;
 	background-color: #fff;
 	display:table;
@@ -51,11 +96,13 @@ input:-moz-placeholder{
 }
 
 .rentMovieButton {
+    clear: both;
     text-align: right;
     padding-bottom: 15px;
 }
 
 .registerMovieCopyButton {
+    clear: both;
     text-align: right;
     padding-bottom: 15px;
 }

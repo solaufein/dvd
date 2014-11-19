@@ -40,7 +40,7 @@
 		</div> 
 		</div>
 		<div class="rentMovieButton">
-			<form name="rentMovie" action=" <c:url value="clients/clientdetails"/>" method="get">
+			<form name="rentMovie" action=" <c:url value="clientdetails/moviesrent"/>" method="get">
 				<input type="hidden" name="id" value="${param.id}" />
 				<input type="submit" value="<spring:message code="common.button.rentMovie"/>" class = "myButton"/>
 			</form>

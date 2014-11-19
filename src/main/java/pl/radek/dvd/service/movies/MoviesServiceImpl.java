@@ -7,10 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.genres.GenreData;
-import pl.radek.dvd.dto.movies.MovieDataDTO;
-import pl.radek.dvd.dto.movies.MoviesData;
-import pl.radek.dvd.dto.movies.PaginatedListMovies;
+import pl.radek.dvd.dto.movies.*;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.logic.movies.MoviesDAO;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
@@ -51,6 +50,11 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
+    public RentData getMovieRentData(int movieCopyId) {
+        return moviesDAO.getMovieRentData(movieCopyId);
+    }
+
+    @Override
     public PaginatedList<MoviesData> getMovies(ListDataRequest request) {
         List<MoviesData> movies = moviesDAO.getMovies(request);
         int noOfRecords = moviesDAO.getNoOfRecords(request);
@@ -60,6 +64,13 @@ public class MoviesServiceImpl implements MoviesService {
         paginatedList.setNoOfRecords(noOfRecords);
 
         return paginatedList;
+    }
+
+    @Override
+    public PaginatedList<MoviesRentData> getMoviesRentData(ListDataRequest request) {
+        PaginatedList<MoviesRentData> moviesRentDataPaginated = moviesDAO.getMoviesRentDataPaginated(request);
+
+        return moviesRentDataPaginated;
     }
 
     @Override
@@ -135,12 +146,12 @@ public class MoviesServiceImpl implements MoviesService {
         return movie;
     }
 
-    private GenreData convertGenreToGenreData(Genre genre){
+    private GenreData convertGenreToGenreData(Genre genre) {
         GenreData genreData = new GenreData(genre.getId(), genre.getGenre(), genre.getMovies());
         return genreData;
     }
 
-    private static Genre convertGenreDataToGenre(GenreData genreData){
+    private static Genre convertGenreDataToGenre(GenreData genreData) {
         Genre genre = new Genre();
         genre.setId(genreData.getId());
         genre.setGenre(genreData.getName());
@@ -148,7 +159,7 @@ public class MoviesServiceImpl implements MoviesService {
         return genre;
     }
 
-    private PromotionData convertPromotionToPromotionData(Promotion promotion){
+    private PromotionData convertPromotionToPromotionData(Promotion promotion) {
         PromotionData promotionData = new PromotionData();
         promotionData.setId(promotion.getId());
         promotionData.setName(promotion.getName());
@@ -158,7 +169,7 @@ public class MoviesServiceImpl implements MoviesService {
         return promotionData;
     }
 
-    private static Promotion convertPromotionDataToPromotion(PromotionData promotionData){
+    private static Promotion convertPromotionDataToPromotion(PromotionData promotionData) {
         Promotion promotion = new Promotion();
         promotion.setId(promotionData.getId());
         promotion.setName(promotionData.getName());
