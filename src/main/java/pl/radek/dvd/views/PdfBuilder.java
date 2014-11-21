@@ -9,6 +9,7 @@ import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 
 /**
@@ -22,6 +23,9 @@ public class PdfBuilder extends AbstractITextPdfView {
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
                                     PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
+
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         // get data model which is passed by the Spring container
         ReceiptPdf receiptInfo = (ReceiptPdf) model.get("receiptInfo");
         ClientData clientInfo = (ClientData) model.get("clientInfo");
@@ -76,7 +80,7 @@ public class PdfBuilder extends AbstractITextPdfView {
         cell.setPhrase(new Phrase("Rent Date", font));
         table2.addCell(cell);
 
-        cell.setPhrase(new Phrase("Return Date", font));
+        cell.setPhrase(new Phrase("Expected Return Date", font));
         table2.addCell(cell);
 
         cell.setPhrase(new Phrase("Pay Date", font));
@@ -88,10 +92,21 @@ public class PdfBuilder extends AbstractITextPdfView {
         // write table row data
         table2.addCell(receiptInfo.getTitle());
         table2.addCell(receiptInfo.getSerialNumber());
-        table2.addCell(String.valueOf(receiptInfo.getRentDate()));
-        table2.addCell(String.valueOf(receiptInfo.getReturnDate()));
-        table2.addCell(String.valueOf((receiptInfo.getPayDate())));
-        table2.addCell(String.valueOf(receiptInfo.getPrice()));
+
+        table2.addCell(sdfDate.format(receiptInfo.getRentDate()));
+        table2.addCell(sdfDate.format(receiptInfo.getReturnDate()));
+
+        if (receiptInfo.getPayDate() == null) {
+            table2.addCell("");
+        } else {
+            table2.addCell(sdfDate.format(receiptInfo.getPayDate()));
+        }
+
+        if (receiptInfo.getPrice() == null) {
+            table2.addCell("");
+        } else {
+            table2.addCell(String.valueOf(receiptInfo.getPrice()));
+        }
 
         doc.add(table);
         doc.add(new Paragraph("Movie rental details:  "));

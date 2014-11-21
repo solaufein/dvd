@@ -138,7 +138,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
         movieCopy.setAvailability((short) 1);
 
         session.save(movieCopy);
-        movie.getMovieCopies().add(movieCopy);
+        movie.getMovieCopies().add(movieCopy);  // needed?
 
         logger.debug("Saved Movie Copy to Movie sucesfully");
     }

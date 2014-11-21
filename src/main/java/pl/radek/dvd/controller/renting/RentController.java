@@ -2,6 +2,7 @@ package pl.radek.dvd.controller.renting;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
+import pl.radek.dvd.dto.rr.NewRentDto;
 import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.model.Constants;
+import pl.radek.dvd.model.Employee;
 import pl.radek.dvd.service.renting.RentingFacade;
+
+import java.security.Principal;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/emp/rent")
@@ -34,6 +40,9 @@ public class RentController {
         ClientData clientData = rentingFacade.getClient(clientId);
         RentData rentData = rentingFacade.getMovieRentData(movieCopyId);
 
+        //  MovieCopyDTO movieCopy = rentingFacade.getMovieCopy(movieCopyId);
+        //  modelMap.addAttribute("movieCopy", movieCopy);
+
         modelMap.addAttribute("movieCopyId", movieCopyId);
         modelMap.addAttribute("clientId", clientId);
         modelMap.addAttribute(Constants.CLIENT, clientData);
@@ -45,13 +54,20 @@ public class RentController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveRent(@RequestParam(value = "movieCopyId") int movieCopyId,
                            @RequestParam(value = "clientId") int clientId,
-                           ModelMap modelMap) throws Exception {
+                           @RequestParam(value = "date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                           ModelMap modelMap, Principal principal) throws Exception {
 
-        // tutaj zapisy....
-        int registryId = 1;
+        logger.info("save date = " + date);
+        // http://www.mkyong.com/spring-security/get-current-logged-in-username-in-spring-security/
+        // employee get
+        String employeeEmail = principal.getName();
 
-        MovieCopyDTO movieCopy = rentingFacade.getMovieCopy(movieCopyId);
+        // create renting registry, create receipt - set this receipt to this renting registry
+        NewRentDto newRentDto = new NewRentDto(date, clientId, movieCopyId, employeeEmail);
+        int registryId = rentingFacade.addRentingRegistry(newRentDto);
+        logger.info("registry Id = " + registryId);
 
+        // go to print receipt view
         ClientData clientData = rentingFacade.getClient(clientId);
         ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformations(registryId);
 
@@ -62,8 +78,8 @@ public class RentController {
     }
 
     // 1  V  wybrac dane z bazy danych: Client, Movie, MovieCopy, Promotion oraz Employee!
-    // 2     wybrac date rent i wyslac POST zapis(id client, id movieCopy, id employee, data)
-    // 3     utworzyc nowe Renting Registry (client id, movieCopy id, employee id, receipt id)
-    // 4     stworzyc Receipt i przypisac je do utworzonego RentingRegistry
+    // 2  V   wybrac date rent i wyslac POST zapis(id client, id movieCopy, id employee, data)
+    // 3  V   utworzyc nowe Renting Registry (client id, movieCopy id, employee id, receipt id)
+    // 4  V   stworzyc Receipt i przypisac je do utworzonego RentingRegistry
     // 5  V   po zapisie uruchomic Controller do print Receipt (id clienta, id registry)
 }

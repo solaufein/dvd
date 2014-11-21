@@ -28,8 +28,8 @@ public class Receipt {
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDate;
 
-    @Column(name = "bill_number", nullable = false)
-    private int billNumber;
+    @Column(name = "bill_number", unique = true, nullable = false)
+    private String billNumber;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt")
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
@@ -37,14 +37,14 @@ public class Receipt {
     public Receipt() {
     }
 
-    public Receipt(int id, BigDecimal price, Date payDate, int billNumber) {
+    public Receipt(int id, BigDecimal price, Date payDate, String billNumber) {
         this.id = id;
         this.price = price;
         this.payDate = payDate;
         this.billNumber = billNumber;
     }
 
-    public Receipt(int id, BigDecimal price, Date payDate, int billNumber, Set<RentingRegistry> rentingRegistries) {
+    public Receipt(int id, BigDecimal price, Date payDate, String billNumber, Set<RentingRegistry> rentingRegistries) {
         this.id = id;
         this.price = price;
         this.payDate = payDate;
@@ -76,11 +76,11 @@ public class Receipt {
         this.payDate = payDate;
     }
 
-    public int getBillNumber() {
+    public String getBillNumber() {
         return billNumber;
     }
 
-    public void setBillNumber(int billNumber) {
+    public void setBillNumber(String billNumber) {
         this.billNumber = billNumber;
     }
 

@@ -41,14 +41,27 @@
                     <li><label> <spring:message code="movies.moviesList.promotion"/>: </label> <c:out
                             value="${rentData.promotion}"/>
                     </li>
-                    <li><label> <spring:message code="clients.clientHistoryList.returnDate"/>: </label>
-                        <input type="text" id="datepicker">
-                    </li>
                 </ul>
-            </div>
+                <form id="ok" name="ok" action="<c:url value="/emp/rent/save"/>" method="POST">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="datepicker"> <spring:message
+                                        code="clients.clientHistoryList.returnDate"/>: </label>
+                                <input type="text" name="date" id="datepicker">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="movieCopyId" value="${param.movieCopyId}"/>
+                                <input type="hidden" name="clientId" value="${param.clientId}"/>
+                                <input type="submit" value="<spring:message code="common.button.ok"/>"
+                                       class="myButton"/>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
 
-            <div class="separator"></div>
-            <div class="inputs">
                 <form name="cancel" action="<c:url value="/clientdetails/moviesrent" context="/dvd/emp/clients"/>"
                       method="get">
                     <table>
@@ -63,27 +76,32 @@
                         </tr>
                     </table>
                 </form>
-                <form name="ok" action="<c:url value="/emp/rent/save"/>" method="POST">
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <input type="hidden" name="movieCopyId" value="${param.movieCopyId}"/>
-                                <input type="hidden" name="clientId" value="${param.clientId}"/>
-                                <input type="submit" value="<spring:message code="common.button.ok"/>"
-                                       class="myButton"/>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </form>
             </div>
         </div>
 
         <script>
 
             $(document).ready(function () {
-                $("#datepicker").datepicker();
+                $("#datepicker").datepicker({
+                    dateFormat: 'yy-mm-dd',
+                    minDate: 0, // 0 days offset = today
+                    onSelect: function (dateText) {
+                        $("#datepicker-error").remove();
+                    }
+                });
+
+                $("#ok").validate({
+                    rules: {
+                        date: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        date: {
+                            required: "Please provide a date"
+                        }
+                    }
+                });
             });
 
         </script>

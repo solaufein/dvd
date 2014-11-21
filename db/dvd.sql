@@ -82,7 +82,7 @@ CREATE TABLE receipt
 (id BIGINT NOT NULL AUTO_INCREMENT,
 price DECIMAL(10,2),
 pay_date DATETIME,
-bill_number BIGINT NOT NULL,
+bill_number VARCHAR(10)NOT NULL,
 PRIMARY KEY(id),
 UNIQUE(bill_number)); 
 
@@ -103,7 +103,7 @@ client_id BIGINT NOT NULL,
 receipt_id BIGINT NOT NULL,
 movie_copy_id BIGINT NOT NULL, 
 rent_date DATETIME NOT NULL, 
-return_date DATETIME,
+return_date DATETIME NOT NULL,
 comment VARCHAR(255),
 PRIMARY KEY(id),
 FOREIGN KEY(employee_id) REFERENCES employee(id) ON DELETE CASCADE ON UPDATE CASCADE,

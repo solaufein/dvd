@@ -19,12 +19,12 @@ public class ReceiptPdf {
     private Date returnDate;
     private BigDecimal price;
     private Date payDate;
-    private int billNumber;
+    private String billNumber;
 
     public ReceiptPdf() {
     }
 
-    public ReceiptPdf(String title, String serialNumber, Date rentDate, Date returnDate, BigDecimal price, Date payDate, int billNumber) {
+    public ReceiptPdf(String title, String serialNumber, Date rentDate, Date returnDate, BigDecimal price, Date payDate, String billNumber) {
         this.title = title;
         this.serialNumber = serialNumber;
         this.rentDate = rentDate;
@@ -82,11 +82,11 @@ public class ReceiptPdf {
         this.payDate = payDate;
     }
 
-    public int getBillNumber() {
+    public String getBillNumber() {
         return billNumber;
     }
 
-    public void setBillNumber(int billNumber) {
+    public void setBillNumber(String billNumber) {
         this.billNumber = billNumber;
     }
 }

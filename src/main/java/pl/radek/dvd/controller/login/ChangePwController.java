@@ -41,8 +41,8 @@ public class ChangePwController {
     public String changePw(@RequestParam(value = "empId") String empId,
                            @RequestParam(value = "pw") String pw,
                            ModelMap modelMap) {
-        //todo: if link is active then save new password to db, redirect: Login.page
-        //todo: else go to remind view with msg
+        // if link is active then save new password to db, redirect: Login.page
+        // else go to remind view with msg
 
         try {
             employeeFacade.changePassword(empId, pw);

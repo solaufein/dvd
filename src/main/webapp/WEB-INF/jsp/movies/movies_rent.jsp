@@ -22,7 +22,7 @@
 <tiles:putAttribute name="content">
 
 <h2>
-    <spring:message code="movies.moviesList.list"/>:
+    <spring:message code="movies.moviesList.available"/>:
 </h2>
 
 <div id="myform">
