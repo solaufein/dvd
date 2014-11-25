@@ -48,7 +48,8 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientDetails(rr.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientDetails(rr.id, m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.payDate, mc.id) FROM RentingRegistry as rr ");
+        query.append("INNER JOIN rr.receipt as r ");
         query.append("INNER JOIN rr.client as c ");
         query.append("INNER JOIN rr.movieCopy as mc ");
         query.append("INNER JOIN mc.movie as m ");

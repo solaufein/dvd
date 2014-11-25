@@ -4,6 +4,7 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.actor.ActorDataTag;
 import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
@@ -46,6 +47,7 @@ public interface MoviesFacade {
     public MovieDataDTO getMovie(int id);
 
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
+
     public PaginatedList<MoviesRentData> getMoviesRentData(ListDataRequest request);
 
     public void deleteMovie(int id);
@@ -61,4 +63,9 @@ public interface MoviesFacade {
     public void updateMovie(MovieDataDTO movieDataDTO);
 
     public PaginatedList<MovieCopyDTO> getMovieCopyPaginatedList(final ListDataRequest request, int movieId);
+
+    List<ClientRentDto> getClients(String term);
+
+    ClientRentDto getClient(String term);
+
 }

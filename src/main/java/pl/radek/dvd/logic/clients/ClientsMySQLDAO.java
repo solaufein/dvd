@@ -12,6 +12,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.model.*;
 
 import java.util.List;
@@ -277,5 +278,53 @@ public class ClientsMySQLDAO implements ClientsDAO {
         //    int records = DataAccessUtils.intResult(hibernateTemplate.find(query.toString()));
         logger.debug("Got total number of FILTERED records: " + records);
         return records;
+    }
+
+    @Override
+    public List<ClientRentDto> getClients(String pesel) {
+        logger.info("Getting clients by pesel: " + pesel);
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientRentDto(c.id, c.firstName, c.lastName, c.pesel) FROM Client as c ");
+        query.append("WHERE c.pesel LIKE :pesel ");
+        query.append("ORDER BY c.pesel DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("pesel", pesel + "%");
+        q.setFirstResult(0);
+        q.setMaxResults(5);
+
+        List<ClientRentDto> results = (List<ClientRentDto>) q.list();
+
+        if (results.size() > 0) {
+            logger.info("Got clients by pesel: " + pesel);
+        } else {
+            logger.info("Result list is null ");
+        }
+        return results;
+    }
+
+    @Override
+    public ClientRentDto getClient(String pesel) {
+        logger.info("Getting client by pesel: " + pesel);
+        ClientRentDto clientRentDto = null;
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientRentDto(c.id, c.firstName, c.lastName, c.pesel) FROM Client as c ");
+        query.append("WHERE c.pesel = :pesel ");
+        query.append("ORDER BY c.pesel DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("pesel", pesel);
+
+        List<ClientRentDto> results = (List<ClientRentDto>) q.list();
+
+        if (results.size() > 0) {
+            logger.info("Got client by pesel: " + pesel);
+            clientRentDto = results.get(0);
+        } else {
+            logger.info("Result list is null ");
+            // can throw exception ...
+        }
+
+        return clientRentDto;
     }
 }

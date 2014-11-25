@@ -1,4 +1,23 @@
 DvdFormUtil = {
+    checkPesel: function (tip, pesel) {
+        var reg = /^[0-9]{11}$/;
+        if (reg.test(pesel.val()) == false) {
+            pesel.addClass("ui-state-error");
+            this.updateTips(tip, "Incorrect pesel!");
+            return false;
+        } else {
+            return true;
+            /*var dig = ("" + pesel).split("");
+             var kontrola = (1 * parseInt(dig[0]) + 3 * parseInt(dig[1]) + 7 * parseInt(dig[2]) + 9 * parseInt(dig[3]) + 1 * parseInt(dig[4]) + 3 * parseInt(dig[5]) + 7 * parseInt(dig[6]) + 9 * parseInt(dig[7]) + 1 * parseInt(dig[8]) + 3 * parseInt(dig[9])) % 10;
+             if (kontrola == 0) kontrola = 10;
+             kontrola = 10 - kontrola;
+             if (parseInt(dig[10]) == kontrola)
+             return true;
+             else
+             return false;*/
+        }
+    },
+
     checkPasswordMatch: function (tip, p1, p2) {
         if (p1.val() != p2.val()) {
             p2.addClass("ui-state-error");
@@ -52,6 +71,18 @@ DvdFormUtil = {
                 }
             });
         });
+    },
+
+    createTd: function (text) {
+        var col = $('<td></td>').text(text);
+
+        return col;
+    },
+
+    createTr: function () {
+        var row = $('<tr></tr>');
+
+        return row;
     },
 
     submitFormViaAjax1: function (type, url, data, dataType, contentType, callback) {

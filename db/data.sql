@@ -106,10 +106,10 @@ INSERT INTO movie_copy VALUES(default,4,'D203','copy ok',1);
 INSERT INTO movie_copy VALUES(default,4,'D205','copy ok',1);
 INSERT INTO movie_copy VALUES(default,5,'E204','copy ok',1);
 INSERT INTO movie_copy VALUES(default,6,'F203','copy ok',1);
-INSERT INTO movie_copy VALUES(default,6,'F204','copy ok',0);
+INSERT INTO movie_copy VALUES(default,6,'F204','copy ok',1);
 INSERT INTO movie_copy VALUES(default,7,'G104','copy ok',1);
 INSERT INTO movie_copy VALUES(default,7,'G106','copy ok',1);
-INSERT INTO movie_copy VALUES(default,7,'G107','copy ok',0);
+INSERT INTO movie_copy VALUES(default,7,'G107','copy ok',1);
 
 INSERT INTO renting_registry VALUES(default,1,2,2,2,'2013-05-10 12:23:44','2013-05-13 12:23:44','everything ok');
 INSERT INTO renting_registry VALUES(default,1,3,3,3,'2013-05-12 12:23:44','2013-05-14 12:23:44','everything ok');

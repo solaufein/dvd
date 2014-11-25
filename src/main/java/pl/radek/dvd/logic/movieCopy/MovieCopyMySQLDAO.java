@@ -82,7 +82,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         List<MovieCopy> movieCopies = (List<MovieCopy>) q.list();
 
-        //todo: ok ?
+        //ok ?
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
      /*   for (MovieCopy movieCopy : movieCopies) {
             Hibernate.initialize(movieCopy.getMovie());

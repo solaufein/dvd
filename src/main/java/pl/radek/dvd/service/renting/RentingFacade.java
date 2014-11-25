@@ -5,6 +5,8 @@ import pl.radek.dvd.dto.clients.ReceiptPdf;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.rr.NewRentDto;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
+import pl.radek.dvd.exceptions.movie.MovieCopyNotAvailableException;
 import pl.radek.dvd.model.Employee;
 
 /**
@@ -14,8 +16,10 @@ public interface RentingFacade {
 
     ClientData getClient(int clientId);
     MovieCopyDTO getMovieCopy(int movieCopyId);
-    RentData getMovieRentData(int movieCopyId);
+    RentData getMovieRentData(int movieCopyId, short avail);
     ReceiptPdf getReceiptPdfInformations(int clientId);
     Employee getEmployee(String name);
-    int addRentingRegistry(NewRentDto rentDto);
+    int addRentingRegistry(NewRentDto rentDto) throws MovieCopyNotAvailableException;
+
+    void updateRentingRegistry(ReturnCommentDto returnDto);
 }

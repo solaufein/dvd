@@ -8,6 +8,8 @@ import pl.radek.dvd.dto.clients.ReceiptPdf;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.rr.NewRentDto;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
+import pl.radek.dvd.exceptions.movie.MovieCopyNotAvailableException;
 import pl.radek.dvd.model.Employee;
 import pl.radek.dvd.service.clients.ClientDetailsService;
 import pl.radek.dvd.service.clients.ClientsService;
@@ -68,8 +70,13 @@ public class RentingFacadeImpl implements RentingFacade {
     }
 
     @Override
-    public int addRentingRegistry(NewRentDto rentDto) {
+    public int addRentingRegistry(NewRentDto rentDto) throws MovieCopyNotAvailableException {
         return rentingService.addRentingRegistry(rentDto);
+    }
+
+    @Override
+    public void updateRentingRegistry(ReturnCommentDto returnDto) {
+        rentingService.updateRentingRegistry(returnDto);
     }
 
     @Override
@@ -83,8 +90,8 @@ public class RentingFacadeImpl implements RentingFacade {
     }
 
     @Override
-    public RentData getMovieRentData(int movieCopyId) {
-        return moviesService.getMovieRentData(movieCopyId);
+    public RentData getMovieRentData(int movieCopyId, short avail) {
+        return moviesService.getMovieRentData(movieCopyId, avail);
     }
 
     @Override

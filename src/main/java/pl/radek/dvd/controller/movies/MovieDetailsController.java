@@ -7,9 +7,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.model.Constants;
@@ -70,5 +72,19 @@ public class MovieDetailsController {
         modelMap.addAttribute(Constants.MOVIEDETAILS, movieCopyDTOList);
 
         return "/movies/movie_details";
+    }
+
+    @RequestMapping(value = "/getClient", method = RequestMethod.GET, produces = "application/json")
+    public
+    @ResponseBody
+    ClientRentDto getClients(@RequestParam("pesel") String pesel) {
+
+        ClientRentDto data = moviesFacade.getClient(pesel);
+
+        logger.info("client id = " + data.getId());
+        logger.info("client pesel = " + data.getPesel());
+
+        return data;
+
     }
 }

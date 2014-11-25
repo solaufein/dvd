@@ -26,8 +26,10 @@
             <add-attribute value="/resources/js/jquery-ui.min.js"/>
             <add-attribute value="/resources/js/jquery.validate.min.js"/>
             <add-attribute value="/resources/js/additional-methods.min.js"/>
+            <add-attribute value="/resources/js/utils.js"/>
             <add-attribute value="/resources/js/navigation.js"/>
             <add-attribute value="/resources/js/actorsAutocomplete.js"/>
+            <add-attribute value="/resources/js/rent_movie_modal.js"/>
         </put-list-attribute>
     </definition>
 

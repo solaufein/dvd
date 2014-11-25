@@ -1,9 +1,6 @@
 package pl.radek.dvd.logic.renting;
 
-import pl.radek.dvd.model.Client;
-import pl.radek.dvd.model.Employee;
-import pl.radek.dvd.model.MovieCopy;
-import pl.radek.dvd.model.Receipt;
+import pl.radek.dvd.model.*;
 
 import java.util.Date;
 
@@ -12,4 +9,10 @@ import java.util.Date;
  */
 public interface RentingDAO {
     int saveRentingRegistry(Employee employee, Client client, MovieCopy movieCopy, Date returnDate, Receipt receipt);
+
+    void addRentingRegistry(RentingRegistry rentingRegistry);
+
+    void updateRentingRegistry(RentingRegistry rentingRegistry);
+
+    RentingRegistry getRentingRegistry(int registryId);
 }

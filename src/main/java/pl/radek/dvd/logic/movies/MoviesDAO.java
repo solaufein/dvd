@@ -20,7 +20,7 @@ public interface MoviesDAO {
     public List<MoviesData> getMovies(ListDataRequest listDataRequest);
     public PaginatedList<MoviesRentData> getMoviesRentDataPaginated(ListDataRequest listDataRequest);
     public Movie getMovie(int id);
-    RentData getMovieRentData(int movieCopyId);
+    RentData getMovieRentData(int movieCopyId, short avail);
     public void deleteMovie(int id);
     public void addMovie(Movie movie);
     public void updateMovie(Movie movie);

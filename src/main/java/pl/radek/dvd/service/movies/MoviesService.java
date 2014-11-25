@@ -18,7 +18,7 @@ import java.util.List;
 public interface MoviesService {
     public List<MovieDataDTO> getMovies();
     public MovieDataDTO getMovie(int id);
-    RentData getMovieRentData(int movieCopyId);
+    RentData getMovieRentData(int movieCopyId, short avail);
     public PaginatedList<MoviesData> getMovies(final ListDataRequest request);
     public PaginatedList<MoviesRentData> getMoviesRentData(ListDataRequest request);
     public void deleteMovie(int id);

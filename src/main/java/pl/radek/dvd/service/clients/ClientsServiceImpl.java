@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.clients.PaginatedListImpl;
 import pl.radek.dvd.logic.clients.ClientsDAO;
 import pl.radek.dvd.model.Client;
@@ -65,7 +66,6 @@ public class ClientsServiceImpl implements ClientsService {
     }
 
 
-
     @Override
     public void deleteClient(int id) {
         clientsDAO.deleteClient(id);
@@ -83,9 +83,20 @@ public class ClientsServiceImpl implements ClientsService {
         clientsDAO.updateClient(c);
     }
 
+    @Override
+    public List<ClientRentDto> getClients(String pesel) {
+
+        return clientsDAO.getClients(pesel);
+    }
+
+    @Override
+    public ClientRentDto getClient(String pesel) {
+        return clientsDAO.getClient(pesel);
+    }
+
     private List<ClientData> convertClientListToClientDataList(List<Client> clientList) {
         List<ClientData> clientDataList = new LinkedList<ClientData>();
-        for (Client c : clientList){
+        for (Client c : clientList) {
             ClientData clientData = convertClientToClientData(c);
             clientDataList.add(clientData);
         }
@@ -95,7 +106,7 @@ public class ClientsServiceImpl implements ClientsService {
 
     private List<Client> convertClientDataListToClientList(List<ClientData> clientDataList) {
         List<Client> clientList = new LinkedList<Client>();
-        for (ClientData cd : clientDataList){
+        for (ClientData cd : clientDataList) {
             Client client = convertClientDataToClient(cd);
             clientList.add(client);
         }

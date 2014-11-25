@@ -106,7 +106,7 @@ public class MoviesMySQLDAO implements MoviesDAO {
     }
 
     @Override
-    public RentData getMovieRentData(int movieCopyId) {
+    public RentData getMovieRentData(int movieCopyId, short avail) {
         logger.debug("Getting MovieRentData by id: " + movieCopyId);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
@@ -119,7 +119,7 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         Query q = session.createQuery(query.toString());
 
-        short avail = 1;
+     //   short avail = 1;
         q.setParameter("avail", avail);
         q.setParameter("ide", movieCopyId);
 

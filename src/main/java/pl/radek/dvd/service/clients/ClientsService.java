@@ -3,6 +3,7 @@ package pl.radek.dvd.service.clients;
 import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.ListDataRequest;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface ClientsService {
     public void deleteClient(int id);
     public void addClient(ClientData client);
     public void updateClient(ClientData client);
+
+    List<ClientRentDto> getClients(String pesel);
+    ClientRentDto getClient(String pesel);
+
 }

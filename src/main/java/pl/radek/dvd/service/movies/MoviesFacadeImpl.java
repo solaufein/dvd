@@ -7,6 +7,7 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.actor.ActorDataTag;
 import pl.radek.dvd.dto.clients.ClientData;
+import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
@@ -178,5 +179,14 @@ public class MoviesFacadeImpl implements MoviesFacade {
         return movieCopyService.getMovieCopyPaginatedList(request, id);
     }
 
+    @Override
+    public List<ClientRentDto> getClients(String term) {
 
+        return clientsService.getClients(term);
+    }
+
+    @Override
+    public ClientRentDto getClient(String term) {
+        return clientsService.getClient(term);
+    }
 }

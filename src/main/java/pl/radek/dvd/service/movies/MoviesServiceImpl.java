@@ -50,8 +50,8 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public RentData getMovieRentData(int movieCopyId) {
-        return moviesDAO.getMovieRentData(movieCopyId);
+    public RentData getMovieRentData(int movieCopyId, short avail) {
+        return moviesDAO.getMovieRentData(movieCopyId, avail);
     }
 
     @Override
