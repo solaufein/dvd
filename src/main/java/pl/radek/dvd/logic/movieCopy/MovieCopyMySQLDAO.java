@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
 
@@ -91,6 +92,47 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         logger.debug("Got MovieCopies by id: " + movieId);
         return movieCopies;
+    }
+
+    @Override
+    public ReturnCommentDto getReturnData(Integer movieCopyId) {
+        logger.info("Getting ReturnData by movie copy id: " + movieCopyId);
+
+        /*
+        SELECT rr.id as 'renting id', c.id as 'client id'
+        FROM movie_copy as mc
+        INNER JOIN renting_registry as rr ON rr.movie_copy_id = mc.id
+        INNER JOIN receipt as r ON r.id = rr.receipt_id
+        INNER JOIN client as c ON c.id = rr.client_id
+        WHERE mc.id = 2 AND r.pay_date IS NULL;
+        */
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.ReturnCommentDto(c.id, rr.id) FROM MovieCopy as mc ");
+        //   StringBuilder query = new StringBuilder("FROM MovieCopy as mc ");
+        query.append("INNER JOIN mc.rentingRegistries as rr ");
+        query.append("INNER JOIN rr.receipt as r ");
+        query.append("INNER JOIN rr.client as c ");
+        query.append("WHERE mc.id = :ide ");
+        query.append("AND r.payDate IS NULL ");
+        query.append("ORDER BY mc.availability DESC ");
+
+        Query q = session.createQuery(query.toString());
+        q.setParameter("ide", movieCopyId);
+
+        List result = q.list();
+
+        ReturnCommentDto returnCommentDto = null;
+
+        if (result.size() > 0){
+            returnCommentDto = (ReturnCommentDto) q.list().get(0);
+        } else {
+            //   throw new exception...
+        }
+
+        logger.info("Got ReturnData by movie copy id: " + movieCopyId);
+        return returnCommentDto;
     }
 
     @Override

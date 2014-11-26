@@ -98,9 +98,9 @@
                             <td><spring:message code="movies.movieCopy.unavailable"/></td>
                             <td>
                                 <form name="returnMovieCopy" class="returnMovieCopy"
-                                      action=" <c:url value="/emp/return/movie"/>"
+                                      action=" <c:url context="/dvd/emp" value="/return/movie" />"
                                       method="post">
-                                    <input type="hidden" name="moviecopyid" value="${details.id}"/>
+                                    <input type="hidden" name="movieCopyId" value="${details.id}"/>
                                     <input type="submit" value="<spring:message code="common.button.return"/>"
                                            class="myButton"/>
                                 </form>

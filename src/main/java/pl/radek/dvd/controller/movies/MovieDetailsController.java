@@ -14,6 +14,7 @@ import pl.radek.dvd.dto.PaginationInfo;
 import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
@@ -85,6 +86,18 @@ public class MovieDetailsController {
         logger.info("client pesel = " + data.getPesel());
 
         return data;
+    }
 
+    @RequestMapping(value = "/getReturnData", method = RequestMethod.POST, produces = "application/json")
+    public
+    @ResponseBody
+    ReturnCommentDto getReturnData(@RequestParam("movieCopyId") Integer movieCopyId) {
+
+        ReturnCommentDto data = moviesFacade.getReturnData(movieCopyId);
+
+        logger.info("client id = " + data.getClientId());
+        logger.info("registry id = " + data.getRegistryId());
+
+        return data;
     }
 }

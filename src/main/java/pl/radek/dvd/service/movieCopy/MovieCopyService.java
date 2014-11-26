@@ -4,6 +4,7 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
 
@@ -26,4 +27,6 @@ public interface MovieCopyService {
     public void addMovieCopy(int movieId ,MovieCopyDTO movieCopy);
 
     public void updateMovieCopy(MovieCopyDTO movieCopy);
+
+    ReturnCommentDto getReturnData(Integer movieCopyId);
 }

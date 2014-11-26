@@ -13,6 +13,7 @@ InitRentMovie = {
         };
 
         this.setRentButton();
+        this.setReturnButton();
     },
 
     createRentDialog: function () {
@@ -129,6 +130,56 @@ InitRentMovie = {
 
             console.log("opening Rent dialog, movie copy id = " + movieCopyId);
             InitRentMovie.config.dialog.dialog("open");
+        });
+    },
+
+    setReturnButton: function () {
+        console.log("return button set");
+
+        $(".returnMovieCopy").on("click", function (e) {
+            e.preventDefault();
+
+            var form = $(this);
+            var movieCopyId = form.find('input[name="movieCopyId"]').val();
+            var findAction = "/dvd/emp/movies/moviedetails/getReturnData";
+
+            console.log("movie copy id = " + movieCopyId);
+            console.log("find action = " + findAction);
+
+            $.ajax({
+                type: "POST",
+                //contentType: "application/json; charset=utf-8",
+                url: findAction,
+                data: {movieCopyId: movieCopyId},
+                dataType: "json",
+                success: function (data) {
+                    console.log("data client id = " + data.clientId);
+                    console.log("data registry id = " + data.registryId);
+
+                    // append inputs to form, and submit that form
+
+                    form.append(
+                        $("<input/>",
+                            {
+                                type: 'hidden',
+                                name: 'clientId',
+                                value: data.clientId
+                            }
+                        )
+                    );
+                    form.append(
+                        $("<input/>",
+                            {
+                                type: 'hidden',
+                                name: 'registryId',
+                                value: data.registryId
+                            }
+                        )
+                    );
+
+                    form.submit();
+                }
+            });
         });
     }
 };

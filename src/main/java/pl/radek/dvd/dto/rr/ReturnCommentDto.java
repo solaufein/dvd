@@ -19,6 +19,17 @@ public class ReturnCommentDto {
         this.registryId = registryId;
     }
 
+    public ReturnCommentDto(int movieCopyId, int clientId, int registryId) {
+        this.movieCopyId = movieCopyId;
+        this.clientId = clientId;
+        this.registryId = registryId;
+    }
+
+    public ReturnCommentDto(int clientId, int registryId) {
+        this.clientId = clientId;
+        this.registryId = registryId;
+    }
+
     public String getComment() {
         return comment;
     }

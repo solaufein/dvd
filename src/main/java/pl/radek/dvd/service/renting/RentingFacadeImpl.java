@@ -9,6 +9,7 @@ import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.rr.NewRentDto;
 import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.dto.rr.ReturnCommentDto;
+import pl.radek.dvd.dto.rr.ReturnData;
 import pl.radek.dvd.exceptions.movie.MovieCopyNotAvailableException;
 import pl.radek.dvd.model.Employee;
 import pl.radek.dvd.service.clients.ClientDetailsService;

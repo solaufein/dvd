@@ -14,6 +14,7 @@ import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.promotions.PromotionData;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
@@ -188,5 +189,11 @@ public class MoviesFacadeImpl implements MoviesFacade {
     @Override
     public ClientRentDto getClient(String term) {
         return clientsService.getClient(term);
+    }
+
+    @Override
+    public ReturnCommentDto getReturnData(Integer movieCopyId) {
+
+        return movieCopyService.getReturnData(movieCopyId);
     }
 }

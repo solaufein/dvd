@@ -9,6 +9,7 @@ import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.PaginatedListMovieCopy;
+import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.logic.movieCopy.MovieCopyDAO;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.MovieCopy;
@@ -79,6 +80,12 @@ public class MovieCopyServiceImpl implements MovieCopyService {
         MovieCopy movieCopy = convertMovieCopyDTOtoMovieCopy(movieCopyDTO);
         movieCopyDAO.updateMovieCopy(movieCopy);
 
+    }
+
+    @Override
+    public ReturnCommentDto getReturnData(Integer movieCopyId) {
+
+        return movieCopyDAO.getReturnData(movieCopyId);
     }
 
     private MovieCopy convertMovieCopyDTOtoMovieCopy(MovieCopyDTO movieCopyDTO) {

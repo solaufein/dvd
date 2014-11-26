@@ -12,6 +12,8 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
 import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.dto.rr.ReturnCommentDto;
+import pl.radek.dvd.dto.rr.ReturnData;
+import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.renting.RentingFacade;
 
@@ -28,10 +30,10 @@ public class ReturnController {
     }
 
     @RequestMapping(value = "/movie", method = RequestMethod.POST)
-    public String returnForm(@RequestParam(value = "clientId") int clientId,
-                             @RequestParam(value = "movieCopyId") int movieCopyId,
-                             @RequestParam(value = "registryId") int registryId,
-                             ModelMap modelMap) throws Exception {
+    public String returnFormClient(@RequestParam(value = "clientId") int clientId,
+                                   @RequestParam(value = "movieCopyId") int movieCopyId,
+                                   @RequestParam(value = "registryId") int registryId,
+                                   ModelMap modelMap) throws Exception {
 
         logger.info("client id = " + clientId);
         logger.info("movie copy id = " + movieCopyId);
@@ -58,13 +60,8 @@ public class ReturnController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveReturn(@RequestParam(value = "movieCopyId") int movieCopyId,
-                             @RequestParam(value = "registryId") int registryId,
-                             @RequestParam(value = "clientId") int clientId,
-                             @ModelAttribute("returnDto") ReturnCommentDto returnDto,
+    public String saveReturn(@ModelAttribute("returnDto") ReturnCommentDto returnDto,
                              ModelMap modelMap) throws Exception {
-
-        //todo: czy potrzebne @RequestParams: movieCopyId, registryId, clientId ?????? sprawdzic
 
         logger.info("comment = " + returnDto.getComment());
         logger.info("client id = " + returnDto.getClientId());
@@ -80,8 +77,8 @@ public class ReturnController {
         rentingFacade.updateRentingRegistry(returnDto);
 
         // go to print receipt view
-        ClientData clientData = rentingFacade.getClient(clientId);
-        ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformations(registryId);
+        ClientData clientData = rentingFacade.getClient(returnDto.getClientId());
+        ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformations(returnDto.getRegistryId());
 
         modelMap.addAttribute("receiptInfo", receiptPdfInformations);
         modelMap.addAttribute("clientInfo", clientData);
