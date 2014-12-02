@@ -109,6 +109,11 @@
 	font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
 }
 
+.labelWidth{
+    display: inline-block;
+    width: 280px;
+}
+
 input::-webkit-input-placeholder{
 	color: #B5B5B5;
 }

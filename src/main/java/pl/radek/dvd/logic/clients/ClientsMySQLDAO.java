@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.clients.ClientRentDto;
+import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.model.*;
 
 import java.util.List;
@@ -281,7 +282,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
     }
 
     @Override
-    public List<ClientRentDto> getClients(String pesel) {
+    public List<ClientRentDto> getClients(String pesel) throws ClientNotFoundException {
         logger.info("Getting clients by pesel: " + pesel);
 
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ClientRentDto(c.id, c.firstName, c.lastName, c.pesel) FROM Client as c ");
@@ -299,6 +300,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
             logger.info("Got clients by pesel: " + pesel);
         } else {
             logger.info("Result list is null ");
+            throw new ClientNotFoundException("Client with given pesel = " + pesel + " - not found.");
         }
         return results;
     }
@@ -326,5 +328,29 @@ public class ClientsMySQLDAO implements ClientsDAO {
         }
 
         return clientRentDto;
+    }
+
+    @Override
+    public  List<Client> getClientByLastName(String lastName) throws ClientNotFoundException {
+        logger.info("Getting clients by lastName: " + lastName);
+
+        StringBuilder query = new StringBuilder("FROM Client as c ");
+        query.append("WHERE c.lastName LIKE :lastName ");
+        query.append("ORDER BY c.lastName DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("lastName", lastName + "%");
+        q.setFirstResult(0);
+        q.setMaxResults(5);
+
+        List<Client> results = (List<Client>) q.list();
+
+        if (results.size() > 0) {
+            logger.info("Got clients by lastName: " + lastName);
+        } else {
+            logger.info("Result list is null ");
+            throw new ClientNotFoundException("Client with given lastName = " + lastName + " - not found.");
+        }
+        return results;
     }
 }

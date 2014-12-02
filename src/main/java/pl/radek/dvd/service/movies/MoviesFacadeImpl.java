@@ -15,6 +15,7 @@ import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.dto.rr.ReturnCommentDto;
+import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.model.Actor;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
@@ -181,7 +182,7 @@ public class MoviesFacadeImpl implements MoviesFacade {
     }
 
     @Override
-    public List<ClientRentDto> getClients(String term) {
+    public List<ClientRentDto> getClients(String term) throws ClientNotFoundException {
 
         return clientsService.getClients(term);
     }

@@ -1,4 +1,24 @@
 DvdFormUtil = {
+    simpleCheckPesel: function (pesel) {
+        var reg = /^[0-9]{11}$/;
+        if (reg.test(pesel.val()) == false) {
+            //    pesel.addClass("error");
+            //   pesel.css('background-color', 'pink');
+
+            var x = 1000,
+                originalColor = pesel.css("background");
+
+            pesel.css("background", "pink");
+            setTimeout(function () {
+                pesel.css("background", originalColor);
+            }, x);
+
+            return false;
+        } else {
+            return true;
+        }
+    },
+
     checkPesel: function (tip, pesel) {
         var reg = /^[0-9]{11}$/;
         if (reg.test(pesel.val()) == false) {
@@ -44,6 +64,25 @@ DvdFormUtil = {
             o.addClass("ui-state-error");
             this.updateTips(tip, "Length of " + n + " must be between " +
                 min + " and " + max + ".");
+            return false;
+        } else {
+            return true;
+        }
+    },
+
+    simpleCheckRegexp: function (o, regexp) {
+        if (!( regexp.test(o.val()) )) {
+            //    o.addClass("error");
+            //  o.css('background-color', 'pink');
+
+            var x = 1000,
+                originalColor = o.css("background");
+
+            o.css("background", "pink");
+            setTimeout(function () {
+                o.css("background", originalColor);
+            }, x);
+
             return false;
         } else {
             return true;

@@ -10,6 +10,7 @@ import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.*;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.logic.movies.MoviesDAO;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
@@ -35,6 +36,23 @@ public class MoviesServiceImpl implements MoviesService {
 
     public void setMoviesDAO(MoviesDAO moviesDAO) {
         this.moviesDAO = moviesDAO;
+    }
+
+    @Override
+    public List<Movie> getMovieByTitle(String title) throws MovieNotFoundException {
+
+        return moviesDAO.getMovieByTitle(title);
+    }
+
+    @Override
+    public List<Movie> getMoviesBySerialNumber(String serialNumber) throws MovieNotFoundException {
+
+        return moviesDAO.getMoviesBySerialNumber(serialNumber);
+    }
+
+    @Override
+    public MovieBySerialData getMovieBySerialNumber(String serialNumber) throws MovieNotFoundException {
+        return moviesDAO.getMovieBySerialNumber(serialNumber);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package pl.radek.dvd.logic.clients;
 
 import pl.radek.dvd.dto.clients.ClientRentDto;
+import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.dto.ListDataRequest;
 
@@ -31,7 +32,9 @@ public interface ClientsDAO {
 
     public int getNoOfRecords(ListDataRequest listDataRequest);
 
-    List<ClientRentDto> getClients(String pesel);
+    List<ClientRentDto> getClients(String pesel) throws ClientNotFoundException;
 
     ClientRentDto getClient(String pesel);
+
+    List<Client> getClientByLastName(String lastName) throws ClientNotFoundException;
 }

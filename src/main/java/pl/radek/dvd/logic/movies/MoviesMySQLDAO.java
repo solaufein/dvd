@@ -12,10 +12,12 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.*;
+import pl.radek.dvd.dto.movies.MovieBySerialData;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.movies.PaginatedListMoviesRent;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.logic.builder.MovieFiltreChoice;
 import pl.radek.dvd.logic.builder.MultiFiltreChoice;
 import pl.radek.dvd.model.Constants;
@@ -48,6 +50,81 @@ public class MoviesMySQLDAO implements MoviesDAO {
     @Autowired
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
+    }
+
+    @Override
+    public List<Movie> getMovieByTitle(String title) throws MovieNotFoundException {
+        logger.info("Getting movies by title: " + title);
+
+        StringBuilder query = new StringBuilder("FROM Movie as m ");
+        query.append("WHERE m.title LIKE :title ");
+        query.append("ORDER BY m.title DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("title", title + "%");
+        q.setFirstResult(0);
+        q.setMaxResults(5);
+
+        List<Movie> results = (List<Movie>) q.list();
+
+        if (results.size() > 0) {
+            logger.info("Got movies by title: " + title);
+        } else {
+            logger.info("Result list is null ");
+            throw new MovieNotFoundException("Movie with given title = " + title + " - not found.");
+        }
+        return results;
+    }
+
+    @Override
+    public List<Movie> getMoviesBySerialNumber(String serialNumber) throws MovieNotFoundException {
+        logger.info("Getting movies by serialNumber: " + serialNumber);
+
+        StringBuilder query = new StringBuilder("FROM Movie as m ");
+        query.append("INNER JOIN m.movieCopies as mc ");
+        query.append("WHERE mc.serialNumber LIKE :serialNumber ");
+        query.append("ORDER BY mc.serialNumber DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("serialNumber", serialNumber + "%");
+        q.setFirstResult(0);
+        q.setMaxResults(5);
+
+        List<Movie> results = (List<Movie>) q.list();
+
+        if (results.size() > 0) {
+            logger.info("Got movies by serialNumber: " + serialNumber);
+        } else {
+            logger.info("Result list is null ");
+            throw new MovieNotFoundException("Movies with given serialNumber = " + serialNumber + " - not found.");
+        }
+        return results;
+    }
+
+    @Override
+    public MovieBySerialData getMovieBySerialNumber(String serialNumber) throws MovieNotFoundException {
+        logger.info("Getting movie by serialNumber: " + serialNumber);
+
+     //   StringBuilder query = new StringBuilder("FROM Movie as m ");
+        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.movies.MovieBySerialData(m.id, m.title, mc.serialNumber) FROM Movie as m ");
+        query.append("INNER JOIN m.movieCopies as mc ");
+        query.append("WHERE mc.serialNumber = :serialNumber ");
+        query.append("ORDER BY mc.serialNumber DESC ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("serialNumber", serialNumber);
+
+        List<MovieBySerialData> results = (List<MovieBySerialData>) q.list();
+        MovieBySerialData movie;
+
+        if (results.size() > 0) {
+            logger.info("Got movie by serialNumber: " + serialNumber);
+            movie = results.get(0);
+        } else {
+            logger.info("Result list is null ");
+            throw new MovieNotFoundException("Movie with given serialNumber = " + serialNumber + " - not found.");
+        }
+        return movie;
     }
 
     @Override

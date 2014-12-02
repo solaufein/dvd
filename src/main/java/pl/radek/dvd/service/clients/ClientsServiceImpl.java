@@ -8,6 +8,7 @@ import pl.radek.dvd.dto.*;
 import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ClientRentDto;
 import pl.radek.dvd.dto.clients.PaginatedListImpl;
+import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.logic.clients.ClientsDAO;
 import pl.radek.dvd.model.Client;
 
@@ -84,7 +85,7 @@ public class ClientsServiceImpl implements ClientsService {
     }
 
     @Override
-    public List<ClientRentDto> getClients(String pesel) {
+    public List<ClientRentDto> getClients(String pesel) throws ClientNotFoundException {
 
         return clientsDAO.getClients(pesel);
     }
@@ -92,6 +93,12 @@ public class ClientsServiceImpl implements ClientsService {
     @Override
     public ClientRentDto getClient(String pesel) {
         return clientsDAO.getClient(pesel);
+    }
+
+    @Override
+    public  List<Client> getClientByLastName(String lastName) throws ClientNotFoundException {
+
+       return clientsDAO.getClientByLastName(lastName);
     }
 
     private List<ClientData> convertClientListToClientDataList(List<Client> clientList) {

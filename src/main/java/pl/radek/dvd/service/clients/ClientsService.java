@@ -4,6 +4,8 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.clients.ClientRentDto;
+import pl.radek.dvd.exceptions.client.ClientNotFoundException;
+import pl.radek.dvd.model.Client;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ public interface ClientsService {
     public void addClient(ClientData client);
     public void updateClient(ClientData client);
 
-    List<ClientRentDto> getClients(String pesel);
+    List<ClientRentDto> getClients(String pesel) throws ClientNotFoundException;
     ClientRentDto getClient(String pesel);
 
+    List<Client> getClientByLastName(String lastName) throws ClientNotFoundException;
 }

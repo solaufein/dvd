@@ -129,6 +129,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
             returnCommentDto = (ReturnCommentDto) q.list().get(0);
         } else {
             //   throw new exception...
+            logger.info("Got ReturnData by movie copy id: EXCEPTION - list size is 0 !");
         }
 
         logger.info("Got ReturnData by movie copy id: " + movieCopyId);

@@ -2,10 +2,12 @@ package pl.radek.dvd.service.movies;
 
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.movies.MovieBySerialData;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.model.Movie;
 
 import java.util.List;
@@ -16,6 +18,9 @@ import java.util.List;
  * Time: 15:26
  */
 public interface MoviesService {
+    public List<Movie> getMovieByTitle(String title) throws MovieNotFoundException;
+    public List<Movie> getMoviesBySerialNumber(String serialNumber) throws MovieNotFoundException;
+    public MovieBySerialData getMovieBySerialNumber(String serialNumber) throws MovieNotFoundException;
     public List<MovieDataDTO> getMovies();
     public MovieDataDTO getMovie(int id);
     RentData getMovieRentData(int movieCopyId, short avail);
