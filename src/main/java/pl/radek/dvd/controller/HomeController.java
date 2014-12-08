@@ -102,5 +102,119 @@ public class HomeController {
         return "redirect:/emp/movies/moviedetails?id=" + movie.getId();
     }
 
+    @RequestMapping(value = "/return/movieTitle", method = RequestMethod.GET)
+    public String returnMovieByTitle(@RequestParam(value = "title") String title,
+                                     ModelMap modelMap) throws Exception {
+        List<Movie> movieByTitle;
+        try {
+            movieByTitle = homeFacade.getMovieByTitle(title);
+        } catch (MovieNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
 
+        if (movieByTitle.size() == 1) {
+            int id = movieByTitle.get(0).getId();
+            return "redirect:/emp/movies/moviedetails?id=" + id;
+        } else {
+            return "redirect:/emp/movies/movieslist?title=" + title;
+        }
+
+        //    return "redirect:/emp/movies/movieslist?title=" + title;
+    }
+
+    @RequestMapping(value = "/return/movieSerialNumber", method = RequestMethod.GET)
+    public String returnMovieBySerialNumber(@RequestParam(value = "serialNumber") String serialNumber,
+                                            ModelMap modelMap) throws Exception {
+        MovieBySerialData movie;
+        try {
+            movie = homeFacade.getMovieBySerialNumber(serialNumber);
+        } catch (MovieNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
+
+        return "redirect:/emp/movies/moviedetails?id=" + movie.getId();
+    }
+
+    @RequestMapping(value = "/rent/movieTitle", method = RequestMethod.GET)
+    public String rentMovieByTitle(@RequestParam(value = "title") String title,
+                                   ModelMap modelMap) throws Exception {
+        List<Movie> movieByTitle;
+        try {
+            movieByTitle = homeFacade.getMovieByTitle(title);
+        } catch (MovieNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
+
+        if (movieByTitle.size() == 1) {
+            int id = movieByTitle.get(0).getId();
+            return "redirect:/emp/movies/moviedetails?id=" + id;
+        } else {
+            return "redirect:/emp/movies/movieslist?title=" + title;
+        }
+
+        //    return "redirect:/emp/movies/movieslist?title=" + title;
+    }
+
+    @RequestMapping(value = "/rent/movieSerialNumber", method = RequestMethod.GET)
+    public String rentMovieBySerialNumber(@RequestParam(value = "serialNumber") String serialNumber,
+                                          ModelMap modelMap) throws Exception {
+        MovieBySerialData movie;
+        try {
+            movie = homeFacade.getMovieBySerialNumber(serialNumber);
+        } catch (MovieNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
+
+        return "redirect:/emp/movies/moviedetails?id=" + movie.getId();
+    }
+
+    @RequestMapping(value = "/rent/clientName", method = RequestMethod.GET)
+    public String rentMovieByClientLastName(@RequestParam(value = "lastName") String lastName,
+                                            ModelMap modelMap) throws Exception {
+
+        List<Client> client;
+
+        try {
+            client = homeFacade.getClientByLastName(lastName);
+        } catch (ClientNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
+
+        if (client.size() == 1) {
+            int id = client.get(0).getId();
+            return "redirect:/emp/clients/clientdetails?id=" + id;
+        } else {
+            return "redirect:/emp/clients/clientslist?lastName=" + lastName;
+        }
+
+        //   return "redirect:/emp/clients/clientslist?lastName=" + lastName;
+    }
+
+    @RequestMapping(value = "/rent/clientPesel", method = RequestMethod.GET)
+    public String rentMovieByClientPesel(@RequestParam(value = "pesel") String pesel,
+                                         ModelMap modelMap) throws Exception {
+
+        List<ClientRentDto> client;
+
+        try {
+            client = homeFacade.getClients(pesel);
+        } catch (ClientNotFoundException e) {
+            modelMap.addAttribute("error", e.getMessage());
+            return "/home/home";
+        }
+
+        if (client.size() == 1) {
+            int id = client.get(0).getId();
+            return "redirect:/emp/clients/clientdetails?id=" + id;
+        } else {
+            return "redirect:/emp/clients/clientslist?pesel=" + pesel;
+        }
+
+        //   return "redirect:/emp/clients/clientslist?pesel=" + pesel;
+    }
 }

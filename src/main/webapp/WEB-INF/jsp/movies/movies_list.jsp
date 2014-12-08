@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td><form:label path="genre"><spring:message code="movies.moviesList.genre"/>:</form:label></td>
-                <td><form:select path="genre" cssClass="inputs">
+                <td><form:select path="genre">
                     <form:option value="NONE" label="--- Select ---"/>
                     <form:options items="${allGenres}"/>
                 </form:select>
@@ -49,7 +49,7 @@
             <tr>
                 <td><form:label path="promotion"><spring:message
                         code="movies.moviesList.promotion"/>:</form:label></td>
-                <td><form:select path="promotion" cssClass="inputs">
+                <td><form:select path="promotion">
                     <form:option value="NONE" label="--- Select ---"/>
                     <form:options items="${allPromotions}"/>
                 </form:select>
@@ -221,6 +221,12 @@
 
     $(document).ready(function () {
         InitAutocompleteInput.init();
+        $( "#genre" ).selectmenu({
+            width: 180
+        });
+        $( "#promotion" ).selectmenu({
+            width: 180
+        });
     });
 
 </script>

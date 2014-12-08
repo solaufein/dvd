@@ -54,7 +54,7 @@
                             <tr>
                                 <td><form:label path="genre"><spring:message
                                         code="movies.moviesList.genre"/>:</form:label></td>
-                                <td><form:select path="genre" cssClass="inputs">
+                                <td><form:select path="genre">
                                     <form:options items="${allGenres}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                                 </td>
@@ -63,7 +63,7 @@
                             <tr>
                                 <td><form:label path="promotion"><spring:message
                                         code="movies.moviesList.promotion"/>:</form:label></td>
-                                <td><form:select path="promotion" cssClass="inputs">
+                                <td><form:select path="promotion">
                                     <form:options items="${allPromotions}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                                 </td>
@@ -142,7 +142,7 @@
                             <tr>
                                 <td><form:label path="genre"><spring:message
                                         code="movies.moviesList.genre"/>:</form:label></td>
-                                <td><form:select path="genre" cssClass="inputs">
+                                <td><form:select path="genre">
                                     <form:options items="${allGenres}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                                 </td>
@@ -151,7 +151,7 @@
                             <tr>
                                 <td><form:label path="promotion"><spring:message
                                         code="movies.moviesList.promotion"/>:</form:label></td>
-                                <td><form:select path="promotion" cssClass="inputs">
+                                <td><form:select path="promotion">
                                     <form:options items="${allPromotions}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                                 </td>
@@ -204,6 +204,12 @@
     $(document).ready(function () {
 
         InitAutocompleteInput.init();
+        $( "#genre" ).selectmenu({
+            width: 180
+        });
+        $( "#promotion" ).selectmenu({
+            width: 180
+        });
 
     });
 

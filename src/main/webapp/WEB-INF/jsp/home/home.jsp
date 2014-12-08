@@ -8,10 +8,10 @@
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="langs">
-        <c:url var="englishLocaleUrl" value="/emp/home">
+        <c:url var="englishLocaleUrl" value="/emp/home/">
             <c:param name="lang" value="en"/>
         </c:url>
-        <c:url var="polishLocaleUrl" value="/emp/home">
+        <c:url var="polishLocaleUrl" value="/emp/home/">
             <c:param name="lang" value="pl"/>
         </c:url>
         <a href="${englishLocaleUrl}">EN</a>
@@ -23,61 +23,54 @@
             <div class="filtreheader">
                 <p><spring:message code="menu.home"/></p>
             </div>
-            <div class="separator"></div>
+            <div class="separator2"></div>
             <c:if test="${not empty error}">
                 <div class="error">${error}</div>
             </c:if>
             <div class="inputs">
-                <table>
-                    <tr>
-                        <td>
-
-                        </td>
-                    </tr>
-                </table>
 
                 <!-- RENT -->
-                <form name="rentClientLastname" id="rentClientLastname" method="GET" action="<c:url value="#"/>">
+                <form name="rentClientLastname" id="rentClientLastname" method="GET" action="<c:url value="/emp/home/rent/clientName"/>">
                     <label for="lastName1" class="labelWidth"><spring:message
                             code="home.rent.client.lastName"/>: </label>
                     <input type="text" id="lastName1" name="lastName"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentClientPesel" id="rentClientPesel" method="GET" action="<c:url value="#"/>">
+                <form name="rentClientPesel" id="rentClientPesel" method="GET" action="<c:url value="/emp/home/rent/clientPesel"/>">
                     <label for="pesel1" class="labelWidth"><spring:message code="home.rent.client.pesel"/>: </label>
                     <input type="text" id="pesel1" name="pesel"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentMovieTitle" id="rentMovieTitle" method="GET" action="<c:url value="#"/>">
+                <form name="rentMovieTitle" id="rentMovieTitle" method="GET" action="<c:url value="/emp/home/rent/movieTitle"/>">
                     <label for="title1" class="labelWidth"><spring:message code="home.rent.movie.title"/>: </label>
                     <input type="text" id="title1" name="title"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentMovieSerialNumber" id="rentMovieSerialNumber" method="GET" action="<c:url value="#"/>">
+                <form name="rentMovieSerialNumber" id="rentMovieSerialNumber" method="GET" action="<c:url value="/emp/home/rent/movieSerialNumber"/>">
                     <label for="serialNumber1" class="labelWidth"><spring:message
                             code="home.rent.movie.serialNumber"/>: </label>
                     <input type="text" id="serialNumber1" name="serialNumber"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
-                <div class="separator"></div>
+                <div class="separator2"></div>
 
                 <!-- RETURN -->
-                <form name="returnMovieTitle" id="returnMovieTitle" method="GET" action="<c:url value="#"/>">
+                <form name="returnMovieTitle" id="returnMovieTitle" method="GET" action="<c:url value="/emp/home/return/movieTitle"/>">
                     <label for="title2" class="labelWidth"><spring:message code="home.return.movie.title"/>: </label>
                     <input type="text" id="title2" name="title"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="returnSerialNumber" id="returnSerialNumber" method="GET" action="<c:url value="#"/>">
+                <form name="returnSerialNumber" id="returnSerialNumber" method="GET" action="<c:url value="/emp/home/return/movieSerialNumber"/>">
                     <label for="serialNumber2" class="labelWidth"><spring:message
                             code="home.return.movie.serialNumber"/>: </label>
                     <input type="text" id="serialNumber2" name="serialNumber"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
-                <div class="separator"></div>
+                <div class="separator2"></div>
 
                 <!-- FIND -->
                 <form name="findClientLastname" id="findClientLastname" method="GET" action="<c:url value="/emp/home/find/clientName"/>">
