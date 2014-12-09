@@ -31,7 +31,7 @@
                 <a href="#" class="myButton"><spring:message code="raports.raportslist.income"/></a>
                 <a href="#" class="myButton"><spring:message code="raports.raportslist.tophits"/></a>
                 <a href="#" class="myButton"><spring:message code="raports.raportslist.promotions"/></a>
-                <a href="#" class="myButton"><spring:message code="raports.raportslist.returned"/></a>
+                <a href="<c:url value="/emp/raports/notreturned"/>" class="myButton"><spring:message code="raports.raportslist.returned"/></a>
             </div>
         </div>
 

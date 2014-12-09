@@ -74,7 +74,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
 
         List<Promotion> promotions = (List<Promotion>) q.list();
 
-        //todo: ok ?
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         /*for (Promotion promotion : promotions) {
             Hibernate.initialize(promotion.getMovies());

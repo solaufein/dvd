@@ -33,7 +33,10 @@ public final class ChoiceFiltreQueryFactory {
             multiFiltreChoice = new MovieFiltreChoice(listDataRequest, hibernateTemplate);
         } else if (dtoName.equals("moviesRentData")) {
             multiFiltreChoice = new MovieRentFilterChoice(listDataRequest, hibernateTemplate);
+        } else if (dtoName.equals("MovieNotReturnedDto")){
+            multiFiltreChoice = new MovieNotReturnedFilterChoice(listDataRequest, hibernateTemplate);
         }
+
         return multiFiltreChoice;
     }
 }

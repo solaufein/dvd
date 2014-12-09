@@ -81,7 +81,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         List<Employee> employees = (List<Employee>) q.list();
 
-        //todo: ok ?
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         /*for (Employee employee : employees) {
             Hibernate.initialize(employee.getRentingRegistries());
