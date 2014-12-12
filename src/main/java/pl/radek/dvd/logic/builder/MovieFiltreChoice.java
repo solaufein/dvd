@@ -1,5 +1,6 @@
 package pl.radek.dvd.logic.builder;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Transaction;
 import org.hibernate.classic.Session;
@@ -12,6 +13,7 @@ import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.model.Movie;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * User: Sola
@@ -19,6 +21,8 @@ import java.util.List;
  * Time: 12:48
  */
 public class MovieFiltreChoice extends MultiFiltreChoice {
+    private static Logger logger = Logger.getLogger(MovieFiltreChoice.class);
+
     protected MovieFiltreChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate) {
         super(listDataRequest, hibernateTemplate);
     }
@@ -92,13 +96,21 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
 
         query.append(" GROUP BY m.title");
 
-        q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        String queryString = query.toString();
+        logger.info("Movie No Of Records query = " + queryString);
+        q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(queryString);
 
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             setFiltreQueryParams(filterInfoList, q);
         }
 
-        records = q.list().size();
+        try {
+            records = ((Number) q.iterate().next()).intValue();
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
+        //    records = (Integer) q.uniqueResult();
+        //    records = q.list().size();
         return records;
     }
 

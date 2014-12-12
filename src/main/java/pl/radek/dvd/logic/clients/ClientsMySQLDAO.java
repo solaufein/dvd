@@ -17,6 +17,7 @@ import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.model.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -270,7 +271,14 @@ public class ClientsMySQLDAO implements ClientsDAO {
                     q.setParameter("pes", filterInfo.getFilterData() + "%");
                 }
             }
-            records = q.list().size();
+
+            try {
+                records = ((Number) q.iterate().next()).intValue();
+            } catch (NoSuchElementException e) {
+                return 0;
+            }
+        //    records = ((Number) q.uniqueResult()).intValue();
+        //    records = q.list().size();
         } else {
             logger.debug("FilterInfoList isnull or empty! Get total number of records.");
             records = getNoOfRecords();

@@ -26,7 +26,10 @@ public class MovieNotReturnedDto {
         this.title = title;
         this.rentDate = sdfDate.format(rentDate);
         this.returnDate = sdfDate.format(returnDate);
-        this.daysLate = daysLate;
+
+        this.daysLate = daysLate < 0 ? 0 : daysLate;
+
+    //    this.daysLate = daysLate;
         this.phoneNumber = phoneNumber;
     }
 

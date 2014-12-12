@@ -2,6 +2,7 @@ package pl.radek.dvd.logic.builder;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
+import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;
@@ -10,6 +11,7 @@ import pl.radek.dvd.dto.SortInfo;
 import pl.radek.dvd.model.Constants;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Sola on 2014-11-19.
@@ -86,10 +88,10 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
 
     @Override
     public int getNoOfRecords() {
-        //SELECT COUNT(*) FROM Movie WHERE first_name LIKE 'J%' AND pesel LIKE '83%';
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
-        StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
+        StringBuilder query = new StringBuilder("SELECT COUNT(distinct mc.id) FROM Movie m ");      // count(distinct mc.id) zamiast group by mc.id
+        //    StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
         query.append("LEFT JOIN m.movieCopies as mc ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
@@ -101,7 +103,7 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
 
         buildFiltreQuery(filterInfoList, query, isFirst);
 
-        query.append(" GROUP BY mc.id");
+    //    query.append(" GROUP BY mc.id");
 
         String readyQuery = query.toString();
         logger.info("Query No of Records = " + readyQuery);
@@ -110,7 +112,15 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
 
         setFiltreQueryParams(filterInfoList, q);
 
-        records = q.list().size();
+        try {
+            records = ((Number) q.iterate().next()).intValue();
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
+
+        //   records = DataAccessUtils.intResult(list);
+        //   records = ((Number) q.uniqueResult()).intValue();
+        //   records = q.list().size();
         return records;
     }
 

@@ -7,9 +7,9 @@ package pl.radek.dvd.dto;
  */
 public class FilterInfo {
     private String filterColumn;
-    private String filterData;
+    private Object filterData;
 
-    public FilterInfo(String filterColumn, String filterData) {
+    public FilterInfo(String filterColumn, Object filterData) {
         this.filterColumn = filterColumn;
         this.filterData = filterData;
     }
@@ -18,7 +18,7 @@ public class FilterInfo {
         return filterColumn;
     }
 
-    public String getFilterData() {
+    public Object getFilterData() {
         return filterData;
     }
 }

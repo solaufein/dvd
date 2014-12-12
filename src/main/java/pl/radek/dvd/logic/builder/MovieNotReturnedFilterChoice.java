@@ -7,6 +7,7 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 /**
  * Created by Sola on 2014-12-09.
@@ -30,13 +31,13 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         ORDER BY ABS(DATEDIFF(rr.return_date,r.pay_date)) DESC
         LIMIT 0,9;*/
 
-        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.MovieNotReturnedDto(c.firstName, c.lastName, m.title, rr.rentDate, rr.returnDate, ABS(DATEDIFF(rr.returnDate, :now)), c.phoneNumber) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.MovieNotReturnedDto(c.firstName, c.lastName, m.title, rr.rentDate, rr.returnDate, DATEDIFF(:now, rr.returnDate), c.phoneNumber) FROM RentingRegistry as rr ");
         query.append("LEFT JOIN rr.client as c ");
         query.append("LEFT JOIN rr.movieCopy as mc ");
         query.append("LEFT JOIN mc.movie as m ");
         query.append("LEFT JOIN rr.receipt as r ");
         query.append("WHERE r.payDate IS NULL ");
-        query.append("ORDER BY ABS(DATEDIFF(rr.returnDate, :now)) DESC ");
+        query.append("ORDER BY DATEDIFF(:now, rr.returnDate) DESC ");
 
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
         int page = paginationInfo.getPage();
@@ -63,7 +64,14 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
 
         Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
-        int records = q.list().size();
+        int records;
+        try {
+            records = ((Number) q.iterate().next()).intValue();
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
+        // int records = ((Number) q.uniqueResult()).intValue();
+        //  int records = q.list().size();
         return records;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.raports.MovieNotReturnedDto;
+import pl.radek.dvd.dto.raports.TopHitsDto;
 import pl.radek.dvd.logic.raports.RaportDAO;
 
 @Service
@@ -26,5 +27,10 @@ public class RaportsServiceImpl implements RaportsService {
         PaginatedList<MovieNotReturnedDto> movieNotReturnedDtoList = raportDAO.getMovieNotReturnedDtoList(listDataRequest);
 
         return movieNotReturnedDtoList;
+    }
+
+    @Override
+    public PaginatedList<TopHitsDto> getTopHitsDtoList(ListDataRequest listDataRequest) {
+        return raportDAO.getTopHitsDtoList(listDataRequest);
     }
 }
