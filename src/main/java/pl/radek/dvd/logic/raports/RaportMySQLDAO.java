@@ -11,10 +11,7 @@ import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.PaginationInfo;
-import pl.radek.dvd.dto.raports.MovieNotReturnedDto;
-import pl.radek.dvd.dto.raports.PaginatedListMoviesNotReturned;
-import pl.radek.dvd.dto.raports.PaginatedListTopHits;
-import pl.radek.dvd.dto.raports.TopHitsDto;
+import pl.radek.dvd.dto.raports.*;
 import pl.radek.dvd.logic.builder.ChoiceFiltreQueryFactory;
 import pl.radek.dvd.logic.builder.MultiFiltreChoice;
 import pl.radek.dvd.logic.builder.MultiRaportFilterChoice;
@@ -76,6 +73,50 @@ public class RaportMySQLDAO implements RaportDAO {
         paginatedList.setTotalRecords(totalRecords);
 
         logger.info("Got TopHitsDtoList. ");
+
+        return paginatedList;
+    }
+
+    @Override
+    public PaginatedList<IncomePromotionDTO> getIncomeDtoList(ListDataRequest listDataRequest) {
+        logger.info("Getting IncomeDtoList ");
+
+        MultiRaportFilterChoice multiFiltreChoice = (MultiRaportFilterChoice) ChoiceFiltreQueryFactory.getMultiFiltreChoice(listDataRequest, hibernateTemplate, "IncomeDto");
+        Query query = multiFiltreChoice.filtreQuery();
+        List<IncomePromotionDTO> results = (List<IncomePromotionDTO>) query.list();
+        int noOfRecords = multiFiltreChoice.getNoOfRecords();
+        int totalRecords = multiFiltreChoice.getTotalRecords();
+        logger.info(" totalRecords = " + totalRecords);
+        logger.info(" noOfRecords = " + noOfRecords);
+
+        PaginatedListIncomePromotion paginatedList = new PaginatedListIncomePromotion();
+        paginatedList.setDtos(results);
+        paginatedList.setNoOfRecords(noOfRecords);
+        paginatedList.setTotalRecords(totalRecords);
+
+        logger.info("Got IncomeDtoList. ");
+
+        return paginatedList;
+    }
+
+    @Override
+    public PaginatedList<IncomePromotionDTO> getRentPromotionDtoList(ListDataRequest listDataRequest) {
+        logger.info("Getting RentPromotionDtoList ");
+
+        MultiRaportFilterChoice multiFiltreChoice = (MultiRaportFilterChoice) ChoiceFiltreQueryFactory.getMultiFiltreChoice(listDataRequest, hibernateTemplate, "RentPromotionDto");
+        Query query = multiFiltreChoice.filtreQuery();
+        List<IncomePromotionDTO> results = (List<IncomePromotionDTO>) query.list();
+        int noOfRecords = multiFiltreChoice.getNoOfRecords();
+        int totalRecords = multiFiltreChoice.getTotalRecords();
+        logger.info(" totalRecords = " + totalRecords);
+        logger.info(" noOfRecords = " + noOfRecords);
+
+        PaginatedListIncomePromotion paginatedList = new PaginatedListIncomePromotion();
+        paginatedList.setDtos(results);
+        paginatedList.setNoOfRecords(noOfRecords);
+        paginatedList.setTotalRecords(totalRecords);
+
+        logger.info("Got RentPromotionDtoList. ");
 
         return paginatedList;
     }

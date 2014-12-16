@@ -1,16 +1,16 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
-<%@ taglib prefix="pagi" uri="/WEB-INF/tags/raports/tophits_raport_pagination.tld" %>
+<%@ taglib prefix="pagi" uri="/WEB-INF/tags/raports/income_raport_pagination.tld" %>
 <%@page import="pl.radek.dvd.model.Constants, pl.radek.dvd.utils.JspMethods, java.util.List" %>
 <%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <jsp:useBean id="cons" class="pl.radek.dvd.model.Constants"/>
 
 <tiles:insertDefinition name="defaultTemplate">
 <tiles:putAttribute name="langs">
-    <c:url var="englishLocaleUrl" value="/emp/raports/tophits">
+    <c:url var="englishLocaleUrl" value="/emp/raports/income">
         <c:param name="lang" value="en"/>
     </c:url>
-    <c:url var="polishLocaleUrl" value="/emp/raports/tophits">
+    <c:url var="polishLocaleUrl" value="/emp/raports/income">
         <c:param name="lang" value="pl"/>
     </c:url>
     <a href="${englishLocaleUrl}">EN</a>
@@ -20,10 +20,10 @@
 
 <div id="myform">
     <div class="filtreheader">
-        <p><spring:message code="raports.raportslist.tophits"/></p>
+        <p><spring:message code="raports.raportslist.income"/></p>
     </div>
     <div class="separator"></div>
-    <form:form id="ok" method="GET" commandName="tophits" action="tophits">
+    <form:form id="ok" method="GET" commandName="income" action="income">
     <div class="inputs">
         <table>
             <tbody>
@@ -44,14 +44,13 @@
                 <td><form:errors path="genre" cssClass="error"></form:errors></td>
             </tr>
             <tr>
-                <td><form:label path="promotion"><spring:message
-                        code="movies.moviesList.promotion"/>:</form:label></td>
-                <td><form:select path="promotion">
-                    <form:option value="NONE" label="--- Select ---"/>
-                    <form:options items="${allPromotions}"/>
+                <td><form:label path="section"><spring:message
+                        code="raports.income.section"/>:</form:label></td>
+                <td><form:select path="section">
+                    <form:options items="${allSections}"/>
                 </form:select>
                 </td>
-                <td><form:errors path="promotion" cssClass="error"></form:errors></td>
+                <td><form:errors path="section" cssClass="error"></form:errors></td>
             </tr>
             <tr>
                 <td></td>
@@ -62,7 +61,7 @@
                 </td>
                 </form:form>
                 <td>
-                    <form name="clearTable" action=" <c:url value="tophits"/>" method="get">
+                    <form name="clearTable" action=" <c:url value="income"/>" method="get">
                         <input type="submit" value="<spring:message code="common.button.clear"/>"/>
                     </form>
                 </td>
@@ -79,15 +78,21 @@
         <table>
             <tr>
                 <td>
+
                 </td>
-                <td>
-                    <spring:message code="raports.tophits.loanAmount"/>
+                <c:forEach items="${promotionNames}" var="prom">
+                    <td><c:out value="${prom}"/></td>
+                </c:forEach>
+                <td style="background: lightblue">
+                    Total:
                 </td>
             </tr>
             <c:forEach items="${dataList}" var="o">
                 <tr>
-                    <td><c:out value="${o.title}"/></td>
-                    <td><c:out value="${o.loanCount}"/></td>
+                    <td><c:out value="${o.periodName}"/></td>
+                    <c:forEach items="${o.amount}" var="amount">
+                        <td><c:out value="${amount}"/></td>
+                    </c:forEach>
                 </tr>
             </c:forEach>
             <tr class="">
@@ -109,8 +114,8 @@
                                      dateFrom="${param.dateFrom}"
                                      dateTo="${param.dateTo}"
                                      genre="${param.genre}"
-                                     promotion="${param.promotion}"/>
-                        <c:url value="tophits${paginlink}" var="paginURL"/>
+                                     section="${param.section}"/>
+                        <c:url value="income${paginlink}" var="paginURL"/>
                         <a href="${paginURL}" class="myButtonTwo"> |<< </a>
                     </c:if>
                 </td>
@@ -122,8 +127,8 @@
                                      dateFrom="${param.dateFrom}"
                                      dateTo="${param.dateTo}"
                                      genre="${param.genre}"
-                                     promotion="${param.promotion}"/>
-                        <c:url value="tophits${paginlink}" var="paginURL"/>
+                                     section="${param.section}"/>
+                        <c:url value="income${paginlink}" var="paginURL"/>
                         <a href="${paginURL}" class="myButtonTwo"> < </a>
                     </c:if>
                 </td>
@@ -138,8 +143,8 @@
                                      dateFrom="${param.dateFrom}"
                                      dateTo="${param.dateTo}"
                                      genre="${param.genre}"
-                                     promotion="${param.promotion}"/>
-                        <c:url value="tophits${paginlink}" var="paginURL"/>
+                                     section="${param.section}"/>
+                        <c:url value="income${paginlink}" var="paginURL"/>
                         <a href="${paginURL}" class="myButtonTwo"> > </a>
                     </c:if>
                 </td>
@@ -151,8 +156,8 @@
                                      dateFrom="${param.dateFrom}"
                                      dateTo="${param.dateTo}"
                                      genre="${param.genre}"
-                                     promotion="${param.promotion}"/>
-                        <c:url value="tophits${paginlink}" var="paginURL"/>
+                                     section="${param.section}"/>
+                        <c:url value="income${paginlink}" var="paginURL"/>
                         <a href="${paginURL}" class="myButtonTwo"> >>| </a>
                     </c:if>
                 </td>
@@ -236,7 +241,7 @@
         $("#genre").selectmenu({
             width: 180
         });
-        $("#promotion").selectmenu({
+        $("#section").selectmenu({
             width: 180
         });
 

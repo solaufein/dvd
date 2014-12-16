@@ -28,9 +28,9 @@
                 <div class="error">${error}</div>
             </c:if>
             <div class="inputs">
-                <a href="#" class="myButton"><spring:message code="raports.raportslist.income"/></a>
+                <a href="<c:url value="/emp/raports/income"/>" class="myButton"><spring:message code="raports.raportslist.income"/></a>
                 <a href="<c:url value="/emp/raports/tophits"/>" class="myButton"><spring:message code="raports.raportslist.tophits"/></a>
-                <a href="#" class="myButton"><spring:message code="raports.raportslist.promotions"/></a>
+                <a href="<c:url value="/emp/raports/promotions"/>" class="myButton"><spring:message code="raports.raportslist.promotions"/></a>
                 <a href="<c:url value="/emp/raports/notreturned"/>" class="myButton"><spring:message code="raports.raportslist.returned"/></a>
             </div>
         </div>

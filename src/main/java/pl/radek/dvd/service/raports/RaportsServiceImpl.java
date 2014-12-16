@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
+import pl.radek.dvd.dto.raports.IncomePromotionDTO;
 import pl.radek.dvd.dto.raports.MovieNotReturnedDto;
 import pl.radek.dvd.dto.raports.TopHitsDto;
 import pl.radek.dvd.logic.raports.RaportDAO;
@@ -32,5 +33,15 @@ public class RaportsServiceImpl implements RaportsService {
     @Override
     public PaginatedList<TopHitsDto> getTopHitsDtoList(ListDataRequest listDataRequest) {
         return raportDAO.getTopHitsDtoList(listDataRequest);
+    }
+
+    @Override
+    public PaginatedList<IncomePromotionDTO> getIncomeDtoList(ListDataRequest listDataRequest) {
+        return raportDAO.getIncomeDtoList(listDataRequest);
+    }
+
+    @Override
+    public PaginatedList<IncomePromotionDTO> getRentPromotionDtoList(ListDataRequest listDataRequest) {
+        return raportDAO.getRentPromotionDtoList(listDataRequest);
     }
 }

@@ -71,7 +71,7 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         int records;
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
-        StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.movie) FROM RentingRegistry as rr ");    //todo: distinct zamiast group by ?
+        StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.movie) FROM RentingRegistry as rr ");    //distinct zamiast group by ?
         //    StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.id) FROM RentingRegistry as rr ");
         query.append("LEFT JOIN rr.movieCopy as mc ");
         query.append("LEFT JOIN mc.movie as m ");
@@ -167,7 +167,6 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         }
     }
 
-    //todo: ok ?
     private void setFiltreQueryParams(List<FilterInfo> filterInfoList, Query q) {
         if (filterInfoList != null && !filterInfoList.isEmpty()) {
             for (FilterInfo filterInfo : filterInfoList) {

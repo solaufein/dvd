@@ -53,6 +53,8 @@ public class Constants {
     //Promotions
     public static final String PROMOTIONLIST = "promotionList";
 
+    //Raports
+    public static final String SECTION = "section";
 
     //for jstl, el, jsp purposes
     public String asc = ASC;
@@ -96,6 +98,15 @@ public class Constants {
 
     public String promotionlist = PROMOTIONLIST;
 
+    public String section = SECTION;
+
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
 
     public String getAsc() {
         return asc;
