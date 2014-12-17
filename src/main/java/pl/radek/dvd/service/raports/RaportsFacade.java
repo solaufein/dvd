@@ -4,10 +4,7 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.promotions.PromotionData;
-import pl.radek.dvd.dto.raports.IncomePromotionDTO;
-import pl.radek.dvd.dto.raports.IncomeRaportWrapper;
-import pl.radek.dvd.dto.raports.MovieNotReturnedDto;
-import pl.radek.dvd.dto.raports.TopHitsDto;
+import pl.radek.dvd.dto.raports.*;
 
 import java.util.List;
 
@@ -23,7 +20,9 @@ public interface RaportsFacade {
 
     PaginatedList<IncomePromotionDTO> getRentPromotionDtoList(ListDataRequest listDataRequest);
 
-    IncomeRaportWrapper getIncomeWrappedList(ListDataRequest listDataRequest);
+    PaginatedRaportWrapper<AmountPerX> getIncomeWrappedList(ListDataRequest listDataRequest);
+
+    PaginatedRaportWrapper<AmountPerX> getRentPromotionWrappedList(ListDataRequest listDataRequest);
 
     List<GenreData> getGenres();
 

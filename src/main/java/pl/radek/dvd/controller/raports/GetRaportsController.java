@@ -15,6 +15,7 @@ import pl.radek.dvd.dto.raports.*;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.raports.RaportsFacade;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -193,29 +194,19 @@ public class GetRaportsController {
         if (!filterInfoList.isEmpty()) {
             listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
 
-            IncomeRaportWrapper incomeWrappedList = raportsFacade.getIncomeWrappedList(listDataRequest);
+            PaginatedRaportWrapper<AmountPerX> incomeWrappedList = raportsFacade.getIncomeWrappedList(listDataRequest);
             int noOfRecords = incomeWrappedList.getNoOfRecords();
-            List<RaportDto> raportDtos = incomeWrappedList.getRaportDtos();
+            List<AmountPerX> amountPerPeriodRaports = incomeWrappedList.getAmountPerPeriodRaports();
+            List<AmountPerX> amountPerPromotionRaports = incomeWrappedList.getAmountPerPromotionRaports();
 
             PromotionAndPeriodNames promotionAndPeriodNames = incomeWrappedList.getPromotionAndPeriodNames();
             Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
-            Set<Number> periodNames = promotionAndPeriodNames.getPeriodNames();
+            Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
 
-            //todo: sformatowac odpowiednio dataList...
-            //todo: wyswietlanie miesiecy i dni jako pełna nazwa a nie liczba - w zależności od Section
-            //todo: dorobic Total rows i cols
-           /* dataList = new ArrayList<IncomePromotionDTO>();
-            dataList.add(new IncomePromotionDTO(5, "Hit", 80.64));
-            dataList.add(new IncomePromotionDTO(6, "Hit", 104.76));
-            dataList.add(new IncomePromotionDTO(6, "Mega Hit", 28.65));
-            dataList.add(new IncomePromotionDTO(6, "Super Hit", 11.15));
-            dataList.add(new IncomePromotionDTO(7, "Mega Hit", 56.22));
-            dataList.add(new IncomePromotionDTO(7, "Super Hit", 20.45));
-            dataList.add(new IncomePromotionDTO(8, "Hit", 25.42));
-            dataList.add(new IncomePromotionDTO(8, "Super Hit", 23.23));
-            dataList.add(new IncomePromotionDTO(9, "Mega Hit", 84.54));
-            dataList.add(new IncomePromotionDTO(9, "Super Hit", 26.22));
-            dataList.add(new IncomePromotionDTO(10, "Super Hit", 85.74));*/
+            BigDecimal bd = BigDecimal.ZERO;
+            for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
+                bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
+            }
 
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
@@ -224,7 +215,9 @@ public class GetRaportsController {
 
             modelMap.addAttribute("periodNames", periodNames);
             modelMap.addAttribute("promotionNames", promotionNames);
-            modelMap.addAttribute("dataList", raportDtos);
+            modelMap.addAttribute("dataList", amountPerPeriodRaports);
+            modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
+            modelMap.addAttribute("total", bd.toString());
             modelMap.addAttribute(Constants.CURRENTPAGE, page);
             modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
         }
@@ -283,23 +276,32 @@ public class GetRaportsController {
         if (!filterInfoList.isEmpty()) {
             listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
 
-            PaginatedRaportList<IncomePromotionDTO> rentPromotionDtoList = (PaginatedRaportList<IncomePromotionDTO>) raportsFacade.getRentPromotionDtoList(listDataRequest);
-            List<IncomePromotionDTO> dataList = rentPromotionDtoList.getDataList();
-            //todo: sformatowac odpowiednio dataList - w service albo facade
+            PaginatedRaportWrapper<AmountPerX> rentPromotionWrappedList = raportsFacade.getRentPromotionWrappedList(listDataRequest);
+            int noOfRecords = rentPromotionWrappedList.getNoOfRecords();
+            List<AmountPerX> amountPerPeriodRaports = rentPromotionWrappedList.getAmountPerPeriodRaports();
+            List<AmountPerX> amountPerPromotionRaports = rentPromotionWrappedList.getAmountPerPromotionRaports();
 
-            int totalRecords = rentPromotionDtoList.getTotalRecords();
-            int noOfRecords = rentPromotionDtoList.getNoOfRecords();
+            PromotionAndPeriodNames promotionAndPeriodNames = rentPromotionWrappedList.getPromotionAndPeriodNames();
+            Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
+            Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
+
+            BigDecimal bd = BigDecimal.ZERO;
+            for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
+                bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
+            }
+
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
             logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
             logger.info(" !!!! NO OF PAGES : " + noOfPages);
-            logger.info(" !!!! Total Count : " + totalRecords);
 
-            modelMap.addAttribute("loanCount", totalRecords);
-            modelMap.addAttribute("dataList", dataList);
+            modelMap.addAttribute("periodNames", periodNames);
+            modelMap.addAttribute("promotionNames", promotionNames);
+            modelMap.addAttribute("dataList", amountPerPeriodRaports);
+            modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
+            modelMap.addAttribute("total", bd.toString());
             modelMap.addAttribute(Constants.CURRENTPAGE, page);
             modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
-            //    modelMap.addAttribute("promotions", promotions);
         }
         List<String> sections = new ArrayList<String>();
         sections.add("DAY");

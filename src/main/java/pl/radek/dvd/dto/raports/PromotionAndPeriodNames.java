@@ -4,12 +4,12 @@ import java.util.Set;
 
 public class PromotionAndPeriodNames {
     Set<String> promotionNames;
-    Set<Number> periodNames;
+    Set<String> periodNames;
 
     public PromotionAndPeriodNames() {
     }
 
-    public PromotionAndPeriodNames(Set<String> promotionNames, Set<Number> periodNames) {
+    public PromotionAndPeriodNames(Set<String> promotionNames, Set<String> periodNames) {
         this.promotionNames = promotionNames;
         this.periodNames = periodNames;
     }
@@ -18,7 +18,7 @@ public class PromotionAndPeriodNames {
         return promotionNames;
     }
 
-    public Set<Number> getPeriodNames() {
+    public Set<String> getPeriodNames() {
         return periodNames;
     }
 }

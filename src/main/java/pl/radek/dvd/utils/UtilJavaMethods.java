@@ -1,7 +1,11 @@
 package pl.radek.dvd.utils;
 
+import org.springframework.context.i18n.LocaleContextHolder;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -10,6 +14,7 @@ import java.util.Random;
 public class UtilJavaMethods {
     public static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     static Random random = new SecureRandom();
+    private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
 
     public static String randomString(char[] characterSet, int length) {
 
@@ -22,9 +27,17 @@ public class UtilJavaMethods {
         return new String(result);
     }
 
-    public static String securedRandomString(){
+    public static String securedRandomString() {
         String kod = new BigInteger(130, random).toString(32);
 
         return kod;
+    }
+
+    public static String formatDate(String pattern, Date date) {
+       //    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, LocaleContextHolder.getLocale());
+        simpleDateFormat.applyPattern(pattern);
+        String formattedDate = simpleDateFormat.format(date);
+
+        return formattedDate;
     }
 }

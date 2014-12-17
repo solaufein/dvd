@@ -3,18 +3,18 @@ package pl.radek.dvd.service.raports;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.dto.raports.*;
+import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.genres.GenresService;
 import pl.radek.dvd.service.promotions.PromotionsService;
+import pl.radek.dvd.utils.UtilJavaMethods;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class RaportsFacadeImpl implements RaportsFacade {
@@ -64,12 +64,27 @@ public class RaportsFacadeImpl implements RaportsFacade {
     }
 
     @Override
-    public IncomeRaportWrapper getIncomeWrappedList(ListDataRequest listDataRequest) {
+    public PaginatedRaportWrapper<AmountPerX> getIncomeWrappedList(ListDataRequest listDataRequest) {
+        String formatPattern = getFormatPattern(listDataRequest);
+
         PaginatedList<IncomePromotionDTO> incomeDtoList = raportsService.getIncomeDtoList(listDataRequest);
         List<IncomePromotionDTO> dataList = incomeDtoList.getDataList();
         int noOfRecords = incomeDtoList.getNoOfRecords();
 
-        IncomeRaportWrapper importRaportWrapper = createImportRaportWrapper(dataList, noOfRecords);
+        IncomeRaportWrapper importRaportWrapper = createImportRaportWrapper(dataList, formatPattern, noOfRecords);
+
+        return importRaportWrapper;
+    }
+
+    @Override
+    public PaginatedRaportWrapper<AmountPerX> getRentPromotionWrappedList(ListDataRequest listDataRequest) {
+        String formatPattern = getFormatPattern(listDataRequest);
+
+        PaginatedList<IncomePromotionDTO> incomeDtoList = raportsService.getRentPromotionDtoList(listDataRequest);
+        List<IncomePromotionDTO> dataList = incomeDtoList.getDataList();
+        int noOfRecords = incomeDtoList.getNoOfRecords();
+
+        IncomeRaportWrapper importRaportWrapper = createImportRaportWrapper(dataList, formatPattern, noOfRecords);
 
         return importRaportWrapper;
     }
@@ -84,20 +99,23 @@ public class RaportsFacadeImpl implements RaportsFacade {
         return promotionsService.getPromotions();
     }
 
-    private IncomeRaportWrapper createImportRaportWrapper(List<IncomePromotionDTO> dataList, int noOfRecords) {
-        Number[] amount;
-        RaportDto raportDto;
-        List<RaportDto> raportDtos = new ArrayList<RaportDto>();
+    private IncomeRaportWrapper createImportRaportWrapper(List<IncomePromotionDTO> dataList, String formatPattern, int noOfRecords) {
+        PromotionAndPeriodNames promotionAndPeriod = getPromotionAndPeriod(dataList, formatPattern);
+        List<AmountPerX> amountPerPeriodRaports = getAmountPerPeriodRaports(dataList, formatPattern, promotionAndPeriod);
+        List<AmountPerX> amountPerPromotionRaports = getAmountPerPromotionRaports(dataList, promotionAndPeriod);
 
-        PromotionAndPeriodNames promotionAndPeriod = getPromotionAndPeriod(dataList);
-        Set<Number> periodNames = promotionAndPeriod.getPeriodNames();
+        return new IncomeRaportWrapper(promotionAndPeriod, amountPerPeriodRaports, amountPerPromotionRaports, noOfRecords);
+    }
+
+    private List<AmountPerX> getAmountPerPeriodRaports(List<IncomePromotionDTO> dataList, String formatPattern, PromotionAndPeriodNames promotionAndPeriod) {
+        Number[] amount;
+        AmountPerPeriodRaport amountPerPeriodRaport;
+        List<AmountPerX> amountPerPeriodRaports = new ArrayList<AmountPerX>();
+        Set<String> periodNames = promotionAndPeriod.getPeriodNames();
         Set<String> promotionNames = promotionAndPeriod.getPromotionNames();
 
-        //    System.out.println("promotion names = " + promotionNames);
-        //    System.out.println("period names = " + periodNames);
-
-        for (Number period : periodNames) {
-            raportDto = new RaportDto();
+        for (String period : periodNames) {     // year, month, day
+            amountPerPeriodRaport = new AmountPerPeriodRaport();
             amount = new Number[promotionNames.size()];
 
             for (int i = 0; i < dataList.size(); i++) {
@@ -105,37 +123,92 @@ public class RaportsFacadeImpl implements RaportsFacade {
 
                 String promotion = incomePromotionDTO.getPromotion();
                 Number count = incomePromotionDTO.getCount();
-                Number currentPeriod = incomePromotionDTO.getPeriod();
+                Date currentPeriod = incomePromotionDTO.getPeriod();
+                String currPeriod = UtilJavaMethods.formatDate(formatPattern, currentPeriod);
 
-                if (period.equals(currentPeriod)) {     // dodajemy do tego samego
+                if (period.equals(currPeriod)) {     // dodajemy do tego samego
                     int c = 0;
                     for (String promotionName : promotionNames) {
                         if (promotion.equals(promotionName)) {
                             amount[c++] = count;
-                            raportDto.setPeriodName(period);
-                            raportDto.setAmount(amount);
+                            amountPerPeriodRaport.setName(period);
+                            amountPerPeriodRaport.setAmount(amount);
                         }
                         c++;
                     }
                 }
             }
-            raportDtos.add(raportDto);
+            amountPerPeriodRaports.add(amountPerPeriodRaport);
         }
-        return new IncomeRaportWrapper(promotionAndPeriod, raportDtos, noOfRecords);
+        return amountPerPeriodRaports;
     }
 
-    private PromotionAndPeriodNames getPromotionAndPeriod(List<IncomePromotionDTO> dataList) {
-        Set<String> promotionNames = new HashSet<String>();
-        Set<Number> periodNames = new HashSet<Number>();
+    private List<AmountPerX> getAmountPerPromotionRaports(List<IncomePromotionDTO> dataList, PromotionAndPeriodNames promotionAndPeriod) {
+        Number[] amount;
+        AmountPerPromotionRaport amountPerPromotionRaport;
+        List<AmountPerX> amountPerPromotionRaports = new ArrayList<AmountPerX>();
+        Set<String> periodNames = promotionAndPeriod.getPeriodNames();
+        Set<String> promotionNames = promotionAndPeriod.getPromotionNames();
+
+        for (String promotion : promotionNames) {
+            amountPerPromotionRaport = new AmountPerPromotionRaport();
+            amount = new Number[periodNames.size()];
+            int c = 0;
+
+            for (int i = 0; i < dataList.size(); i++) {
+                IncomePromotionDTO incomePromotionDTO = dataList.get(i);
+
+                Number count = incomePromotionDTO.getCount();
+                String currentPromotion = incomePromotionDTO.getPromotion();
+
+                if (promotion.equals(currentPromotion)) {     // dodajemy do tego samego
+                    amount[c++] = count;
+                    amountPerPromotionRaport.setName(promotion);
+                    amountPerPromotionRaport.setAmount(amount);
+                }
+            }
+            amountPerPromotionRaports.add(amountPerPromotionRaport);
+        }
+        return amountPerPromotionRaports;
+    }
+
+    private PromotionAndPeriodNames getPromotionAndPeriod(List<IncomePromotionDTO> dataList, String formatPattern) {
+        Set<String> promotionNames = new LinkedHashSet<String>();
+        Set<String> periodNames = new LinkedHashSet<String>();
 
         for (IncomePromotionDTO incomePromotionDTO : dataList) {
             String promotion = incomePromotionDTO.getPromotion();
             promotionNames.add(promotion);
 
-            Number period = incomePromotionDTO.getPeriod();
-            periodNames.add(period);
+            Date period = incomePromotionDTO.getPeriod();
+            String formattedPeriod = UtilJavaMethods.formatDate(formatPattern, period);
+            periodNames.add(formattedPeriod);
         }
 
         return new PromotionAndPeriodNames(promotionNames, periodNames);
+    }
+
+    private String getFormatPattern(ListDataRequest listDataRequest) {
+        String section = null;
+        List<FilterInfo> filterInfo = listDataRequest.getFilterInfo();
+        for (FilterInfo info : filterInfo) {
+            if (info.getFilterColumn().equals(Constants.SECTION)) {
+                section = String.valueOf(info.getFilterData());
+            }
+        }
+
+        String formatPattern;
+        if (section.equals("MONTH")) {
+            formatPattern = "yyyy-MMMM";
+        } else if (section.equals("DAY")) {
+            formatPattern = "yyyy-MM-dd";
+            //    formatPattern = "yyyy-dd";
+        } else if (section.equals("YEAR")) {
+            formatPattern = "yyyy";
+        } else {
+            formatPattern = "yyyy-MM-dd";
+        }
+
+        return formatPattern;
     }
 }

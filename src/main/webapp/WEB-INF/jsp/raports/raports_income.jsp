@@ -84,20 +84,24 @@
                     <td><c:out value="${prom}"/></td>
                 </c:forEach>
                 <td style="background: lightblue">
-                    Total:
+                    <spring:message code="raports.tophits.total"/>
                 </td>
             </tr>
             <c:forEach items="${dataList}" var="o">
                 <tr>
-                    <td><c:out value="${o.periodName}"/></td>
+                    <td><c:out value="${o.name}"/></td>
                     <c:forEach items="${o.amount}" var="amount">
                         <td><c:out value="${amount}"/></td>
                     </c:forEach>
+                    <td><c:out value="${o.totalAmount}"/></td>
                 </tr>
             </c:forEach>
             <tr class="">
                 <td style="background: lightblue"><spring:message code="raports.tophits.total"/></td>
-                <td style="background: lightblue"><c:out value="${loanCount}"/></td>
+                <c:forEach items="${amountPerPromotion}" var="amount">
+                    <td style="background: lightblue"><c:out value="${amount.totalAmount}"/></td>
+                </c:forEach>
+                <td style="background: lightblue"><c:out value="${total}"/></td>
             </tr>
         </table>
     </div>

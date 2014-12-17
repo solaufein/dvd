@@ -102,9 +102,10 @@ public class IncomeDtoFilterChoice extends MultiRaportFilterChoice {
     }
 
     private StringBuilder createQuery(String period) {
-        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.IncomePromotionDTO(");
+        /*StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.IncomePromotionDTO(");
         query.append(period);   // WEEK, MONTHNAME, YEAR, WEEKDAY
-        query.append("(rr.rentDate), p.name, SUM(r.price)) FROM RentingRegistry as rr ");
+        query.append("(rr.rentDate), p.name, SUM(r.price)) FROM RentingRegistry as rr ");*/
+        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.IncomePromotionDTO(rr.rentDate, p.name, SUM(r.price)) FROM RentingRegistry as rr ");
         query.append("LEFT JOIN rr.receipt as r ");
         query.append("LEFT JOIN rr.movieCopy as mc ");
         query.append("LEFT JOIN mc.movie as m ");
@@ -130,15 +131,27 @@ public class IncomeDtoFilterChoice extends MultiRaportFilterChoice {
 
     private StringBuilder createNoOfRecordsNativeQuery(String period) {
         //Native Query
-        StringBuilder queryNative = new StringBuilder("SELECT COUNT(distinct p.id, ");
+        StringBuilder queryNative;
+
+        //   if (period.equals("DAY")) {
+        queryNative = new StringBuilder("SELECT COUNT(distinct ");
         queryNative.append(period);
-        queryNative.append("(rr.rent_date)) FROM renting_registry as rr ");
+        queryNative.append("(rr.rent_date), p.id) FROM renting_registry as rr ");
         queryNative.append("LEFT JOIN receipt as r ON r.id = rr.receipt_id ");
         queryNative.append("LEFT JOIN movie_copy as mc ON mc.id = rr.movie_copy_id ");
         queryNative.append("LEFT JOIN movie as m ON m.id = mc.movie_id ");
         queryNative.append("LEFT JOIN genre as g ON g.id = m.genre_id ");
         queryNative.append("LEFT JOIN promotion as p ON p.id = m.promotion_id ");
-
+      /*  } else {
+            queryNative = new StringBuilder("SELECT COUNT(distinct ");
+            queryNative.append(period);
+            queryNative.append("(rr.rent_date)) FROM renting_registry as rr ");
+            queryNative.append("LEFT JOIN receipt as r ON r.id = rr.receipt_id ");
+            queryNative.append("LEFT JOIN movie_copy as mc ON mc.id = rr.movie_copy_id ");
+            queryNative.append("LEFT JOIN movie as m ON m.id = mc.movie_id ");
+            queryNative.append("LEFT JOIN genre as g ON g.id = m.genre_id ");
+            queryNative.append("LEFT JOIN promotion as p ON p.id = m.promotion_id ");
+        }*/
 
         return queryNative;
     }
@@ -168,9 +181,10 @@ public class IncomeDtoFilterChoice extends MultiRaportFilterChoice {
         query.append(period);
         query.append("(rr.rentDate), p.id ");
 
-        query.append(" ORDER BY ");
+        /*query.append(" ORDER BY ");
         query.append(period);
-        query.append("(rr.rentDate) ");
+        query.append("(rr.rentDate) ");*/
+        query.append(" ORDER BY rr.rentDate ");
         query.append(order);
     }
 
