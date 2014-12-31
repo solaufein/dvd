@@ -1,5 +1,6 @@
 package pl.radek.dvd.dto.rr;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -14,15 +15,18 @@ public class NewRentDto {
     private Date returnDate;
     private Date rentDate;
     private String comment;
+    private short promotionDaysNumber;
+    private BigDecimal price;
 
     public NewRentDto() {
     }
 
-    public NewRentDto(Date returnDate, int clientId, int movieCopyId, String employeeName) {
-        this.returnDate = returnDate;
+    public NewRentDto(short promotionDaysNumber, int clientId, int movieCopyId, String employeeName, BigDecimal price) {
+        this.promotionDaysNumber = promotionDaysNumber;
         this.clientId = clientId;
         this.movieCopyId = movieCopyId;
         this.employeeName = employeeName;
+        this.price = price;
     }
 
     public NewRentDto(int rentingId, int clientId, int movieCopyId, int receiptId, String employeeName, Date returnDate, Date rentDate, String comment) {
@@ -98,5 +102,21 @@ public class NewRentDto {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public short getPromotionDaysNumber() {
+        return promotionDaysNumber;
+    }
+
+    public void setPromotionDaysNumber(short promotionDaysNumber) {
+        this.promotionDaysNumber = promotionDaysNumber;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

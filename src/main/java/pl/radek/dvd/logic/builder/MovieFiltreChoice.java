@@ -39,7 +39,7 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
         final int recordsPerPage = paginationInfo.getRecordsPerPage();
         final int offset = (page - 1) * recordsPerPage;
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.movies.MoviesData(m.id , m.title, m.director, m.productionYear, g.genre, p.name) FROM Movie as m ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.movies.MoviesData(m.id , m.title, m.director, m.productionYear, g.genre, p.name, p.value) FROM Movie as m ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
         query.append("LEFT JOIN m.actorset as a ");
@@ -59,6 +59,10 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
                 order = Constants.ASC;
             } else {
                 order = Constants.DESC;
+            }
+
+            if (field.equals(Constants.PRICE)){
+                field = "value";
             }
 
             query.append(" ORDER BY " + field + " " + order);

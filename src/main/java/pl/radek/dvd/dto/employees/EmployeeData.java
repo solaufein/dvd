@@ -25,7 +25,7 @@ public class EmployeeData {
     private String pwChangeKey;
     private Date pwChangeDate;
     private Set<RoleData> rolesSet = new HashSet<RoleData>();
-    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);       //todo: in future change this to RentingRegistryData if needed
+    private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);       //in future change this to RentingRegistryData if needed
 
     public EmployeeData() {
     }

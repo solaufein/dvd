@@ -9,6 +9,7 @@ import pl.radek.dvd.model.MovieCopy;
 import pl.radek.dvd.model.Promotion;
 
 import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,7 @@ public class MovieDataDTO {
     @Pattern(regexp = "\\d{4}", message = "{Pattern.moviedatadto.productionyear}")
     private String productionYear;
 
+    private BigDecimal price;
     private String description;
     private Set<MovieCopy> movieCopies;
     private GenreData genre;
@@ -38,19 +40,21 @@ public class MovieDataDTO {
     public MovieDataDTO() {
     }
 
-    public MovieDataDTO(int id, String title, String director, String productionYear, String description) {
+    public MovieDataDTO(int id, String title, String director, String productionYear, BigDecimal price, String description) {
         this.id = id;
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
+        this.price = price;
         this.description = description;
     }
 
-    public MovieDataDTO(int id, String title, String director, String productionYear, String description, Set<MovieCopy> movieCopies, GenreData genre, PromotionData promotion, Set<Actor> actorset) {
+    public MovieDataDTO(int id, String title, String director, String productionYear, BigDecimal price, String description, Set<MovieCopy> movieCopies, GenreData genre, PromotionData promotion, Set<Actor> actorset) {
         this.id = id;
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
+        this.price = price;
         this.description = description;
         this.movieCopies = movieCopies;
         this.genre = genre;
@@ -128,5 +132,13 @@ public class MovieDataDTO {
 
     public void setActorset(Set<Actor> actorset) {
         this.actorset = actorset;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

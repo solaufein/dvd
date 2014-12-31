@@ -17,6 +17,7 @@ import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.movies.PaginatedListMoviesRent;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.dto.rr.ReturnData;
 import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.logic.builder.MovieFiltreChoice;
 import pl.radek.dvd.logic.builder.MultiFiltreChoice;
@@ -188,7 +189,7 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
-        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.RentData(m.title, mc.serialNumber, p.name) FROM Movie as m ");
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.RentData(m.title, mc.serialNumber, p.name, p.value, p.promotionDaysNumber) FROM Movie as m ");
         query.append("INNER JOIN m.movieCopies as mc ");
         query.append("INNER JOIN m.promotion as p ");
         query.append("WHERE mc.id = :ide ");
@@ -202,9 +203,43 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         List results = q.list();
 
-        if (results.size() > 0) {
+        if (!results.isEmpty()) {
             RentData rentData = (RentData) results.get(0);
             logger.debug("Got MovieRentData by id: " + movieCopyId);
+            return rentData;
+        } else {
+            logger.debug("Result list is null ");
+            return null;
+        }
+    }
+
+    @Override
+    public ReturnData getMovieReturnData(int movieCopyId, short avail) {
+        logger.debug("Getting MovieReturnData by id: " + movieCopyId);
+
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.ReturnData(c.firstName, c.lastName, m.title, mc.serialNumber, p.name, rr.returnDate) FROM Movie as m ");
+        query.append("INNER JOIN m.movieCopies as mc ");
+        query.append("INNER JOIN m.promotion as p ");
+        query.append("INNER JOIN mc.rentingRegistries as rr ");
+        query.append("INNER JOIN rr.client as c ");
+        query.append("INNER JOIN rr.receipt as r ");
+        query.append("WHERE mc.id = :ide ");
+        query.append("AND mc.availability = :avail ");
+        query.append("AND r.payDate IS NULL ");
+
+        Query q = session.createQuery(query.toString());
+
+        //   short avail = 1;
+        q.setParameter("avail", avail);
+        q.setParameter("ide", movieCopyId);
+
+        List results = q.list();
+
+        if (!results.isEmpty()) {
+            ReturnData rentData = (ReturnData) results.get(0);
+            logger.debug("Got MovieReturnData by id: " + movieCopyId);
             return rentData;
         } else {
             logger.debug("Result list is null ");

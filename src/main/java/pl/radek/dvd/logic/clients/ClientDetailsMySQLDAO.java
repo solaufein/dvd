@@ -90,6 +90,29 @@ public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
         return list.get(0);
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public ReceiptPdf getReceiptPdfInformationsReturnMovie(int id) {
+        logger.debug("Perform method getReceiptPdfInformations for RR id: " + id);
+
+        StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.clients.ReceiptPdf(m.title, mc.serialNumber, rr.rentDate, rr.returnDate, r.price - p.value, r.payDate, r.billNumber) FROM RentingRegistry as rr ");
+        query.append("INNER JOIN rr.receipt as r ");
+        query.append("INNER JOIN rr.client as c ");
+        query.append("INNER JOIN rr.movieCopy as mc ");
+        query.append("INNER JOIN mc.movie as m ");
+        query.append("INNER JOIN m.promotion as p ");
+        query.append("WHERE rr.id = :ide ");
+
+        Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+        q.setParameter("ide", id);
+
+        logger.debug("query: " + query.toString());
+        logger.debug("Got Receipt info for Client id: " + id);
+        List<ReceiptPdf> list = (List<ReceiptPdf>) q.list();
+
+        return list.get(0);
+    }
+
     @SuppressWarnings("unchecked")
     public int getNoOfRecords(int clientId) {
         logger.debug("Getting total number of records for ClientDetails");

@@ -121,6 +121,13 @@
                 <c:url value="movieslist${hlink}" var="paginationURL"/>
                 <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.promotion"/></a>
             </td>
+            <td>
+                <hero:Linkuj order="${param.order}" field="${param.field}" columnName="${cons.price}"
+                             title="${param.title}" genre="${param.genre}" promotion="${param.price}"
+                             actorName="${param.actor}"/>
+                <c:url value="movieslist${hlink}" var="paginationURL"/>
+                <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.price"/></a>
+            </td>
             <td></td>
             <td></td>
             <td></td>
@@ -132,6 +139,7 @@
                 <td><c:out value="${movie.productionYear}"/></td>
                 <td><c:out value="${movie.genre}"/></td>
                 <td><c:out value="${movie.name}"/></td>
+                <td><c:out value="${movie.price}"/></td>
                 <td>
                     <form name="moviedetails" action=" <c:url value="moviedetails"/>" method="get">
                         <input type="hidden" name="id" value="${movie.id}"/>

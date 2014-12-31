@@ -102,6 +102,13 @@
             <version>${tiles.version}</version>
         </dependency>
 
+        <!-- Joda Time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.3</version>
+        </dependency>
+
         <!-- Test NG -->
         <dependency>
             <groupId>org.testng</groupId>

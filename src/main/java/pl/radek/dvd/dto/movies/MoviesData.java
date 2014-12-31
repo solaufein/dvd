@@ -1,5 +1,7 @@
 package pl.radek.dvd.dto.movies;
 
+import java.math.BigDecimal;
+
 /**
  * User: Sola
  * Date: 2014-07-14
@@ -12,25 +14,28 @@ public class MoviesData {
     private String productionYear;
     private String genre;               // genre name
     private String name;               // promotion name
+    private BigDecimal price;   // promotion value price
 
     public MoviesData() {
     }
 
-    public MoviesData(String title, String director, String productionYear, String genre, String name) {
+    public MoviesData(String title, String director, String productionYear, String genre, String name, BigDecimal price) {
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
         this.genre = genre;
         this.name = name;
+        this.price = price;
     }
 
-    public MoviesData(int id, String title, String director, String productionYear, String genre, String name) {
+    public MoviesData(int id, String title, String director, String productionYear, String genre, String name, BigDecimal price) {
         this.id = id;
         this.title = title;
         this.director = director;
         this.productionYear = productionYear;
         this.genre = genre;
         this.name = name;
+        this.price = price;
     }
 
     public int getId() {
@@ -79,5 +84,13 @@ public class MoviesData {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

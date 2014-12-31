@@ -9,6 +9,7 @@ import java.util.Date;
 public class MovieNotReturnedDto {
     private static final SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    private Integer id;
     private String firstName;
     private String lastName;
     private String title; // movie title
@@ -20,7 +21,8 @@ public class MovieNotReturnedDto {
     public MovieNotReturnedDto() {
     }
 
-    public MovieNotReturnedDto(String firstName, String lastName, String title, Date rentDate, Date returnDate, int daysLate, String phoneNumber) {
+    public MovieNotReturnedDto(Integer id, String firstName, String lastName, String title, Date rentDate, Date returnDate, int daysLate, String phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -29,7 +31,7 @@ public class MovieNotReturnedDto {
 
         this.daysLate = daysLate < 0 ? 0 : daysLate;
 
-    //    this.daysLate = daysLate;
+        //    this.daysLate = daysLate;
         this.phoneNumber = phoneNumber;
     }
 
@@ -87,5 +89,13 @@ public class MovieNotReturnedDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }

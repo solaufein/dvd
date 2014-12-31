@@ -47,4 +47,10 @@ public class ClientDetailsServiceImpl implements ClientDetailsService {
     public ReceiptPdf getReceiptPdfInformations(int id) {
         return clientDetailsDAO.getReceiptPdfInformations(id);
     }
+
+    @Override
+    public ReceiptPdf getReceiptPdfInformationsReturnMovie(int id) {
+        return clientDetailsDAO.getReceiptPdfInformationsReturnMovie(id);
+    }
+
 }

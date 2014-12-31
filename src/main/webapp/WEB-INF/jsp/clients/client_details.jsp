@@ -114,6 +114,7 @@
                             <%--Displaying First link except for the 1st page--%>
                         <c:if test="${currentPage != 1}">
                             <form name="firstlink" action="<c:url value="clientdetails"/>" method="get">
+                                <input type="hidden" name="id" value="${param.id}"/>
                                 <input type="hidden" name="currentPage" value="1"/>
                                 <input type="submit" value="|<<" class="myButtonTwo"/>
                             </form>
@@ -124,6 +125,7 @@
                             <%--Displaying Previous link except for the 1st page--%>
                         <c:if test="${currentPage != 1}">
                             <form name="previouslink" action="<c:url value="clientdetails"/>" method="get">
+                                <input type="hidden" name="id" value="${param.id}"/>
                                 <input type="hidden" name="currentPage" value="${currentPage - 1}"/>
                                 <input type="submit" value="<" class="myButtonTwo"/>
                             </form>
@@ -137,6 +139,7 @@
                             <%--Displaying Next link--%>
                         <c:if test="${currentPage < noOfPages}">
                             <form name="nextlink" action="<c:url value="clientdetails"/>" method="get">
+                                <input type="hidden" name="id" value="${param.id}"/>
                                 <input type="hidden" name="currentPage" value="${currentPage + 1}"/>
                                 <input type="submit" value=">" class="myButtonTwo"/>
                             </form>
@@ -147,6 +150,7 @@
                             <%--Displaying Last link--%>
                         <c:if test="${currentPage < noOfPages}">
                             <form name="lastlink" action="<c:url value="clientdetails"/>" method="get">
+                                <input type="hidden" name="id" value="${param.id}"/>
                                 <input type="hidden" name="currentPage" value="${noOfPages}"/>
                                 <input type="submit" value=">>|" class="myButtonTwo"/>
                             </form>

@@ -10,12 +10,15 @@ import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.*;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.dto.rr.ReturnData;
 import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.logic.movies.MoviesDAO;
 import pl.radek.dvd.model.Genre;
 import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.model.Promotion;
+import pl.radek.dvd.utils.UtilJavaMethods;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,7 +72,17 @@ public class MoviesServiceImpl implements MoviesService {
 
     @Override
     public RentData getMovieRentData(int movieCopyId, short avail) {
-        return moviesDAO.getMovieRentData(movieCopyId, avail);
+        RentData movieRentData = moviesDAO.getMovieRentData(movieCopyId, avail);
+        Date date = UtilJavaMethods.currentDatePlusNoOfDays(movieRentData.getPromotionDaysNumber());
+        String expectedReturnDate = UtilJavaMethods.formatDate("yyyy-MM-dd", date);
+        movieRentData.setExpectedReturnDate(expectedReturnDate);
+
+        return movieRentData;
+    }
+
+    @Override
+    public ReturnData getMovieReturnData(int movieCopyId, short avail) {
+        return moviesDAO.getMovieReturnData(movieCopyId, avail);
     }
 
     @Override

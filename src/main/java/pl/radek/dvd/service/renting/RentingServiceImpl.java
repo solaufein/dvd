@@ -1,6 +1,10 @@
 package pl.radek.dvd.service.renting;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Instant;
+import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,8 @@ import pl.radek.dvd.service.clients.ClientsService;
 import pl.radek.dvd.utils.UtilJavaMethods;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Calendar;
 import java.util.Date;
 
 @Service
@@ -46,12 +52,17 @@ public class RentingServiceImpl implements RentingService {
 
         Client client = clientsDAO.getClient(rentDto.getClientId());
         Employee employee = employeeDAO.getEmployee(rentDto.getEmployeeName());
-        Date returnDate = rentDto.getReturnDate();
+
+        short promotionDaysNumber = rentDto.getPromotionDaysNumber();
+        Date returnDate = UtilJavaMethods.currentDatePlusNoOfDays(promotionDaysNumber);
+
+        //    Date returnDate = rentDto.getReturnDate();
 
         // add new receipt
         String billNumber = UtilJavaMethods.randomString(UtilJavaMethods.CHARSET_AZ_09, 10);
         Receipt receipt = new Receipt();
         receipt.setBillNumber(billNumber);
+        receipt.setPrice(rentDto.getPrice());
         receiptDAO.addReceipt(receipt);
 
         // save new renting registry
@@ -65,12 +76,16 @@ public class RentingServiceImpl implements RentingService {
     }
 
     @Override
-    public void updateRentingRegistry(ReturnCommentDto returnDto) {
+    public boolean updateRentingRegistry(ReturnCommentDto returnDto) {
         logger.info("UpdateRentingRegistry Service method entered");
+        boolean isLate = false;
 
         // get renting registry
         RentingRegistry rentingRegistry = rentingDAO.getRentingRegistry(returnDto.getRegistryId());
         Receipt receipt = rentingRegistry.getReceipt();     // get receipt from rr
+        BigDecimal price = receipt.getPrice();  // get price from receipt
+        Date returnDate = rentingRegistry.getReturnDate();
+        Date currentDate = new Date();
 
         // update renting registry - set comment
         rentingRegistry.setComment(returnDto.getComment());
@@ -82,10 +97,33 @@ public class RentingServiceImpl implements RentingService {
         movieCopyDAO.updateMovieCopy(movieCopy);
 
         // update receipt - pay date and price
-        receipt.setPayDate(new Date());
-        receipt.setPrice(new BigDecimal("100.20"));     // in future we can implement some logic to automatic count price, or manually set price via view
+        receipt.setPayDate(currentDate);
+        // logic to automatic count price
+        int days = Days.daysBetween(new DateTime(returnDate), new DateTime(currentDate)).getDays();
+        //    int days = Days.daysBetween(new DateTime(currentDate), new DateTime(returnDate)).getDays();   // for testing purposes
+        if (days > 0) {
+            BigDecimal totalCost = getTotalPrice(price, days);
+            logger.info("totalCost = " + totalCost);
+            logger.info("days = " + days);
+
+            receipt.setPrice(totalCost);
+            isLate = true;
+        }
+
         receiptDAO.updateReceipt(receipt);
 
         logger.info("UpdateRentingRegistry Service method leaved");
+        return isLate;
+    }
+
+    private BigDecimal getTotalPrice(BigDecimal price, int days) {
+        double discountPercent = 0.02;
+        BigDecimal totalCost = BigDecimal.ZERO;
+        BigDecimal decimalDiscountPercent = new BigDecimal(Double.toString(discountPercent));   // 2%
+        BigDecimal discountAmount = price.multiply(decimalDiscountPercent);     // 15zl * 2%
+        discountAmount = discountAmount.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal debt = discountAmount.multiply(new BigDecimal(days));  //  debt = 5days * amount of discount
+        totalCost = debt.add(price);        // sum price + debt
+        return totalCost;
     }
 }

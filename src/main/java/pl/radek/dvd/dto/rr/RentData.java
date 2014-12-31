@@ -1,5 +1,8 @@
 package pl.radek.dvd.dto.rr;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
  * Created by Sola on 2014-11-19.
  */
@@ -7,14 +10,19 @@ public class RentData {
     private String title;
     private String serialNumber;
     private String promotion;
+    private BigDecimal price;   // promotion value
+    private short promotionDaysNumber;
+    private String expectedReturnDate;
 
     public RentData() {
     }
 
-    public RentData(String title, String serialNumber, String promotion) {
+    public RentData(String title, String serialNumber, String promotion, BigDecimal price, short promotionDaysNumber) {
         this.title = title;
         this.serialNumber = serialNumber;
         this.promotion = promotion;
+        this.price = price;
+        this.promotionDaysNumber = promotionDaysNumber;
     }
 
     public String getTitle() {
@@ -39,5 +47,29 @@ public class RentData {
 
     public void setPromotion(String promotion) {
         this.promotion = promotion;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public short getPromotionDaysNumber() {
+        return promotionDaysNumber;
+    }
+
+    public void setPromotionDaysNumber(short promotionDaysNumber) {
+        this.promotionDaysNumber = promotionDaysNumber;
+    }
+
+    public String getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setExpectedReturnDate(String expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
     }
 }

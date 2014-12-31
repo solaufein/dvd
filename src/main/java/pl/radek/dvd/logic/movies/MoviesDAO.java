@@ -6,6 +6,7 @@ import pl.radek.dvd.dto.movies.MovieBySerialData;
 import pl.radek.dvd.dto.movies.MoviesData;
 import pl.radek.dvd.dto.movies.MoviesRentData;
 import pl.radek.dvd.dto.rr.RentData;
+import pl.radek.dvd.dto.rr.ReturnData;
 import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
 import pl.radek.dvd.model.Movie;
 
@@ -25,6 +26,7 @@ public interface MoviesDAO {
     public PaginatedList<MoviesRentData> getMoviesRentDataPaginated(ListDataRequest listDataRequest);
     public Movie getMovie(int id);
     RentData getMovieRentData(int movieCopyId, short avail);
+    ReturnData getMovieReturnData(int movieCopyId, short avail);
     public void deleteMovie(int id);
     public void addMovie(Movie movie);
     public void updateMovie(Movie movie);

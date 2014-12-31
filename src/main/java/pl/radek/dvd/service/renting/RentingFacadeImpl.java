@@ -76,8 +76,8 @@ public class RentingFacadeImpl implements RentingFacade {
     }
 
     @Override
-    public void updateRentingRegistry(ReturnCommentDto returnDto) {
-        rentingService.updateRentingRegistry(returnDto);
+    public boolean updateRentingRegistry(ReturnCommentDto returnDto) {
+        return rentingService.updateRentingRegistry(returnDto);
     }
 
     @Override
@@ -96,7 +96,18 @@ public class RentingFacadeImpl implements RentingFacade {
     }
 
     @Override
+    public ReturnData getMovieReturnData(int movieCopyId, short avail) {
+
+        return moviesService.getMovieReturnData(movieCopyId, avail);
+    }
+
+    @Override
     public ReceiptPdf getReceiptPdfInformations(int clientId) {
         return clientDetailsService.getReceiptPdfInformations(clientId);
+    }
+
+    @Override
+    public ReceiptPdf getReceiptPdfInformationsReturnMovie(int id) {
+        return clientDetailsService.getReceiptPdfInformationsReturnMovie(id);
     }
 }

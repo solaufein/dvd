@@ -18,9 +18,11 @@ public interface RentingFacade {
     ClientData getClient(int clientId);
     MovieCopyDTO getMovieCopy(int movieCopyId);
     RentData getMovieRentData(int movieCopyId, short avail);
+    ReturnData getMovieReturnData(int movieCopyId, short avail);
     ReceiptPdf getReceiptPdfInformations(int clientId);
+    ReceiptPdf getReceiptPdfInformationsReturnMovie(int id);
     Employee getEmployee(String name);
     int addRentingRegistry(NewRentDto rentDto) throws MovieCopyNotAvailableException;
 
-    void updateRentingRegistry(ReturnCommentDto returnDto);
+    boolean updateRentingRegistry(ReturnCommentDto returnDto);
 }

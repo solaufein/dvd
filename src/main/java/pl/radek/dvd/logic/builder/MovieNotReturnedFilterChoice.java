@@ -31,7 +31,7 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         ORDER BY ABS(DATEDIFF(rr.return_date,r.pay_date)) DESC
         LIMIT 0,9;*/
 
-        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.MovieNotReturnedDto(c.firstName, c.lastName, m.title, rr.rentDate, rr.returnDate, DATEDIFF(:now, rr.returnDate), c.phoneNumber) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.MovieNotReturnedDto(c.id, c.firstName, c.lastName, m.title, rr.rentDate, rr.returnDate, DATEDIFF(:now, rr.returnDate), c.phoneNumber) FROM RentingRegistry as rr ");
         query.append("LEFT JOIN rr.client as c ");
         query.append("LEFT JOIN rr.movieCopy as mc ");
         query.append("LEFT JOIN mc.movie as m ");

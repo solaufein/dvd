@@ -30,6 +30,8 @@
             <add-attribute value="/resources/js/navigation.js"/>
             <add-attribute value="/resources/js/actorsAutocomplete.js"/>
             <add-attribute value="/resources/js/rent_movie_modal.js"/>
+            <add-attribute value="/resources/js/rent_print_receipt.js"/>
+            <add-attribute value="/resources/js/return_print_receipt.js"/>
             <add-attribute value="/resources/js/homeInputs.js"/>
         </put-list-attribute>
     </definition>

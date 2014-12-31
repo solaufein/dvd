@@ -10,5 +10,5 @@ import pl.radek.dvd.exceptions.movie.MovieCopyNotAvailableException;
 public interface RentingService {
     int addRentingRegistry(NewRentDto rentDto) throws MovieCopyNotAvailableException;
 
-    void updateRentingRegistry(ReturnCommentDto returnDto);
+    boolean updateRentingRegistry(ReturnCommentDto returnDto);
 }

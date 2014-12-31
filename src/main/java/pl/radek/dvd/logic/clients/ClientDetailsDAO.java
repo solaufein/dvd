@@ -15,4 +15,5 @@ public interface ClientDetailsDAO {
     public int getNoOfRecords(ListDataRequest listDataRequest, int clientId);
     public List<ClientDetails> getClientDetails(ListDataRequest listDataRequest, int clientId);
     public ReceiptPdf getReceiptPdfInformations(int id);
+    public ReceiptPdf getReceiptPdfInformationsReturnMovie(int id);
 }

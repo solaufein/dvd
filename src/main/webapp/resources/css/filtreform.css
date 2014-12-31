@@ -63,6 +63,11 @@
     outline: none;
 }
 
+.separatorInvisible{
+    height: 1px;
+    width: auto;
+}
+
 #myform {
     float: left;
     padding: auto;

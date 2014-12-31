@@ -45,69 +45,53 @@
                     <li><label> <spring:message code="movies.moviesList.promotion"/>: </label> <c:out
                             value="${rentData.promotion}"/>
                     </li>
+                    <li><label> <spring:message code="movies.moviesList.price"/>: </label> <c:out
+                            value="${rentData.price}"/>
+                    </li>
+                    <li><label> <spring:message code="clients.clientHistoryList.expectedReturnDate"/>: </label> <c:out
+                            value="${rentData.expectedReturnDate}"/>
+                    </li>
                 </ul>
-                <form id="ok" name="ok" action="<c:url value="/emp/rent/save"/>" method="POST" target="_blank">
-                    <table>
-                        <tr>
-                            <td>
-                                <label for="datepicker"> <spring:message
-                                        code="clients.clientHistoryList.expectedReturnDate"/>: </label>
-                                <input type="text" name="date" id="datepicker">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="hidden" name="clientId" value="${param.clientId}"/>
-                                <input type="hidden" name="movieCopyId" value="${param.movieCopyId}"/>
-                                <input type="submit" value="<spring:message code="common.button.ok"/>"
-                                       class="myButton"/>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
 
-                <form name="cancel" action="<c:url value="/clientdetails/moviesrent" context="/dvd/emp/clients"/>"
-                      method="get">
-                    <table>
-                        <tr>
-                            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <div id="rentOrPrint">
+                                <form id="ok" name="ok" action="<c:url value="/emp/rent/save"/>" method="POST">
+                                    <input type="hidden" name="clientId" value="${param.clientId}"/>
+                                    <input type="hidden" name="movieCopyId" value="${param.movieCopyId}"/>
+                                    <input type="hidden" name="promotionDaysNumber"
+                                           value="${rentData.promotionDaysNumber}"/>
+                                    <input type="hidden" name="price" value="${rentData.price}"/>
+                                    <input type="submit" value="<spring:message code="common.button.ok"/>"
+                                           class="myButton"/>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr>
+                        <td>
+                            <form name="cancel"
+                                  action="<c:url value="/clientdetails/moviesrent" context="/dvd/emp/clients"/>"
+                                  method="get">
                                 <input type="hidden" name="id" value="${param.clientId}"/>
                                 <input type="submit" value="<spring:message code="common.button.back"/>"
                                        class="myButton"/>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </form>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
         <script>
-
             $(document).ready(function () {
-                $("#datepicker").datepicker({
-                    dateFormat: 'yy-mm-dd',
-                    minDate: 0, // 0 days offset = today
-                    onSelect: function (dateText) {
-                        $("#datepicker-error").remove();
-                    }
-                });
+                InitRentPrintReceipt.init();
 
-                $("#ok").validate({
-                    rules: {
-                        date: {
-                            required: true
-                        }
-                    },
-                    messages: {
-                        date: {
-                            required: "Please provide a date"
-                        }
-                    }
-                });
             });
-
         </script>
 
     </tiles:putAttribute>

@@ -4,16 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
-import pl.radek.dvd.dto.rr.RentData;
 import pl.radek.dvd.dto.rr.ReturnCommentDto;
 import pl.radek.dvd.dto.rr.ReturnData;
-import pl.radek.dvd.model.Client;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.renting.RentingFacade;
 
@@ -35,50 +30,38 @@ public class ReturnController {
                                    @RequestParam(value = "registryId") int registryId,
                                    ModelMap modelMap) throws Exception {
 
-        logger.info("client id = " + clientId);
-        logger.info("movie copy id = " + movieCopyId);
-        logger.info("registry id = " + registryId);
-
-        ClientData clientData = rentingFacade.getClient(clientId);
-        RentData rentData = rentingFacade.getMovieRentData(movieCopyId, (short) 0);
+        ReturnData returnData = rentingFacade.getMovieReturnData(movieCopyId, (short) 0);
         ReturnCommentDto returnDto = new ReturnCommentDto();
         returnDto.setClientId(clientId);
         returnDto.setMovieCopyId(movieCopyId);
         returnDto.setRegistryId(registryId);
 
-        //  MovieCopyDTO movieCopy = rentingFacade.getMovieCopy(movieCopyId);
-        //  modelMap.addAttribute("movieCopy", movieCopy);
-
         modelMap.addAttribute("movieCopyId", movieCopyId);
         modelMap.addAttribute("clientId", clientId);
         modelMap.addAttribute("registryId", registryId);
-        modelMap.addAttribute(Constants.CLIENT, clientData);
-        modelMap.addAttribute("rentData", rentData);
+        modelMap.addAttribute("returnData", returnData);
         modelMap.addAttribute("returnDto", returnDto);
 
         return "/movies/return";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveReturn(@ModelAttribute("returnDto") ReturnCommentDto returnDto,
-                             ModelMap modelMap) throws Exception {
+    @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public boolean saveReturn(@ModelAttribute("returnDto") ReturnCommentDto returnDto) throws Exception {
 
-        logger.info("comment = " + returnDto.getComment());
-        logger.info("client id = " + returnDto.getClientId());
-        logger.info("mc id = " + returnDto.getMovieCopyId());
-        logger.info("rr id = " + returnDto.getRegistryId());
+        boolean isLate = rentingFacade.updateRentingRegistry(returnDto);
 
+        return isLate;
+    }
 
-        // update renting registry - return:
-        // set movie copy avail = 1
-        // set comments in renting registry
-        // set pay date in receipt
-        // set price in receipt
-        rentingFacade.updateRentingRegistry(returnDto);
+    @RequestMapping(value = "/printReceipt", method = RequestMethod.POST)
+    public String printReceipt(@RequestParam(value = "clientId") int clientId,
+                               @RequestParam(value = "registryId") int registryId,
+                               ModelMap modelMap) {
 
         // go to print receipt view
-        ClientData clientData = rentingFacade.getClient(returnDto.getClientId());
-        ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformations(returnDto.getRegistryId());
+        ClientData clientData = rentingFacade.getClient(clientId);
+        ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformationsReturnMovie(registryId);
 
         modelMap.addAttribute("receiptInfo", receiptPdfInformations);
         modelMap.addAttribute("clientInfo", clientData);

@@ -143,6 +143,13 @@
             <td>
                 <spring:message code="movies.movieCopy.serialNumber"/>
             </td>
+            <td>
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.price}"
+                             title="${param.title}" genre="${param.genre}" promotion="${param.price}"
+                             actorName="${param.actor}"/>
+                <c:url value="moviesrent${hlink}" var="paginationURL"/>
+                <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.price"/></a>
+            </td>
             <td></td>
         </tr>
         <c:forEach items="${moviesList}" var="movie">
@@ -153,6 +160,7 @@
                 <td><c:out value="${movie.genre}"/></td>
                 <td><c:out value="${movie.name}"/></td>
                 <td><c:out value="${movie.movieCopySerial}"/></td>
+                <td><c:out value="${movie.price}"/></td>
                 <td>
                     <form name="movierent" action=" <c:url context="/dvd/emp" value="/rent/movie" />" method="POST">
                         <input type="hidden" name="movieCopyId" value="${movie.id}"/>

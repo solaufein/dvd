@@ -83,7 +83,7 @@ public class PdfBuilder extends AbstractITextPdfView {
         cell.setPhrase(new Phrase("Expected Return Date", font));
         table2.addCell(cell);
 
-        cell.setPhrase(new Phrase("Pay Date", font));
+        cell.setPhrase(new Phrase("Return Date", font));    // PayDate from Receipt
         table2.addCell(cell);
 
         cell.setPhrase(new Phrase("Price", font));

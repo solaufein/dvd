@@ -31,58 +31,66 @@
             <div class="inputs">
                 <ul>
                     <li><label> <spring:message code="clients.clientsList.firstName"/>: </label> <c:out
-                            value="${client.firstName}"/></li>
+                            value="${returnData.clientFirstName}"/></li>
                     <li><label> <spring:message code="clients.clientsList.lastName"/>: </label> <c:out
-                            value="${client.lastName}"/></li>
+                            value="${returnData.clientLastName}"/></li>
                     <li><label> <spring:message code="movies.moviesList.title"/>: </label> <c:out
-                            value="${rentData.title}"/>
+                            value="${returnData.title}"/>
                     </li>
                     <li><label> <spring:message code="movies.movieCopy.serialNumber"/>: </label> <c:out
-                            value="${rentData.serialNumber}"/>
+                            value="${returnData.serialNumber}"/>
                     </li>
                     <li><label> <spring:message code="movies.moviesList.promotion"/>: </label> <c:out
-                            value="${rentData.promotion}"/>
+                            value="${returnData.promotionName}"/>
+                    </li>
+                    <li><label> <spring:message code="clients.clientHistoryList.expectedReturnDate"/>: </label> <c:out
+                            value="${returnData.expectedReturnDate}"/>
                     </li>
                     <li>
                         <label> <spring:message code="movies.movieCopy.comment"/>: </label>
                     </li>
                 </ul>
 
-                <form:form method="POST" commandName="returnDto" action="save" target="_blank">
-                    <table>
-                        <tr>
-                            <td><form:hidden path="clientId"></form:hidden></td>
-                            <td><form:hidden path="movieCopyId"></form:hidden></td>
-                            <td><form:hidden path="registryId"></form:hidden></td>
-                            <td><form:textarea path="comment" rows="5" cols="30" cssClass="inputs"/></td>
-                            <td><form:errors path="comment" cssClass="error"></form:errors></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" value="<spring:message code="common.button.return"/>"
-                                       class="myButton"/></td>
-                        </tr>
-                    </table>
-                </form:form>
+                <table>
+                    <tr>
+                        <td>
+                            <div id="returnOrPrint">
+                                <form:form id="ok" name="ok" method="POST" commandName="returnDto" action="save">
+                                    <form:hidden path="clientId"></form:hidden>
+                                    <form:hidden path="movieCopyId"></form:hidden>
+                                    <form:hidden path="registryId"></form:hidden>
+                                    <form:textarea path="comment" rows="5" cols="30" cssClass="inputs"/>
+                                    <form:errors path="comment" cssClass="error"></form:errors>
+                                    <div class="separatorInvisible"></div>
+                                    <input type="submit" value="<spring:message code="common.button.return"/>"
+                                           class="myButton"/>
+                                </form:form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
-                <form name="cancel" action="<c:url value="/clientdetails" context="/dvd/emp/clients"/>"
-                      method="get">
-                    <table>
-                        <tr>
-                            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <form name="cancel"
+                                  action="<c:url value="/clientdetails" context="/dvd/emp/clients"/>"
+                                  method="get">
                                 <input type="hidden" name="id" value="${param.clientId}"/>
                                 <input type="submit" value="<spring:message code="common.button.back"/>"
                                        class="myButton"/>
-                            </td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </form>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 
         <script>
+            $(document).ready(function () {
+                InitReturnPrintReceipt.init();
 
+            });
         </script>
 
     </tiles:putAttribute>

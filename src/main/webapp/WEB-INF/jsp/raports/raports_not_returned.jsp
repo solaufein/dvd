@@ -52,6 +52,9 @@
                     <td>
                         <spring:message code="clients.clientsList.phoneNumber"/>
                     </td>
+                    <td>
+                        <spring:message code="clients.client.details"/>
+                    </td>
                 </tr>
                 <c:forEach items="${dataList}" var="rap">
                     <tr>
@@ -62,6 +65,10 @@
                         <td><c:out value="${rap.returnDate}"/></td>
                         <td><c:out value="${rap.daysLate}"/></td>
                         <td><c:out value="${rap.phoneNumber}"/></td>
+                        <td><form name="clientdetails" action=" <c:url value="/emp/clients/clientdetails"/>" method="get">
+                            <input type="hidden" name="id" value="${rap.id}" />
+                            <input type="submit" value="<spring:message code="common.button.details"/>" class = "myButton"/>
+                        </form></td>
                     </tr>
                 </c:forEach>
             </table>

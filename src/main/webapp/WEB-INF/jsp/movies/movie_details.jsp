@@ -56,6 +56,8 @@
                             value="${movie.genre}"/></li>
                     <li><label> <spring:message code="movies.moviesList.promotion"/>: </label> <c:out
                             value="${movie.promotion}"/></li>
+                    <li><label> <spring:message code="movies.moviesList.price"/>: </label> <c:out
+                            value="${movie.promotion.value}"/></li>
                 </ul>
             </div>
         </div>

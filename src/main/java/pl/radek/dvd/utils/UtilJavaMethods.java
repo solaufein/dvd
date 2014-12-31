@@ -5,6 +5,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -34,10 +35,20 @@ public class UtilJavaMethods {
     }
 
     public static String formatDate(String pattern, Date date) {
-       //    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, LocaleContextHolder.getLocale());
+        //    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, LocaleContextHolder.getLocale());
         simpleDateFormat.applyPattern(pattern);
         String formattedDate = simpleDateFormat.format(date);
 
         return formattedDate;
+    }
+
+    public static Date currentDatePlusNoOfDays(short promotionDaysNumber) {
+        Date returnDate = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(returnDate);
+        c.add(Calendar.DATE, promotionDaysNumber);
+        returnDate = c.getTime();
+
+        return returnDate;
     }
 }

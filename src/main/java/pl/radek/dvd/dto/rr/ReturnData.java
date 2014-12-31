@@ -1,8 +1,9 @@
 package pl.radek.dvd.dto.rr;
 
-/**
- * Created by Sola on 2014-11-26.
- */
+import pl.radek.dvd.utils.UtilJavaMethods;
+
+import java.util.Date;
+
 public class ReturnData {
     private int clientId;
     private int movieCopyId;
@@ -12,6 +13,16 @@ public class ReturnData {
     private String title;
     private String serialNumber;
     private String promotionName;
+    private String expectedReturnDate;
+
+    public ReturnData(String clientFirstName, String clientLastName, String title, String serialNumber, String promotionName, Date expectedReturnDate) {
+        this.clientFirstName = clientFirstName;
+        this.clientLastName = clientLastName;
+        this.title = title;
+        this.serialNumber = serialNumber;
+        this.promotionName = promotionName;
+        this.expectedReturnDate = UtilJavaMethods.formatDate("yyyy-MM-dd HH:mm:ss", expectedReturnDate);
+    }
 
     public ReturnData(int clientId, int movieCopyId, int rentingId, String clientFirstName, String clientLastName, String title, String serialNumber, String promotionName) {
         this.clientId = clientId;
@@ -90,5 +101,13 @@ public class ReturnData {
 
     public void setPromotionName(String promotionName) {
         this.promotionName = promotionName;
+    }
+
+    public String getExpectedReturnDate() {
+        return expectedReturnDate;
+    }
+
+    public void setExpectedReturnDate(String expectedReturnDate) {
+        this.expectedReturnDate = expectedReturnDate;
     }
 }
