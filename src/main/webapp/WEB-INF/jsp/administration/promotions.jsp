@@ -123,8 +123,12 @@
 
 <script>
     $(document).ready(function () {
+        var strings = [];
+        strings['promotion.createNew'] = "<spring:message code='promotion.createNew' javaScriptEscape='true' />";
+        strings['promotion.create'] = "<spring:message code='promotion.button.create' javaScriptEscape='true' />";
+        strings['promotion.cancel'] = "<spring:message code='promotion.button.cancel' javaScriptEscape='true' />";
 
         initPaginationButtons("${noOfPages}");
-        InitActionButtons.init();
+        InitActionButtons.init(strings);
     });
 </script>

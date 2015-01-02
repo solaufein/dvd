@@ -61,6 +61,7 @@
             <add-attribute value="/resources/js/employee_pagination.js"/>
             <add-attribute value="/resources/js/employee_actions.js"/>
             <add-attribute value="/resources/js/promotion_actions.js"/>
+            <add-attribute value="/resources/js/jquery.i18n.properties-1.0.9.js"/>
         </put-list-attribute>
     </definition>
 

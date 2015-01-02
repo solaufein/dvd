@@ -38,9 +38,11 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
 
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
-        int page = paginationInfo.getPage();
-        int recordsPerPage = paginationInfo.getRecordsPerPage();
-        int offset = (page - 1) * recordsPerPage;
+        if (paginationInfo != null) {
+            int page = paginationInfo.getPage();
+            int recordsPerPage = paginationInfo.getRecordsPerPage();
+            int offset = (page - 1) * recordsPerPage;
+        }
 
         StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.raports.TopHitsDto(m.title, COUNT(mc.id)) FROM RentingRegistry as rr ");
         query.append("LEFT JOIN rr.movieCopy as mc ");
@@ -60,8 +62,8 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
 
         setFiltreQueryParams(filterInfoList, q);
 
-        q.setFirstResult(offset);
-        q.setMaxResults(recordsPerPage);
+        //    q.setFirstResult(offset);
+        //    q.setMaxResults(recordsPerPage);
 
         return q;
     }
@@ -81,7 +83,7 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         boolean isFirst = true;
 
         buildFiltreQuery(filterInfoList, query, isFirst);
-    //    query.append(" GROUP BY mc.id ");
+        //    query.append(" GROUP BY mc.id ");
 
         Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 

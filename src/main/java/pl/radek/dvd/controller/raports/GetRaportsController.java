@@ -1,6 +1,7 @@
 package pl.radek.dvd.controller.raports;
 
 import org.apache.log4j.Logger;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -56,9 +57,11 @@ public class GetRaportsController {
 
     @RequestMapping(value = "/notreturned", method = RequestMethod.GET)
     public String getNotReturnedMovieRaportView(@RequestParam(value = Constants.CURRENTPAGE, required = false) String currentPage,
+                                                @ModelAttribute("moviesNotReturned") FilterMoviesNotReturnedForm moviesNotReturnedForm,
                                                 ModelMap modelMap) throws Exception {
 
         ListDataRequest listDataRequest;
+        List<FilterInfo> filterInfoList;
 
         // Pagination Info
         int page = 1;
@@ -68,7 +71,33 @@ public class GetRaportsController {
             page = Integer.parseInt(currentPage);
         }
         PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
-        listDataRequest = new ListDataRequest(null, null, paginationInfo);
+
+        // Filter Info
+        Date dateFrom = moviesNotReturnedForm.getDateFrom();
+        Date dateTo = moviesNotReturnedForm.getDateTo();
+
+        filterInfoList = new ArrayList<FilterInfo>();
+        if (dateFrom != null && !dateFrom.equals("") && dateTo != null && !dateTo.equals("")) {
+            Map<String, Date> range = new HashMap<String, Date>();
+            range.put("from", dateFrom);
+            range.put("to", dateTo);
+            filterInfoList.add(new FilterInfo("date", range));
+        } else {
+            Map<String, Date> range = new HashMap<String, Date>();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -1);
+            Date from = cal.getTime();
+            Date to = new Date();
+
+            range.put("from", from);
+            range.put("to", new Date());
+            filterInfoList.add(new FilterInfo("date", range));
+
+            moviesNotReturnedForm.setDateFrom(from);
+            moviesNotReturnedForm.setDateTo(to);
+        }
+
+        listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
 
         PaginatedList<MovieNotReturnedDto> movieNotReturnedDtoList = raportsFacade.getMovieNotReturnedDtoList(listDataRequest);
         List<MovieNotReturnedDto> dataList = movieNotReturnedDtoList.getDataList();
@@ -94,15 +123,6 @@ public class GetRaportsController {
         ListDataRequest listDataRequest;
         List<FilterInfo> filterInfoList;
 
-        // Pagination Info
-        int page = 1;
-        int recordsPerPage = 5;
-        int noOfPages;
-        if (currentPage != null) {
-            page = Integer.parseInt(currentPage);
-        }
-        PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
-
         // Filter Info
         String promotion = topHitsForm.getPromotion();
         String genre = topHitsForm.getGenre();
@@ -124,28 +144,31 @@ public class GetRaportsController {
             range.put("from", dateFrom);
             range.put("to", dateTo);
             filterInfoList.add(new FilterInfo("date", range));
+        } else {
+            Map<String, Date> range = new HashMap<String, Date>();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -1);
+            Date from = cal.getTime();
+            Date to = new Date();
+
+            range.put("from", from);
+            range.put("to", new Date());
+            filterInfoList.add(new FilterInfo("date", range));
+
+            topHitsForm.setDateFrom(from);
+            topHitsForm.setDateTo(to);
         }
 
-        if (!filterInfoList.isEmpty()) {
-            listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
+        listDataRequest = new ListDataRequest(null, filterInfoList, null);
 
-            PaginatedRaportList<TopHitsDto> topHitsDtoList = (PaginatedRaportList<TopHitsDto>) raportsFacade.getTopHitsDtoList(listDataRequest);
-            List<TopHitsDto> dataList = topHitsDtoList.getDataList();
+        PaginatedRaportList<TopHitsDto> topHitsDtoList = (PaginatedRaportList<TopHitsDto>) raportsFacade.getTopHitsDtoList(listDataRequest);
+        List<TopHitsDto> dataList = topHitsDtoList.getDataList();
 
-            int loanCount = topHitsDtoList.getTotalRecords();
-            int noOfRecords = topHitsDtoList.getNoOfRecords();
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-            logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-            logger.info(" !!!! NO OF PAGES : " + noOfPages);
-            logger.info(" !!!! Loan Count : " + loanCount);
+        int loanCount = topHitsDtoList.getTotalRecords();
+        logger.info(" !!!! Loan Count : " + loanCount);
 
-            modelMap.addAttribute("loanCount", loanCount);
-            modelMap.addAttribute("dataList", dataList);
-            modelMap.addAttribute(Constants.CURRENTPAGE, page);
-            modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
-            //     modelMap.addAttribute("tophits", topHitsForm);
-        }
+        modelMap.addAttribute("loanCount", loanCount);
+        modelMap.addAttribute("dataList", dataList);
         modelMap.addAttribute("tophits", topHitsForm);
 
         return "/raports/raports_top_hits";
@@ -158,15 +181,6 @@ public class GetRaportsController {
 
         ListDataRequest listDataRequest;
         List<FilterInfo> filterInfoList;
-
-        // Pagination Info
-        int page = 1;
-        int recordsPerPage = 5;
-        int noOfPages;
-        if (currentPage != null) {
-            page = Integer.parseInt(currentPage);
-        }
-        PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
 
         // Filter Info
         String section = income.getSection();
@@ -182,6 +196,9 @@ public class GetRaportsController {
         if (section != null && !section.equals("") && !section.equals("NONE")) {
             filterInfoList.add(new FilterInfo(Constants.SECTION, section));
             logger.info("section = " + section);
+        } else {
+            filterInfoList.add(new FilterInfo(Constants.SECTION, "MONTH"));
+            logger.info("section = MONTH");
         }
 
         if (dateFrom != null && !dateFrom.equals("") && dateTo != null && !dateTo.equals("")) {
@@ -189,46 +206,49 @@ public class GetRaportsController {
             range.put("from", dateFrom);
             range.put("to", dateTo);
             filterInfoList.add(new FilterInfo("date", range));
+        } else {
+            Map<String, Date> range = new HashMap<String, Date>();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -1);
+            Date from = cal.getTime();
+            Date to = new Date();
+
+            range.put("from", from);
+            range.put("to", new Date());
+            filterInfoList.add(new FilterInfo("date", range));
+
+            income.setDateFrom(from);
+            income.setDateTo(to);
         }
 
-        if (!filterInfoList.isEmpty()) {
-            listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
+        listDataRequest = new ListDataRequest(null, filterInfoList, null);
 
-            PaginatedRaportWrapper<AmountPerX> incomeWrappedList = raportsFacade.getIncomeWrappedList(listDataRequest);
-            int noOfRecords = incomeWrappedList.getNoOfRecords();
-            List<AmountPerX> amountPerPeriodRaports = incomeWrappedList.getAmountPerPeriodRaports();
-            List<AmountPerX> amountPerPromotionRaports = incomeWrappedList.getAmountPerPromotionRaports();
+        PaginatedRaportWrapper<AmountPerX> incomeWrappedList = raportsFacade.getIncomeWrappedList(listDataRequest);
+        List<AmountPerX> amountPerPeriodRaports = incomeWrappedList.getAmountPerPeriodRaports();
+        List<AmountPerX> amountPerPromotionRaports = incomeWrappedList.getAmountPerPromotionRaports();
 
-            PromotionAndPeriodNames promotionAndPeriodNames = incomeWrappedList.getPromotionAndPeriodNames();
-            Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
-            Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
+        PromotionAndPeriodNames promotionAndPeriodNames = incomeWrappedList.getPromotionAndPeriodNames();
+        Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
+        Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
 
-            BigDecimal bd = BigDecimal.ZERO;
-            for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
-                bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
-            }
-
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-            logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-            logger.info(" !!!! NO OF PAGES : " + noOfPages);
-
-            modelMap.addAttribute("periodNames", periodNames);
-            modelMap.addAttribute("promotionNames", promotionNames);
-            modelMap.addAttribute("dataList", amountPerPeriodRaports);
-            modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
-            modelMap.addAttribute("total", bd.toString());
-            modelMap.addAttribute(Constants.CURRENTPAGE, page);
-            modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
+        BigDecimal bd = BigDecimal.ZERO;
+        for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
+            bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
         }
+
+        modelMap.addAttribute("periodNames", periodNames);
+        modelMap.addAttribute("promotionNames", promotionNames);
+        modelMap.addAttribute("dataList", amountPerPeriodRaports);
+        modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
+        modelMap.addAttribute("total", bd.toString());
+
         List<String> sections = new ArrayList<String>();
-        sections.add("DAY");
         sections.add("MONTH");
         sections.add("YEAR");
+        sections.add("DAY");
 
         modelMap.addAttribute("allSections", sections);
         modelMap.addAttribute("income", income);
-
 
         return "/raports/raports_income";
     }
@@ -240,15 +260,6 @@ public class GetRaportsController {
 
         ListDataRequest listDataRequest;
         List<FilterInfo> filterInfoList;
-
-        // Pagination Info
-        int page = 1;
-        int recordsPerPage = 5;
-        int noOfPages;
-        if (currentPage != null) {
-            page = Integer.parseInt(currentPage);
-        }
-        PaginationInfo paginationInfo = new PaginationInfo(page, recordsPerPage);
 
         // Filter Info
         String section = promotions.getSection();
@@ -264,6 +275,9 @@ public class GetRaportsController {
         if (section != null && !section.equals("") && !section.equals("NONE")) {
             filterInfoList.add(new FilterInfo(Constants.SECTION, section));
             logger.info("section = " + section);
+        } else {
+            filterInfoList.add(new FilterInfo(Constants.SECTION, "MONTH"));
+            logger.info("section = MONTH");
         }
 
         if (dateFrom != null && !dateFrom.equals("") && dateTo != null && !dateTo.equals("")) {
@@ -271,42 +285,46 @@ public class GetRaportsController {
             range.put("from", dateFrom);
             range.put("to", dateTo);
             filterInfoList.add(new FilterInfo("date", range));
+        } else {
+            Map<String, Date> range = new HashMap<String, Date>();
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.MONTH, -1);
+            Date from = cal.getTime();
+            Date to = new Date();
+
+            range.put("from", from);
+            range.put("to", new Date());
+            filterInfoList.add(new FilterInfo("date", range));
+
+            promotions.setDateFrom(from);
+            promotions.setDateTo(to);
         }
 
-        if (!filterInfoList.isEmpty()) {
-            listDataRequest = new ListDataRequest(null, filterInfoList, paginationInfo);
+        listDataRequest = new ListDataRequest(null, filterInfoList, null);
 
-            PaginatedRaportWrapper<AmountPerX> rentPromotionWrappedList = raportsFacade.getRentPromotionWrappedList(listDataRequest);
-            int noOfRecords = rentPromotionWrappedList.getNoOfRecords();
-            List<AmountPerX> amountPerPeriodRaports = rentPromotionWrappedList.getAmountPerPeriodRaports();
-            List<AmountPerX> amountPerPromotionRaports = rentPromotionWrappedList.getAmountPerPromotionRaports();
+        PaginatedRaportWrapper<AmountPerX> rentPromotionWrappedList = raportsFacade.getRentPromotionWrappedList(listDataRequest);
+        List<AmountPerX> amountPerPeriodRaports = rentPromotionWrappedList.getAmountPerPeriodRaports();
+        List<AmountPerX> amountPerPromotionRaports = rentPromotionWrappedList.getAmountPerPromotionRaports();
 
-            PromotionAndPeriodNames promotionAndPeriodNames = rentPromotionWrappedList.getPromotionAndPeriodNames();
-            Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
-            Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
+        PromotionAndPeriodNames promotionAndPeriodNames = rentPromotionWrappedList.getPromotionAndPeriodNames();
+        Set<String> promotionNames = promotionAndPeriodNames.getPromotionNames();
+        Set<String> periodNames = promotionAndPeriodNames.getPeriodNames();
 
-            BigDecimal bd = BigDecimal.ZERO;
-            for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
-                bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
-            }
-
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-            logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-            logger.info(" !!!! NO OF PAGES : " + noOfPages);
-
-            modelMap.addAttribute("periodNames", periodNames);
-            modelMap.addAttribute("promotionNames", promotionNames);
-            modelMap.addAttribute("dataList", amountPerPeriodRaports);
-            modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
-            modelMap.addAttribute("total", bd.toString());
-            modelMap.addAttribute(Constants.CURRENTPAGE, page);
-            modelMap.addAttribute(Constants.NO_OF_PAGES, noOfPages);
+        BigDecimal bd = BigDecimal.ZERO;
+        for (AmountPerX amountPerPeriodRaport : amountPerPeriodRaports) {
+            bd = bd.add(new BigDecimal(amountPerPeriodRaport.getTotalAmount()));
         }
+
+        modelMap.addAttribute("periodNames", periodNames);
+        modelMap.addAttribute("promotionNames", promotionNames);
+        modelMap.addAttribute("dataList", amountPerPeriodRaports);
+        modelMap.addAttribute("amountPerPromotion", amountPerPromotionRaports);
+        modelMap.addAttribute("total", bd.toString());
+
         List<String> sections = new ArrayList<String>();
-        sections.add("DAY");
         sections.add("MONTH");
         sections.add("YEAR");
+        sections.add("DAY");
 
         modelMap.addAttribute("allSections", sections);
         modelMap.addAttribute("promotions", promotions);

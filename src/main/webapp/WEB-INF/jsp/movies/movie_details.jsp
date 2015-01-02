@@ -78,7 +78,9 @@
                         <spring:message code="movies.movieCopy.availability"/>
                     </td>
                     <td></td>
-                    <td></td>
+                    <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                        <td></td>
+                    </sec:authorize>
                 </tr>
                 <c:forEach items="${movieDetails}" var="details">
                     <tr>
@@ -108,15 +110,17 @@
                                 </form>
                             </td>
                         </c:if>
-                        <td>
-                            <form action=" <c:url value="deletecopy"/>" method="post"
-                                  onsubmit="return ConfirmDelete();">
-                                <input type="hidden" name="id" value="${details.id}"/>
-                                <input type="hidden" name="movieid" value="${movie.id}"/>
-                                <input type="submit" value="<spring:message code="common.button.delete"/>"
-                                       class="myButton"/>
-                            </form>
-                        </td>
+                        <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                            <td>
+                                <form action=" <c:url value="deletecopy"/>" method="post"
+                                      onsubmit="return ConfirmDelete();">
+                                    <input type="hidden" name="id" value="${details.id}"/>
+                                    <input type="hidden" name="movieid" value="${movie.id}"/>
+                                    <input type="submit" value="<spring:message code="common.button.delete"/>"
+                                           class="myButton"/>
+                                </form>
+                            </td>
+                        </sec:authorize>
                     </tr>
                 </c:forEach>
             </table>

@@ -37,15 +37,15 @@ public class RentPromotionDtoFilterChoice extends MultiRaportFilterChoice {
         super(listDataRequest, hibernateTemplate);
     }
 
-    //todo: ....
-
     @Override
     public Query filtreQuery() {
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
-        int page = paginationInfo.getPage();
-        int recordsPerPage = paginationInfo.getRecordsPerPage();
-        int offset = (page - 1) * recordsPerPage;
+        if (paginationInfo != null) {
+            int page = paginationInfo.getPage();
+            int recordsPerPage = paginationInfo.getRecordsPerPage();
+            int offset = (page - 1) * recordsPerPage;
+        }
 
         String period = getPeriod(filterInfoList);
         StringBuilder query = createQuery(period);
@@ -61,8 +61,8 @@ public class RentPromotionDtoFilterChoice extends MultiRaportFilterChoice {
 
         setFiltreQueryParams(filterInfoList, q);
 
-        q.setFirstResult(offset);
-        q.setMaxResults(recordsPerPage);
+        //    q.setFirstResult(offset);
+        //    q.setMaxResults(recordsPerPage);
 
         return q;
     }

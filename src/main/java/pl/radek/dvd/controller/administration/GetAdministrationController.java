@@ -1,6 +1,7 @@
 package pl.radek.dvd.controller.administration;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/emp/administration/administration")
+@Secured("ROLE_ADMIN")
 public class GetAdministrationController {
     private static Logger logger = Logger.getLogger(GetAdministrationController.class);
 

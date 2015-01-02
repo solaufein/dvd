@@ -3,10 +3,14 @@ package pl.radek.dvd.logic.builder;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import pl.radek.dvd.dto.FilterInfo;
 import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginationInfo;
+import pl.radek.dvd.model.Constants;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 /**
@@ -37,6 +41,11 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         query.append("LEFT JOIN mc.movie as m ");
         query.append("LEFT JOIN rr.receipt as r ");
         query.append("WHERE r.payDate IS NULL ");
+
+        boolean isFirst = false;
+        List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
+        buildFiltreQuery(filterInfoList, query, isFirst);
+
         query.append("ORDER BY DATEDIFF(:now, rr.returnDate) DESC ");
 
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
@@ -45,6 +54,9 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         int offset = (page - 1) * recordsPerPage;
 
         Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+
+        setFiltreQueryParams(filterInfoList, q);
+
         q.setParameter("now", new Date());
         q.setFirstResult(offset);
         q.setMaxResults(recordsPerPage);
@@ -62,7 +74,13 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         query.append("WHERE r.payDate IS NULL ");
         //    query.append("ORDER BY ABS(DATEDIFF(rr.returnDate,r.payDate)) DESC ");
 
+        boolean isFirst = false;
+        List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
+        buildFiltreQuery(filterInfoList, query, isFirst);
+
         Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
+
+        setFiltreQueryParams(filterInfoList, q);
 
         int records;
         try {
@@ -73,5 +91,58 @@ public class MovieNotReturnedFilterChoice extends MultiFiltreChoice {
         // int records = ((Number) q.uniqueResult()).intValue();
         //  int records = q.list().size();
         return records;
+    }
+
+    private void buildFiltreQuery(List<FilterInfo> filterInfoList, StringBuilder query, boolean isFirst) {
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals(Constants.GENRE)) {
+                    if (isFirst) {
+                        query.append(" WHERE g.genre = :genre");
+                    } else {
+                        query.append(" AND g.genre = :genre");
+                    }
+                    isFirst = false;
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.PROMOTION)) {
+                    if (isFirst) {
+                        query.append(" WHERE p.name = :pname");
+                    } else {
+                        query.append(" AND p.name = :pname");
+                    }
+                    isFirst = false;
+                }
+
+                if (filterInfo.getFilterColumn().equals("date")) {
+                    if (isFirst) {
+                        query.append(" WHERE rr.rentDate BETWEEN :from AND :to ");
+                    } else {
+                        query.append(" AND rr.rentDate BETWEEN :from AND :to ");
+                    }
+                    isFirst = false;
+                }
+            }
+        }
+    }
+
+    private void setFiltreQueryParams(List<FilterInfo> filterInfoList, Query q) {
+        if (filterInfoList != null && !filterInfoList.isEmpty()) {
+            for (FilterInfo filterInfo : filterInfoList) {
+                if (filterInfo.getFilterColumn().equals("date")) {
+                    Map<String, Date> filterData = (Map<String, Date>) filterInfo.getFilterData();
+                    q.setParameter("from", filterData.get("from"));
+                    q.setParameter("to", filterData.get("to"));
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.GENRE)) {
+                    q.setParameter("genre", filterInfo.getFilterData());
+                }
+
+                if (filterInfo.getFilterColumn().equals(Constants.PROMOTION)) {
+                    q.setParameter("pname", filterInfo.getFilterData());
+                }
+            }
+        }
     }
 }

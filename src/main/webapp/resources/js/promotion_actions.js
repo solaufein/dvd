@@ -1,5 +1,5 @@
 InitActionButtons = {
-    init: function () {
+    init: function (strings) {
         InitActionButtons.config = {	// tutaj jest ok, mamy utworzony obiekt w funkcji init, dlatego obiekty nie sa puste i mozemy sie do nich odwolywac
             dialog: $("#dialog-form"),
             form: $("#dialog-form").find("form"),
@@ -18,7 +18,8 @@ InitActionButtons = {
                 var allo = $([]).add(this.name).add(this.value).add(this.promotionDaysNumber);
                 return allo;
             },
-            tips: $(".validateTips")
+            tips: $(".validateTips"),
+            stringss : strings
         };
 
         this.setAddButton();
@@ -31,7 +32,7 @@ InitActionButtons = {
         var allFields = InitActionButtons.config.allFields();
 
         conf.dialog.dialog({
-            title: "Create new promotion",
+            title: InitActionButtons.config.stringss['promotion.createNew'],
             autoOpen: false,
             height: 400,
             width: 350,

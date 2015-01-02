@@ -130,7 +130,9 @@
             </td>
             <td></td>
             <td></td>
-            <td></td>
+            <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                <td></td>
+            </sec:authorize>
         </tr>
         <c:forEach items="${moviesList}" var="movie">
             <tr>
@@ -154,13 +156,15 @@
                                class="myButton"/>
                     </form>
                 </td>
-                <td>
-                    <form action=" <c:url value="delete"/>" method="post" onsubmit="return ConfirmDelete();">
-                        <input type="hidden" name="id" value="${movie.id}"/>
-                        <input type="submit" value="<spring:message code="common.button.delete"/>"
-                               class="myButton"/>
-                    </form>
-                </td>
+                <sec:authorize ifAnyGranted="ROLE_ADMIN">
+                    <td>
+                        <form action=" <c:url value="delete"/>" method="post" onsubmit="return ConfirmDelete();">
+                            <input type="hidden" name="id" value="${movie.id}"/>
+                            <input type="submit" value="<spring:message code="common.button.delete"/>"
+                                   class="myButton"/>
+                        </form>
+                    </td>
+                </sec:authorize>
             </tr>
         </c:forEach>
     </table>
@@ -229,10 +233,10 @@
 
     $(document).ready(function () {
         InitAutocompleteInput.init();
-        $( "#genre" ).selectmenu({
+        $("#genre").selectmenu({
             width: 180
         });
-        $( "#promotion" ).selectmenu({
+        $("#promotion").selectmenu({
             width: 180
         });
     });
