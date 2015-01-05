@@ -2,11 +2,6 @@ package pl.radek.dvd.dto.movies;
 
 import javax.validation.constraints.Pattern;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 15:29
- */
 public class FiltreMovieForm {
 
     @Pattern(regexp = "^\\s*$|^[A-Za-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.firstName}")
@@ -14,9 +9,6 @@ public class FiltreMovieForm {
 
     private String genre;
     private String promotion;
-
-    // walidacja imienia i nazwiska nie ma sensu, na calym swiecie moga byc rozne znaki i lepiej to dopuscic tak jak
-    // uzytkownik to wpisze
     private String actor;
 
     public FiltreMovieForm() {

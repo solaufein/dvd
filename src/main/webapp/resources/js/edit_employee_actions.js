@@ -108,12 +108,8 @@ var editBtnAction = (function () {
             editUser();
         });
 
-        $(".table").on("click", ".editempbtn", function (e) {		//oddelegowanie .editempbtn - za kazdym razem szuka w .table przycisku o tej klasie
+        $(".table").on("click", ".editempbtn", function (e) {
             e.preventDefault();
-
-            //1 tutaj zrobic ajax call z idekiem z edit buttona, aby uzyskac dane employee...
-            //2 po uzyskaniu danych(on success) wrzucamy je do forma i otwieramy ten dialog
-            //3 przed zapisem - validacja - jesli ok, to ajax call -> update w bazie i on success odswiezenie strony
 
             var dataForm = $(this).parent().serialize();
             console.log("dataForm = " + dataForm);
@@ -137,7 +133,6 @@ var editBtnAction = (function () {
             });
 
             //dialog.dialog( "open" );
-            //tutaj? czy on success ?
         });
     }
 

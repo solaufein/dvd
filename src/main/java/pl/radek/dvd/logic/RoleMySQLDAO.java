@@ -12,12 +12,6 @@ import pl.radek.dvd.model.Roles;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-04-30
- * Time: 11:30
- */
-
 @Repository
 public class RoleMySQLDAO implements RoleDAO {
 
@@ -49,10 +43,8 @@ public class RoleMySQLDAO implements RoleDAO {
     @Override
     public Roles getRole(int id) {
         logger.info("Getting role by id: " + id);
-    //    return hibernateTemplate.get(Roles.class, id);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-
         Roles roles = (Roles) session.get(Roles.class, id);
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
@@ -65,9 +57,6 @@ public class RoleMySQLDAO implements RoleDAO {
     @Override
     public void deleteRole(int id) {
         logger.debug("Deleting role by id: " + id);
-
-     //   hibernateTemplate.delete(hibernateTemplate.get(Roles.class, id));
-        //      hibernateTemplate.bulkUpdate("delete from Roles where id = " + id);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 

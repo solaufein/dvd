@@ -9,13 +9,6 @@ import pl.radek.dvd.model.Client;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 07.03.14
- * Time: 11:38
- * To change this template use File | Settings | File Templates.
- */
 public interface ClientsService {
     public List<ClientData> getClients();
     public ClientData getClient(int id);

@@ -17,7 +17,7 @@
     <!-- Root Context: defines shared resources visible to all other web components -->
 
     <!-- here must be component scan for service and logic(dao) becouse we have HERE tx: annotation driven for transactional -->
-    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic" />
+    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location">
@@ -26,7 +26,7 @@
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
         <!--property name="annotatedClasses">
             <list>
                 <value>pl.radek.dvd.model.Client</value>
@@ -42,7 +42,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="current_session_context_class">thread</prop>
-                <prop key="hibernate.dialect"> org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
@@ -70,8 +70,8 @@
 
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean name="secureRandom" class="java.security.SecureRandom">
@@ -80,8 +80,8 @@
     <!-- Mail Authenticator implementation -->
     <bean id="smtpAuthenticator"
           class="pl.radek.dvd.mail.SmtpAuthenticator">
-        <constructor-arg value="{mail.smtp.user}" />
-        <constructor-arg value="{mail.smtp.password}" />
+        <constructor-arg value="{mail.smtp.user}"/>
+        <constructor-arg value="{mail.smtp.password}"/>
     </bean>
 
     <!-- Setup an authenticated session -->
@@ -110,10 +110,10 @@
     </bean-->
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="${mail.smtp.host}" />
-        <property name="port" value="${mail.smtp.port}" />
-        <property name="username" value="${mail.smtp.user}" />
-        <property name="password" value="${mail.smtp.password}" />
+        <property name="host" value="${mail.smtp.host}"/>
+        <property name="port" value="${mail.smtp.port}"/>
+        <property name="username" value="${mail.smtp.user}"/>
+        <property name="password" value="${mail.smtp.password}"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">${mail.transport.protocol}</prop>

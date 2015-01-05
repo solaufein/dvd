@@ -4,11 +4,6 @@ import pl.radek.dvd.dto.PaginatedList;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-16
- * Time: 15:55
- */
 public class PaginatedListMovies implements PaginatedList<MoviesData> {
     private List<MoviesData> moviesDatas;
     private int noOfRecords;

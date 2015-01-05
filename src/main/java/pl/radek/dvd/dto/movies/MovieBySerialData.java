@@ -1,8 +1,5 @@
 package pl.radek.dvd.dto.movies;
 
-/**
- * Created by Sola on 2014-12-02.
- */
 public class MovieBySerialData {
     private int id;     // movie id
     private String title;   // movie title

@@ -9,14 +9,6 @@ import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 13.01.14
- * Time: 15:55
- * To change this template use File | Settings | File Templates.
- */
-
 @Entity
 @Table(name = "client")
 public class Client {

@@ -29,12 +29,6 @@ import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-14
- * Time: 14:50
- */
-
 @Repository
 public class MoviesMySQLDAO implements MoviesDAO {
 
@@ -106,7 +100,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
     public MovieBySerialData getMovieBySerialNumber(String serialNumber) throws MovieNotFoundException {
         logger.info("Getting movie by serialNumber: " + serialNumber);
 
-     //   StringBuilder query = new StringBuilder("FROM Movie as m ");
         StringBuilder query = new StringBuilder(" SELECT NEW pl.radek.dvd.dto.movies.MovieBySerialData(m.id, m.title, mc.serialNumber) FROM Movie as m ");
         query.append("INNER JOIN m.movieCopies as mc ");
         query.append("WHERE mc.serialNumber = :serialNumber ");
@@ -197,7 +190,7 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         Query q = session.createQuery(query.toString());
 
-     //   short avail = 1;
+        //   short avail = 1;
         q.setParameter("avail", avail);
         q.setParameter("ide", movieCopyId);
 
@@ -253,8 +246,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
-        //  hibernateTemplate.delete(hibernateTemplate.get(Movie.class, id));
-        //      hibernateTemplate.bulkUpdate("delete from Movie where id = " + id);
         Movie m = (Movie) session.get(Movie.class, id);
         session.delete(m);
 
@@ -307,7 +298,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
         logger.debug("Getting total number of FILTERED movie records");
-        //SELECT COUNT(*) FROM Movie WHERE first_name LIKE 'J%' AND pesel LIKE '83%';
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
         int records;
@@ -321,7 +311,6 @@ public class MoviesMySQLDAO implements MoviesDAO {
             records = getNoOfRecords();
         }
 
-        //    int records = DataAccessUtils.intResult(hibernateTemplate.find(query.toString()));
         logger.debug("Got total number of FILTERED records: " + records);
         return records;
     }

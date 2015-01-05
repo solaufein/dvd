@@ -6,11 +6,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * User: Sola
- * Date: 2014-07-29
- * Time: 14:28
- */
 public class ClientPaginationTag extends SimpleTagSupport {
     String order;
     String field;

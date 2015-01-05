@@ -13,28 +13,12 @@ import pl.radek.dvd.model.Constants;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public class MovieRentFilterChoice extends MultiFiltreChoice {
     private static Logger logger = Logger.getLogger(MovieRentFilterChoice.class);
 
     protected MovieRentFilterChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate) {
         super(listDataRequest, hibernateTemplate);
     }
-
-    /*  MySQL query
-        SELECT mc.id, movie.title, movie.director, movie.production_year, g.genre, p.name, mc.serial_number
-        FROM movie
-        LEFT JOIN movie_copy as mc ON mc.movie_id = movie.id
-        LEFT JOIN genre as g ON g.id = movie.genre_id
-        LEFT JOIN promotion as p ON p.id = movie.promotion_id
-        LEFT JOIN starring as s ON movie.id = s.movie_id
-        LEFT JOIN actors as a ON s.actors_id = a.id
-        WHERE mc.availability = 1
-        GROUP BY mc.id
-        ORDER BY mc.serial_number ASC;
-        */
 
     @Override
     public Query filtreQuery() {
@@ -69,7 +53,7 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
                 order = Constants.DESC;
             }
 
-            if (field.equals(Constants.PRICE)){
+            if (field.equals(Constants.PRICE)) {
                 field = "value";
             }
 
@@ -94,8 +78,7 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
     public int getNoOfRecords() {
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
-        StringBuilder query = new StringBuilder("SELECT COUNT(distinct mc.id) FROM Movie m ");      // count(distinct mc.id) zamiast group by mc.id
-        //    StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
+        StringBuilder query = new StringBuilder("SELECT COUNT(distinct mc.id) FROM Movie m ");      // count(distinct mc.id) instead of group by mc.id
         query.append("LEFT JOIN m.movieCopies as mc ");
         query.append("LEFT JOIN m.genre as g ");
         query.append("LEFT JOIN m.promotion as p ");
@@ -106,8 +89,6 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
         boolean isFirst = true;
 
         buildFiltreQuery(filterInfoList, query, isFirst);
-
-    //    query.append(" GROUP BY mc.id");
 
         String readyQuery = query.toString();
         logger.info("Query No of Records = " + readyQuery);
@@ -122,9 +103,6 @@ public class MovieRentFilterChoice extends MultiFiltreChoice {
             return 0;
         }
 
-        //   records = DataAccessUtils.intResult(list);
-        //   records = ((Number) q.uniqueResult()).intValue();
-        //   records = q.list().size();
         return records;
     }
 

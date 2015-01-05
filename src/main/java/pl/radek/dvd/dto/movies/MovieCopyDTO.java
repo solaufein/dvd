@@ -6,11 +6,6 @@ import pl.radek.dvd.model.RentingRegistry;
 
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-09-01
- * Time: 13:49
- */
 public class MovieCopyDTO{
     private int id;
 

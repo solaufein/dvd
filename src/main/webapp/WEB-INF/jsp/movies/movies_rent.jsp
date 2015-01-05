@@ -105,21 +105,24 @@
     <table>
         <tr>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.title}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.title}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
                 <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.title"/></a>
             </td>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.director}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.director}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
                 <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.director"/></a>
             </td>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.productionyear}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.productionyear}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
@@ -127,14 +130,16 @@
                         code="movies.moviesList.productionYear"/></a>
             </td>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.genre}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.genre}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
                 <a href="${paginationURL}" class="link"><spring:message code="movies.moviesList.genre"/></a>
             </td>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.promotionname}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.promotionname}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
@@ -144,7 +149,8 @@
                 <spring:message code="movies.movieCopy.serialNumber"/>
             </td>
             <td>
-                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" columnName="${cons.price}"
+                <hero:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                             columnName="${cons.price}"
                              title="${param.title}" genre="${param.genre}" promotion="${param.price}"
                              actorName="${param.actor}"/>
                 <c:url value="moviesrent${hlink}" var="paginationURL"/>
@@ -191,7 +197,8 @@
             <td>
                     <%--Displaying Previous link except for the 1st page--%>
                 <c:if test="${currentPage != 1}">
-                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" currentPage="${currentPage - 1}"
+                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                                 currentPage="${currentPage - 1}"
                                  title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                                  actorName="${param.actor}"/>
                     <c:url value="moviesrent${paginlink}" var="paginURL"/>
@@ -205,7 +212,8 @@
             <td>
                     <%--Displaying Next link--%>
                 <c:if test="${currentPage < noOfPages}">
-                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" currentPage="${currentPage + 1}"
+                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                                 currentPage="${currentPage + 1}"
                                  title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                                  actorName="${param.actor}"/>
                     <c:url value="moviesrent${paginlink}" var="paginURL"/>
@@ -216,7 +224,8 @@
             <td>
                     <%--Displaying Last link--%>
                 <c:if test="${currentPage < noOfPages}">
-                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}" currentPage="${noOfPages}"
+                    <pagi:Linkuj clientId="${param.id}" order="${param.order}" field="${param.field}"
+                                 currentPage="${noOfPages}"
                                  title="${param.title}" genre="${param.genre}" promotion="${param.promotion}"
                                  actorName="${param.actor}"/>
                     <c:url value="moviesrent${paginlink}" var="paginURL"/>
@@ -245,10 +254,10 @@
 
     $(document).ready(function () {
         InitAutocompleteInput.init();
-        $( "#genre" ).selectmenu({
+        $("#genre").selectmenu({
             width: 180
         });
-        $( "#promotion" ).selectmenu({
+        $("#promotion").selectmenu({
             width: 180
         });
     });

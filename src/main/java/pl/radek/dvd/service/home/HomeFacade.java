@@ -9,9 +9,6 @@ import pl.radek.dvd.model.Movie;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-12-02.
- */
 public interface HomeFacade {
     List<ClientRentDto> getClients(String pesel) throws ClientNotFoundException;
     ClientRentDto getClient(String pesel);

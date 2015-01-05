@@ -3,12 +3,6 @@ package pl.radek.dvd.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 15:01
- */
-
 @Entity
 @Table(name = "renting_registry")
 public class RentingRegistry {

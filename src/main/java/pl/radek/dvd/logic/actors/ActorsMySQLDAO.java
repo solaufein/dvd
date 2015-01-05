@@ -11,10 +11,6 @@ import pl.radek.dvd.model.Actor;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-11-11.
- */
-
 @Repository
 public class ActorsMySQLDAO implements ActorsDAO {
     private static Logger logger = Logger.getLogger(ActorsMySQLDAO.class);

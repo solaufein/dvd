@@ -2,11 +2,6 @@ package pl.radek.dvd.dto.movies;
 
 import java.math.BigDecimal;
 
-/**
- * User: Sola
- * Date: 2014-07-14
- * Time: 15:34
- */
 public class MoviesData {
     private int id;                        // movie id
     private String title;

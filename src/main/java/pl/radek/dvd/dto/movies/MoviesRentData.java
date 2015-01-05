@@ -2,9 +2,6 @@ package pl.radek.dvd.dto.movies;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public class MoviesRentData {
     private int id;                        // movie copy id
     private String title;

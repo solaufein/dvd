@@ -14,12 +14,6 @@ import pl.radek.dvd.dto.clients.ReceiptPdf;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-06-02
- * Time: 17:25
- */
-
 @Repository
 public class ClientDetailsMySQLDAO implements ClientDetailsDAO {
 

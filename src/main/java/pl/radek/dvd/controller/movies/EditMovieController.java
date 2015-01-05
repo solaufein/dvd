@@ -25,12 +25,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-08-07
- * Time: 15:10
- */
-
 @Controller
 @RequestMapping("/emp/movies/editmovie")
 public class EditMovieController {
@@ -61,18 +55,13 @@ public class EditMovieController {
             logger.info("No errors spotted");
             logger.info("Editing movie with id = " + movie.getId());
 
-            logger.info("Title = " + movie.getTitle());
-
             moviesFacade.updateMovie(movie);
 
             // redirect to GetMoviesController
-            logger.info("Redirect to GetMoviesController");
             modelAndView = new ModelAndView("redirect:/emp/movies/movieslist");
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
-
-            //  movie.setActorset(null);
 
             modelAndView = new ModelAndView("/movies/add_movie");
             modelAndView.addObject(Constants.ID, movie.getId());
@@ -89,11 +78,6 @@ public class EditMovieController {
     List<ActorDataTag> getTags(@RequestParam("term") String term) {
 
         List<ActorDataTag> data = moviesFacade.getActorTags(term);
-
-        for (ActorDataTag aData : data) {
-            logger.info("data id = " + aData.getId());
-            logger.info("data tag = " + aData.getTag());
-        }
 
         return data;
     }

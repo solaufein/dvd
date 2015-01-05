@@ -11,11 +11,6 @@ import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-03
- * Time: 12:39
- */
 public class MovieCopyFiltreChoice extends MultiFiltreChoice {
 
     protected MovieCopyFiltreChoice(ListDataRequest listDataRequest, HibernateTemplate hibernateTemplate) {

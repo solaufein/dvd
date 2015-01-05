@@ -13,11 +13,6 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-08-07
- * Time: 13:49
- */
 public class MovieDataDTO {
     private int id;
 

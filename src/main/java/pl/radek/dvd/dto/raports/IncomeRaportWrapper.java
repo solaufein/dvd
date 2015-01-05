@@ -2,9 +2,6 @@ package pl.radek.dvd.dto.raports;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-12-16.
- */
 public class IncomeRaportWrapper implements PaginatedRaportWrapper<AmountPerX> {
     private PromotionAndPeriodNames promotionAndPeriodNames;
     private List<AmountPerX> amountPerPeriodRaports;

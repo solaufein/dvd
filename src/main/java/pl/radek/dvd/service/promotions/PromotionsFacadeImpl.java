@@ -7,12 +7,6 @@ import pl.radek.dvd.dto.ListDataRequest;
 import pl.radek.dvd.dto.PaginatedList;
 import pl.radek.dvd.dto.promotions.PromotionData;
 
-/**
- * User: Sola
- * Date: 2014-10-08
- * Time: 12:43
- */
-
 @Component
 public class PromotionsFacadeImpl implements PromotionsFacade {
     private static Logger logger = Logger.getLogger(PromotionsFacadeImpl.class);

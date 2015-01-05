@@ -6,11 +6,6 @@ import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:14
- */
 public interface PromotionDAO {
     public List<Promotion> getPromotions();
 

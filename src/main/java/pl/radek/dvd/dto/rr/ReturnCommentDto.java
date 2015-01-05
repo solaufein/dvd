@@ -1,8 +1,5 @@
 package pl.radek.dvd.dto.rr;
 
-/**
- * Created by Sola on 2014-11-24.
- */
 public class ReturnCommentDto {
     private int clientId;
     private int movieCopyId;

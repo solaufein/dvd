@@ -11,11 +11,6 @@ import pl.radek.dvd.model.Genre;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:28
- */
 @Service
 @Transactional
 public class GenresServiceImpl implements GenresService {

@@ -3,7 +3,7 @@
     margin: 0px;
     padding: 0px;
     width: 100%;
-   /* border: 1px solid #000000;*/
+    /* border: 1px solid #000000;*/
 
     -moz-border-radius-bottomleft: 4px;
     -webkit-border-bottom-left-radius: 4px;
@@ -64,7 +64,7 @@
 .table td {
     vertical-align: middle;
     background-color: #ffffff;
-   /* border: 1px solid #000000;*/
+    /* border: 1px solid #000000;*/
     border-width: 0px 1px 1px 0px;
     text-align: center;
     padding: 8px;
@@ -86,7 +86,7 @@
 
 .table tr:first-child td {
     background-color: lightblue;
-   /* border: 0px solid #000000;*/
+    /* border: 0px solid #000000;*/
     text-align: center;
     border-width: 0px 0px 1px 1px;
     font: 12px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;

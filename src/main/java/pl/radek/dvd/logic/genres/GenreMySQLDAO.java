@@ -13,12 +13,6 @@ import pl.radek.dvd.model.Genre;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:17
- */
-
 @Repository
 public class GenreMySQLDAO implements GenreDAO {
 
@@ -50,8 +44,6 @@ public class GenreMySQLDAO implements GenreDAO {
     @Override
     public Genre getGenre(int id) {
         logger.debug("Getting Genre by id: " + id);
-
-      //  Genre genre = (Genre) hibernateTemplate.get(Genre.class, id);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         Genre genre = (Genre) session.get(Genre.class, id);

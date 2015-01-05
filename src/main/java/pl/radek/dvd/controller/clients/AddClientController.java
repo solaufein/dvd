@@ -14,14 +14,6 @@ import pl.radek.dvd.service.clients.ClientFacade;
 
 import javax.validation.Valid;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 07.03.14
- * Time: 11:15
- * To change this template use File | Settings | File Templates.
- */
-
 @Controller
 @RequestMapping("/emp/clients/addclient")
 public class AddClientController {

@@ -8,12 +8,6 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ClientDetails;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
 
-/**
- * User: Sola
- * Date: 2014-03-27
- * Time: 13:54
- */
-
 @Component
 public class ClientFacadeImpl implements ClientFacade {
 

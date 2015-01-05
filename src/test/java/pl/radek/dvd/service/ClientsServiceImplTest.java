@@ -11,11 +11,6 @@ import pl.radek.dvd.logic.clients.ClientsMySQLDAO;
 import pl.radek.dvd.model.Client;
 import pl.radek.dvd.service.clients.ClientsServiceImpl;
 
-/**
- * User: Sola
- * Date: 2014-03-20
- * Time: 12:52
- */
 public class ClientsServiceImplTest {
 
     @Mock
@@ -27,14 +22,15 @@ public class ClientsServiceImplTest {
     @BeforeMethod
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-   //     clientsServiceImpl = new ClientsServiceImpl();
-   //     clientsServiceImpl.setClientsMySQLDAO(clientsMySQLDAO);           // ok ?
+        //     clientsServiceImpl = new ClientsServiceImpl();
+        //     clientsServiceImpl.setClientsMySQLDAO(clientsMySQLDAO);           // ok ?
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
 
     }
+
     @Test
     public void testDeleteClient() throws Exception {
 
@@ -54,12 +50,9 @@ public class ClientsServiceImplTest {
        /* Mockito.when(clientsMySQLDAO.getClient(id)).thenReturn(client);
         final Client c = clientsServiceImpl.getClient(id);*/
 
-
       /*
         clientsServiceImpl.addClient(client);
         Mockito.verify(clientsMySQLDAO, Mockito.times(2)).addClient(client);*/
-
-
     }
 
     @Test

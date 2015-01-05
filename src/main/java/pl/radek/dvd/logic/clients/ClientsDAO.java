@@ -7,13 +7,6 @@ import pl.radek.dvd.dto.ListDataRequest;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 05.02.14
- * Time: 13:18
- * To change this template use File | Settings | File Templates.
- */
 public interface ClientsDAO {
 
     public List<Client> getClients();

@@ -204,10 +204,10 @@
     $(document).ready(function () {
 
         InitAutocompleteInput.init();
-        $( "#genre" ).selectmenu({
+        $("#genre").selectmenu({
             width: 180
         });
-        $( "#promotion" ).selectmenu({
+        $("#promotion").selectmenu({
             width: 180
         });
 

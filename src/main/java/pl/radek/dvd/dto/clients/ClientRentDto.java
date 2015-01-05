@@ -1,8 +1,5 @@
 package pl.radek.dvd.dto.clients;
 
-/**
- * Created by Sola on 2014-11-24.
- */
 public class ClientRentDto {
     private int id;
     private String firstName;

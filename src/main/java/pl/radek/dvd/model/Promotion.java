@@ -5,12 +5,6 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 16:56
- */
-
 @Entity
 @Table(name = "promotion")
 public class Promotion {

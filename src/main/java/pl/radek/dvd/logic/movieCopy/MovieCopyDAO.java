@@ -7,11 +7,6 @@ import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-01
- * Time: 14:03
- */
 public interface MovieCopyDAO {
     public List<MovieCopy> getMovieCopies();
     public MovieCopy getMovieCopy(int id);

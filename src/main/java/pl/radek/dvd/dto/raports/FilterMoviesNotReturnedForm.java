@@ -4,9 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * Created by Sola on 2015-01-02.
- */
 public class FilterMoviesNotReturnedForm {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFrom;

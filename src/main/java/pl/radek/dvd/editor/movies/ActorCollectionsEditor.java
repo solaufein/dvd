@@ -6,9 +6,6 @@ import pl.radek.dvd.service.movies.MoviesFacade;
 
 import java.util.Set;
 
-/**
- * Created by Sola on 2014-11-12.
- */
 public class ActorCollectionsEditor extends CustomCollectionEditor {
     private static Logger logger = Logger.getLogger(ActorCollectionsEditor.class);
 

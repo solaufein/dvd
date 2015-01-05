@@ -11,12 +11,6 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
 import pl.radek.dvd.service.clients.ClientFacade;
 
-/**
- * User: Sola
- * Date: 2014-06-24
- * Time: 17:19
- */
-
 @Controller
 @RequestMapping("/emp/clients/printreceipt")
 public class PrintReceiptController {

@@ -14,12 +14,6 @@ import pl.radek.dvd.model.Promotion;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:29
- */
-
 @Service
 @Transactional
 public class PromotionsServiceImpl implements PromotionsService {

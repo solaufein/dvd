@@ -9,9 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
-/**
- * Created by Sola on 2014-11-21.
- */
 public class UtilJavaMethods {
     public static final char[] CHARSET_AZ_09 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     static Random random = new SecureRandom();

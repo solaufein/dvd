@@ -10,11 +10,6 @@ import pl.radek.dvd.model.Roles;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 17:13
- */
 public interface EmployeeFacade {
     public List<RoleData> getRoles();
     public RoleData getRole(int id);

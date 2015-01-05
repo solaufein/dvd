@@ -30,26 +30,30 @@
             <div class="inputs">
 
                 <!-- RENT -->
-                <form name="rentClientLastname" id="rentClientLastname" method="GET" action="<c:url value="/emp/home/rent/clientName"/>">
+                <form name="rentClientLastname" id="rentClientLastname" method="GET"
+                      action="<c:url value="/emp/home/rent/clientName"/>">
                     <label for="lastName1" class="labelWidth"><spring:message
                             code="home.rent.client.lastName"/>: </label>
                     <input type="text" id="lastName1" name="lastName"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentClientPesel" id="rentClientPesel" method="GET" action="<c:url value="/emp/home/rent/clientPesel"/>">
+                <form name="rentClientPesel" id="rentClientPesel" method="GET"
+                      action="<c:url value="/emp/home/rent/clientPesel"/>">
                     <label for="pesel1" class="labelWidth"><spring:message code="home.rent.client.pesel"/>: </label>
                     <input type="text" id="pesel1" name="pesel"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentMovieTitle" id="rentMovieTitle" method="GET" action="<c:url value="/emp/home/rent/movieTitle"/>">
+                <form name="rentMovieTitle" id="rentMovieTitle" method="GET"
+                      action="<c:url value="/emp/home/rent/movieTitle"/>">
                     <label for="title1" class="labelWidth"><spring:message code="home.rent.movie.title"/>: </label>
                     <input type="text" id="title1" name="title"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="rentMovieSerialNumber" id="rentMovieSerialNumber" method="GET" action="<c:url value="/emp/home/rent/movieSerialNumber"/>">
+                <form name="rentMovieSerialNumber" id="rentMovieSerialNumber" method="GET"
+                      action="<c:url value="/emp/home/rent/movieSerialNumber"/>">
                     <label for="serialNumber1" class="labelWidth"><spring:message
                             code="home.rent.movie.serialNumber"/>: </label>
                     <input type="text" id="serialNumber1" name="serialNumber"/>
@@ -58,13 +62,15 @@
                 <div class="separator2"></div>
 
                 <!-- RETURN -->
-                <form name="returnMovieTitle" id="returnMovieTitle" method="GET" action="<c:url value="/emp/home/return/movieTitle"/>">
+                <form name="returnMovieTitle" id="returnMovieTitle" method="GET"
+                      action="<c:url value="/emp/home/return/movieTitle"/>">
                     <label for="title2" class="labelWidth"><spring:message code="home.return.movie.title"/>: </label>
                     <input type="text" id="title2" name="title"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="returnSerialNumber" id="returnSerialNumber" method="GET" action="<c:url value="/emp/home/return/movieSerialNumber"/>">
+                <form name="returnSerialNumber" id="returnSerialNumber" method="GET"
+                      action="<c:url value="/emp/home/return/movieSerialNumber"/>">
                     <label for="serialNumber2" class="labelWidth"><spring:message
                             code="home.return.movie.serialNumber"/>: </label>
                     <input type="text" id="serialNumber2" name="serialNumber"/>
@@ -73,26 +79,30 @@
                 <div class="separator2"></div>
 
                 <!-- FIND -->
-                <form name="findClientLastname" id="findClientLastname" method="GET" action="<c:url value="/emp/home/find/clientName"/>">
+                <form name="findClientLastname" id="findClientLastname" method="GET"
+                      action="<c:url value="/emp/home/find/clientName"/>">
                     <label for="lastName3" class="labelWidth"><spring:message
                             code="home.find.client.lastName"/>: </label>
                     <input type="text" id="lastName3" name="lastName"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="findClientPesel" id="findClientPesel" method="GET" action="<c:url value="/emp/home/find/clientPesel"/>">
+                <form name="findClientPesel" id="findClientPesel" method="GET"
+                      action="<c:url value="/emp/home/find/clientPesel"/>">
                     <label for="pesel3" class="labelWidth"><spring:message code="home.find.client.pesel"/>: </label>
                     <input type="text" id="pesel3" name="pesel"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="findMovieTitle" id="findMovieTitle" method="GET" action="<c:url value="/emp/home/find/movieTitle"/>">
+                <form name="findMovieTitle" id="findMovieTitle" method="GET"
+                      action="<c:url value="/emp/home/find/movieTitle"/>">
                     <label for="title3" class="labelWidth"><spring:message code="home.find.movie.title"/>: </label>
                     <input type="text" id="title3" name="title"/>
                     <input type="submit" value="<spring:message code="common.button.submit"/>" class="myButton"/>
                 </form>
 
-                <form name="findMovieSerialNumber" id="findMovieSerialNumber" method="GET" action="<c:url value="/emp/home/find/movieSerialNumber"/>">
+                <form name="findMovieSerialNumber" id="findMovieSerialNumber" method="GET"
+                      action="<c:url value="/emp/home/find/movieSerialNumber"/>">
                     <label for="serialNumber3" class="labelWidth"><spring:message
                             code="home.find.movie.serialNumber"/>: </label>
                     <input type="text" id="serialNumber3" name="serialNumber"/>

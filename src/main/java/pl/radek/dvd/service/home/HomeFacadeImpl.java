@@ -15,10 +15,6 @@ import pl.radek.dvd.service.movies.MoviesService;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-12-02.
- */
-
 @Component
 public class HomeFacadeImpl implements HomeFacade {
     private static Logger logger = Logger.getLogger(HomeFacadeImpl.class);

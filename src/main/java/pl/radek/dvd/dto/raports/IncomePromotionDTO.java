@@ -3,11 +3,8 @@ package pl.radek.dvd.dto.raports;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by Sola on 2014-12-15.
- */
 public class IncomePromotionDTO {
-    private Date period;  // day, month, year         // zmienic na Date. bo z niej latwiej pozniej wyciagac informacje w javie
+    private Date period;  // day, month, year
     private String promotion;
     private Number count;
 

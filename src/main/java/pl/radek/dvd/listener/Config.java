@@ -9,11 +9,6 @@ import javax.servlet.ServletContextListener;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * User: Sola
- * Date: 2014-09-05
- * Time: 14:41
- */
 public class Config implements ServletContextListener {
 
     /* Can inject only beans that are in applicationContext. */

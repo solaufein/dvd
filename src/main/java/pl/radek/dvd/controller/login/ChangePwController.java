@@ -12,12 +12,6 @@ import pl.radek.dvd.exceptions.employee.EmployeeNotFoundException;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
-/**
- * User: Sola
- * Date: 2014-09-23
- * Time: 18:38
- */
-
 @Controller
 public class ChangePwController {
     private static Logger logger = Logger.getLogger(ChangePwController.class);
@@ -29,18 +23,11 @@ public class ChangePwController {
         this.employeeFacade = employeeFacade;
     }
 
-    /*@RequestMapping(value = " /remind/change/{empId}", method = RequestMethod.GET)
-    public String changePwForm(@PathVariable String empId, ModelMap modelMap) {
-        // change password form - view
-
-
-        return "/change";
-    }*/
-
     @RequestMapping(value = "/change", method = RequestMethod.POST)
     public String changePw(@RequestParam(value = "empId") String empId,
                            @RequestParam(value = "pw") String pw,
                            ModelMap modelMap) {
+
         // if link is active then save new password to db, redirect: Login.page
         // else go to remind view with msg
 

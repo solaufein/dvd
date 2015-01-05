@@ -2,11 +2,6 @@ package pl.radek.dvd.dto.clients;
 
 import java.util.Date;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 17:22
- */
 public class ClientDetails {
     private int id;               // renting registry id!
     private String title;         // movie title

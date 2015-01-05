@@ -28,12 +28,6 @@ import pl.radek.dvd.service.promotions.PromotionsService;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-16
- * Time: 16:01
- */
-
 @Component
 public class MoviesFacadeImpl implements MoviesFacade {
 

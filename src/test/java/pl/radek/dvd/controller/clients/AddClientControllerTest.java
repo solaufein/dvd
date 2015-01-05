@@ -14,11 +14,6 @@ import org.testng.annotations.Test;
 import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.service.clients.ClientFacadeImpl;
 
-/**
- * User: Sola
- * Date: 2014-03-25
- * Time: 21:41
- */
 public class AddClientControllerTest {
 
     /*@Mock
@@ -33,7 +28,7 @@ public class AddClientControllerTest {
     @BeforeMethod
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-    //    addClientController = new AddClientController();
+        //    addClientController = new AddClientController();
     }
 
     @AfterMethod
@@ -58,7 +53,7 @@ public class AddClientControllerTest {
         ClientData client = new ClientData(id, "rad", "wit", "22233344455", "Krak", "ul ladna", "555-222", "rad@rad.op.pl");
 
         BindingResult bindingResult = new BeanPropertyBindingResult(client, "client");
-        bindingResult.addError(new ObjectError("client","jakis tam error"));
+        bindingResult.addError(new ObjectError("client", "jakis tam error"));
 
         ModelAndView modelAndView = addClientController.handleRequest(client, bindingResult);
         Assert.assertEquals("forward:/jsp/clients/add_client.jsp", modelAndView.getViewName());

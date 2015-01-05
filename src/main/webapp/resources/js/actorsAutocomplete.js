@@ -8,7 +8,7 @@ InitAutocompleteInput = {
      */
 
     init: function () {
-        InitAutocompleteInput.config = {	// tutaj jest ok, mamy utworzony obiekt w funkcji init, dlatego obiekty nie sa puste i mozemy sie do nich odwolywac
+        InitAutocompleteInput.config = {
             autocompleteField: $("#actor"),
             form: $("#myform").find("form")
         };

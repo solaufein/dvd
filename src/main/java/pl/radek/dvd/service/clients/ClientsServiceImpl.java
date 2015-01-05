@@ -15,14 +15,6 @@ import pl.radek.dvd.model.Client;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 07.03.14
- * Time: 11:24
- * To change this template use File | Settings | File Templates.
- */
-
 @Service
 @Transactional
 public class ClientsServiceImpl implements ClientsService {

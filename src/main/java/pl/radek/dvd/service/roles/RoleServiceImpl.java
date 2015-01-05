@@ -15,12 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-10-21
- * Time: 13:35
- */
-
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {

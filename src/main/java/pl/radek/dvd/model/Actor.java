@@ -4,12 +4,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 17:02
- */
-
 @Entity
 @Table(name = "actors")
 public class Actor {

@@ -18,14 +18,6 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 17.01.14
- * Time: 10:04
- * To change this template use File | Settings | File Templates.
- */
-
 @Controller
 @RequestMapping("/emp/clients/clientslist")
 public class GetClientsController {
@@ -83,30 +75,13 @@ public class GetClientsController {
             logger.info("No errors spotted");
 
             // Filter Info
-            String firstName = client.getFirstName();
-            String lastName = client.getLastName();
-            String pesel = client.getPesel();
-
-            filterInfoList = new ArrayList<FilterInfo>();
-            if (firstName != null && !firstName.equals("")) {
-                filterInfoList.add(new FilterInfo(Constants.FIRSTNAME, firstName));
-            }
-            if (lastName != null && !lastName.equals("")) {
-                filterInfoList.add(new FilterInfo(Constants.LASTNAME, lastName));
-            }
-            if (pesel != null && !pesel.equals("")) {
-                filterInfoList.add(new FilterInfo(Constants.PESEL, pesel));
-            }
-
+            filterInfoList = getFilterInfos(client);
             ListDataRequest listDataRequest = new ListDataRequest(sortInfo, filterInfoList, paginationInfo);
 
             PaginatedList<ClientData> clientPaginatedList = clientFacade.getClients(listDataRequest);
             int noOfRecords = clientPaginatedList.getNoOfRecords();
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-            logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-            logger.info(" !!!! NO OF PAGES : " + noOfPages);
-            // sorting and paging logic method
+
             clientList = clientPaginatedList.getDataList();
 
         } else {
@@ -119,7 +94,6 @@ public class GetClientsController {
             int noOfRecords = clientPaginatedList.getNoOfRecords();
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 
-            // sorting and paging logic method
             clientList = clientPaginatedList.getDataList();
         }
 
@@ -132,5 +106,24 @@ public class GetClientsController {
         modelAndView.addObject(Constants.CLIENT, client);
 
         return modelAndView;
+    }
+
+    private List<FilterInfo> getFilterInfos(FiltreClientForm client) {
+        List<FilterInfo> filterInfoList;
+        String firstName = client.getFirstName();
+        String lastName = client.getLastName();
+        String pesel = client.getPesel();
+
+        filterInfoList = new ArrayList<FilterInfo>();
+        if (firstName != null && !firstName.equals("")) {
+            filterInfoList.add(new FilterInfo(Constants.FIRSTNAME, firstName));
+        }
+        if (lastName != null && !lastName.equals("")) {
+            filterInfoList.add(new FilterInfo(Constants.LASTNAME, lastName));
+        }
+        if (pesel != null && !pesel.equals("")) {
+            filterInfoList.add(new FilterInfo(Constants.PESEL, pesel));
+        }
+        return filterInfoList;
     }
 }

@@ -2,9 +2,6 @@ package pl.radek.dvd.dto.raports;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Sola on 2014-12-17.
- */
 public class AmountPerPromotionRaport implements AmountPerX {
     private String name;
     private Number[] amount;

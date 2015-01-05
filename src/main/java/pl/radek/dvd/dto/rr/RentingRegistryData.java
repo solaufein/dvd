@@ -7,11 +7,6 @@ import pl.radek.dvd.model.Receipt;
 
 import java.util.Date;
 
-/**
- * User: Sola
- * Date: 2014-10-28
- * Time: 16:50
- */
 public class RentingRegistryData {
     private int id;
     private Date rentDate;

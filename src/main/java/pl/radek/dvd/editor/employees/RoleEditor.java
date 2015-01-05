@@ -8,11 +8,6 @@ import pl.radek.dvd.service.employees.EmployeeFacade;
 import java.beans.PropertyEditorSupport;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-10-21
- * Time: 14:16
- */
 public class RoleEditor extends PropertyEditorSupport {
     private static Logger logger = Logger.getLogger(RoleEditor.class);
 
@@ -40,7 +35,7 @@ public class RoleEditor extends PropertyEditorSupport {
         logger.info("Role Editor inside method: setAsText...");
 
         RoleData role = employeeFacade.getRole(Integer.parseInt(text));
-    //    Roles role = employeeFacade.getRoleEntity(Integer.parseInt(text));
+
         setValue(role);
     }
 }

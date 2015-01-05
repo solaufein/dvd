@@ -1,40 +1,40 @@
 .myButton {
--webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 11px;
-  background: #333;
-  padding: 5px 13px 5px 13px;
-  text-decoration: none;
-  border: solid 1px black;
-  cursor: pointer;
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 11px;
+    background: #333;
+    padding: 5px 13px 5px 13px;
+    text-decoration: none;
+    border: solid 1px black;
+    cursor: pointer;
 }
 
 .myButton:hover {
-  background: #383;
-  text-decoration: none;
+    background: #383;
+    text-decoration: none;
 }
 
 .myButtonTwo {
--webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  font-family: Arial;
-  color: #ffffff;
-  font-size: 11px;
-  font-weight:bold;
-  background: #333;
-  padding: 5px 13px 5px 13px;
-  text-decoration: none;
-  border: solid 1px black;
-  cursor: pointer;
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    background: #333;
+    padding: 5px 13px 5px 13px;
+    text-decoration: none;
+    border: solid 1px black;
+    cursor: pointer;
 }
 
 .myButtonTwo:hover {
-  background: #383;
-  text-decoration: none;
+    background: #383;
+    text-decoration: none;
 }
 
 .myButtonPink {
@@ -56,20 +56,20 @@
     text-decoration: none;
 }
 
-.myButtonDisabled{
-  -webkit-border-radius: 4;
-  -moz-border-radius: 4;
-  border-radius: 4px;
-  font-family: Arial;
-  color: #333;
-  font-size: 11px;
-  background: #333;
-  padding: 5px 13px 5px 13px;
-  text-decoration: none;
-  border: solid 1px black;
+.myButtonDisabled {
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #333;
+    font-size: 11px;
+    background: #333;
+    padding: 5px 13px 5px 13px;
+    text-decoration: none;
+    border: solid 1px black;
 }
 
-.delempbtn, .editempbtn, .delPromotionBtn, .editPromotionBtn{
+.delempbtn, .editempbtn, .delPromotionBtn, .editPromotionBtn {
     -webkit-border-radius: 4;
     -moz-border-radius: 4;
     border-radius: 4px;
@@ -84,6 +84,6 @@
 }
 
 .delempbtn:hover, .editempbtn:hover, .delPromotionBtn:hover, .editPromotionBtn:hover {
-  background: #383;
-  text-decoration: none;
+    background: #383;
+    text-decoration: none;
 }

@@ -8,12 +8,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-04-29
- * Time: 19:17
- */
-
 @Entity
 @Table(name = "roles")
 public class Roles {

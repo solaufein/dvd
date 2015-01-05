@@ -6,11 +6,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * User: Sola
- * Date: 2014-07-21
- * Time: 12:32
- */
 public class MoviesSortHeaderTag extends SimpleTagSupport {
     String title;
     String genre;

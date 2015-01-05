@@ -5,9 +5,6 @@ import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * Created by Sola on 2014-12-15.
- */
 public class IncomePaginationTag extends SimpleTagSupport {
     String order;
     String field;

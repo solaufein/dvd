@@ -1,8 +1,5 @@
 package pl.radek.dvd.dto.actor;
 
-/**
- * Created by Sola on 2014-11-11.
- */
 public class ActorDataTag {
     private int id;
     private String tag;

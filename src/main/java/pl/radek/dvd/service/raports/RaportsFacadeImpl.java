@@ -126,7 +126,7 @@ public class RaportsFacadeImpl implements RaportsFacade {
                 Date currentPeriod = incomePromotionDTO.getPeriod();
                 String currPeriod = UtilJavaMethods.formatDate(formatPattern, currentPeriod);
 
-                if (period.equals(currPeriod)) {     // dodajemy do tego samego
+                if (period.equals(currPeriod)) {     // adding to the same
                     int c = 0;
                     for (String promotionName : promotionNames) {
                         if (promotion.equals(promotionName)) {
@@ -161,7 +161,7 @@ public class RaportsFacadeImpl implements RaportsFacade {
                 Number count = incomePromotionDTO.getCount();
                 String currentPromotion = incomePromotionDTO.getPromotion();
 
-                if (promotion.equals(currentPromotion)) {     // dodajemy do tego samego
+                if (promotion.equals(currentPromotion)) {     // adding to the same
                     amount[c++] = count;
                     amountPerPromotionRaport.setName(promotion);
                     amountPerPromotionRaport.setAmount(amount);

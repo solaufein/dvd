@@ -19,7 +19,7 @@ InitActionButtons = {
                 return allo;
             },
             tips: $(".validateTips"),
-            stringss : strings
+            stringss: strings
         };
 
         this.setAddButton();
@@ -229,9 +229,6 @@ InitActionButtons = {
             e.preventDefault();
             InitActionButtons.createEditDialog();
             console.log("opening EDIT dialog");
-
-            //1 tutaj zrobic ajax call z idekiem z edit buttona, aby uzyskac dane employee...
-            //2 po uzyskaniu danych(on success) wrzucamy je do forma i otwieramy ten dialog
 
             var dataForm = $(this).parent().serialize();
             var editPromotionAction = InitActionButtons.config.editForm.attr("action");

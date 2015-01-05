@@ -4,11 +4,6 @@ import pl.radek.dvd.dto.PaginatedList;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-06-02
- * Time: 18:08
- */
 public class PaginatedListClientDetails implements PaginatedList<ClientDetails> {
     private List<ClientDetails> dataList;
     private int noOfRecords;

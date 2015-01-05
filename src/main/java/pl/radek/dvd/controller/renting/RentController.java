@@ -51,38 +51,6 @@ public class RentController {
         return "/movies/rent";
     }
 
-   /* @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveRent(@RequestParam(value = "clientId") int clientId,
-                           @RequestParam(value = "movieCopyId") int movieCopyId,
-                           @RequestParam(value = "promotionDaysNumber") short promotionDaysNumber,
-                           @RequestParam(value = "price") BigDecimal price,
-                           ModelMap modelMap, Principal principal) throws Exception {
-
-        // employee get
-        String employeeEmail = principal.getName();
-
-        // create renting registry, create receipt - set this receipt to this renting registry
-        NewRentDto newRentDto = new NewRentDto(promotionDaysNumber, clientId, movieCopyId, employeeEmail, price);
-        int registryId;
-        try {
-            registryId = rentingFacade.addRentingRegistry(newRentDto);
-            logger.info("registry Id = " + registryId);
-        } catch (MovieCopyNotAvailableException e) {
-            // forward to remind.jsp with msg: employee not found
-            modelMap.addAttribute("msg", e.getMessage());
-            return "/movies/rent";
-        }
-
-        // go to print receipt view
-        ClientData clientData = rentingFacade.getClient(clientId);
-        ReceiptPdf receiptPdfInformations = rentingFacade.getReceiptPdfInformations(registryId);
-
-        modelMap.addAttribute("receiptInfo", receiptPdfInformations);
-        modelMap.addAttribute("clientInfo", clientData);
-
-        return "pdfView";
-    }*/
-
     @RequestMapping(value = "/save", method = RequestMethod.POST, produces = "application/json")
     public
     @ResponseBody
@@ -123,5 +91,4 @@ public class RentController {
 
         return "pdfView";
     }
-
 }

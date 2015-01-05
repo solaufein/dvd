@@ -12,14 +12,6 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.clients.ClientFacade;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 07.03.14
- * Time: 11:16
- * To change this template use File | Settings | File Templates.
- */
-
 @Controller
 @RequestMapping("/emp/clients/controller")
 public class AddEditController {
@@ -45,7 +37,6 @@ public class AddEditController {
             ClientData client = new ClientData();
             client.setId(-1);
             modelAndView.addObject(Constants.CLIENT, client);
-       //     modelAndView.addObject(Constants.ID, id);
 
         } else {                         // edit client with given id
             logger.info("id equals: " + id + "(edit client)");

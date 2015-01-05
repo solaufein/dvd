@@ -10,12 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
-/**
- * User: Sola
- * Date: 2014-09-03
- * Time: 16:27
- */
-
 @Controller
 @RequestMapping("/emp/movies/deletecopy")
 @Secured("ROLE_ADMIN")
@@ -37,15 +31,13 @@ public class DeleteMovieCopyController {
 
         // get id from movies_list.jsp form
         logger.info("get id from movie_details.jsp form, id=" + id);
-
         logger.info("Deleting movie copy with id=" + id);
+
         moviesFacade.deleteMovieCopy(id);
 
         modelMap.addAttribute("id", movieid);
 
         // redirect to MovieDetailsController
-        logger.info("Redirect to MovieDetailsController");
-
         return "redirect:/emp/movies/moviedetails";
     }
 }

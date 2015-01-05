@@ -7,9 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import pl.radek.dvd.dto.clients.ClientRentDto;
-import pl.radek.dvd.dto.clients.FiltreClientForm;
 import pl.radek.dvd.dto.movies.MovieBySerialData;
 import pl.radek.dvd.exceptions.client.ClientNotFoundException;
 import pl.radek.dvd.exceptions.movie.MovieNotFoundException;
@@ -19,12 +17,6 @@ import pl.radek.dvd.model.Movie;
 import pl.radek.dvd.service.home.HomeFacade;
 
 import java.util.List;
-
-/**
- * User: Sola
- * Date: 2014-04-26
- * Time: 15:25
- */
 
 @Controller
 @RequestMapping("/emp/home")
@@ -119,8 +111,6 @@ public class HomeController {
         } else {
             return "redirect:/emp/movies/movieslist?title=" + title;
         }
-
-        //    return "redirect:/emp/movies/movieslist?title=" + title;
     }
 
     @RequestMapping(value = "/return/movieSerialNumber", method = RequestMethod.GET)
@@ -154,8 +144,6 @@ public class HomeController {
         } else {
             return "redirect:/emp/movies/movieslist?title=" + title;
         }
-
-        //    return "redirect:/emp/movies/movieslist?title=" + title;
     }
 
     @RequestMapping(value = "/rent/movieSerialNumber", method = RequestMethod.GET)
@@ -191,8 +179,6 @@ public class HomeController {
         } else {
             return "redirect:/emp/clients/clientslist?lastName=" + lastName;
         }
-
-        //   return "redirect:/emp/clients/clientslist?lastName=" + lastName;
     }
 
     @RequestMapping(value = "/rent/clientPesel", method = RequestMethod.GET)
@@ -214,7 +200,5 @@ public class HomeController {
         } else {
             return "redirect:/emp/clients/clientslist?pesel=" + pesel;
         }
-
-        //   return "redirect:/emp/clients/clientslist?pesel=" + pesel;
     }
 }

@@ -4,9 +4,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * Created by Sola on 2014-12-12.
- */
 public class TopHitsPaginationTag extends SimpleTagSupport {
     String order;
     String field;

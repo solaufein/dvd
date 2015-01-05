@@ -18,12 +18,6 @@ import pl.radek.dvd.service.employees.EmployeeFacade;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 13:35
- */
-
 @Controller
 public class RemindController {
     private static Logger logger = Logger.getLogger(RemindController.class);
@@ -59,7 +53,6 @@ public class RemindController {
         }
 
         return model;
-
     }
 
     @RequestMapping(value = "/remind", method = RequestMethod.POST)
@@ -105,8 +98,6 @@ public class RemindController {
     @RequestMapping(value = " /remind/{empId}", method = RequestMethod.GET)
     public String checkLinkExp(@PathVariable String empId,
                                ModelMap modelMap) {
-        // obsluga linka w zaleznosci: jesli przekroczony 3min czasu LUB key nie istnieje - to msg i nic
-        // a jesli mozna zmienic, to widok do zmiany.
 
         boolean isActiveLink = employeeFacade.checkLinkExp(empId);
 

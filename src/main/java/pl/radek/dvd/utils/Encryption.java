@@ -3,11 +3,6 @@ package pl.radek.dvd.utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
-/**
- * User: Sola
- * Date: 2014-09-24
- * Time: 15:19
- */
 public class Encryption {
     public static String encrypt(String source) {
         String md5 = null;

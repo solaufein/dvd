@@ -17,12 +17,6 @@ import pl.radek.dvd.utils.Encryption;
 
 import java.util.*;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 17:13
- */
-
 @Service
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {

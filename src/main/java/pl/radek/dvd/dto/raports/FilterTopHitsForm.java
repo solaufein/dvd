@@ -4,9 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-/**
- * Created by Sola on 2014-12-11.
- */
 public class FilterTopHitsForm {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateFrom;

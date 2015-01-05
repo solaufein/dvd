@@ -3,9 +3,6 @@ package pl.radek.dvd.objectmapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate3.Hibernate3Module;
 
-/**
- * Created by Sola on 2014-11-02.
- */
 public class HibernateAwareObjectMapper extends ObjectMapper {
 
     public HibernateAwareObjectMapper() {

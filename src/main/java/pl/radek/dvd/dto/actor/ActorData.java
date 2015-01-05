@@ -5,9 +5,6 @@ import pl.radek.dvd.model.Movie;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Sola on 2014-11-11.
- */
 public class ActorData {
     private int id;
     private String firstName;

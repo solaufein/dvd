@@ -1,10 +1,5 @@
 package pl.radek.dvd.dto;
 
-/**
- * User: Sola
- * Date: 14.03.14
- * Time: 18:03
- */
 public class PaginationInfo {
     private int page;
     private int recordsPerPage;

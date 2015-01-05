@@ -4,12 +4,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 15:58
- */
-
 @Entity
 @Table(name = "movie_copy")
 public class MovieCopy {
@@ -30,7 +24,7 @@ public class MovieCopy {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "movieCopy")           // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     private Set<RentingRegistry> rentingRegistries = new HashSet<RentingRegistry>(0);
 
-    @ManyToOne(fetch = FetchType.LAZY)                               // cascade={CascadeType.PERSIST, CascadeType.MERGE}
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
 

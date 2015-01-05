@@ -12,7 +12,6 @@
         <put-attribute name="location_bar" value="/WEB-INF/templates/locationBar.jsp"/>
         <put-attribute name="navigation" value="/WEB-INF/templates/navigation.jsp"/>
         <put-attribute name="navigation_left" value=""/>
-        <!--put-attribute name="langs" value="/WEB-INF/templates/langs.jsp" /-->
         <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp"/>
         <put-list-attribute name="cssList" cascade="true">
             <add-attribute value="/resources/css/jquery-ui.css"/>
@@ -43,10 +42,6 @@
     <definition name="administrationTemplate" extends="defaultTemplate">
         <!-- Overridden here -->
         <put-attribute name="navigation_left" value="/WEB-INF/templates/navigation_left.jsp"/>
-        <!--put-attribute name="navigation_left" cascade="true" value="secondTemplate"/-->
-        <!--put-list-attribute name="cssList" cascade="true" inherit="true">
-            <add-attribute value="/resources/css/jquery-ui.css" />
-        </put-list-attribute-->
         <put-list-attribute name="cssList" cascade="true">
             <add-attribute value="/resources/css/jquery-ui.css"/>
             <add-attribute value="/resources/css/main.css"/>

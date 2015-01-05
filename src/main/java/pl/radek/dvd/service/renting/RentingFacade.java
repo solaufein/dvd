@@ -10,9 +10,6 @@ import pl.radek.dvd.dto.rr.ReturnData;
 import pl.radek.dvd.exceptions.movie.MovieCopyNotAvailableException;
 import pl.radek.dvd.model.Employee;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public interface RentingFacade {
 
     ClientData getClient(int clientId);

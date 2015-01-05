@@ -20,12 +20,6 @@ import pl.radek.dvd.model.MovieCopy;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-01
- * Time: 14:03
- */
-
 @Repository
 public class MovieCopyMySQLDAO implements MovieCopyDAO {
     private static Logger logger = Logger.getLogger(MovieCopyMySQLDAO.class);
@@ -66,7 +60,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.model.MovieCopy(mc.id, mc.serialNumber, mc.conditionInfo, mc.availability) FROM MovieCopy as mc ");
-        //   StringBuilder query = new StringBuilder("FROM MovieCopy as mc ");
         query.append("INNER JOIN mc.movie as m ");
         query.append("WHERE m.id = :ide ");
         query.append("ORDER BY mc.availability DESC ");
@@ -83,13 +76,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         List<MovieCopy> movieCopies = (List<MovieCopy>) q.list();
 
-        //ok ?
-        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
-     /*   for (MovieCopy movieCopy : movieCopies) {
-            Hibernate.initialize(movieCopy.getMovie());
-            Hibernate.initialize(movieCopy.getRentingRegistries());
-        }*/
-
         logger.debug("Got MovieCopies by id: " + movieId);
         return movieCopies;
     }
@@ -98,19 +84,9 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     public ReturnCommentDto getReturnData(Integer movieCopyId) {
         logger.info("Getting ReturnData by movie copy id: " + movieCopyId);
 
-        /*
-        SELECT rr.id as 'renting id', c.id as 'client id'
-        FROM movie_copy as mc
-        INNER JOIN renting_registry as rr ON rr.movie_copy_id = mc.id
-        INNER JOIN receipt as r ON r.id = rr.receipt_id
-        INNER JOIN client as c ON c.id = rr.client_id
-        WHERE mc.id = 2 AND r.pay_date IS NULL;
-        */
-
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 
         StringBuilder query = new StringBuilder("SELECT NEW pl.radek.dvd.dto.rr.ReturnCommentDto(c.id, rr.id) FROM MovieCopy as mc ");
-        //   StringBuilder query = new StringBuilder("FROM MovieCopy as mc ");
         query.append("INNER JOIN mc.rentingRegistries as rr ");
         query.append("INNER JOIN rr.receipt as r ");
         query.append("INNER JOIN rr.client as c ");
@@ -125,7 +101,7 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
 
         ReturnCommentDto returnCommentDto = null;
 
-        if (result.size() > 0){
+        if (result.size() > 0) {
             returnCommentDto = (ReturnCommentDto) q.list().get(0);
         } else {
             //   throw new exception...
@@ -139,8 +115,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     @Override
     public MovieCopy getMovieCopy(int id) {
         logger.debug("Getting MovieCopy by id: " + id);
-
-        //  MovieCopy movieCopy= (MovieCopy) hibernateTemplate.get(MovieCopy.class, id);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         MovieCopy movieCopy = (MovieCopy) session.get(MovieCopy.class, id);
@@ -157,9 +131,6 @@ public class MovieCopyMySQLDAO implements MovieCopyDAO {
     public void deleteMovieCopy(int id) {
         logger.debug("Deleting MovieCopy by id: " + id);
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-
-        //     MovieCopy movieCopy = hibernateTemplate.get(MovieCopy.class, id);
-        //     hibernateTemplate.delete(movieCopy);
 
         MovieCopy movieCopy = (MovieCopy) session.get(MovieCopy.class, id);
         Hibernate.initialize(movieCopy.getMovie());

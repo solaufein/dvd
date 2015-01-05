@@ -13,12 +13,6 @@ import java.io.OutputStream;
 import java.util.Map;
 
 /**
- * User: Sola
- * Date: 2014-06-27
- * Time: 16:57
- */
-
-/**
  * This class is a work around for working with iText 5.x in Spring.
  * The code here is almost identical to the AbstractPdfView class.
  */

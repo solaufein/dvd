@@ -1,5 +1,5 @@
 <%@ include file="/WEB-INF/jsp/include.jsp" %>
-<%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="Java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <table id="tabb">
     <tr>

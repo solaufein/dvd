@@ -5,9 +5,6 @@ import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public class MovieRentPaginationTag extends SimpleTagSupport {
     String clientId;
     String order;

@@ -4,11 +4,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-/**
- * User: Sola
- * Date: 2014-03-27
- * Time: 14:00
- */
 public class ClientData {
 
     private int id;

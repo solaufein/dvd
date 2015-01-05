@@ -41,5 +41,5 @@
     </authentication-manager>
 
     <!--beans:bean id="userDetailsService" class="pl.radek.dvd.service.EmployeeDetailsService"/-->
-    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller" />
+    <context:component-scan base-package="pl.radek.dvd.service, pl.radek.dvd.logic, pl.radek.dvd.controller"/>
 </beans:beans>

@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/**
- * Created by Sola on 2014-12-12.
- */
 public class TopHitsFilterChoice extends MultiRaportFilterChoice {
     private static Logger logger = Logger.getLogger(TopHitsFilterChoice.class);
 
@@ -25,17 +22,6 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
 
     @Override
     public Query filtreQuery() {
-        /*SELECT m.title, COUNT(rr.movie_copy_id) AS 'amount of loan'
-        FROM renting_registry as rr
-        LEFT JOIN movie_copy as mc ON mc.id = rr.movie_copy_id
-        LEFT JOIN movie as m ON m.id = mc.movie_id
-        LEFT JOIN promotion as p ON p.id = m.promotion_id
-        LEFT JOIN genre as g ON g.id = m.genre_id
-        WHERE g.id = 5 AND p.id = 1 AND rr.rent_date BETWEEN '2005-05-05 00:00:00' AND '2013-12-12 23:59:59'
-        GROUP BY mc.movie_id
-        ORDER BY COUNT(rr.movie_copy_id) DESC
-        LIMIT 0,9;*/
-
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
         PaginationInfo paginationInfo = listDataRequest.getPaginationInfo();
         if (paginationInfo != null) {
@@ -62,9 +48,6 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
 
         setFiltreQueryParams(filterInfoList, q);
 
-        //    q.setFirstResult(offset);
-        //    q.setMaxResults(recordsPerPage);
-
         return q;
     }
 
@@ -73,8 +56,7 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         int records;
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
-        StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.movie) FROM RentingRegistry as rr ");    //distinct zamiast group by ?
-        //    StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.id) FROM RentingRegistry as rr ");
+        StringBuilder query = new StringBuilder(" SELECT COUNT(distinct mc.movie) FROM RentingRegistry as rr ");    //distinct instead of group by ?
         query.append("LEFT JOIN rr.movieCopy as mc ");
         query.append("LEFT JOIN mc.movie as m ");
         query.append("LEFT JOIN m.promotion as p ");
@@ -83,7 +65,7 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         boolean isFirst = true;
 
         buildFiltreQuery(filterInfoList, query, isFirst);
-        //    query.append(" GROUP BY mc.id ");
+
 
         Query q = hibernateTemplate.getSessionFactory().getCurrentSession().createQuery(query.toString());
 
@@ -94,21 +76,11 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         } catch (NoSuchElementException e) {
             return 0;
         }
-        //  records = ((Number) q.uniqueResult()).intValue();
-        //  records = q.list().size();
+
         return records;
     }
 
     public int getTotalRecords() {
-        /*total:
-        SELECT COUNT(*) AS 'total'
-        FROM renting_registry as rr
-        LEFT JOIN movie_copy as mc ON mc.id = rr.movie_copy_id
-        LEFT JOIN movie as m ON m.id = mc.movie_id
-        LEFT JOIN promotion as p ON p.id = m.promotion_id
-        LEFT JOIN genre as g ON g.id = m.genre_id
-        WHERE g.id = 5 AND p.id = 1 AND rr.rent_date BETWEEN '2005-05-05 00:00:00' AND '2013-12-12 23:59:59';*/
-
         int records;
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
@@ -131,8 +103,7 @@ public class TopHitsFilterChoice extends MultiRaportFilterChoice {
         } catch (NoSuchElementException e) {
             return 0;
         }
-        //  records = ((Number) q.uniqueResult()).intValue();
-        //  records = q.list().size();
+
         return records;
     }
 

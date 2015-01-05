@@ -83,7 +83,8 @@
                         <td><c:out value="${details.returnDate}"/></td>
                         <c:if test="${not empty details.payDate}">
                             <td>
-                                <form name="printReceipt" action=" <c:url value="printreceipt"/>" method="post" target="_blank">
+                                <form name="printReceipt" action=" <c:url value="printreceipt"/>" method="post"
+                                      target="_blank">
                                     <input type="hidden" name="registryid" value="${details.id}"/>
                                     <input type="hidden" name="clientid" value="${client.id}"/>
                                     <input type="submit" value="<spring:message code="common.button.print"/>"

@@ -8,11 +8,6 @@ import pl.radek.dvd.model.Employee;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 17:12
- */
 public interface EmployeeService {
     public List<Employee> getEmployees();
     public PaginatedList<EmployeeData> getEmployees(ListDataRequest listDataRequest);

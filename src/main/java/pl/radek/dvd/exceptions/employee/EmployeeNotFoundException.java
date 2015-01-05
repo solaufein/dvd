@@ -1,10 +1,5 @@
 package pl.radek.dvd.exceptions.employee;
 
-/**
- * User: Sola
- * Date: 2014-09-23
- * Time: 18:25
- */
 public class EmployeeNotFoundException extends Exception {
     /**
      * Constructs a new exception with the specified detail message.  The

@@ -4,9 +4,6 @@ import pl.radek.dvd.dto.PaginatedList;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public class PaginatedListMoviesRent implements PaginatedList<MoviesRentData> {
     private List<MoviesRentData> moviesDatas;
     private int noOfRecords;

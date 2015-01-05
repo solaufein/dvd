@@ -2,11 +2,6 @@ package pl.radek.dvd.dto.clients;
 
 import javax.validation.constraints.Pattern;
 
-/**
- * User: Sola
- * Date: 2014-05-22
- * Time: 12:24
- */
 public class FiltreClientForm {
 
     @Pattern(regexp = "^\\s*$|^[A-Za-ząęśćńółżź]*$", message = "{Pattern.filtreclientform.firstName}")

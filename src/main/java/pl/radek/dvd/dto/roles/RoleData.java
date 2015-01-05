@@ -7,17 +7,12 @@ import pl.radek.dvd.model.Employee;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-10-21
- * Time: 13:39
- */
 public class RoleData {
 
     private int id;
     private String role;
 
-    @JsonIgnore // this is becouse lazyInitializationError was thrown - no session or session was closed, during ResponseBody json object
+    @JsonIgnore // this is becouse lazyInitializationError was thrown - no session or session was closed, during ResponseBody json object in controller method
     private Set<Employee> employees = new HashSet<Employee>();
 
     public RoleData() {

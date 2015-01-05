@@ -83,29 +83,7 @@ public class GetMoviesRentController {
             logger.info("No errors spotted");
 
             // Filter Info
-            String title = movie.getTitle();
-            String genre = movie.getGenre();
-            String promotion = movie.getPromotion();
-            String actor = movie.getActor();
-
-            filterInfoList = new ArrayList<FilterInfo>();
-            if (title != null && !title.equals("")) {
-                filterInfoList.add(new FilterInfo(Constants.TITLE, title));
-                logger.info("title = " + title);
-            }
-            if (genre != null && !genre.equals("") && !genre.equals("NONE")) {
-                filterInfoList.add(new FilterInfo(Constants.GENRE, genre));
-                logger.info("genre = " + genre);
-            }
-            if (promotion != null && !promotion.equals("") && !promotion.equals("NONE")) {
-                filterInfoList.add(new FilterInfo(Constants.PROMOTION, promotion));
-                logger.info("promotion = " + promotion);
-            }
-            if (actor != null && !actor.equals("")) {
-                filterInfoList.add(new FilterInfo(Constants.ACTOR, actor));
-                logger.info("actor = " + actor);
-            }
-
+            filterInfoList = getFilterInfos(movie);
         } else {
             // Put errors in request scope and forward back to JSP.
             logger.info("Errors spotted, pass errors through request scope and forward back to JSP");
@@ -117,9 +95,7 @@ public class GetMoviesRentController {
         PaginatedList<MoviesRentData> paginatedList = moviesFacade.getMoviesRentData(listDataRequest);
         int noOfRecords = paginatedList.getNoOfRecords();
         noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-        logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-        logger.info(" !!!! NO OF PAGES : " + noOfPages);
+
         moviesDataList = paginatedList.getDataList();
 
         modelAndView = new ModelAndView("/movies/movies_rent");
@@ -133,6 +109,33 @@ public class GetMoviesRentController {
         return modelAndView;
     }
 
+    private List<FilterInfo> getFilterInfos(FiltreMovieForm movie) {
+        List<FilterInfo> filterInfoList;
+        String title = movie.getTitle();
+        String genre = movie.getGenre();
+        String promotion = movie.getPromotion();
+        String actor = movie.getActor();
+
+        filterInfoList = new ArrayList<FilterInfo>();
+        if (title != null && !title.equals("")) {
+            filterInfoList.add(new FilterInfo(Constants.TITLE, title));
+            logger.info("title = " + title);
+        }
+        if (genre != null && !genre.equals("") && !genre.equals("NONE")) {
+            filterInfoList.add(new FilterInfo(Constants.GENRE, genre));
+            logger.info("genre = " + genre);
+        }
+        if (promotion != null && !promotion.equals("") && !promotion.equals("NONE")) {
+            filterInfoList.add(new FilterInfo(Constants.PROMOTION, promotion));
+            logger.info("promotion = " + promotion);
+        }
+        if (actor != null && !actor.equals("")) {
+            filterInfoList.add(new FilterInfo(Constants.ACTOR, actor));
+            logger.info("actor = " + actor);
+        }
+        return filterInfoList;
+    }
+
     @RequestMapping(value = "/getTags", method = RequestMethod.GET, produces = "application/json")
     public
     @ResponseBody
@@ -140,12 +143,6 @@ public class GetMoviesRentController {
 
         List<ActorDataTag> data = moviesFacade.getActorTags(term);
 
-        for (int i = 0; i < data.size(); i++) {
-            logger.info("data id = " + data.get(i).getId());
-            logger.info("data tag = " + data.get(i).getTag());
-        }
-
         return data;
-
     }
 }

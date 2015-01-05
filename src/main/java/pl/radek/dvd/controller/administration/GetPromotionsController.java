@@ -12,14 +12,7 @@ import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.promotions.PromotionsFacade;
 
-import java.util.LinkedList;
 import java.util.List;
-
-/**
- * User: Sola
- * Date: 2014-09-11
- * Time: 16:42
- */
 
 @Controller
 @RequestMapping("/emp/administration/promotions")
@@ -55,10 +48,6 @@ public class GetPromotionsController {
         List<PromotionData> promotionDataList = promotionDataPaginatedList.getDataList();
 
         noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        logger.info(" !!!! PROMOTIONS !!!! ");
-        logger.info(" !!!! NO OF RECORDS : " + noOfRecords);
-        logger.info(" !!!! RECORDS PER PAGE : " + recordsPerPage);
-        logger.info(" !!!! NO OF PAGES : " + noOfPages);
 
         PromotionData promotionData = new PromotionData();
 
@@ -98,13 +87,12 @@ public class GetPromotionsController {
         logger.info("Follow to promotions_page jsp");
         modelMap.addAttribute(Constants.PROMOTIONLIST, promotionDataList);
 
-        logger.info(" !!!! PROMOTIONS CURRENT PAGE !!!! ");
         logger.info(" !!!! PAGE : " + page);
 
         return "/administration/promotions_page";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST/*, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE*/)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public String deletePromotion(@RequestParam("id") int id) throws Exception {
 
@@ -135,7 +123,7 @@ public class GetPromotionsController {
         logger.info("get Promotion controller method start");
 
         PromotionData promotionData = promotionsFacade.getPromotion(id);
-        promotionData.setMovies(null);  // we dont need it to json
+        promotionData.setMovies(null);  // we dont need/want it to json
 
         logger.info("get Promotion controller method end");
 

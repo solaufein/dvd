@@ -5,9 +5,6 @@ import pl.radek.dvd.dto.PaginatedRaportList;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-12-12.
- */
 public class PaginatedListTopHits implements PaginatedRaportList<TopHitsDto> {
     private List<TopHitsDto> dtoList;
     private int noOfRecords;

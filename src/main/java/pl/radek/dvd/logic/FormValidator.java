@@ -5,13 +5,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 21.01.14
- * Time: 16:55
- * To change this template use File | Settings | File Templates.
- */
 public class FormValidator {
 
     private Map<String, String> errors = new HashMap<String, String>();

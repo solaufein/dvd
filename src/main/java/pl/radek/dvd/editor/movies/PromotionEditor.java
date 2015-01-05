@@ -5,11 +5,6 @@ import pl.radek.dvd.service.movies.MoviesFacade;
 
 import java.beans.PropertyEditorSupport;
 
-/**
- * User: Sola
- * Date: 2014-08-11
- * Time: 14:05
- */
 public class PromotionEditor extends PropertyEditorSupport {
 
     private MoviesFacade moviesFacade;

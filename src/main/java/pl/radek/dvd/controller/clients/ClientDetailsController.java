@@ -15,12 +15,6 @@ import pl.radek.dvd.service.clients.ClientFacade;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-05-16
- * Time: 16:12
- */
-
 @Controller
 @RequestMapping("/emp/clients/clientdetails")
 public class ClientDetailsController {
@@ -72,14 +66,5 @@ public class ClientDetailsController {
 
         return modelAndView;
     }
-
-   /* @RequestMapping(method= RequestMethod.GET)
-    public ModelAndView changeLocale() throws Exception {
-        ModelAndView modelAndView;
-
-        modelAndView = new ModelAndView("/clients/client_details");
-
-        return modelAndView;
-    }*/
 }
 

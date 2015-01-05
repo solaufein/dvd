@@ -5,11 +5,6 @@ import pl.radek.dvd.model.Genre;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:27
- */
 public interface GenresService {
     public List<GenreData> getGenres();
     public List<Genre> getGenresEntity();

@@ -21,12 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-04-26
- * Time: 16:20
- */
-
 @Repository
 public class EmployeeMySQLDAO implements EmployeeDAO {
 
@@ -43,7 +37,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
     }
-
 
     @Override
     public List<Employee> getEmployees() {
@@ -81,12 +74,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         List<Employee> employees = (List<Employee>) q.list();
 
-        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
-        /*for (Employee employee : employees) {
-            Hibernate.initialize(employee.getRentingRegistries());
-            Hibernate.initialize(employee.getRolesSet());
-        }*/
-
         logger.debug("Got Paginated EmployeeList ");
 
         return employees;
@@ -102,14 +89,8 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
         Hibernate.initialize(employee.getRolesSet());
-        /*for (Roles roles : employee.getRolesSet()){
-            Hibernate.initialize(roles.getEmployees());
-        }*/
 
         Hibernate.initialize(employee.getRentingRegistries());
-        /*for (RentingRegistry rentingRegistry : employee.getRentingRegistries()){
-            Hibernate.initialize(rentingRegistry.getEmployee());
-        }*/
 
         logger.debug("Got employee by id: " + id);
         return employee;
@@ -159,13 +140,8 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         Employee employee = (Employee) session.get(Employee.class, id);
-        //   Hibernate.initialize(employee.getRolesSet());
-        //   Hibernate.initialize(employee.getRentingRegistries());
 
         session.delete(employee);
-
-        // hibernateTemplate.delete(hibernateTemplate.get(Employee.class, id));
-        // hibernateTemplate.bulkUpdate("delete from Employee where id = " + id);
 
         logger.debug("Deleted employee");
     }
@@ -179,8 +155,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
         String password = employee.getPassword();
 
         logger.debug("Adding employee to db: firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
-
-      //  hibernateTemplate.save(employee);
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         session.save(employee);
@@ -201,8 +175,6 @@ public class EmployeeMySQLDAO implements EmployeeDAO {
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         session.update(employee);
-
-     //   hibernateTemplate.update(employee);
 
         logger.debug("Updated employee with id =" + id + ", SETTING firstname=" + first_name + ", lastname=" + last_name + ", phonenumber=" + phone_number + ", email=" + email + ", password=" + password);
 

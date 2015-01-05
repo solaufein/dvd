@@ -20,12 +20,6 @@ import pl.radek.dvd.service.movies.MoviesFacade;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-01
- * Time: 13:29
- */
-
 @Controller
 @RequestMapping("/emp/movies/moviedetails")
 public class MovieDetailsController {

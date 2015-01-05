@@ -7,9 +7,6 @@ import javax.servlet.jsp.tagext.JspTag;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
-/**
- * Created by Sola on 2014-11-19.
- */
 public class MoviesRentSortHeaderTag extends SimpleTagSupport {
     String clientId;
     String title;

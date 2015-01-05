@@ -4,12 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * User: Sola
- * Date: 2014-06-24
- * Time: 17:07
- */
-
-/**
  *  This class is DTO-class prepared for pdf generated view
  */
 public class ReceiptPdf {

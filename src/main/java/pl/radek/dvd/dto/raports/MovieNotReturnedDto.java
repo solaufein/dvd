@@ -3,9 +3,6 @@ package pl.radek.dvd.dto.raports;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Sola on 2014-12-09.
- */
 public class MovieNotReturnedDto {
     private static final SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

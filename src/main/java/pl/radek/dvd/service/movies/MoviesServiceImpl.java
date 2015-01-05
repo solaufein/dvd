@@ -22,12 +22,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-16
- * Time: 15:46
- */
-
 @Service
 @Transactional
 public class MoviesServiceImpl implements MoviesService {

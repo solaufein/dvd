@@ -8,9 +8,6 @@ import pl.radek.dvd.dto.raports.*;
 
 import java.util.List;
 
-/**
- * Created by Sola on 2014-12-09.
- */
 public interface RaportsFacade {
     PaginatedList<MovieNotReturnedDto> getMovieNotReturnedDtoList(ListDataRequest listDataRequest);
 

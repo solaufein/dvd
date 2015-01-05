@@ -18,12 +18,6 @@ import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:17
- */
-
 @Repository
 public class PromotionMySQLDAO implements PromotionDAO {
 
@@ -74,11 +68,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
 
         List<Promotion> promotions = (List<Promotion>) q.list();
 
-        // must initialize - becouse entities are LAZY initialized and throw exception - proxy no session!
-        /*for (Promotion promotion : promotions) {
-            Hibernate.initialize(promotion.getMovies());
-        }*/
-
         logger.debug("Got Paginated Promotions List ");
 
         return promotions;
@@ -87,9 +76,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
     @Override
     public Promotion getPromotion(int id) {
         logger.debug("Getting Promotion by id: " + id);
-
-        //    Promotion promotion = (Promotion) hibernateTemplate.get(Promotion.class, id);
-
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         Promotion promotion = (Promotion) session.get(Promotion.class, id);
@@ -106,7 +92,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
         logger.debug("Deleting Promotion by id: " + id);
 
         hibernateTemplate.delete(hibernateTemplate.get(Promotion.class, id));
-        //      hibernateTemplate.bulkUpdate("delete from Promotion where id = " + id);
 
         logger.debug("Deleted Promotion with id = " + id);
     }
@@ -118,8 +103,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         session.save(promotion);
 
-        //  hibernateTemplate.save(promotion);
-
         logger.info("add Promotion method END");
     }
 
@@ -129,8 +112,6 @@ public class PromotionMySQLDAO implements PromotionDAO {
 
         Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
         session.update(promotion);
-
-        //  hibernateTemplate.update(promotion);
 
         logger.info("update Promotion method END");
     }

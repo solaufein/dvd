@@ -12,18 +12,9 @@ import pl.radek.dvd.dto.genres.GenreData;
 import pl.radek.dvd.dto.movies.MovieDataDTO;
 import pl.radek.dvd.dto.promotions.PromotionData;
 import pl.radek.dvd.model.Constants;
-import pl.radek.dvd.model.Genre;
-import pl.radek.dvd.model.Movie;
-import pl.radek.dvd.model.Promotion;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
 import java.util.List;
-
-/**
- * User: Sola
- * Date: 2014-08-07
- * Time: 13:43
- */
 
 @Controller
 @RequestMapping("/emp/movies/controller")
@@ -58,15 +49,12 @@ public class AddEditMovieController {
             // follow to add_movie.jsp
             modelAndView = new ModelAndView("/movies/add_movie");
             MovieDataDTO movie = new MovieDataDTO();
-       //     Movie movie = new Movie();
             movie.setId(-1);
             modelAndView.addObject(Constants.MOVIE, movie);
-            //     modelAndView.addObject(Constants.ID, id);
 
         } else {                         // edit movie with given id
             logger.info("id equals: " + id + "(edit movie)");
             MovieDataDTO movie = moviesFacade.getMovie(Integer.parseInt(id));
-     //       Movie movie = new Movie();
 
             // follow to add_movie.jsp
             modelAndView = new ModelAndView("/movies/add_movie");

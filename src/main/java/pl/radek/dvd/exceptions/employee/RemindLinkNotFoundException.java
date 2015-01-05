@@ -1,10 +1,5 @@
 package pl.radek.dvd.exceptions.employee;
 
-/**
- * User: Sola
- * Date: 2014-09-24
- * Time: 13:55
- */
 public class RemindLinkNotFoundException extends Exception {
     /**
      * Constructs a new exception with the specified detail message.  The

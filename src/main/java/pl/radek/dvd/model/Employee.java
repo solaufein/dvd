@@ -7,12 +7,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-04-26
- * Time: 14:10
- */
-
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -45,7 +39,7 @@ public class Employee {
     private Date pwChangeDate;
 
 
-    @ManyToMany(fetch=FetchType.LAZY)    // cascade = {CascadeType.ALL},fetch=FetchType.EAGER ?       // cascade={CascadeType.PERSIST, CascadeType.MERGE}
+    @ManyToMany(fetch=FetchType.LAZY)    // cascade={CascadeType.PERSIST, CascadeType.MERGE}
     @JoinTable(name = "employee_roles",
             joinColumns = {@JoinColumn(name = "employee_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})

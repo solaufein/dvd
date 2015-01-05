@@ -19,12 +19,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-04-26
- * Time: 16:03
- */
-
 @Service
 @Transactional(readOnly = true)
 public class EmployeeDetailsService implements UserDetailsService {

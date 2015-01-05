@@ -3,9 +3,6 @@ package pl.radek.dvd.dto.rr;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * Created by Sola on 2014-11-21.
- */
 public class NewRentDto {
     private int rentingId;
     private int clientId;

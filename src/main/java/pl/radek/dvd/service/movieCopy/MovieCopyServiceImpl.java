@@ -18,12 +18,6 @@ import pl.radek.dvd.service.movies.MoviesServiceImpl;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-01
- * Time: 14:18
- */
-
 @Service
 @Transactional
 public class MovieCopyServiceImpl implements MovieCopyService {

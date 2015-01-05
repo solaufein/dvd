@@ -1,64 +1,63 @@
 body {
-  font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
-  color: #404040;
-  background: #0ca3d2;
+    font: 13px/20px "Lucida Grande", Tahoma, Verdana, sans-serif;
+    color: #404040;
+    background: #0ca3d2;
 }
 
-.container{
-	width: 600px;
-	max-width: 600px;
-	margin: 0 600px;
-	margin-top: 200px;
+.container {
+    width: 600px;
+    max-width: 600px;
+    margin: 0 600px;
+    margin-top: 200px;
 }
 
-#remind{
-	padding: 0px 25px 25px;
-	background: #FFF;
-	box-shadow:
-		0px 0px 0px 5px rgba(255, 255, 255, 0.4),
-		0px 4px 20px rgba(0, 0, 0, 0.33);
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border radius: 4px;
-	display:table;
-	position: static;
+#remind {
+    padding: 0px 25px 25px;
+    background: #FFF;
+    box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.4),
+    0px 4px 20px rgba(0, 0, 0, 0.33);
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border radius: 4px;
+    display: table;
+    position: static;
 }
 
 #remind .header {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 #remind .header h3 {
-	color: #333;
-	font-size: 24px;
-	font-weight: bold;
-	margin-bottom: 5px;
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 #remind .header p {
-	color: #8F8F8F;
-	font-size: 14px;
-	font-weight: 300;
+    color: #8F8F8F;
+    font-size: 14px;
+    font-weight: 300;
 }
 
-#remind .separator{
-	height: 1px;
-	background: #E8E8E8;
-	width: auto;
-	min-width: 406px;
-	margin: 0px -25px;
+#remind .separator {
+    height: 1px;
+    background: #E8E8E8;
+    width: auto;
+    min-width: 406px;
+    margin: 0px -25px;
 }
 
-#remind .inputs{
-	margin-top: 25px;
+#remind .inputs {
+    margin-top: 25px;
 
 }
 
-#remind .inputs .loginpage{
+#remind .inputs .loginpage {
     margin-top: 25px;
 }
 
-#remind .inputs .loginpage a{
+#remind .inputs .loginpage a {
     text-decoration: none;
     color: #8F8F8F;
     font-size: 12px;
@@ -66,115 +65,115 @@ body {
     letter-spacing: 1px;
 }
 
-#remind .inputs .loginpage a:hover{
+#remind .inputs .loginpage a:hover {
     text-decoration: underline;
 }
 
-#remind .inputs label{
-	color: #8F8F8F;
-	font-size: 12px;
-	font-weight: 300;
-	letter-spacing: 1px;
-	padding-left: 30px;
-	margin-left: 15px;
+#remind .inputs label {
+    color: #8F8F8F;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    padding-left: 30px;
+    margin-left: 15px;
 }
 
-input::-webkit-input-placeholder{
-	color: #B5B5B5;
+input::-webkit-input-placeholder {
+    color: #B5B5B5;
 }
 
-input:-moz-placeholder{
-	color: #B5B5B5;
+input:-moz-placeholder {
+    color: #B5B5B5;
 }
 
-#remind .inputs input[type=text], input[type=password]{
-	background: #F5F5F5;
-	font-size: 0.8rem;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	border: none;
-	padding: 10px 10px;
-	width: 250px;
-	margin-bottom: 15px;
-	box-shadow: inset 0px 2px 3px rgba(0,0,0,0.1);
-	clear: both;
+#remind .inputs input[type=text], input[type=password] {
+    background: #F5F5F5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    padding: 10px 10px;
+    width: 250px;
+    margin-bottom: 15px;
+    box-shadow: inset 0px 2px 3px rgba(0, 0, 0, 0.1);
+    clear: both;
 }
 
-#remind .inputs input[type=text]:focus, input[type=password]:focus{
-	background: #FFF;
-	box-shadow: 0px 0px 0px 3px #FFFF66,
-	inset 0px 2px 3px rgba(0,0,0,0.2),
-	0px 5px 5px rgba(0,0,0,0.15);
-	outline: none;
+#remind .inputs input[type=text]:focus, input[type=password]:focus {
+    background: #FFF;
+    box-shadow: 0px 0px 0px 3px #FFFF66,
+    inset 0px 2px 3px rgba(0, 0, 0, 0.2),
+    0px 5px 5px rgba(0, 0, 0, 0.15);
+    outline: none;
 }
 
-#remind .inputs .remember{
-	display: block;
-	position: static;
-	height: 25px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	clear: both;
+#remind .inputs .remember {
+    display: block;
+    position: static;
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
 }
 
-#remind .inputs input[type=checkbox]{
-	float: left;
-	margin-right: 14px;
-	margin-top: 3px;
+#remind .inputs input[type=checkbox] {
+    float: left;
+    margin-right: 14px;
+    margin-top: 3px;
 }
 
-#remind .inputs label.terms{
-	float: left;
-	font-size: 12px;
+#remind .inputs label.terms {
+    float: left;
+    font-size: 12px;
 }
 
-#remind .inputs input[type=submit]{
-	-webkit-border-radius: 4;
-	-moz-border-radius: 4;
-	border-radius: 4px;
-	font-family: Arial;
-	color: #ffffff;
-	font-size: 11px;
-	background: #333;
-	padding: 5px 13px 5px 13px;
-	text-decoration: none;
-	width: 9em;
-	height: 3em;
-	border: solid 1px black;
-	cursor: pointer;
-	display: block;
+#remind .inputs input[type=submit] {
+    -webkit-border-radius: 4;
+    -moz-border-radius: 4;
+    border-radius: 4px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 11px;
+    background: #333;
+    padding: 5px 13px 5px 13px;
+    text-decoration: none;
+    width: 9em;
+    height: 3em;
+    border: solid 1px black;
+    cursor: pointer;
+    display: block;
 }
 
-#remind .inputs input[type=submit]:hover{
-	background: #383;
-	text-decoration: none;
+#remind .inputs input[type=submit]:hover {
+    background: #383;
+    text-decoration: none;
 }
 
 label.error {
-	background: url('../images/unchecked.gif') no-repeat;
+    background: url('../images/unchecked.gif') no-repeat;
 }
 
-label.valid{
-	background: url('../images/checked.gif') no-repeat;
+label.valid {
+    background: url('../images/checked.gif') no-repeat;
 }
 
 .errors {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #a94442;
-	background-color: #f2dede;
-	border-color: #ebccd1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
 
 .msg {
-	padding: 15px;
-	margin-bottom: 20px;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #31708f;
-	background-color: #d9edf7;
-	border-color: #bce8f1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
 }

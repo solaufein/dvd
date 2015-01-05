@@ -5,11 +5,6 @@ import pl.radek.dvd.model.Roles;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-10-21
- * Time: 13:35
- */
 public interface RoleService {
     public List<RoleData> getRoles();
     public RoleData getRole(int id);

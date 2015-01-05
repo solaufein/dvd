@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
-/**
- * User: Sola
- * Date: 2014-06-27
- * Time: 18:22
- */
 public class PdfBuilder extends AbstractITextPdfView {
 
     @Override

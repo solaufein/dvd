@@ -1,12 +1,5 @@
 package pl.radek.dvd.model;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 31.01.14
- * Time: 15:39
- * To change this template use File | Settings | File Templates.
- */
 public class Constants {
     public static final String ASC = "ASC";
     public static final String DESC = "DESC";

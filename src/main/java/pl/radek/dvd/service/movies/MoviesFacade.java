@@ -20,11 +20,6 @@ import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-16
- * Time: 15:27
- */
 public interface MoviesFacade {
     public ClientData getClient(int id);
 

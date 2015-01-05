@@ -6,11 +6,6 @@ import pl.radek.dvd.dto.SortInfo;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 14.03.14
- * Time: 18:08
- */
 public class ListDataRequest {
     private SortInfo sortInfo;
     private PaginationInfo paginationInfo;

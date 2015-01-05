@@ -19,15 +19,6 @@ import pl.radek.dvd.model.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 13.01.14
- * Time: 15:50
- * To change this template use File | Settings | File Templates.
- */
-
 @Repository
 public class ClientsMySQLDAO implements ClientsDAO {
 
@@ -217,7 +208,6 @@ public class ClientsMySQLDAO implements ClientsDAO {
     @Override
     public int getNoOfRecords(ListDataRequest listDataRequest) {
         logger.debug("Getting total number of FILTERED records");
-        //SELECT COUNT(*) FROM Client WHERE first_name LIKE 'J%' AND pesel LIKE '83%';
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Client c ");
@@ -277,8 +267,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
             } catch (NoSuchElementException e) {
                 return 0;
             }
-        //    records = ((Number) q.uniqueResult()).intValue();
-        //    records = q.list().size();
+
         } else {
             logger.debug("FilterInfoList isnull or empty! Get total number of records.");
             records = getNoOfRecords();
@@ -339,7 +328,7 @@ public class ClientsMySQLDAO implements ClientsDAO {
     }
 
     @Override
-    public  List<Client> getClientByLastName(String lastName) throws ClientNotFoundException {
+    public List<Client> getClientByLastName(String lastName) throws ClientNotFoundException {
         logger.info("Getting clients by lastName: " + lastName);
 
         StringBuilder query = new StringBuilder("FROM Client as c ");

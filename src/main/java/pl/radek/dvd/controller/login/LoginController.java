@@ -7,12 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 13:35
- */
-
 @Controller
 public class LoginController {
     private static Logger logger = Logger.getLogger(LoginController.class);
@@ -37,7 +31,6 @@ public class LoginController {
         }
 
         return model;
-
     }
 
     @RequestMapping(value = "/logout")

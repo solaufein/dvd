@@ -4,11 +4,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import pl.radek.dvd.service.employees.EmployeeFacade;
 
-/**
- * User: Sola
- * Date: 2014-10-28
- * Time: 16:22
- */
 public class RoleCollectionsEditor extends CustomCollectionEditor {
     private static Logger logger = Logger.getLogger(RoleCollectionsEditor.class);
 
@@ -26,7 +21,6 @@ public class RoleCollectionsEditor extends CustomCollectionEditor {
         {
             // forms should return the id as the itemValue
             return employeeFacade.getRole(Integer.valueOf(element.toString()));
-          //  return employeeFacade.getRoleEntity(Integer.valueOf(element.toString()));
         }
         catch (NumberFormatException e)
         {

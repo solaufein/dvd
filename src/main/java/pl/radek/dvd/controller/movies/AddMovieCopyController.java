@@ -18,12 +18,6 @@ import pl.radek.dvd.service.movies.MoviesFacade;
 
 import javax.validation.Valid;
 
-/**
- * User: Sola
- * Date: 2014-09-03
- * Time: 17:05
- */
-
 @Controller
 @RequestMapping("/emp/movies/addmoviecopy")
 public class AddMovieCopyController {
@@ -67,8 +61,6 @@ public class AddMovieCopyController {
             modelMap.addAttribute(Constants.ID, movieid);
 
             // redirect to MovieDetailsController
-            logger.info("Redirect to MovieDetailsController");
-
             return "redirect:/emp/movies/moviedetails";
 
         } else {

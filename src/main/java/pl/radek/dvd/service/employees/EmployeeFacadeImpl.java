@@ -14,12 +14,6 @@ import pl.radek.dvd.service.roles.RoleService;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 17:15
- */
-
 @Component
 public class EmployeeFacadeImpl implements EmployeeFacade {
 

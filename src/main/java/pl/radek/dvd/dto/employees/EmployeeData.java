@@ -9,11 +9,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-09-19
- * Time: 14:34
- */
 public class EmployeeData {
 
     private int id;

@@ -5,11 +5,6 @@ import pl.radek.dvd.model.Movie;
 import java.math.BigDecimal;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:06
- */
 public class PromotionData {
     private int id;
     private String name;

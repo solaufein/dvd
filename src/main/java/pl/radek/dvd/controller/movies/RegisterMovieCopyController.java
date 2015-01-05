@@ -12,12 +12,6 @@ import pl.radek.dvd.dto.movies.MovieCopyDTO;
 import pl.radek.dvd.model.Constants;
 import pl.radek.dvd.service.movies.MoviesFacade;
 
-/**
- * User: Sola
- * Date: 2014-09-03
- * Time: 17:34
- */
-
 @Controller
 @RequestMapping("/emp/movies/register")
 public class RegisterMovieCopyController {
@@ -40,10 +34,8 @@ public class RegisterMovieCopyController {
 
         // follow to add_moviecopy.jsp
         MovieCopyDTO movieCopyDTO = new MovieCopyDTO();
-     //   movieCopyDTO.setId(-1);
         modelMap.addAttribute(Constants.MOVIECOPY, movieCopyDTO);
         modelMap.addAttribute(Constants.MOVIEID, movieid);
-
 
         return "/movies/add_moviecopy";
     }

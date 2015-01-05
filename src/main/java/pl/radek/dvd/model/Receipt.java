@@ -6,12 +6,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * User: Sola
- * Date: 2014-05-27
- * Time: 15:48
- */
-
 @Entity
 @Table(name = "receipt")
 public class Receipt {

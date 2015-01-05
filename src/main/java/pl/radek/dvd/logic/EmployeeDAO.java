@@ -6,11 +6,6 @@ import pl.radek.dvd.model.Employee;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-04-26
- * Time: 16:20
- */
 public interface EmployeeDAO {
     public List<Employee> getEmployees();
     public List<Employee> getEmployees(ListDataRequest listDataRequest);

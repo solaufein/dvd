@@ -14,14 +14,6 @@ import pl.radek.dvd.service.clients.ClientFacade;
 
 import javax.validation.Valid;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Sola
- * Date: 07.03.14
- * Time: 11:17
- * To change this template use File | Settings | File Templates.
- */
-
 @Controller
 @RequestMapping("/emp/clients/updateclient")
 public class UpdateClientController {
@@ -48,7 +40,6 @@ public class UpdateClientController {
             clientFacade.updateClient(client);
 
             // redirect to GetClientsListServlet
-            logger.info("Redirect to GetClientsController");
             modelAndView = new ModelAndView("redirect:/emp/clients/clientslist");
         } else {
             // Put errors in request scope and forward back to JSP.

@@ -5,11 +5,6 @@ import pl.radek.dvd.dto.clients.ClientData;
 import pl.radek.dvd.dto.clients.ClientDetails;
 import pl.radek.dvd.dto.clients.ReceiptPdf;
 
-/**
- * User: Sola
- * Date: 2014-03-27
- * Time: 13:53
- */
 public interface ClientFacade {
     public ClientData getClient(int id);
     public PaginatedList<ClientData> getClients(final ListDataRequest request);

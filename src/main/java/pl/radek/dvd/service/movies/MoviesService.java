@@ -13,11 +13,6 @@ import pl.radek.dvd.model.Movie;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-16
- * Time: 15:26
- */
 public interface MoviesService {
     public List<Movie> getMovieByTitle(String title) throws MovieNotFoundException;
     public List<Movie> getMoviesBySerialNumber(String serialNumber) throws MovieNotFoundException;

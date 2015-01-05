@@ -15,11 +15,6 @@ import pl.radek.dvd.model.Movie;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-/**
- * User: Sola
- * Date: 2014-07-29
- * Time: 12:48
- */
 public class MovieFiltreChoice extends MultiFiltreChoice {
     private static Logger logger = Logger.getLogger(MovieFiltreChoice.class);
 
@@ -61,7 +56,7 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
                 order = Constants.DESC;
             }
 
-            if (field.equals(Constants.PRICE)){
+            if (field.equals(Constants.PRICE)) {
                 field = "value";
             }
 
@@ -84,7 +79,6 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
 
     @Override
     public int getNoOfRecords() {
-        //SELECT COUNT(*) FROM Movie WHERE first_name LIKE 'J%' AND pesel LIKE '83%';
         List<FilterInfo> filterInfoList = listDataRequest.getFilterInfo();
 
         StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM Movie m ");
@@ -113,8 +107,6 @@ public class MovieFiltreChoice extends MultiFiltreChoice {
         } catch (NoSuchElementException e) {
             return 0;
         }
-        //    records = (Integer) q.uniqueResult();
-        //    records = q.list().size();
         return records;
     }
 

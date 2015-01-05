@@ -12,12 +12,6 @@ import pl.radek.dvd.logic.clients.ClientDetailsDAO;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-06-02
- * Time: 17:26
- */
-
 @Service
 @Transactional
 public class ClientDetailsServiceImpl implements ClientDetailsService {

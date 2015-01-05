@@ -33,7 +33,6 @@ InitRentPrintReceipt = {
             console.log("price: " + price);
 
             //  var url = "/dvd/emp/clients/clientdetails?id=" + clientId;
-
             //       var newWindow = window.open("","_blank");
             //       this.submit();
             //           newWindow.location.href = url;

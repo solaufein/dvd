@@ -7,11 +7,6 @@ import pl.radek.dvd.model.Promotion;
 
 import java.util.List;
 
-/**
- * User: Sola
- * Date: 2014-07-26
- * Time: 16:27
- */
 public interface PromotionsService {
     public List<PromotionData> getPromotions();
     public PaginatedList<PromotionData> getPromotions(ListDataRequest listDataRequest);

@@ -3,9 +3,6 @@ package pl.radek.dvd.model;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Sola on 2014-10-31.
- */
 public class Foo {
     private String name;
     private String age;
